@@ -112,6 +112,38 @@
     updateHeaderHeightVar();
   }
 
+  /* ---------------------------------------------------------------
+     Accessible tabs ([data-tabs]): click, arrow keys, Home / End.
+     Without JavaScript every panel stays visible.
+     --------------------------------------------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-tabs]'), function (box) {
+    var tabs = Array.prototype.slice.call(box.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+    function select(i, focus) {
+      tabs.forEach(function (t, k) {
+        var on = k === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        if (on) t.removeAttribute('tabindex'); else t.setAttribute('tabindex', '-1');
+        if (panels[k]) panels[k].hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i, false); });
+      t.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') n = 0;
+        else if (e.key === 'End') n = tabs.length - 1;
+        if (n !== null) { e.preventDefault(); select(n, true); }
+      });
+    });
+    var start = tabs.findIndex(function (t) { return t.getAttribute('aria-selected') === 'true'; });
+    select(start < 0 ? 0 : start, false);
+    box.classList.add('is-enhanced');
+  });
+
   /* In-page section nav (.sp-index) height, so sticky headings and anchor
      targets sit below it instead of underneath it. */
   var spIndex = document.querySelector('.sp-index');

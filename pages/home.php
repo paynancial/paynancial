@@ -232,12 +232,81 @@ console.log(payment.id);</code></pre>
   </div>
 </section>
 
-<section aria-labelledby="proof-heading">
+<?php
+require_once __DIR__ . '/../includes/business-services-ui.php';
+// Company incorporation selector. India is a confirmed Business Services
+// offering; the international tabs are research jurisdictions (not approved
+// as served — see bs_jurisdiction_approved()), so they only link to the
+// jurisdiction information page and an availability enquiry.
+$incorpTabs = [
+    'india' => [
+        'name' => 'India', 'iso' => 'in', 'served' => true,
+        'title' => 'Company incorporation in India',
+        'lead' => 'Incorporate in India with structured documentation and expert guidance — from choosing a structure to your certificate, then GST, trademarks and compliance.',
+        'options' => array_map(fn ($slug) => [bs_service($slug)['short'] ?? bs_service($slug)['name'], bs_service($slug)['summary'], bs_url($slug)],
+            ['private-limited-company', 'llp-registration', 'opc-registration', 'partnership-registration']),
+        'primary' => ['Start Your Business', bs_url('company-incorporation')],
+        'secondary' => ['All Business Services', bs_url()],
+    ],
+];
+foreach ([
+    'uae' => [['Mainland company', 'Ask about setting up on the UAE mainland.', 'uae-mainland'], ['Free zone company', 'Ask about setting up in a UAE free zone.', 'uae-free-zone']],
+    'singapore' => [['New company', 'Ask about setting up a new company in Singapore.', 'singapore-new-company'], ['Expand from India', 'Ask about taking your Indian business to Singapore.', 'singapore-expansion']],
+    'hong-kong' => [['New company', 'Ask about setting up a new company in Hong Kong.', 'hong-kong-new-company'], ['Expand from India', 'Ask about taking your Indian business to Hong Kong.', 'hong-kong-expansion']],
+    'united-kingdom' => [['New company', 'Ask about setting up a new company in the UK.', 'uk-new-company'], ['Expand from India', 'Ask about taking your Indian business to the UK.', 'uk-expansion']],
+] as $slug => $opts) {
+    $j = bs_jurisdiction($slug);
+    $label = $j['short'] ?? $j['name'];
+    $served = bs_jurisdiction_approved($j);
+    $incorpTabs[$slug] = [
+        'name' => $label, 'iso' => $j['iso'], 'served' => $served,
+        'title' => $served ? 'Company incorporation in ' . $j['name'] : 'Setting up in ' . $j['name'] . '?',
+        'lead' => $j['descriptor'] . ' Requirements differ by setup route and business activity. Our team confirms what is available for your plans before any work begins.',
+        'options' => array_map(fn ($o) => [$o[0], $o[1], bs_enquiry_url($o[2])], $opts),
+        'primary' => ['Ask about availability', bs_enquiry_url($slug)],
+        'secondary' => [$label . ' jurisdiction information', bs_jurisdiction_url($slug)],
+    ];
+}
+?>
+<section class="section-subtle home-incorp" aria-labelledby="incorp-heading">
   <div class="container">
-    <div class="cta-band reveal" style="text-align:center;">
-      <h2 id="proof-heading">Built for businesses that need reliable payment operations.</h2>
-      <p class="lead" style="max-width:560px;margin-inline:auto;margin-top:14px;">We publish real customer stories as they're approved — not placeholder quotes.</p>
+    <div class="section-head center reveal">
+      <span class="eyebrow">Business Services</span>
+      <h2 id="incorp-heading">Start your company — in India or abroad.</h2>
+      <p>Company incorporation and registrations in India, and guidance for founders looking at the UAE, Singapore, Hong Kong or the UK.</p>
     </div>
+
+    <div class="incorp reveal" data-tabs>
+      <div class="incorp-tabs" role="tablist" aria-label="Choose where to incorporate">
+        <?php $first = true; foreach ($incorpTabs as $slug => $t): ?>
+        <button type="button" class="incorp-tab" role="tab" id="incorp-tab-<?= e($slug) ?>" aria-controls="incorp-panel-<?= e($slug) ?>" aria-selected="<?= $first ? 'true' : 'false' ?>"<?= $first ? '' : ' tabindex="-1"' ?>>
+          <?= bs_flag(['iso' => $t['iso']], 'incorp-flag') ?>
+          <span><?= e($t['name']) ?></span>
+        </button>
+        <?php $first = false; endforeach; ?>
+      </div>
+
+      <?php foreach ($incorpTabs as $slug => $t): ?>
+      <div class="incorp-panel" role="tabpanel" id="incorp-panel-<?= e($slug) ?>" aria-labelledby="incorp-tab-<?= e($slug) ?>" tabindex="0">
+        <div class="incorp-intro">
+          <span class="incorp-status<?= $t['served'] ? ' is-available' : '' ?>"><?= $t['served'] ? 'Available' : 'Availability confirmed on enquiry' ?></span>
+          <h3><?= e($t['title']) ?></h3>
+          <p><?= e($t['lead']) ?></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="<?= e($t['primary'][1]) ?>"><?= e($t['primary'][0]) ?></a>
+            <a class="btn btn-outline" href="<?= e($t['secondary'][1]) ?>"><?= e($t['secondary'][0]) ?></a>
+          </div>
+        </div>
+        <ul class="incorp-options">
+          <?php foreach ($t['options'] as [$label, $desc, $href]): ?>
+          <li><a class="incorp-option" href="<?= e($href) ?>"><strong><?= e($label) ?></strong><span><?= e($desc) ?></span><span class="incorp-go" aria-hidden="true">→</span></a></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+      <?php endforeach; ?>
+    </div>
+
+    <p class="text-center reveal" style="margin-top:28px;"><a class="card-link" href="<?= e(bs_jurisdiction_url()) ?>">Explore all jurisdictions →</a></p>
   </div>
 </section>
 

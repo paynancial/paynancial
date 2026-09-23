@@ -1054,3 +1054,45 @@ section:last-of-type { border-bottom: none; }
 .code-tab { background: transparent; border: 0; border-radius: 8px 8px 0 0; color: rgba(250, 249, 245, 0.62); }
 .code-tab:hover { color: var(--paper); }
 .code-tab.is-active { background: var(--ink-soft); color: var(--paper); }
+
+/* ---- Homepage: company incorporation selector ---- */
+.incorp { margin-top: 40px; border: 1px solid var(--border); border-radius: 20px; background: var(--white, #fff); overflow: hidden; }
+.incorp-tabs { display: flex; gap: 6px; padding: 10px; border-bottom: 1px solid var(--border); background: var(--paper); overflow-x: auto; scrollbar-width: none; }
+.incorp-tabs::-webkit-scrollbar { display: none; }
+.incorp-tab {
+  display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; min-height: 44px; padding: 8px 18px 8px 12px;
+  border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--text-muted);
+  font: 600 0.92rem var(--font-sans); cursor: pointer; transition: background 160ms, color 160ms, border-color 160ms;
+}
+.incorp-tab:hover { color: var(--ink); background: #fff; }
+.incorp-tab[aria-selected="true"] { color: var(--ink); background: #fff; border-color: var(--border); box-shadow: 0 4px 14px -8px rgba(10, 33, 29, 0.35); }
+.incorp-tab:focus-visible { outline: 2px solid var(--teal-500); outline-offset: 2px; }
+.incorp-flag { width: 24px; height: 18px; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(10, 33, 29, 0.12); }
+.incorp-panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 32px; }
+.incorp-panel[hidden] { display: none; }
+.incorp-panel:focus-visible { outline: 2px solid var(--teal-500); outline-offset: -4px; }
+.incorp:not(.is-enhanced) .incorp-panel + .incorp-panel { border-top: 1px solid var(--border); }
+@media (min-width: 900px) { .incorp-panel { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; padding: 40px; align-items: start; } }
+.incorp-status { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; color: #6b4700; background: #fdf3df; border: 1px solid #f3d9a4; }
+.incorp-status.is-available { color: var(--teal-900); background: var(--teal-50); border-color: var(--teal-100); }
+.incorp-intro h3 { margin-top: 14px; font-size: 1.5rem; }
+.incorp-intro p { margin-top: 10px; color: var(--text-muted); line-height: 1.65; }
+.incorp-intro .hero-actions { margin-top: 22px; }
+.incorp-options { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+@media (min-width: 600px) { .incorp-options { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.incorp-option {
+  position: relative; display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 18px 44px 18px 18px;
+  border: 1px solid var(--border); border-radius: 14px; background: var(--paper); color: var(--ink); text-decoration: none;
+  transition: border-color 160ms, background 160ms, transform 160ms;
+}
+.incorp-option strong { font-size: 0.98rem; }
+.incorp-option span { font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); }
+.incorp-option .incorp-go { position: absolute; right: 16px; top: 18px; color: var(--teal-700); font-size: 1rem; }
+.incorp-option:hover { border-color: var(--teal-100); background: var(--teal-50); transform: translateY(-1px); }
+.incorp-option:focus-visible { outline: 2px solid var(--teal-500); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .incorp-panel { padding: 22px 18px; } .incorp-intro h3 { font-size: 1.3rem; }
+  .incorp-tabs { flex-wrap: wrap; overflow: visible; } /* every country visible, no hidden scroll */
+  .incorp-tab { padding: 6px 14px 6px 10px; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) { .incorp-option, .incorp-tab { transition: none; } .incorp-option:hover { transform: none; } }
