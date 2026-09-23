@@ -7,7 +7,7 @@
  * until legal / regulatory review of the process wording is complete.
  *
  * Content rule: only details the business has confirmed — the officer's
- * name and the contact email already published in the Privacy Policy. No
+ * name, title and dedicated grievance email (gro@paynancial.com). No
  * response or resolution timelines, escalation levels, phone numbers,
  * addresses or regulator / ombudsman routes until they are confirmed and
  * reviewed.
@@ -16,13 +16,13 @@ require_once __DIR__ . '/../includes/standalone-ui.php';
 
 $path = '/grievance-redressal';
 $officer = 'Mrs. Anjali Sharma';
-$email = 'hello@paynancial.com';
+$email = 'gro@paynancial.com';
 $mailto = 'mailto:' . $email . '?subject=' . rawurlencode('Grievance');
 $trail = [['Home', '/'], ['Trust Center', '/trust'], ['Grievance Redressal', $path]];
 $page_meta = sp_meta([
     'type'        => 'ContactPage',
-    'title'       => 'Grievance Redressal | Grievance Officer | Paynancial',
-    'description' => 'How to raise a grievance with Paynancial: who the Grievance Officer is, how to contact them, and what to include so your complaint can be looked into.',
+    'title'       => 'Grievance Redressal | Grievance Redressal Officer | Paynancial',
+    'description' => 'How to raise a grievance with Paynancial: who the Grievance Redressal Officer is, how to contact them, and what to include so your complaint can be looked into.',
     'path'        => $path,
     'h1'          => 'Grievance Redressal',
     'trail'       => $trail,
@@ -30,8 +30,8 @@ $page_meta = sp_meta([
 
 ob_start(); ?>
 <div class="sp-glance">
-  <span class="sp-glance-label">Grievance Officer</span>
-  <p><strong><?= e($officer) ?></strong><br>M/S Paynancial Technology Private Limited<br>Email: <a class="inline-link" href="<?= e($mailto) ?>"><?= e($email) ?></a></p>
+  <span class="sp-glance-label">Grievance Redressal Officer</span>
+  <p><strong><?= e($officer) ?></strong><br>Grievance Redressal Officer<br>M/S Paynancial Technology Private Limited<br>Email: <a class="inline-link" href="<?= e($mailto) ?>"><?= e($email) ?></a></p>
 </div>
 <?php $aside = ob_get_clean();
 
@@ -40,8 +40,8 @@ sp_hero([
     'trail'   => $trail,
     'eyebrow' => 'Trust · Grievance Redressal',
     'h1'      => 'Grievance Redressal',
-    'lead'    => 'If you have a complaint about Paynancial — your account, a payment, our services or how we handle your personal data — you can raise it with our Grievance Officer.',
-    'primary' => ['Email the Grievance Officer', $mailto, 'cta_click'],
+    'lead'    => 'If you have a complaint about Paynancial — your account, a payment, our services or how we handle your personal data — you can raise it with our Grievance Redressal Officer.',
+    'primary' => ['Email the Grievance Redressal Officer', $mailto, 'cta_click'],
     'secondary' => ['Support Center', '/support', 'cta_click'],
     'aside'   => $aside,
 ]);
@@ -49,10 +49,10 @@ sp_hero([
 
 <?php sp_band_open('officer'); ?>
   <div class="sp-split">
-    <?php sp_head('officer', 'Grievance Officer', 'Who handles grievances.'); ?>
+    <?php sp_head('officer', 'Grievance Redressal Officer', 'Who handles grievances.'); ?>
     <div class="sp-prose reveal">
-      <p>Grievances are handled by <strong><?= e($officer) ?></strong>, Grievance Officer, M/S Paynancial Technology Private Limited, based in Patna, Bihar.</p>
-      <p>To raise a grievance, email <a class="inline-link" href="<?= e($mailto) ?>"><?= e($email) ?></a> with “Grievance” in the subject line, addressed to the Grievance Officer.</p>
+      <p>Grievances are handled by <strong><?= e($officer) ?></strong>, Grievance Redressal Officer, M/S Paynancial Technology Private Limited, based in Patna, Bihar.</p>
+      <p>To raise a grievance, email <a class="inline-link" href="<?= e($mailto) ?>"><?= e($email) ?></a> with “Grievance” in the subject line, addressed to the Grievance Redressal Officer.</p>
       <p>For everyday questions about your account, payments or integration, you can also use the <a class="inline-link" href="/support">Support Center</a>.</p>
     </div>
   </div>

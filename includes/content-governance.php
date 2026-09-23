@@ -88,7 +88,7 @@ function gov_content_items(): array
     $items['/grievance-redressal'] = [
         'stage' => 'regulatory_review', 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
         'professional_review' => GOV_PROFESSIONAL_REVIEW, 'approved_by' => null, 'approved_on' => null,
-        'reason' => 'Grievance Redressal page: officer name and contact email confirmed by the business; response timelines, escalation levels and regulatory routes not yet confirmed; legal review pending.',
+        'reason' => 'Grievance Redressal page: officer name, title and grievance email (gro@paynancial.com) confirmed by the business; response timelines, escalation levels and regulatory routes not yet confirmed; legal review pending.',
     ];
     return $items;
 }
