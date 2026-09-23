@@ -187,6 +187,42 @@ Note: PHP's built-in server does not read `.htaccess`, so
   `permissions` / `role_permissions` / `user_permissions` for modules that
   need finer control than role alone.
 
+## Business Services (standalone pages)
+
+A Business Services vertical (company incorporation, registrations,
+trademarks, compliance and international incorporation) lives under
+`/business-services`. These pages are **standalone**: reachable by direct
+URL and linked to each other contextually, but deliberately **not** linked
+from the global header, mega-menus, footer or `sitemap.xml` until that is
+approved. They reuse the site header/footer unchanged.
+
+| Path | Template |
+|---|---|
+| `/business-services` | `pages/business-services/index.php` |
+| `/business-services/{service}` | `pages/business-services/service.php` |
+| `/business-services/global-incorporation` | `pages/business-services/global-incorporation.php` |
+| `/business-services/jurisdictions` | `pages/business-services/jurisdictions.php` (search + region/objective filters) |
+| `/business-services/jurisdictions/{slug}` | `pages/business-services/jurisdiction.php` |
+
+- **Content** — every service, category, region and jurisdiction is defined
+  once in `includes/business-services.php`. Adding an entry there publishes
+  its page; unknown slugs 404.
+- **Components** — `includes/business-services-ui.php` (service card,
+  jurisdiction card, jurisdiction search, region filter, process steps,
+  FAQ, CTA, payments cross-sell).
+- **Assets** — `assets/css/business-services.css` and
+  `assets/js/business-services.js` load only on these pages. The dotted
+  world map (`assets/images/business-services/`) was generated from Natural
+  Earth land data; flags are from [flag-icons](https://github.com/lipis/flag-icons)
+  (MIT, see `assets/images/flags/LICENSE.txt`).
+- **Verified content only** — fees and timelines are `null` (rendered as
+  "shared in your written quote") until verified figures are supplied.
+  Jurisdiction `overview`, `structures` and `considerations` are optional;
+  until verified text is added, pages say these are confirmed during
+  consultation. The Company Structure filter in the directory appears
+  automatically once any jurisdiction has verified `structures`.
+- **Enquiries** — CTAs link to `/contact?intent=sales&service=business-services&topic={slug}`.
+
 ## Content & claims policy
 
 Per the project brief, this build **does not invent** transaction volumes,

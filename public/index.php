@@ -200,6 +200,51 @@ if (($segments[0] ?? '') === 'solutions' && isset($segments[1])) {
 }
 
 // ---------------------------------------------------------------------
+// Business Services (standalone pages — reachable by direct URL only; not
+// linked from the global header, menus, footer or sitemap):
+//   /business-services
+//   /business-services/{service}
+//   /business-services/global-incorporation
+//   /business-services/jurisdictions[/{jurisdiction}]
+// All content comes from includes/business-services.php; unknown slugs 404.
+// ---------------------------------------------------------------------
+if (($segments[0] ?? '') === 'business-services') {
+    require_once __DIR__ . '/../includes/business-services.php';
+    $bsDir = __DIR__ . '/../pages/business-services/';
+    $bsFile = null;
+
+    if (count($segments) === 1) {
+        $bsFile = 'index.php';
+    } elseif ($segments[1] === 'global-incorporation' && count($segments) === 2) {
+        $bsFile = 'global-incorporation.php';
+    } elseif ($segments[1] === 'jurisdictions' && count($segments) === 2) {
+        $bsFile = 'jurisdictions.php';
+    } elseif ($segments[1] === 'jurisdictions' && count($segments) === 3) {
+        $bs_jurisdiction = bs_jurisdiction($segments[2]);
+        $bsFile = $bs_jurisdiction ? 'jurisdiction.php' : null;
+    } elseif (count($segments) === 2) {
+        $bs_service = bs_service($segments[1]);
+        $bsFile = $bs_service ? 'service.php' : null;
+    }
+
+    ob_start();
+    if ($bsFile === null) {
+        http_response_code(404);
+        include __DIR__ . '/../pages/404.php';
+    } else {
+        include $bsDir . $bsFile;
+    }
+    $page_body = ob_get_clean();
+
+    include __DIR__ . '/../includes/site-head.php';
+    include __DIR__ . '/../includes/header.php';
+    echo '<main id="main-content">' . $page_body . '</main>';
+    include __DIR__ . '/../includes/footer.php';
+    include __DIR__ . '/../includes/site-foot.php';
+    exit;
+}
+
+// ---------------------------------------------------------------------
 // Legal pages: /legal/{slug}
 // ---------------------------------------------------------------------
 if (($segments[0] ?? '') === 'legal') {
