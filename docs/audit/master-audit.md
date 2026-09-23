@@ -500,3 +500,14 @@ Result: sitemap 75 URLs; no noindex page in the sitemap; no canonical conflicts.
 | Search-visible Partner Program page | New canonical `/partner-program` (1,288 words, built only from published programme facts: partner types, applicant types, engagement models, 7-step application, onboarding stages, document types, agreements, Partner Hub sections). Indexable and in the sitemap. `/partners` and `/partners/` 301 to it in one hop |
 | Primary CTA | "Apply as a Partner →" → `/partner/register` |
 | Header | No standalone "Partners" item; "Partner Program" stays in the Company menu (desktop and mobile), plus footer and contextual links |
+
+## `pages/partners.php` — pre-deletion audit (go-live gate items 12–13)
+
+| Check | Result |
+|---|---|
+| Files referencing `partners.php` (PHP, JS, `.htaccess`, SQL, docs) | None |
+| Route | `'partners'` removed from the public route table; `/partners`, `/partners/` and `/partners?…` 301 to `/partner-program` **before** any page file is resolved, so the old file is unreachable even if it remains on the server |
+| Links to `/partners` | None (Company menu, footer and product pages point to `/partner-program`) |
+| Partner functionality | Untouched and working: `/partner/register` (7-step form, noindex), 16 Partner Hub pages (redirect to login when signed out), `/api/partner/recommend` and `/api/partner/assistant` (403 without auth), partner login tab (`/?login=partner`), admin partner applications |
+
+Conclusion: safe to delete from the server after the new build is deployed and `/partners` is confirmed to redirect. The Partners **header item** was removed; no partner **functionality** was removed.

@@ -13,12 +13,20 @@
  * enquiry is accepted only under a much tighter per-IP limit, flagged, and
  * the outage is recorded for administrators (never shown to visitors).
  *
- * Configuration (secrets never in code or the CMS UI):
- *   TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY — environment variables (or
- *   constants of the same name in config/config.php). Non-secret settings
- *   (enabled, rate limits, honeypot, notification email, active) come from
- *   the CMS `settings` table (admin → Floating Enquiry Anti-Spam), with safe
- *   defaults when the table or a row is missing.
+ * Configuration:
+ *   TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY — SERVER ENVIRONMENT VARIABLES
+ *   ONLY (getenv / the web server's environment). Never code, config files,
+ *   the database or the CMS. Non-secret settings (enabled, rate limits,
+ *   honeypot, notification email, active) come from the CMS `settings`
+ *   table (admin → Floating Enquiry Anti-Spam), with safe defaults.
+ *
+ * Fail-closed rules — there is never an unrestricted fallback:
+ *   - rate-limit table unavailable → file store; file store unavailable or
+ *     corrupted → the request is refused (and logged);
+ *   - Turnstile secret missing → the form is not offered and submissions
+ *     are refused (a misconfiguration never uses the outage fallback);
+ *   - Cloudflare unreachable → accepted only under the stricter fallback
+ *     limit, flagged "Security check unavailable" and logged.
  * WhatsApp, email and call links never touch this file: no CAPTCHA there.
  */
 
@@ -28,14 +36,22 @@ const AS_SETTINGS_PREFIX = 'fe_antispam_';
 const AS_TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const AS_TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
-/** Environment variable first, then a config constant of the same name. */
+/** Label used wherever an enquiry was accepted without a Turnstile check. */
+const AS_FALLBACK_FLAG = 'Security check unavailable';
+
+/**
+ * Server environment only: process environment (getenv) or the web server's
+ * environment ($_SERVER / $_ENV, e.g. PHP-FPM env[] or fastcgi_param).
+ * Deliberately NOT config constants, the database or the CMS.
+ */
 function as_env(string $name): string
 {
-    $v = getenv($name);
-    if ($v !== false && $v !== '') {
-        return (string) $v;
+    foreach ([getenv($name), $_SERVER[$name] ?? null, $_ENV[$name] ?? null] as $v) {
+        if (is_string($v) && $v !== '') {
+            return $v;
+        }
     }
-    return defined($name) ? (string) constant($name) : '';
+    return '';
 }
 
 /** Default non-secret settings (overridable in the CMS). */
@@ -46,7 +62,6 @@ function as_defaults(): array
         'enabled'          => '1',      // CAPTCHA on. If turned off, the form is hidden — never unprotected
         'active'           => '1',      // "Request a Callback" form shown in the widget
         'honeypot_enabled' => '1',
-        'site_key'         => '',       // optional CMS override of TURNSTILE_SITE_KEY (public value)
         'rl_ip_max'        => '5',  'rl_ip_window'      => '600',   // per IP: 5 per 10 min
         'rl_session_max'   => '5',  'rl_session_window' => '600',   // per session
         'rl_email_max'     => '3',  'rl_email_window'   => '3600',  // per email: 3 per hour
@@ -82,8 +97,7 @@ function as_settings(): array
 
 function as_site_key(): string
 {
-    $cms = trim(as_settings()['site_key']);
-    return $cms !== '' ? $cms : as_env('TURNSTILE_SITE_KEY');
+    return as_env('TURNSTILE_SITE_KEY');
 }
 
 function as_secret_configured(): bool
@@ -142,21 +156,46 @@ function as_rate_hit(string $kind, string $value, int $max, int $window): bool
     }
 }
 
+/** True once, in this request, a limiter refused because its store was unusable or corrupt. */
+function as_store_failed(?bool $set = null): bool
+{
+    static $failed = false;
+    if ($set !== null) {
+        $failed = $failed || $set;
+    }
+    return $failed;
+}
+
 function as_rate_hit_file(string $bucket, int $max, int $window): bool
 {
     $dir = __DIR__ . '/../storage/anti-spam';
     if (!is_dir($dir)) {
         @mkdir($dir, 0700, true);
     }
-    $fh = @fopen($dir . '/' . $bucket . '.json', 'c+');
-    if ($fh === false) {
-        as_log('rate_store_unavailable');
-        return true; // other layers (session limit, CAPTCHA, honeypot) still apply
+    $fh = is_dir($dir) ? @fopen($dir . '/' . $bucket . '.json', 'c+') : false;
+    if ($fh === false || !flock($fh, LOCK_EX)) {
+        // Neither store is usable: fail closed. Never an unrestricted fallback.
+        as_log('rate_store_unavailable', 'request_refused');
+        as_store_failed(true);
+        return false;
     }
-    flock($fh, LOCK_EX);
     $now = time();
-    $hits = json_decode((string) stream_get_contents($fh), true);
-    $hits = array_values(array_filter(is_array($hits) ? $hits : [], fn ($t) => is_int($t) && $t > $now - $window));
+    $raw = (string) stream_get_contents($fh);
+    $hits = $raw === '' ? [] : json_decode($raw, true);
+    if (!is_array($hits)) {
+        // Corrupted bucket: refuse this request and treat the bucket as full
+        // for the rest of the window, rather than silently resetting it.
+        $full = array_fill(0, max($max, 1), $now);
+        ftruncate($fh, 0);
+        rewind($fh);
+        fwrite($fh, json_encode($full));
+        flock($fh, LOCK_UN);
+        fclose($fh);
+        as_log('rate_store_corrupt', 'request_refused');
+        as_store_failed(true);
+        return false;
+    }
+    $hits = array_values(array_filter($hits, fn ($t) => is_int($t) && $t > $now - $window));
     $allowed = count($hits) < $max;
     if ($allowed) {
         $hits[] = $now;
@@ -181,7 +220,9 @@ function as_verify_turnstile(string $token, string $ip): string
     }
     $secret = as_env('TURNSTILE_SECRET_KEY');
     if ($secret === '') {
-        return 'unavailable';
+        // Misconfiguration is not an outage: never use the lenient fallback.
+        as_log('captcha_misconfigured');
+        return 'failed';
     }
     // A verify-URL override exists only for local testing, never in production.
     $url = AS_TURNSTILE_VERIFY_URL;

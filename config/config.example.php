@@ -51,12 +51,12 @@ define('MAIL_SALES_TO', 'hello@paynancial.com');
 
 // ---------------------------------------------------------------------
 // Cloudflare Turnstile — "Request a Callback" form in the floating widget.
-// Prefer ENVIRONMENT VARIABLES (TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY);
-// constants here are a fallback. Never commit a real secret key.
-// If either key is missing, the callback form is simply not shown.
+// Set TURNSTILE_SITE_KEY and TURNSTILE_SECRET_KEY as SERVER ENVIRONMENT
+// VARIABLES only (e.g. PHP-FPM pool `env[...]`, Apache `SetEnv`, nginx
+// `fastcgi_param`). They are deliberately NOT read from this file.
+// If either is missing, the callback form is not shown and submissions
+// are refused. See docs/floating-enquiry-anti-spam.md.
 // ---------------------------------------------------------------------
-// define('TURNSTILE_SITE_KEY', '');
-// define('TURNSTILE_SECRET_KEY', '');
 
 // ---------------------------------------------------------------------
 // Uploads

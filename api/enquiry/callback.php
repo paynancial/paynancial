@@ -50,7 +50,8 @@ $ip = client_ip();
 if (!as_rate_hit('ip', $ip, (int) $s['rl_ip_max'], (int) $s['rl_ip_window'])
     || !as_rate_hit('session', session_id() ?: $ip, (int) $s['rl_session_max'], (int) $s['rl_session_window'])) {
     as_log('rate_limited', 'ip_or_session');
-    json_response(['ok' => false, 'error' => CB_MSG_LIMIT], 429);
+    // A broken rate-limit store also refuses (fail closed), with a neutral message.
+    json_response(['ok' => false, 'error' => as_store_failed() ? CB_MSG_RETRY : CB_MSG_LIMIT], 429);
 }
 
 // 3. Validation.
@@ -68,7 +69,7 @@ if ($captcha === 'failed') {
 if ($captcha === 'unavailable') {
     // Provider outage: stay protected (honeypot, validation, limits already
     // applied) and add a much tighter per-IP limit. Recorded for admins.
-    as_log('captcha_unavailable');
+    as_log('captcha_unavailable', 'fallback_used');
     if (!as_rate_hit('fallback_ip', $ip, (int) $s['rl_fallback_max'], (int) $s['rl_fallback_window'])) {
         json_response(['ok' => false, 'error' => CB_MSG_RETRY], 429);
     }
@@ -78,7 +79,7 @@ if ($captcha === 'unavailable') {
 if (!as_rate_hit('email', $f['email'], (int) $s['rl_email_max'], (int) $s['rl_email_window'])
     || !as_rate_hit('phone', $f['phone'], (int) $s['rl_phone_max'], (int) $s['rl_phone_window'])) {
     as_log('rate_limited', 'email_or_phone');
-    json_response(['ok' => false, 'error' => CB_MSG_LIMIT], 429);
+    json_response(['ok' => false, 'error' => as_store_failed() ? CB_MSG_RETRY : CB_MSG_LIMIT], 429);
 }
 if (!as_rate_hit('duplicate', $f['email'] . '|' . $f['phone'] . '|' . $f['requirement'] . '|' . $f['message'], 1, 1800)) {
     json_response(['ok' => false, 'error' => "We've already received this enquiry — our team will be in touch."], 409);
@@ -88,7 +89,8 @@ if (!as_rate_hit('duplicate', $f['email'] . '|' . $f['phone'] . '|' . $f['requir
 $requirements = as_requirements();
 $reqLabel = $requirements[$f['requirement']] ?? 'Not specified';
 $context = preg_replace('/[^a-zA-Z]/', '', (string) ($body['context'] ?? '')) ?: 'default';
-$subject = 'Callback request — ' . $reqLabel;
+$fallback = $captcha !== 'ok';
+$subject = ($fallback ? '[' . AS_FALLBACK_FLAG . '] ' : '') . 'Callback request — ' . $reqLabel;
 $message = "Callback requested from the floating enquiry widget.\n"
     . "Requirement: {$reqLabel}\n"
     . 'Message: ' . ($f['message'] !== '' ? $f['message'] : '(none)');
@@ -110,7 +112,7 @@ try {
         'INSERT INTO contact_submissions (enquiry_id, form_type, payload_json, ip_address) VALUES (:eid, :type, :payload, :ip)'
     )->execute([
         'eid' => $enquiryId, 'type' => 'floating_callback', 'ip' => $ip,
-        'payload' => json_encode($f + ['context' => $context, 'captcha' => $captcha === 'ok' ? 'verified' : 'provider_unavailable'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        'payload' => json_encode($f + ['context' => $context, 'captcha' => $fallback ? 'provider_unavailable' : 'verified', 'security_flag' => $fallback ? AS_FALLBACK_FLAG : null], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
     ]);
     $pdo->commit();
 } catch (Throwable $e) {
@@ -125,8 +127,9 @@ try {
 // 7. Notify. Header values are fixed or validated (no CR/LF can reach them).
 $to = as_notify_to();
 if ($to !== '') {
-    $flag = $captcha === 'ok' ? '' : ' [security check unavailable — review]';
-    $mailBody = "Enquiry ID: {$code}\nName: {$f['name']}\nCompany: {$f['company']}\nEmail: {$f['email']}\nPhone: {$f['phone']}\n"
+    $flag = $fallback ? ' [' . AS_FALLBACK_FLAG . ' — review]' : '';
+    $mailBody = ($fallback ? AS_FALLBACK_FLAG . ": Cloudflare Turnstile could not be reached, so this enquiry was accepted under the stricter fallback limit. Review before acting.\n\n" : '')
+        . "Enquiry ID: {$code}\nName: {$f['name']}\nCompany: {$f['company']}\nEmail: {$f['email']}\nPhone: {$f['phone']}\n"
         . "Requirement: {$reqLabel}\nPage context: {$context}\n\nMessage:\n" . ($f['message'] !== '' ? $f['message'] : '(none)');
     $headers = 'From: ' . MAIL_FROM_NAME . ' <' . MAIL_FROM_ADDRESS . ">\r\nReply-To: " . $f['email'];
     @mail($to, "Callback request — {$code}{$flag}", $mailBody, $headers);

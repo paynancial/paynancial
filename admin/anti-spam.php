@@ -3,9 +3,9 @@
  * Admin — Settings → Communication → Floating Enquiry → Anti-Spam.
  *
  * Non-secret settings are stored in the `settings` table (prefix
- * fe_antispam_). The Turnstile SECRET key is never shown or editable here:
- * it lives only in the server environment (TURNSTILE_SECRET_KEY), and this
- * page reports only whether it is configured.
+ * fe_antispam_). Both Turnstile keys live ONLY in the server environment
+ * (TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY); this page never accepts or
+ * shows them — it reports only whether each is configured.
  */
 require_once __DIR__ . '/../includes/anti-spam.php';
 
@@ -29,12 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'enabled'          => isset($_POST['enabled']) ? '1' : '0',
             'active'           => isset($_POST['active']) ? '1' : '0',
             'honeypot_enabled' => isset($_POST['honeypot_enabled']) ? '1' : '0',
-            'site_key'         => trim((string) ($_POST['site_key'] ?? '')),
             'notify_to'        => trim((string) ($_POST['notify_to'] ?? '')),
         ];
-        if ($new['site_key'] !== '' && !preg_match('/^[0-9A-Za-z_\-]{10,100}$/', $new['site_key'])) {
-            $errors[] = 'The site key does not look valid.';
-        }
         if ($new['notify_to'] !== '' && !filter_var($new['notify_to'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = 'Please enter a valid notification email.';
         }
@@ -69,6 +65,11 @@ $s = as_settings();
 $available = as_form_available();
 $events = as_recent_events(25);
 $check = fn (string $k) => $s[$k] === '1' ? ' checked' : '';
+$lastOutage = null;
+foreach ($events as $ev) {
+    if (($ev['event'] ?? '') === 'captcha_unavailable') { $lastOutage = $ev['t'] ?? null; break; }
+}
+$storeIssue = (bool) array_filter($events, fn ($ev) => in_array($ev['event'] ?? '', ['rate_store_unavailable', 'rate_store_corrupt'], true));
 ?>
 <?php if (isset($_GET['saved'])): ?><div class="alert alert-success">Settings saved.</div><?php endif; ?>
 <?php foreach ($errors as $err): ?><div class="alert alert-error"><?= e($err) ?></div><?php endforeach; ?>
@@ -76,9 +77,12 @@ $check = fn (string $k) => $s[$k] === '1' ? ' checked' : '';
 <div class="stat-grid">
   <div class="stat-card"><span class="label">Callback form</span><strong class="value"><?= $available ? 'Live' : 'Hidden' ?></strong></div>
   <div class="stat-card"><span class="label">CAPTCHA provider</span><strong class="value">Cloudflare Turnstile</strong></div>
-  <div class="stat-card"><span class="label">Site key</span><strong class="value"><?= as_site_key() !== '' ? 'Configured' : 'Missing' ?></strong></div>
-  <div class="stat-card"><span class="label">Secret key</span><strong class="value"><?= as_secret_configured() ? 'Configured (hidden)' : 'Missing' ?></strong></div>
+  <div class="stat-card"><span class="label">Site key (server environment)</span><strong class="value"><?= as_site_key() !== '' ? 'Configured' : 'Missing' ?></strong></div>
+  <div class="stat-card"><span class="label">Secret key (server environment)</span><strong class="value"><?= as_secret_configured() ? 'Configured (hidden)' : 'Missing' ?></strong></div>
+  <div class="stat-card"><span class="label">Last Cloudflare outage (fallback used)</span><strong class="value"><?= $lastOutage ? e($lastOutage) : 'None recorded' ?></strong></div>
 </div>
+<?php if ($lastOutage): ?><div class="alert alert-error">Cloudflare Turnstile was unreachable at <?= e($lastOutage) ?>. Enquiries received then were accepted under the stricter fallback limit and are marked “<?= e(AS_FALLBACK_FLAG) ?>” in Enquiries — review them before acting.</div><?php endif; ?>
+<?php if ($storeIssue): ?><div class="alert alert-error">The rate-limit store was unavailable or corrupted recently, so callback submissions were refused (fail closed). Check that the <code>anti_spam_hits</code> table exists and <code>storage/anti-spam</code> is writable.</div><?php endif; ?>
 
 <div class="panel">
   <p class="text-muted">The “Request a Callback” form in the floating widget appears only when it is active, the CAPTCHA is enabled and both keys are configured — it is never shown unprotected. WhatsApp, email and call links are never affected by these settings.</p>
@@ -91,8 +95,8 @@ $check = fn (string $k) => $s[$k] === '1' ? ' checked' : '';
     <label>CAPTCHA provider
       <input type="text" value="Cloudflare Turnstile (invisible, interaction only when needed)" disabled>
     </label>
-    <label>Site key (public; leave blank to use TURNSTILE_SITE_KEY from the environment)
-      <input type="text" name="site_key" value="<?= e($s['site_key']) ?>" autocomplete="off" spellcheck="false">
+    <label>Site key
+      <input type="text" value="<?= as_site_key() !== '' ? 'Set in the server environment (TURNSTILE_SITE_KEY)' : 'Not set — add TURNSTILE_SITE_KEY to the server environment' ?>" disabled>
     </label>
     <label>Secret key
       <input type="text" value="<?= as_secret_configured() ? 'Set in the server environment — not shown' : 'Not set — add TURNSTILE_SECRET_KEY to the server environment' ?>" disabled>
