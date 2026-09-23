@@ -22,10 +22,6 @@ $footer_groups = [
                 ['Payment Collection', '/products/payment-collection'],
                 ['Pricing', '/pricing'],
             ]],
-            ['Money Movement', [
-                ['Payouts', '/products/payouts'],
-                ['Payment Analytics', '/products/payment-analytics'],
-            ]],
             ['Solutions', [
                 ['E-Commerce', '/solutions#ecommerce'],
                 ['Travel', '/solutions#travel'],
