@@ -9,7 +9,7 @@
  * security facts). No accuracy, detection rates, savings, model names,
  * certifications or customer claims. Availability of every AI capability
  * is "on request" until the business confirms it (ai_confirmed()); the
- * pages say so, and are indexable at the owner's request.
+ * child pages are noindex until approved through content-governance.php.
  */
 
 declare(strict_types=1);
@@ -26,13 +26,14 @@ function ai_confirmed(): array
 }
 
 /**
- * Every child page is indexable (owner's request): each one states that the
- * capability is available on request, so indexing makes no availability
- * claim. ai_confirmed() still records which capabilities are confirmed.
+ * Child pages are governed by the publishing gate (content-governance.php):
+ * live and linked, but noindex and out of the sitemap until the capability
+ * is confirmed and approved. ai_confirmed() records business confirmation.
  */
 function ai_child_indexable(string $slug): bool
 {
-    return isset(ai_confirmed()[$slug]);
+    require_once __DIR__ . '/content-governance.php';
+    return gov_indexable(ai_url($slug));
 }
 
 function ai_url(string $slug = ''): string

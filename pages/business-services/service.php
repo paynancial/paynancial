@@ -73,7 +73,7 @@ $sections = $isIncorporation
       <span class="bs-kicker">At a glance</span>
       <dl>
         <div><dt>Service</dt><dd><?= e($s['name']) ?></dd></div>
-        <div><dt>Framework</dt><dd><?= e($s['framework']) ?></dd></div>
+        <?php if (bs_framework_public($s)): ?><div><dt>Framework</dt><dd><?= e($s['framework']) ?></dd></div><?php endif; ?>
         <div><dt>Fees</dt><dd><?= $s['fees'] ? e($s['fees']) : 'Shared in your written quote' ?></dd></div>
         <div><dt>Timeline</dt><dd><?= $s['timeline'] ? e($s['timeline']) : 'Confirmed after we review your documents' ?></dd></div>
       </dl>
@@ -136,7 +136,7 @@ $sections = $isIncorporation
       <span class="eyebrow">What it is</span>
       <h2 id="bs-overview-title">About <?= e($s['short']) ?></h2>
       <p class="bs-prose"><?= e($s['summary']) ?></p>
-      <p class="bs-prose bs-framework"><?= bs_icon('register') ?><span><?= e($s['framework']) ?></span></p>
+      <?php if (bs_framework_public($s)): ?><p class="bs-prose bs-framework"><?= bs_icon('register') ?><span><?= e($s['framework']) ?></span></p><?php endif; ?>
     </div>
     <ul class="bs-benefit-list">
       <?php foreach ($s['why'] as [$title, $text]): ?>

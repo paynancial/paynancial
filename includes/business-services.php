@@ -636,6 +636,7 @@ function bs_jurisdictions(): array
             'capital' => 'St Peter Port', 'lat' => 49.45, 'lon' => -2.54,
         ],
         'uae' => [
+            'research' => true, 'service_enabled' => false, 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
             'name' => 'United Arab Emirates', 'short' => 'UAE', 'iso' => 'ae', 'regions' => ['middle-east'], 'popular' => true,
             'groups' => ['gcc'],
             'descriptor' => 'A major international business and commercial hub.',
@@ -665,6 +666,7 @@ function bs_jurisdictions(): array
             'capital' => 'George Town', 'lat' => 19.29, 'lon' => -81.38,
         ],
         'singapore' => [
+            'research' => true, 'service_enabled' => false, 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
             'name' => 'Singapore', 'iso' => 'sg', 'regions' => ['asia'], 'popular' => true,
             'groups' => ['asean'],
             'descriptor' => 'A city-state and international financial centre in Southeast Asia.',
@@ -682,6 +684,7 @@ function bs_jurisdictions(): array
             'capital' => 'Nicosia', 'lat' => 35.17, 'lon' => 33.36,
         ],
         'hong-kong' => [
+            'research' => true, 'service_enabled' => false, 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
             'name' => 'Hong Kong', 'iso' => 'hk', 'regions' => ['asia'], 'popular' => true,
             'descriptor' => 'A Special Administrative Region of China and an international financial centre.',
             'capital' => 'Hong Kong', 'lat' => 22.32, 'lon' => 114.17,
@@ -711,6 +714,7 @@ function bs_jurisdictions(): array
             'capital' => 'San Juan', 'lat' => 18.47, 'lon' => -66.11,
         ],
         'united-kingdom' => [
+            'research' => true, 'service_enabled' => false, 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
             'name' => 'United Kingdom', 'short' => 'UK', 'iso' => 'gb', 'regions' => ['europe'], 'popular' => true,
             'descriptor' => 'England, Scotland, Wales and Northern Ireland, with London as a global financial centre.',
             'capital' => 'London', 'lat' => 51.51, 'lon' => -0.13,
@@ -719,17 +723,35 @@ function bs_jurisdictions(): array
 }
 
 /**
- * Jurisdiction approval gate (see docs/jurisdiction-approval-matrix.md).
- * A jurisdiction page is indexable, and may state that Paynancial serves
- * it, only when BOTH are recorded on its entry:
- *   'served_confirmed' => true   — business owner confirmed it is served today
- *   'content_verified' => true   — page content checked against official sources
- * Neither is set for any jurisdiction yet, so every jurisdiction page is
- * noindex and uses "we'll confirm availability" wording.
+ * Jurisdiction approval gate (approved decisions, 23 Sep 2026; see
+ * docs/jurisdiction-approval-matrix.md). Flags on each jurisdiction entry:
+ *   'service_enabled'   => true — business evidence supplied and approved that
+ *                                 Paynancial serves it today
+ *   'indexable'         => true — content verified against official sources
+ *                                 and approved through the publishing gate
+ *   'sitemap'           => true — may be listed in the XML sitemap
+ *   'service_promotion' => true — may use service CTAs ("Get a Quote" …)
+ * A jurisdiction is approved (indexable, service wording, listed as served)
+ * only when BOTH 'service_enabled' and 'indexable' are exactly true. A page
+ * merely existing never implies service availability. None is approved yet;
+ * UAE, Singapore, Hong Kong and the UK are research / content-development
+ * jurisdictions with every flag explicitly false.
  */
 function bs_jurisdiction_approved(array $j): bool
 {
-    return ($j['served_confirmed'] ?? false) === true && ($j['content_verified'] ?? false) === true;
+    return ($j['service_enabled'] ?? false) === true && ($j['indexable'] ?? false) === true;
+}
+
+/** Sitemap listing needs approval plus its own 'sitemap' flag. */
+function bs_jurisdiction_in_sitemap(array $j): bool
+{
+    return bs_jurisdiction_approved($j) && ($j['sitemap'] ?? false) === true;
+}
+
+/** Service CTAs and service wording need approval plus 'service_promotion'. */
+function bs_jurisdiction_promotable(array $j): bool
+{
+    return bs_jurisdiction_approved($j) && ($j['service_promotion'] ?? false) === true;
 }
 
 /**
@@ -772,11 +794,22 @@ function bs_sitemap_paths(): array
         $paths[] = bs_jurisdiction_url();
     }
     foreach (bs_jurisdictions() as $slug => $j) {
-        if (bs_jurisdiction_approved($j)) {
+        if (bs_jurisdiction_in_sitemap($j)) {
             $paths[] = bs_jurisdiction_url($slug);
         }
     }
     return $paths;
+}
+
+/**
+ * The one-line legal "framework" statement on a service page (e.g. "Governed
+ * by the Companies Act, 2013…") is a regulatory claim. It is shown only once
+ * it has an official source and a last-verified date ('framework_source',
+ * 'framework_verified'); until then it stays in the data as a draft.
+ */
+function bs_framework_public(array $service): bool
+{
+    return !empty($service['framework_source']) && !empty($service['framework_verified']);
 }
 
 /** Look up one jurisdiction; null if unknown. */

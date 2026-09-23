@@ -243,6 +243,7 @@ sp_hero([
   </div>
 <?php sp_band_close(); ?>
 
+<?php if (gov_india_context_public()): // regulatory statements pending source verification ?>
 <?php sp_band_open('india', 'dim'); ?>
   <div class="sp-split">
     <?php sp_head('india', 'In India', 'AI for how businesses in India pay and get paid.', 'Built around the realities of Indian digital payments — with people, not models, accountable for decisions.'); ?>
@@ -254,6 +255,7 @@ sp_hero([
     ]); ?>
   </div>
 <?php sp_band_close(); ?>
+<?php endif; ?>
 
 <?php sp_regulatory('ai:hub', 'AI in payments in India'); ?>
 

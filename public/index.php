@@ -104,7 +104,7 @@ $dashboardAreas = [
     'admin'       => ['roles' => ['admin', 'super_admin'],             'dir' => 'admin',    'pages' => [
         'dashboard', 'users', 'transactions', 'cms', 'enquiries',
         'partner-applications', 'products', 'commission-rules', 'customer-applications', 'customer-kyc',
-        'change-requests', 'audit-logs',
+        'change-requests', 'audit-logs', 'content-governance',
     ]],
     'super-admin' => ['roles' => ['super_admin'],                      'dir' => 'admin',    'pages' => ['dashboard']],
 ];

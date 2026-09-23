@@ -47,6 +47,7 @@ function dashboard_nav_items(string $area): array
             ['label' => 'Transactions', 'page' => 'transactions'],
             ['label' => 'Enquiries', 'page' => 'enquiries'],
             ['label' => 'CMS', 'page' => 'cms'],
+            ['label' => 'Content Governance', 'page' => 'content-governance'],
             ['group' => 'Partner Hub', 'label' => 'Partner Applications', 'page' => 'partner-applications'],
             ['group' => 'Partner Hub', 'label' => 'Customer Applications', 'page' => 'customer-applications'],
             ['group' => 'Partner Hub', 'label' => 'Customer eKYC', 'page' => 'customer-kyc'],

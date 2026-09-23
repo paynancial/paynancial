@@ -4,8 +4,9 @@
  * Run: php tests/jurisdiction-gate-test.php   (exit code 0 = pass)
  *
  * Rule (docs/jurisdiction-approval-matrix.md): a jurisdiction is approved —
- * indexable, sitemap-listed, allowed service wording — only when BOTH
- * 'served_confirmed' and 'content_verified' are exactly boolean true.
+ * indexable, allowed service wording — only when BOTH 'service_enabled' and
+ * 'indexable' are exactly boolean true; sitemap and service CTAs also need
+ * their own 'sitemap' / 'service_promotion' flags.
  * A page merely existing never makes it indexable.
  */
 declare(strict_types=1);
@@ -21,16 +22,28 @@ $check = function (string $label, bool $got, bool $want) use (&$fail) {
 
 $base = ['name' => 'Test', 'regions' => ['asia']];
 $cases = [
-    ['both true',                 ['served_confirmed' => true,  'content_verified' => true],  true],
-    ['served only',               ['served_confirmed' => true,  'content_verified' => false], false],
-    ['verified only',             ['served_confirmed' => false, 'content_verified' => true],  false],
-    ['both false',                ['served_confirmed' => false, 'content_verified' => false], false],
+    ['both true',                 ['service_enabled' => true,  'indexable' => true],  true],
+    ['served only',               ['service_enabled' => true,  'indexable' => false], false],
+    ['verified only',             ['service_enabled' => false, 'indexable' => true],  false],
+    ['both false',                ['service_enabled' => false, 'indexable' => false], false],
     ['flags missing (page only)', [],                                                          false],
-    ['truthy int 1',              ['served_confirmed' => 1,     'content_verified' => 1],     false],
-    ["truthy string 'true'",      ['served_confirmed' => 'true', 'content_verified' => 'true'], false],
+    ['truthy int 1',              ['service_enabled' => 1,     'indexable' => 1],     false],
+    ["truthy string 'true'",      ['service_enabled' => 'true', 'indexable' => 'true'], false],
 ];
 foreach ($cases as [$label, $flags, $want]) {
     $check("approved: $label", bs_jurisdiction_approved($base + $flags), $want);
+}
+
+$full = $base + ['service_enabled' => true, 'indexable' => true];
+$check('sitemap needs its own flag', bs_jurisdiction_in_sitemap($full), false);
+$check('sitemap with flag', bs_jurisdiction_in_sitemap($full + ['sitemap' => true]), true);
+$check('promotion needs its own flag', bs_jurisdiction_promotable($full), false);
+$check('promotion never without approval', bs_jurisdiction_promotable($base + ['service_promotion' => true]), false);
+foreach (['uae', 'singapore', 'hong-kong', 'united-kingdom'] as $slug) {
+    $jj = bs_jurisdiction($slug);
+    $check("$slug is research-only (all flags false)", ($jj['research'] ?? false) === true
+        && ($jj['service_enabled'] ?? null) === false && ($jj['indexable'] ?? null) === false
+        && ($jj['sitemap'] ?? null) === false && ($jj['service_promotion'] ?? null) === false, true);
 }
 
 // Current data: nothing approved, so no jurisdiction or hub page may be listed.

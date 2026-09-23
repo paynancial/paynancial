@@ -17,6 +17,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/business-services.php';    // breadcrumb / FAQ schema builders
 require_once __DIR__ . '/business-services-ui.php'; // bs_breadcrumb()
 require_once __DIR__ . '/regulatory-context.php';  // sp_regulatory() content
+require_once __DIR__ . '/content-governance.php';  // publishing gate
 
 /**
  * Page meta for a standalone page: canonical, OG, and JSON-LD

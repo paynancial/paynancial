@@ -1,6 +1,6 @@
 # Paynancial — Master Regulatory SEO + AEO Audit
 
-**Audit date:** 23 September 2026 · **Branch:** `claude/laughing-clarke-u06pou` at `26c04a2` · **Status:** AUDIT + PROPOSAL — no website changes made in this pass (brief §2, §52).
+**Audit date:** 23 September 2026 · **Branch:** `claude/laughing-clarke-u06pou` at `26c04a2` · **Status:** AUDIT + PROPOSAL (23 Sep 2026). **P0 approved decisions implemented** — see the section at the end.
 
 Machine-readable inventory: [`docs/audit/url-inventory.csv`](url-inventory.csv) (111 URLs, all brief §3 columns).
 
@@ -455,3 +455,25 @@ Jurisdictions, company types, business services, FAQs, SEO metadata, redirects a
 | **P3** | Source-change monitoring, Search Console-driven prioritisation |
 
 Each phase ships as its own commit(s) on a branch, is tested locally (crawl, overlap, links, layout, contrast), and is reversible by revert. Production deploy stays with you.
+
+
+---
+
+## Approved decisions — implementation status (23 Sep 2026)
+
+| # | Decision | Implemented | Where |
+|---|---|---|---|
+| 1 | 16 unconfirmed-capability pages: live, `noindex, follow`, out of the sitemap, no service promotion | Yes — 16/16 noindex, 0 in sitemap, 0 with Service schema; primary CTA is "Ask about availability" | `includes/content-governance.php` (readiness flags + publishing gate), `pages/products/capability.php`, `includes/ai-intelligence.php`, `public/sitemap.php` |
+| 1a | Readiness flag that cannot flip to indexable by accident | Yes — needs stage ≥ Indexable **and** indexable flag **and** approved_by + approved_on | `gov_indexable()`; DB mirror with CHECK constraints in `database/content_governance_schema.sql` |
+| 2 | Unsourced regulatory content removed from public pages | Yes — "Compliance in India" bands (23 draft references) render only when every source field is present and status is verified: 0 pages today. "In India" bands held as drafts: 0 pages. Business Services "Framework" lines hidden until sourced. Regulatory statements rewritten out of guide-page bodies and FAQs | `includes/regulatory-context.php` (`reg_references()`, `reg_publishable()`), `gov_india_context_public()`, `bs_framework_public()` |
+| 3 | Network access for official domains | **Requested — still blocked.** Nothing is marked verified | — |
+| 4 | UAE, Singapore, Hong Kong, UK: research only, all flags false | Yes — explicit `research`, `service_enabled`, `indexable`, `sitemap`, `service_promotion` flags; gate test extended | `includes/business-services.php`, `tests/jurisdiction-gate-test.php` |
+| 5 | Professional review: Pending, no named reviewer | Yes — `GOV_PROFESSIONAL_REVIEW = 'pending'`; no "reviewed by" wording anywhere (checked sitewide) | `includes/content-governance.php` |
+| 6 | No location pages; "Based in Patna, Bihar" only | Yes — no location pages; no "registered office" claim about Paynancial | — |
+| 7 | No `uae.paynancial.com`; main-domain architecture | Yes — unchanged | — |
+| 8 | Research vs service separation on jurisdiction pages | Yes — unapproved pages: "{Country}: jurisdiction information", "Paynancial service availability: Not confirmed" panel, research-status list, "Ask about availability" only; no "Get a Quote", incorporation process, generic document lists or service FAQs; floating enquiry reads "Ask About Availability" | `pages/business-services/jurisdiction.php`, `includes/cta-context.php` |
+| 9 | Publishing gate: Draft → Source verification → Content review → Regulatory review → Business service approval → SEO/AEO review → Indexable → Sitemap → Publish | Yes — `gov_stages()`; CMS view at `/admin/content-governance` (read-only) | `admin/content-governance.php` |
+
+After the change: 111 URLs, all 200; sitemap 77 URLs (was 93); no noindex page in the sitemap; no page overflow at 5 widths on the changed templates.
+
+**Still pending (not in the approved list):** `/blog` and `/signup` noindex; 404 self-canonical; Privacy Policy and Terms reference RBI / KYC obligations and the DPDP Act — legal documents, flagged for legal review rather than edited.

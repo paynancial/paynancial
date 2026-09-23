@@ -92,7 +92,11 @@ $entries = [
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+require_once __DIR__ . '/../includes/content-governance.php';
 foreach ($entries as $route => $template) {
+    if (!gov_in_sitemap('/' . $route)) {
+        continue; // governed page not approved for the sitemap
+    }
     $file = $pages . $template;
     if (!is_file($file)) {
         continue; // never list a URL whose template is missing

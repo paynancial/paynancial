@@ -47,10 +47,16 @@ _Last updated: 23 Sep 2026 — all 15 UNCONFIRMED._
 2. Replace templated content with verified, jurisdiction-specific content (overview,
    company structures, requirements, FAQs), each checked against the official source
    below. No professional reviewer is named unless that person actually reviewed it.
-3. In `includes/business-services.php`, set on that jurisdiction's entry:
-   `'served_confirmed' => true` and `'content_verified' => true`.
-   The page then becomes indexable, gains FAQ markup and service wording, and is added
-   to the sitemap automatically; the hub pages become indexable once any row is confirmed.
+3. In `includes/business-services.php`, set on that jurisdiction's entry
+   (flag names from the approved decisions of 23 Sep 2026):
+   `'service_enabled' => true` and `'indexable' => true` — the page becomes indexable and
+   gains FAQ markup and service wording; then `'sitemap' => true` to list it in the
+   sitemap and `'service_promotion' => true` to allow service CTAs ("Get a Quote").
+   Until both `service_enabled` and `indexable` are true the page is **jurisdiction
+   information only**: noindex, "Not confirmed" availability panel, research status, an
+   "Ask about availability" enquiry and no service CTAs. UAE, Singapore, Hong Kong and
+   the UK are research / content-development jurisdictions with every flag false.
+   `tests/jurisdiction-gate-test.php` must pass.
 4. Update this table: Service Available Today? → Yes, Evidence, Index? → Yes,
    Sitemap? → Yes, Status → **CONFIRMED**.
 

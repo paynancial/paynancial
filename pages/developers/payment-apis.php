@@ -38,7 +38,7 @@ sp_hero([
     <li><a href="#lifecycle">Payment lifecycle</a></li>
     <li><a href="#create">Create a payment</a></li>
     <li><a href="#reliability">Reliability</a></li>
-    <li><a href="#india">In India</a></li>
+    <?php if (gov_india_context_public()): ?><li><a href="#india">In India</a></li><?php endif; ?>
     <li><a href="#faq">FAQ</a></li>
   </ul></div>
 </nav>
@@ -97,6 +97,7 @@ sp_hero([
   <p class="reveal" style="margin-top:28px;"><a class="card-link" href="/developers/webhooks" style="color:var(--teal-300);">Webhooks →</a> &nbsp; <a class="card-link" href="/developers/authentication" style="color:var(--teal-300);">Authentication →</a></p>
 <?php sp_band_close(); ?>
 
+<?php if (gov_india_context_public()): // regulatory statements pending source verification ?>
 <?php sp_band_open('india'); ?>
   <div class="sp-split">
     <?php sp_head('india', 'In India', 'Accepting payments from customers in India.'); ?>
@@ -108,6 +109,7 @@ sp_hero([
     ]); ?>
   </div>
 <?php sp_band_close(); ?>
+<?php endif; ?>
 
 <?php sp_regulatory('dev:payment-apis', 'accepting payments in India'); ?>
 

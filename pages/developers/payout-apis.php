@@ -37,7 +37,7 @@ sp_hero([
     <li><a href="#idempotency">Idempotency</a></li>
     <li><a href="#errors">Errors</a></li>
     <li><a href="#bulk">Bulk</a></li>
-    <li><a href="#india">In India</a></li>
+    <?php if (gov_india_context_public()): ?><li><a href="#india">In India</a></li><?php endif; ?>
     <li><a href="#faq">FAQ</a></li>
   </ul></div>
 </nav>
@@ -93,6 +93,7 @@ sp_hero([
   </div>
 <?php sp_band_close(); ?>
 
+<?php if (gov_india_context_public()): // regulatory statements pending source verification ?>
 <?php sp_band_open('india'); ?>
   <div class="sp-split">
     <?php sp_head('india', 'In India', 'Paying out in India.'); ?>
@@ -104,6 +105,7 @@ sp_hero([
     ]); ?>
   </div>
 <?php sp_band_close(); ?>
+<?php endif; ?>
 
 <?php sp_regulatory('dev:payout-apis', 'paying out in India'); ?>
 

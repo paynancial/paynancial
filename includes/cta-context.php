@@ -129,6 +129,13 @@ function cta_context(string $path): array
         $seg = explode('/', trim((string) parse_url($path, PHP_URL_PATH), '/'));
         $j = bs_jurisdiction($seg[2] ?? '');
         $place = $j ? ($j['short'] ?? $j['name']) : 'international';
+        if ($j && !bs_jurisdiction_promotable($j)) {
+            // Unconfirmed jurisdiction: an availability question, not a service CTA.
+            $ctx['label'] = 'Ask About Availability';
+            $ctx['support'] = 'Ask whether Paynancial can support incorporation in {place}.';
+            $ctx['subject'] = 'Availability question: {place}';
+            $ctx['message'] = "Hi Paynancial, I'd like to know whether you can support company incorporation in {place}.";
+        }
         foreach (['support', 'subject', 'message'] as $f) {
             $ctx[$f] = str_replace('{place}', $place, $ctx[$f]);
         }

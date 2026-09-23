@@ -20,10 +20,13 @@ $page_meta = sp_meta([
     'h1'          => $pc['h1'],
     'trail'       => $trail,
     'faqs'        => $faqs,
-    'robots'      => $pc['robots'] ?? '',
-    'service'     => (($pc['family'] ?? '') === 'ai' || !empty($pc['guide'])) ? '' : $pc['name'],
+    // Governed (unconfirmed) pages: live, noindex, no Service schema — content-governance.php.
+    'robots'      => gov_indexable($path) ? ($pc['robots'] ?? '') : 'noindex, follow',
+    'service'     => (($pc['family'] ?? '') === 'ai' || !empty($pc['guide']) || !gov_service_promotion($path)) ? '' : $pc['name'],
 ]);
-$india = $pc['india'] ?? null;
+$promote = gov_service_promotion($path);
+// "In India" bands carry unverified regulatory statements: drafts only until verified.
+$india = gov_india_context_public() ? ($pc['india'] ?? null) : null;
 $tone = fn (string $a, string $b) => $india ? $b : $a; // keep bands alternating when the India band is present
 
 if (!empty($pc['aside_code'])) {
@@ -38,7 +41,7 @@ sp_hero([
     'eyebrow'   => $parent[0] . ' · ' . $pc['name'],
     'h1'        => $pc['h1'],
     'lead'      => $pc['lead'],
-    'primary'   => [cta_label(), '/contact?intent=sales&product=' . $pc['slug'], 'cta_click'],
+    'primary'   => $promote ? [cta_label(), '/contact?intent=sales&product=' . $pc['slug'], 'cta_click'] : ['Ask about availability', '/contact?intent=sales&product=' . $pc['slug'], 'cta_click'],
     'secondary' => $pc['secondary'] ?? ['Read the API Reference', '/developers/api-reference', 'api_reference_click'],
     'values'    => $pc['values'],
     'aside'     => $aside,
@@ -108,7 +111,7 @@ sp_hero([
   <?php sp_related(array_map('pc_related_card', $pc['related'])); ?>
 <?php sp_band_close(); ?>
 
-<?php sp_cta('Talk to us about ' . $noun . '.', 'Tell us how your business takes and moves money, and we will show you how it fits.', [
-    [cta_label(), '/contact?intent=sales&product=' . $pc['slug'], 'cta_click'],
+<?php sp_cta($promote ? 'Talk to us about ' . $noun . '.' : 'Ask about ' . $noun . '.', $promote ? 'Tell us how your business takes and moves money, and we will show you how it fits.' : 'This capability is not confirmed as a Paynancial product. Tell us what you need and our team will tell you what is available.', [
+    [$promote ? cta_label() : 'Ask about availability', '/contact?intent=sales&product=' . $pc['slug'], 'cta_click'],
     ['Explore all products', '/products', 'cta_click'],
 ]); ?>

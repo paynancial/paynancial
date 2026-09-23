@@ -16,14 +16,21 @@ $pos = bs_map_position($j);
 $regionNames = array_map(fn ($r) => bs_regions()[$r] ?? $r, $j['regions']);
 $enquiry = bs_enquiry_url($j['slug']);
 $approved = bs_jurisdiction_approved($j);
+// Research vs service: an unapproved jurisdiction shows jurisdiction information
+// only — no service wording, no "Get a Quote", no incorporation process.
+$promote = bs_jurisdiction_promotable($j);
 
-$faqs = [
+$faqs = $approved ? [
     ["Can Paynancial help me incorporate in {$name}?", $approved
         ? "Yes. {$name} is one of the jurisdictions where we support international company incorporation. Share your requirements and we will outline the options, documents and next steps."
         : "Tell us about your plans for {$name} and our team will confirm whether and how we can support your incorporation there, before any work begins."],
     ["Which company structure should I use in {$name}?", "That depends on your business activity, ownership and plans. We explain the available structures and their ongoing obligations during your consultation."],
     ["How much does incorporation in {$name} cost and how long does it take?", "Government fees, registered agent charges and processing times vary. You receive a written quote and an expected timeline once we understand your case."],
     ['Do you provide tax advice?', "We recommend obtaining independent tax advice in your home country and in {$name} before you incorporate. We coordinate the incorporation itself."],
+] : [
+    ["Does Paynancial offer company incorporation in {$name}?", "Not confirmed. Paynancial has not confirmed incorporation support in {$name}. You can ask our team about availability; nothing on this page is an offer of service."],
+    ["Where can I find official information about {$name}?", "From the official government sources for {$name}. Paynancial will summarise them here, with links and review dates, only once they have been verified."],
+    ['Is this page legal or tax advice?', 'No. It is general jurisdiction information. Take independent professional advice in your home country and in the jurisdiction before you act.'],
 ];
 
 $related = [];
@@ -36,8 +43,9 @@ $related = array_slice($related, 0, 3, true);
 
 $bs_trail = [['Home', '/'], ['Business Services', bs_url()], ['Jurisdictions', bs_jurisdiction_url()], [$name, bs_jurisdiction_url($j['slug'])]];
 $page_meta = bs_page_meta(
-    "Company Incorporation in {$name} | Paynancial Business Services",
-    "Incorporate a company in {$name} with Paynancial. Structures, requirements, documents and process — with expert guidance from first conversation to incorporation.",
+    $approved ? "Company Incorporation in {$name} | Paynancial Business Services" : "{$name}: Jurisdiction Information | Paynancial Business Services",
+    $approved ? "Incorporate a company in {$name} with Paynancial. Structures, requirements, documents and process — with expert guidance from first conversation to incorporation."
+        : "General information about {$name} as a company jurisdiction. Paynancial has not confirmed incorporation support in {$name}; official-source content is being prepared.",
     bs_jurisdiction_url($j['slug']),
     // FAQ markup only once the page is approved and its FAQs are jurisdiction-specific.
     $approved ? [bs_breadcrumb_schema($bs_trail), bs_faq_schema($faqs)] : [bs_breadcrumb_schema($bs_trail)]
@@ -60,14 +68,18 @@ $considerations = $j['considerations'] ?? [
   <div class="container bs-detail-hero-grid">
     <div class="reveal">
       <?php bs_breadcrumb($bs_trail); ?>
-      <span class="eyebrow">International Incorporation</span>
-      <h1 id="bs-jur-title"><span class="bs-jur-hero-flag"><?= bs_flag($j, 'bs-flag bs-flag-lg') ?></span>Company Incorporation in <?= e($name) ?></h1>
+      <span class="eyebrow"><?= $approved ? 'International Incorporation' : 'Jurisdiction information' ?></span>
+      <h1 id="bs-jur-title"><span class="bs-jur-hero-flag"><?= bs_flag($j, 'bs-flag bs-flag-lg') ?></span><?= $approved ? 'Company Incorporation in ' . e($name) : e($name) . ': jurisdiction information' ?></h1>
       <p class="lead"><?= e($j['descriptor']) ?> <?= $approved
           ? 'Paynancial supports incorporation in ' . e($name) . ' with expert guidance, structured documentation and end-to-end coordination.'
-          : 'Planning to incorporate in ' . e($name) . '? Share your requirements and our team will confirm how we can help.' ?></p>
+          : 'This page holds general information about ' . e($name) . '. Paynancial has not confirmed incorporation support here.' ?></p>
       <div class="hero-actions">
+        <?php if ($promote): ?>
         <a class="btn btn-primary" href="<?= e($enquiry) ?>"><?= e(cta_label()) ?> <?= bs_icon('arrow') ?></a>
         <a class="btn btn-outline" href="<?= e(bs_enquiry_url('quote')) ?>">Get a Quote</a>
+        <?php else: ?>
+        <a class="btn btn-outline" href="<?= e($enquiry) ?>">Ask about availability <?= bs_icon('arrow') ?></a>
+        <?php endif; ?>
       </div>
     </div>
     <div class="bs-jur-hero-visual reveal" style="--fx:<?= $pos['x'] ?>;--fy:<?= $pos['y'] ?>;" aria-hidden="true">
@@ -82,11 +94,16 @@ $considerations = $j['considerations'] ?? [
 <nav class="bs-subnav" aria-label="On this page">
   <div class="container">
     <a href="#overview">Overview</a>
+    <?php if ($approved): ?>
     <a href="#structures">Structures</a>
     <a href="#requirements">Requirements</a>
     <a href="#process">Process</a>
     <a href="#considerations">Considerations</a>
     <a href="#compliance">Compliance</a>
+    <?php else: ?>
+    <a href="#availability">Service availability</a>
+    <a href="#research">Research status</a>
+    <?php endif; ?>
     <a href="#faqs">FAQs</a>
   </div>
 </nav>
@@ -97,17 +114,51 @@ $considerations = $j['considerations'] ?? [
     <div class="reveal">
       <span class="eyebrow">Jurisdiction overview</span>
       <h2 id="bs-ov-title"><?= e($name) ?> at a glance</h2>
-      <p class="bs-prose"><?= e($j['overview'] ?? ($j['descriptor'] . ' Incorporation requirements, available structures and ongoing obligations depend on your business activity and plans — our team confirms these with you before you commit.')) ?></p>
+      <p class="bs-prose"><?= e($j['overview'] ?? ($approved
+          ? $j['descriptor'] . ' Incorporation requirements, available structures and ongoing obligations depend on your business activity and plans — our team confirms these with you before you commit.'
+          : $j['descriptor'] . ' Company structures, registration requirements, licensing, tax and ongoing obligations in ' . $name . ' will be summarised here from official sources once verified.')) ?></p>
     </div>
     <dl class="bs-facts reveal">
       <div><dt>Region</dt><dd><?= e(implode(', ', $regionNames)) ?></dd></div>
       <div><dt>Capital / seat of government</dt><dd><?= e($j['capital']) ?></dd></div>
       <div><dt>Coordinates</dt><dd class="mono"><?= e(bs_format_coords($j)) ?></dd></div>
-      <div><dt>Paynancial support</dt><dd><?= $approved ? 'Incorporation, documentation &amp; post-incorporation assistance' : 'Confirmed on enquiry' ?></dd></div>
+      <div><dt>Paynancial service</dt><dd><?= $approved ? 'Incorporation, documentation &amp; post-incorporation assistance' : 'Not confirmed' ?></dd></div>
     </dl>
   </div>
 </section>
 
+<?php if (!$approved): ?>
+<!-- ================================================ SERVICE AVAILABILITY -->
+<section class="bs-section bs-section-tint" id="availability" aria-labelledby="bs-av-title">
+  <div class="container">
+    <div class="bs-note-card reveal">
+      <span class="bs-note-icon"><?= bs_icon('expert') ?></span>
+      <div>
+        <span class="eyebrow">Paynancial service availability</span>
+        <h2 id="bs-av-title">Not confirmed for <?= e($name) ?></h2>
+        <p>Paynancial has not confirmed that it provides company incorporation in <?= e($name) ?>. This page is jurisdiction information, not a service offer. If you are considering <?= e($name) ?>, you can ask our team whether support is available.</p>
+      </div>
+      <a class="bs-text-link" href="<?= e($enquiry) ?>">Ask about availability <?= bs_icon('arrow') ?></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== RESEARCH STATUS -->
+<section class="bs-section" id="research" aria-labelledby="bs-rs-title">
+  <div class="container">
+    <div class="bs-head">
+      <span class="eyebrow">Research status</span>
+      <h2 id="bs-rs-title">What this page will cover</h2>
+      <p>Each topic is published only after it has been checked against the official sources for <?= e($name) ?>. Professional review: Pending.</p>
+    </div>
+    <ul class="bs-checklist bs-research-list">
+      <?php foreach (['Regulatory authorities', 'Company types', 'Registration requirements and documents', 'Business activities and licensing', 'Tax framework', 'Ongoing compliance', 'Beneficial ownership and AML', 'Banking considerations', 'India-side considerations', 'Official sources'] as $topic): ?>
+      <li><?= bs_icon('doc') ?><span><?= e($topic) ?> — source verification pending</span></li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</section>
+<?php else: ?>
 <!-- ========================================================= STRUCTURES -->
 <section class="bs-section bs-section-tint" id="structures" aria-labelledby="bs-st-title">
   <div class="container">
@@ -216,6 +267,8 @@ $considerations = $j['considerations'] ?? [
   </div>
 </section>
 
+<?php endif; ?>
+
 <!-- =============================================================== FAQS -->
 <section class="bs-section" id="faqs" aria-labelledby="bs-faq-title">
   <div class="container bs-faq-wrap">
@@ -260,9 +313,14 @@ $considerations = $j['considerations'] ?? [
 
 <?php bs_payments_crosssell(); ?>
 
-<?php bs_cta_band(
+<?php if ($promote): bs_cta_band(
     "Planning to incorporate in {$name}?",
     'Tell us about your business and our team will outline the structure, documents and next steps.',
     cta_label(), $enquiry,
     'Get a Quote', bs_enquiry_url('quote')
-); ?>
+); else: bs_cta_band(
+    "Considering {$name}?",
+    "Paynancial has not confirmed incorporation support in {$name}. Ask our team what is available.",
+    'Ask about availability', $enquiry,
+    'View all jurisdictions', bs_jurisdiction_url()
+); endif; ?>

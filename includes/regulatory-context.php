@@ -1,18 +1,19 @@
 <?php
 /**
- * Regulatory context — the RBI and NPCI frameworks (and the two Acts) that
- * apply to payments in India, in plain language, for the "Regulatory
- * context" band on product, capability and pillar pages.
+ * Regulatory references — DRAFT / SOURCE VERIFICATION PENDING.
  *
- * Content rules:
- * - General information about the frameworks, not legal advice and not a
- *   statement of Paynancial's own authorisations. PCI DSS and RBI Payment
- *   Aggregator authorisation are "Verify" in the Trust Center, so nothing
- *   here says Paynancial holds them or complies with a given circular.
- * - No circular numbers, dates, thresholds or timelines: those change by
- *   circular, so each entry names the framework and the page links to the
- *   regulators' own sites for the current text.
- * - Have a compliance professional review this file before relying on it.
+ * Approved decision (23 Sep 2026): unsourced regulatory content is removed
+ * from public pages until verified. The summaries below were drafted from
+ * general knowledge, not from official sources, so every reference has
+ * status 'source_verification_pending' and none is rendered.
+ *
+ * A reference becomes public only when reg_publishable() is true, i.e. it
+ * has ALL of: official source, source URL, reference / circular / rule
+ * number, issue date, effective date (or 'not applicable'), applicability,
+ * last-verified date, reviewer status — and status 'verified'. Verification
+ * means the official source was actually accessed and checked; it is never
+ * inferred. Professional review stays 'pending' until a qualified
+ * professional has reviewed the content (no reviewer is named anywhere).
  */
 
 declare(strict_types=1);
@@ -20,7 +21,7 @@ declare(strict_types=1);
 const REG_RBI_URL  = 'https://www.rbi.org.in/';
 const REG_NPCI_URL = 'https://www.npci.org.in/';
 
-/** id => [name, regulator, what it covers]. */
+/** Draft summaries: id => [title, authority, draft summary]. Not public. */
 function reg_items(): array
 {
     return [
@@ -94,22 +95,71 @@ function reg_page_map(): array
 }
 
 /**
+ * Full reference records. Source fields are null until the official source
+ * has been accessed and checked; fill them here (or, later, from the CMS
+ * regulatory_references table — see database/content_governance_schema.sql).
+ */
+function reg_references(): array
+{
+    $verified = []; // id => ['official_source' => …, 'source_url' => …, 'reference' => …, 'issue_date' => …,
+                    //        'effective_date' => …, 'applicability' => …, 'last_verified' => …, 'reviewer_status' => …, 'status' => 'verified']
+    $out = [];
+    foreach (reg_items() as $id => [$title, $authority, $summary]) {
+        $out[$id] = ($verified[$id] ?? []) + [
+            'title'           => $title,
+            'authority'       => $authority,
+            'summary'         => $summary,
+            'official_source' => null,
+            'source_url'      => null,
+            'reference'       => null,
+            'issue_date'      => null,
+            'effective_date'  => null,
+            'applicability'   => null,
+            'last_verified'   => null,
+            'reviewer_status' => 'Professional review: Pending',
+            'status'          => 'source_verification_pending',
+        ];
+    }
+    return $out;
+}
+
+/** Fields a reference must have before it can be shown publicly. */
+function reg_required_fields(): array
+{
+    return ['official_source', 'source_url', 'reference', 'issue_date', 'effective_date', 'applicability', 'last_verified', 'reviewer_status'];
+}
+
+/** Missing required fields for a reference (empty = complete). */
+function reg_missing_fields(array $r): array
+{
+    return array_values(array_filter(reg_required_fields(), fn ($f) => empty($r[$f])));
+}
+
+function reg_publishable(array $r): bool
+{
+    return $r['status'] === 'verified' && reg_missing_fields($r) === [];
+}
+
+/**
  * Full-width "Regulatory context" band. $key is a reg_page_map() key; $tone
  * the band tone. Renders nothing for an unmapped key.
  */
 function sp_regulatory(string $key, string $subject, string $tone = 'ink'): void
 {
-    $ids = reg_page_map()[$key] ?? [];
+    $refs = reg_references();
+    $ids = array_values(array_filter(reg_page_map()[$key] ?? [], fn ($id) => isset($refs[$id]) && reg_publishable($refs[$id])));
     if (!$ids) {
-        return;
+        return; // nothing verified for this page yet: render nothing (no disclaimer-only band)
     }
-    $items = reg_items();
     sp_band_open('regulatory', $tone);
     sp_head('regulatory', 'Compliance in India', 'The RBI and NPCI rules around ' . $subject . '.', 'A plain-language guide to the frameworks that apply. It is general information, not legal advice, and not a statement of Paynancial\'s own licences or authorisations.');
     echo '<div class="sp-reg">';
     foreach ($ids as $id) {
-        [$name, $by, $what] = $items[$id];
-        echo '<article class="sp-reg-item reveal"><span class="sp-reg-by">' . e($by) . '</span><h3>' . e($name) . '</h3><p>' . e($what) . '</p></article>';
+        $r = $refs[$id];
+        echo '<article class="sp-reg-item reveal"><span class="sp-reg-by">' . e($r['authority']) . '</span><h3>' . e($r['title']) . '</h3><p>' . e($r['summary']) . '</p>'
+            . '<p class="sp-reg-meta">' . e($r['reference']) . ' · Issued ' . e($r['issue_date']) . ' · Effective ' . e($r['effective_date'])
+            . ' · <a class="inline-link" href="' . e($r['source_url']) . '" rel="noopener" target="_blank">' . e($r['official_source']) . '</a>'
+            . ' · Last verified ' . e($r['last_verified']) . ' · ' . e($r['reviewer_status']) . '</p></article>';
     }
     echo '</div>';
     echo '<p class="sp-reg-foot reveal">Regulators update these rules by circular, so always check the current text at the source: '
