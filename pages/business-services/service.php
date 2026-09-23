@@ -38,6 +38,10 @@ $page_meta = bs_page_meta(
     ]
 );
 
+if (!bs_service_search_eligible($s)) {
+    $page_meta['robots'] = 'noindex, follow';
+}
+
 $sections = $isIncorporation
     ? ['structures' => 'Structures', 'process' => 'Process', 'documents' => 'Documents', 'pricing' => 'Timeline & fees', 'faqs' => 'FAQs']
     : ['overview' => 'What it is', 'who' => 'Who it’s for', 'documents' => 'Requirements', 'process' => 'Process', 'pricing' => 'Timeline & fees', 'faqs' => 'FAQs'];
@@ -108,7 +112,7 @@ $sections = $isIncorporation
     </div>
     <a class="bs-global-strip reveal" href="<?= e(bs_url('global-incorporation')) ?>">
       <span class="bs-global-strip-icon"><?= bs_icon('globe') ?></span>
-      <span><strong>Incorporating outside India?</strong> Explore international jurisdictions — from the UAE and Singapore to the United Kingdom.</span>
+      <span><strong>Incorporating outside India?</strong> See what to consider, and ask us to confirm what support is available for your plans.</span>
       <span class="bs-text-link">Explore Global Incorporation <?= bs_icon('arrow') ?></span>
     </a>
   </div>

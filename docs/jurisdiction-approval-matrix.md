@@ -1,53 +1,75 @@
 # Jurisdiction Approval Matrix
 
-Controls which `/business-services/jurisdictions/{slug}` pages may be indexed
-by search engines and may state that Paynancial serves that jurisdiction.
+**Owner decision required for every row.** A jurisdiction becomes indexable,
+sitemap-listed, and may be described as a Paynancial incorporation service
+**only after the business owner explicitly confirms** that Paynancial serves it
+today. Until then it stays **UNCONFIRMED**.
 
-## Rule
+_Last updated: 23 Sep 2026 — all 15 UNCONFIRMED._
 
-A jurisdiction page becomes **fully indexable** only when **both** are true
-and recorded in `includes/business-services.php` on that jurisdiction's entry:
+## Matrix
 
-| Flag | Meaning | Who confirms |
-|---|---|---|
-| `'served_confirmed' => true` | Paynancial currently serves this jurisdiction (delivery model and partner/agent known) | Business owner, in writing |
-| `'content_verified' => true` | Page content has been checked against the official sources below and holds jurisdiction-specific (not templated) information | Content owner |
+| Jurisdiction | Service Available Today? | Evidence | Page Exists? | Index? | Sitemap? | Status |
+|---|---|---|---|---|---|---|
+| United Arab Emirates | Not confirmed | None on file | Yes — `/business-services/jurisdictions/uae` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Singapore | Not confirmed | None on file | Yes — `/business-services/jurisdictions/singapore` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| United Kingdom | Not confirmed | None on file | Yes — `/business-services/jurisdictions/united-kingdom` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Hong Kong | Not confirmed | None on file | Yes — `/business-services/jurisdictions/hong-kong` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Ireland | Not confirmed | None on file | Yes — `/business-services/jurisdictions/ireland` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Cyprus | Not confirmed | None on file | Yes — `/business-services/jurisdictions/cyprus` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Luxembourg | Not confirmed | None on file | Yes — `/business-services/jurisdictions/luxembourg` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Malaysia | Not confirmed | None on file | Yes — `/business-services/jurisdictions/malaysia` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Mauritius | Not confirmed | None on file | Yes — `/business-services/jurisdictions/mauritius` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Saudi Arabia | Not confirmed | None on file | Yes — `/business-services/jurisdictions/saudi-arabia` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Guernsey | Not confirmed | None on file | Yes — `/business-services/jurisdictions/guernsey` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| British Virgin Islands | Not confirmed | None on file | Yes — `/business-services/jurisdictions/british-virgin-islands` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Cayman Islands | Not confirmed | None on file | Yes — `/business-services/jurisdictions/cayman-islands` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Saint Vincent and the Grenadines | Not confirmed | None on file | Yes — `/business-services/jurisdictions/saint-vincent-and-the-grenadines` | No (`noindex, follow`) | No | **UNCONFIRMED** |
+| Puerto Rico | Not confirmed | None on file | Yes — `/business-services/jurisdictions/puerto-rico` | No (`noindex, follow`) | No | **UNCONFIRMED** |
 
-Until both flags are set, `bs_jurisdiction_approved()` returns `false` and the page:
+## What UNCONFIRMED means on the site
 
-- carries `<meta name="robots" content="noindex, follow">`
-- omits FAQPage structured data
-- says "our team will confirm how we can help" instead of "Paynancial supports incorporation in …"
-- stays reachable from the directory for visitors
+- The page stays reachable for visitors from the jurisdiction directory, but carries
+  `<meta name="robots" content="noindex, follow">` and is excluded from `sitemap.xml`.
+- No FAQPage structured data.
+- No incorporation-service claim: the page says our team will confirm whether and how
+  we can help, rather than "Paynancial supports incorporation in …".
+- The international hub pages (`/business-services/global-incorporation`,
+  `/business-services/jurisdictions`) are also `noindex` and out of the sitemap while
+  **no** jurisdiction is confirmed, because they would otherwise present an
+  unconfirmed service.
 
-**Professional review:** no CA, CS, lawyer or other professional reviewer is
-named on any page. A reviewer may be named only after that person has
-actually reviewed and approved the specific page.
+## How a row moves to CONFIRMED
 
-## Current status (all pending)
+1. **Service Available Today?** — the business owner confirms in writing, naming the
+   delivery model (in-house / partner firm / registered agent). Record the confirmation
+   (who, date, document) in **Evidence**.
+2. Replace templated content with verified, jurisdiction-specific content (overview,
+   company structures, requirements, FAQs), each checked against the official source
+   below. No professional reviewer is named unless that person actually reviewed it.
+3. In `includes/business-services.php`, set on that jurisdiction's entry:
+   `'served_confirmed' => true` and `'content_verified' => true`.
+   The page then becomes indexable, gains FAQ markup and service wording, and is added
+   to the sitemap automatically; the hub pages become indexable once any row is confirmed.
+4. Update this table: Service Available Today? → Yes, Evidence, Index? → Yes,
+   Sitemap? → Yes, Status → **CONFIRMED**.
 
-| Jurisdiction | Slug | Served today? | Delivery model / partner | Official source to verify against | Content verified | Named reviewer | Indexable |
-|---|---|---|---|---|---|---|---|
-| United Arab Emirates | `uae` | Unconfirmed | — | UAE Ministry of Economy; emirate economic departments; free-zone authorities | No | None | No |
-| Singapore | `singapore` | Unconfirmed | — | Accounting and Corporate Regulatory Authority (ACRA) | No | None | No |
-| United Kingdom | `united-kingdom` | Unconfirmed | — | Companies House | No | None | No |
-| Hong Kong | `hong-kong` | Unconfirmed | — | Companies Registry | No | None | No |
-| Ireland | `ireland` | Unconfirmed | — | Companies Registration Office (CRO) | No | None | No |
-| Cyprus | `cyprus` | Unconfirmed | — | Department of Registrar of Companies and Intellectual Property | No | None | No |
-| Luxembourg | `luxembourg` | Unconfirmed | — | Luxembourg Business Registers | No | None | No |
-| Malaysia | `malaysia` | Unconfirmed | — | Companies Commission of Malaysia (SSM) | No | None | No |
-| Mauritius | `mauritius` | Unconfirmed | — | Corporate and Business Registration Department; Financial Services Commission | No | None | No |
-| Saudi Arabia | `saudi-arabia` | Unconfirmed | — | Ministry of Commerce; Ministry of Investment (MISA) | No | None | No |
-| Guernsey | `guernsey` | Unconfirmed | — | Guernsey Registry | No | None | No |
-| British Virgin Islands | `british-virgin-islands` | Unconfirmed | — | Registry of Corporate Affairs (Financial Services Commission) | No | None | No |
-| Cayman Islands | `cayman-islands` | Unconfirmed | — | General Registry | No | None | No |
-| Saint Vincent and the Grenadines | `saint-vincent-and-the-grenadines` | Unconfirmed | — | Financial Services Authority; Commerce and Intellectual Property Office | No | None | No |
-| Puerto Rico | `puerto-rico` | Unconfirmed | — | Puerto Rico Department of State (Registry of Corporations) | No | None | No |
+## Official sources (for content verification)
 
-## Approving a jurisdiction
-
-1. Business owner confirms in writing that the jurisdiction is served today, and records the delivery model (in-house, partner firm, registered agent).
-2. Content owner adds verified, jurisdiction-specific content to the entry (`overview`, `structures`, `considerations`) with links to the official source, and replaces the templated FAQs.
-3. Set `'served_confirmed' => true` and `'content_verified' => true` on the entry.
-4. Update this table (status, date, who confirmed).
-5. Add the page to the sitemap and request indexing in Search Console.
+| Jurisdiction | Official source to verify content against |
+|---|---|
+| United Arab Emirates | UAE Ministry of Economy; emirate economic departments; free-zone authorities |
+| Singapore | Accounting and Corporate Regulatory Authority (ACRA) |
+| United Kingdom | Companies House |
+| Hong Kong | Companies Registry |
+| Ireland | Companies Registration Office (CRO) |
+| Cyprus | Department of Registrar of Companies and Intellectual Property |
+| Luxembourg | Luxembourg Business Registers |
+| Malaysia | Companies Commission of Malaysia (SSM) |
+| Mauritius | Corporate and Business Registration Department; Financial Services Commission |
+| Saudi Arabia | Ministry of Commerce; Ministry of Investment (MISA) |
+| Guernsey | Guernsey Registry |
+| British Virgin Islands | Registry of Corporate Affairs (Financial Services Commission) |
+| Cayman Islands | General Registry |
+| Saint Vincent and the Grenadines | Financial Services Authority; Commerce and Intellectual Property Office |
+| Puerto Rico | Puerto Rico Department of State (Registry of Corporations) |

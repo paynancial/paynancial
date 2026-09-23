@@ -18,7 +18,7 @@ $faqs = [
 
 $page_meta = bs_page_meta(
     'Global Company Incorporation — Incorporate Your Business Globally | Paynancial',
-    'Explore international jurisdictions with structured incorporation support and expert guidance from Paynancial — from the UAE and Singapore to the United Kingdom.',
+    'Planning to incorporate outside India? Explore what to consider when choosing a jurisdiction, and ask Paynancial to confirm what support is available for your plans.',
     bs_url('global-incorporation'),
     [
         bs_breadcrumb_schema($bs_trail),
@@ -35,6 +35,10 @@ $page_meta = bs_page_meta(
 
 $popular = bs_popular_jurisdictions();
 $featured = array_slice($popular, 0, 8, true);
+if (!bs_international_confirmed()) {
+    // No jurisdiction is confirmed as served yet — keep out of search.
+    $page_meta['robots'] = 'noindex, follow';
+}
 ?>
 
 <!-- =============================================================== HERO -->
@@ -44,7 +48,7 @@ $featured = array_slice($popular, 0, 8, true);
       <?php bs_breadcrumb($bs_trail); ?>
       <span class="eyebrow">Global Company Incorporation</span>
       <h1 id="bs-gi-title">Incorporate Your Business Globally</h1>
-      <p class="lead">Explore international jurisdictions with structured incorporation support and expert guidance — coordinated end to end by one Paynancial team.</p>
+      <p class="lead">Explore what to consider when choosing a jurisdiction, then tell us your plans — our team confirms whether and how we can support your incorporation before any work begins.</p>
       <div class="bs-hero-finder">
         <p class="bs-hero-finder-label">Where do you want to incorporate?</p>
         <?php bs_jurisdiction_search('', 'bs-gi-search'); ?>
@@ -63,9 +67,9 @@ $featured = array_slice($popular, 0, 8, true);
   <div class="container">
     <div class="bs-head bs-head-row">
       <div>
-        <span class="eyebrow">Popular Locations</span>
-        <h2 id="bs-pop-title">Incorporate in Leading Global Jurisdictions</h2>
-        <p>Choose from our popular destinations for international company incorporation.</p>
+        <span class="eyebrow">International Jurisdictions</span>
+        <h2 id="bs-pop-title">Explore International Jurisdictions</h2>
+        <p>Jurisdictions founders often ask us about. Availability for each is confirmed on enquiry.</p>
       </div>
       <a class="bs-text-link" href="<?= e(bs_jurisdiction_url()) ?>">View All Jurisdictions <?= bs_icon('arrow') ?></a>
     </div>

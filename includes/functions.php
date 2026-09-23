@@ -184,7 +184,7 @@ function format_amount(float $amount, string $currency = 'INR'): string
 
 /**
  * Small contextual cross-link from a payments page to Paynancial Business
- * Services. Approved placements only: homepage, Payment Gateway, Solutions.
+ * Services. Approved placements only: homepage, Payment Gateway, Solutions, Pricing.
  * Business Services is deliberately NOT in the header, mega-menus or footer.
  */
 function business_services_crosslink(string $lead, string $text, string $href = '/business-services', string $label = 'Explore Business Services'): void

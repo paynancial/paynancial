@@ -6,8 +6,9 @@
  * Lists every indexable public page, with <lastmod> taken from the page
  * template's modification time. Deliberately excluded: utility pages
  * (login, password reset, signup verification), payment-link pages,
- * dashboards, and the /business-services pages (linked from the header;
- * sitemap inclusion pending approval; jurisdiction pages are noindex).
+ * dashboards. Business Services pages are added only when eligible
+ * (bs_sitemap_paths(): indexable, substantial, confirmed service, not a
+ * duplicate; jurisdiction pages only once approved).
  */
 declare(strict_types=1);
 require_once __DIR__ . '/../includes/bootstrap.php';
@@ -54,5 +55,21 @@ foreach ($entries as $route => $template) {
     }
     echo '  <url><loc>' . htmlspecialchars(site_url($route)) . '</loc>'
         . '<lastmod>' . gmdate('Y-m-d', (int) filemtime($file)) . '</lastmod></url>' . "\n";
+}
+require_once __DIR__ . '/../includes/business-services.php';
+$bsPages = __DIR__ . '/../pages/business-services/';
+foreach (bs_sitemap_paths() as $path) {
+    $parts = explode('/', trim($path, '/'));
+    $template = match (true) {
+        count($parts) === 1                                       => 'index.php',
+        ($parts[1] ?? '') === 'global-incorporation'              => 'global-incorporation.php',
+        ($parts[1] ?? '') === 'jurisdictions' && count($parts) === 2 => 'jurisdictions.php',
+        ($parts[1] ?? '') === 'jurisdictions'                     => 'jurisdiction.php',
+        default                                                   => 'service.php',
+    };
+    // Content lives in the data file as well as the template: use the newer.
+    $mtime = max((int) filemtime($bsPages . $template), (int) filemtime(__DIR__ . '/../includes/business-services.php'));
+    echo '  <url><loc>' . htmlspecialchars(site_url(ltrim($path, '/'))) . '</loc>'
+        . '<lastmod>' . gmdate('Y-m-d', $mtime) . '</lastmod></url>' . "\n";
 }
 echo '</urlset>';

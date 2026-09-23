@@ -272,7 +272,7 @@ function bs_why_paynancial(): void
         ['expert',  'Expert Guidance',               'A team that explains structures, requirements and trade-offs in plain language before you commit.'],
         ['eye',     'Transparent Process',           'A clear scope, a written quote and visibility at every stage.'],
         ['doc',     'Structured Documentation',      'Tailored checklists and a review of every document before anything is filed.'],
-        ['globe',   'Global Business Support',       'Incorporation support in India and across selected international jurisdictions.'],
+        ['globe',   'International Enquiries',       'Planning to incorporate outside India? Tell us where — we confirm what we can support before any work begins.'],
         ['support', 'Post-Incorporation Assistance', 'Registrations, compliance and company changes after incorporation — and payments when you are ready.'],
     ];
     ?>

@@ -6,8 +6,9 @@
  * page, jurisdiction directory and jurisdiction pages all render from this
  * data, so adding a service or jurisdiction here publishes its page.
  *
- * Linked from the primary header (Business Services mega-menu) and from
- * approved contextual links. Not yet in the footer or sitemap.
+ * Navigation-independent but discovery-enabled: NOT in the header or
+ * footer; reachable through approved contextual links; eligible pages are
+ * listed in the XML sitemap (see bs_sitemap_paths()).
  *
  * Content policy (see README "Content & claims policy"): no fees,
  * government charges, turnaround times, customer counts, country counts,
@@ -74,20 +75,6 @@ function bs_categories(): array
 }
 
 /**
- * Header mega-menu columns (Business Services). Only services that have a
- * page are listed; the Protect & Comply column combines trademarks with
- * compliance.
- */
-function bs_menu_columns(): array
-{
-    return [
-        ['label' => 'Start a Business',      'items' => ['company-incorporation', 'private-limited-company', 'llp-registration', 'opc-registration', 'partnership-registration']],
-        ['label' => 'Business Registration', 'items' => ['gst-registration', 'msme-registration', 'startup-registration', 'pan-tan-assistance']],
-        ['label' => 'Protect & Comply',      'items' => ['trademark-registration', 'trademark-search', 'roc-compliance', 'annual-compliance', 'company-changes']],
-    ];
-}
-
-/**
  * Individual services. Every entry renders through the same detail
  * template (pages/business-services/service.php).
  *
@@ -115,7 +102,7 @@ function bs_services(): array
             'popular'   => true,
             'eyebrow'   => 'Company Incorporation',
             'headline'  => 'Start Your Business with Confidence',
-            'summary'   => 'Incorporate your company in India or in selected international jurisdictions, with structured documentation and expert guidance from first conversation to certificate.',
+            'summary'   => 'Incorporate your company in India with structured documentation and expert guidance from first conversation to certificate — and talk to us if you are planning to incorporate abroad.',
             'who'       => ['Founders turning an idea or side project into a registered business', 'Existing businesses moving from a proprietorship or partnership to a company', 'Entrepreneurs planning to operate from, or expand into, another jurisdiction'],
             'framework' => 'In India, companies are incorporated with the Registrar of Companies under the Companies Act, 2013. International incorporations follow the rules of the chosen jurisdiction.',
             'why' => [
@@ -436,6 +423,9 @@ function bs_services(): array
             'name'      => 'Trademark Search',
             'short'     => 'Trademark Search',
             'category'  => 'protect',
+            // Not search-eligible: thin (~400 words) and overlaps Trademark
+            // Registration; planned to merge into that page as a section.
+            'search_eligible' => false,
             'summary'   => 'Check whether your proposed brand name or logo conflicts with existing marks before you invest in it.',
             'who'       => ['Founders choosing a company or product name', 'Businesses preparing a trademark application', 'Teams comparing shortlisted brand names'],
             'framework' => 'Searches are carried out against records maintained by the Trade Marks Registry, India.',
@@ -715,6 +705,53 @@ function bs_jurisdictions(): array
 function bs_jurisdiction_approved(array $j): bool
 {
     return ($j['served_confirmed'] ?? false) === true && ($j['content_verified'] ?? false) === true;
+}
+
+/**
+ * True once at least one jurisdiction is approved. Until then the
+ * international pages (global incorporation, jurisdiction directory) do not
+ * represent a confirmed Paynancial service and stay out of search.
+ */
+function bs_international_confirmed(): bool
+{
+    foreach (bs_jurisdictions() as $j) {
+        if (bs_jurisdiction_approved($j)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * XML-sitemap / indexing eligibility. A Business Services URL is listed only
+ * when it exists, is indexable with a self-canonical, carries substantial
+ * page-specific content, represents a confirmed Paynancial service and does
+ * not duplicate another page (see docs/business-services-sitemap-eligibility.md).
+ */
+function bs_service_search_eligible(array $service): bool
+{
+    return ($service['search_eligible'] ?? true) === true;
+}
+
+/** Eligible Business Services paths for the XML sitemap. */
+function bs_sitemap_paths(): array
+{
+    $paths = [bs_url()];
+    foreach (bs_services() as $slug => $svc) {
+        if (bs_service_search_eligible($svc)) {
+            $paths[] = bs_url($slug);
+        }
+    }
+    if (bs_international_confirmed()) {
+        $paths[] = bs_url('global-incorporation');
+        $paths[] = bs_jurisdiction_url();
+    }
+    foreach (bs_jurisdictions() as $slug => $j) {
+        if (bs_jurisdiction_approved($j)) {
+            $paths[] = bs_jurisdiction_url($slug);
+        }
+    }
+    return $paths;
 }
 
 /** Look up one jurisdiction; null if unknown. */

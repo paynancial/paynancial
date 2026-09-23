@@ -191,10 +191,11 @@ Note: PHP's built-in server does not read `.htaccess`, so
 
 A Business Services vertical (company incorporation, registrations,
 trademarks, compliance and international incorporation) lives under
-`/business-services`. It is linked from the primary header (Business
-Services mega-menu) and from approved contextual links on the homepage,
-Payment Gateway and Solutions pages. It is **not** yet in the footer or
-`sitemap.xml`. Jurisdiction pages stay `noindex` until approved in
+`/business-services`. It is **navigation-independent but discovery-enabled**:
+not in the header or footer; reachable through contextual links on the
+homepage, Payment Gateway, Solutions and Pricing; eligible pages are in
+`sitemap.xml` (`docs/business-services-sitemap-eligibility.md`). Jurisdiction
+pages stay `noindex` and UNCONFIRMED until approved in
 `docs/jurisdiction-approval-matrix.md`.
 
 Contextual CTA wording (floating enquiry widget, footer, secondary page

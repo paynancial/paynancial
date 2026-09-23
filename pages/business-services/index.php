@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../includes/business-services-ui.php';
 $bs_trail = [['Home', '/'], ['Business Services', bs_url()]];
 $page_meta = bs_page_meta(
     'Business Services — Company Incorporation, Registration & Compliance | Paynancial',
-    'Start, manage and grow your business with Paynancial Business Services: company incorporation in India and selected international jurisdictions, business registrations, trademarks and compliance support.',
+    'Start, manage and grow your business with Paynancial Business Services: company incorporation in India, business registrations, trademarks and compliance support.',
     bs_url(),
     [
         bs_breadcrumb_schema($bs_trail),
@@ -43,7 +43,7 @@ $popular = bs_popular_jurisdictions();
         <li><?= bs_icon('check') ?>Expert Guidance</li>
         <li><?= bs_icon('check') ?>Transparent Process</li>
         <li><?= bs_icon('check') ?>End-to-End Support</li>
-        <li><?= bs_icon('check') ?>Global Business Support</li>
+        <li><?= bs_icon('check') ?>Structured Documentation</li>
       </ul>
     </div>
 
@@ -71,8 +71,8 @@ $popular = bs_popular_jurisdictions();
     <div class="bs-global">
       <div class="bs-global-copy reveal">
         <span class="eyebrow">Global Company Incorporation</span>
-        <h2 id="bs-global-title">Incorporate Your Business Anywhere in the World</h2>
-        <p>Paynancial provides incorporation support across selected international jurisdictions. Tell us where you want to operate and we will guide you through structure, documentation and filing — coordinated by one team.</p>
+        <h2 id="bs-global-title">Planning to Incorporate Outside India?</h2>
+        <p>Tell us where you want to operate. Our team will confirm whether and how Paynancial can support an incorporation there before any work begins — nothing is assumed in advance.</p>
         <a class="bs-text-link" href="<?= e(bs_url('global-incorporation')) ?>">Explore Global Incorporation <?= bs_icon('arrow') ?></a>
       </div>
       <div class="bs-finder reveal">
@@ -87,9 +87,9 @@ $popular = bs_popular_jurisdictions();
 
     <div class="bs-head bs-head-row" id="popular">
       <div>
-        <span class="eyebrow">Popular Locations</span>
-        <h2>Incorporate in Leading Global Jurisdictions</h2>
-        <p>Choose from our popular destinations for international company incorporation.</p>
+        <span class="eyebrow">International Jurisdictions</span>
+        <h2>Explore International Jurisdictions</h2>
+        <p>Jurisdictions founders often ask us about. Availability for each is confirmed on enquiry.</p>
       </div>
       <a class="bs-text-link" href="<?= e(bs_jurisdiction_url()) ?>">View All Jurisdictions <?= bs_icon('arrow') ?></a>
     </div>

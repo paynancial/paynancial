@@ -39,6 +39,10 @@ $page_meta = bs_page_meta(
         )),
     ]]
 );
+if (!bs_international_confirmed()) {
+    // No jurisdiction is confirmed as served yet — keep out of search.
+    $page_meta['robots'] = 'noindex, follow';
+}
 ?>
 
 <section class="bs-detail-hero bs-dir-hero" aria-labelledby="bs-dir-title">
@@ -104,8 +108,8 @@ $page_meta = bs_page_meta(
   <div class="container">
     <div class="bs-head bs-head-row">
       <div>
-        <span class="eyebrow">Popular Locations</span>
-        <h2 id="bs-results-title">Incorporate in Leading Global Jurisdictions</h2>
+        <span class="eyebrow">International Jurisdictions</span>
+        <h2 id="bs-results-title">Explore International Jurisdictions</h2>
       </div>
       <p class="bs-results-meta" aria-live="polite" data-jur-status><?php
         if ($isFiltered) echo count($results) === 1 ? '1 jurisdiction matches your filters.' : count($results) . ' jurisdictions match your filters.';

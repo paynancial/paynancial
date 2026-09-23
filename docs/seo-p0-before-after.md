@@ -8,11 +8,15 @@ on every page as part of the footer redesign.
 The live site could not be reached from the audit environment, so HTTPS/host
 redirects (http→https, www→apex) still need verifying on production.
 
-> **Update (header change, later commit):** Business Services was added to the
-> primary header and "Partners" removed from it (Partner Program remains under
-> the Company menu and `/partners` still returns 200). This does not change any
-> status code, canonical or robots value in the table below. Live HTTPS/www
-> redirect checks remain **deferred — not yet verified** against the live domain.
+> **Status notes (23 Sep 2026):**
+> - **Live-site checks: NOT VERIFIED / BLOCKED.** paynancial.com cannot be reached
+>   from the audit environment (egress proxy denies the host; last retried 23 Sep 2026).
+>   HTTPS, www→apex redirects, live status codes, canonical and robots behaviour on the
+>   live domain are **not** marked as passed. Re-run once network access is available.
+> - Header: Partners removed from the primary navigation (Partner Program remains
+>   under Company; `/partners` returns 200). Business Services is **not** in the header
+>   or footer.
+> - Business Services sitemap inclusion: see `docs/business-services-sitemap-eligibility.md`.
 
 ## What P0 changed
 
