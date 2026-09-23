@@ -262,7 +262,7 @@ sp_hero([
 <?php sp_band_open('related', 'dim'); ?>
   <?php sp_head('related', 'Related', 'Keep exploring.'); ?>
   <?php sp_related([
-      ['Financial Operations', 'Reconciliation, settlements, refunds and reports.', '/products/financial-operations'],
+      ['Financial Operations', 'Reconciliation, settlements, refunds and reports.', '/financial-operations'],
       ['AI Financial Agents', 'Where agents work in financial operations.', '/agentic-ai/financial-agents'],
       ['Developer Hub', 'API, SDKs, webhooks and sandbox.', '/developers'],
       ['Trust Center', 'What is verified, and what is still to be confirmed.', '/trust'],

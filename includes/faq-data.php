@@ -237,6 +237,30 @@ function faq_sets(): array
             ['Are the forecasts guaranteed?', 'No. Paynancial does not publish forecast accuracy figures; interpreting the numbers and acting on them stays with people.'],
             ['Is it available now?', 'It is available on request. Ask our team whether it is available for your business.'],
         ],
+        'product:bulk-payouts' => [
+            ['What are bulk payouts?', 'Paying many beneficiaries at once. With Paynancial Payouts you submit a batch of transfers in one action from the dashboard, or in a single API request, and each payout in the batch is tracked individually.'],
+            ['Can a bulk payout include both bank and UPI transfers?', 'Payouts can be sent to bank accounts and UPI IDs. Ask our team how to structure a mixed batch for your business.'],
+            ['What happens if one payout in a batch fails?', 'It fails with a clear reason and can be corrected and retried. The other payouts in the batch are unaffected.'],
+            ['How do I avoid paying someone twice if I re-submit a batch?', 'Send an idempotency key with each payout. Re-submitting with the same key returns the original payout instead of creating a new one.'],
+        ],
+        'product:vendor-payments' => [
+            ['How do I pay suppliers with Paynancial?', 'Save each supplier as a beneficiary with their bank account or UPI ID, then pay them individually or in a batch with Payouts, from the dashboard or the API.'],
+            ['Can I pay many vendors at once?', 'Yes. Payouts supports bulk payouts, so you can pay a batch of vendors in one action and track each payment individually.'],
+            ['How do I know a vendor was paid?', 'Each payout is tracked from initiated to completed, and completed payouts appear in your payout report.'],
+            ['Can I link payments to vendor invoices?', 'Keep the payout ID against the invoice in your own accounts system, and use the payout report to reconcile.'],
+        ],
+        'product:employee-payments' => [
+            ['Is Paynancial a payroll system?', 'No. Paynancial does not calculate salaries, deductions or taxes. Your payroll or finance process calculates what each person is owed, and Payouts sends the payments.'],
+            ['Can I pay staff to their UPI ID?', 'Yes. Payouts can be sent to a bank account or a UPI ID.'],
+            ['Can I pay freelancers as well as employees?', 'Yes. Payouts is built for paying staff, freelancers, vendors and partners.'],
+            ['Can I pay everyone in one pay run?', 'Yes. Submit a batch in one action and track each payment individually.'],
+        ],
+        'product:partner-payments' => [
+            ['How do I pay channel partners with Paynancial?', 'Calculate what each partner is owed in your own system, then pay them with Payouts — by bank transfer or UPI, individually or in a batch, from the dashboard or the API.'],
+            ['Can my commission system trigger partner payouts automatically?', 'Yes. Payouts is API-first, so your system can create payouts directly — with an idempotency key so a retried run never pays a partner twice.'],
+            ['Does Paynancial calculate partner commissions?', 'No. Commission rules and calculations stay in your own systems; Paynancial pays the amounts you send.'],
+            ['Is this the same as the Paynancial Partner Program?', 'No. This page is about paying your own partners. The Partner Program is for businesses that want to partner with Paynancial.'],
+        ],
     ];
 }
 

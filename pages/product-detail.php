@@ -177,7 +177,8 @@ require_once __DIR__ . '/../includes/product-categories.php';
 $p = $products[$product_slug];
 $faqs = $p['faqs'];
 $path = '/products/' . $product_slug;
-$trail = [['Home', '/'], ['Products', '/products'], [$p['eyebrow'], $path]];
+$parents = ['payouts' => ['Pay & Move Money', '/pay-and-move-money'], 'payment-analytics' => ['Financial Operations', '/financial-operations']];
+$trail = [['Home', '/'], $parents[$product_slug] ?? ['Products', '/products'], [$p['eyebrow'], $path]];
 $page_meta = sp_meta([
     'title'       => $p['title'],
     'description' => $p['description'],

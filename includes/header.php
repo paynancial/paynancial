@@ -57,22 +57,22 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/products/payment-collection"><strong>Smart Collections</strong></a>
             </div>
             <div>
-              <a class="mega-col-title mega-col-link" href="/products/pay-and-move-money">Pay &amp; Move Money <span aria-hidden="true">→</span></a>
+              <a class="mega-col-title mega-col-link" href="/pay-and-move-money">Pay &amp; Move Money <span aria-hidden="true">→</span></a>
               <a class="mega-link mega-link-plain" href="/products/payouts"><strong>Payouts</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/payouts"><strong>Bulk Payouts</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/payouts"><strong>Vendor Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/payouts"><strong>Employee Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/payouts"><strong>Partner Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/pay-and-move-money#international-payments"><strong>International Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/bulk-payouts"><strong>Bulk Payouts</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/vendor-payments"><strong>Vendor Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/employee-payments"><strong>Employee Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/partner-payments"><strong>Partner Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/pay-and-move-money#international-payments"><strong>International Payments</strong></a>
             </div>
             <div>
-              <a class="mega-col-title mega-col-link" href="/products/financial-operations">Financial Operations <span aria-hidden="true">→</span></a>
+              <a class="mega-col-title mega-col-link" href="/financial-operations">Financial Operations <span aria-hidden="true">→</span></a>
               <a class="mega-link mega-link-plain" href="/products/reconciliation"><strong>Reconciliation</strong></a>
               <a class="mega-link mega-link-plain" href="/products/settlements"><strong>Settlements</strong></a>
               <a class="mega-link mega-link-plain" href="/products/refunds"><strong>Refunds</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/financial-operations#chargebacks"><strong>Chargebacks</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/financial-operations#invoice-management"><strong>Invoice Management</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/financial-operations#expense-management"><strong>Expense Management</strong></a>
+              <a class="mega-link mega-link-plain" href="/financial-operations#chargebacks"><strong>Chargebacks</strong></a>
+              <a class="mega-link mega-link-plain" href="/financial-operations#invoice-management"><strong>Invoice Management</strong></a>
+              <a class="mega-link mega-link-plain" href="/financial-operations#expense-management"><strong>Expense Management</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-analytics"><strong>Finance Analytics</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-analytics"><strong>MIS &amp; Reports</strong></a>
             </div>
@@ -245,21 +245,21 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/products/payment-collection">Subscription Billing</a></li>
       <li><a href="/products/payment-collection">Smart Collections</a></li>
 
-      <li class="mobile-nav-group-label"><a href="/products/pay-and-move-money">Pay &amp; Move Money</a></li>
+      <li class="mobile-nav-group-label"><a href="/pay-and-move-money">Pay &amp; Move Money</a></li>
       <li><a href="/products/payouts">Payouts</a></li>
-      <li><a href="/products/payouts">Bulk Payouts</a></li>
-      <li><a href="/products/payouts">Vendor Payments</a></li>
-      <li><a href="/products/payouts">Employee Payments</a></li>
-      <li><a href="/products/payouts">Partner Payments</a></li>
-      <li><a href="/products/pay-and-move-money#international-payments">International Payments</a></li>
+      <li><a href="/products/bulk-payouts">Bulk Payouts</a></li>
+      <li><a href="/products/vendor-payments">Vendor Payments</a></li>
+      <li><a href="/products/employee-payments">Employee Payments</a></li>
+      <li><a href="/products/partner-payments">Partner Payments</a></li>
+      <li><a href="/pay-and-move-money#international-payments">International Payments</a></li>
 
-      <li class="mobile-nav-group-label"><a href="/products/financial-operations">Financial Operations</a></li>
+      <li class="mobile-nav-group-label"><a href="/financial-operations">Financial Operations</a></li>
       <li><a href="/products/reconciliation">Reconciliation</a></li>
       <li><a href="/products/settlements">Settlements</a></li>
       <li><a href="/products/refunds">Refunds</a></li>
-      <li><a href="/products/financial-operations#chargebacks">Chargebacks</a></li>
-      <li><a href="/products/financial-operations#invoice-management">Invoice Management</a></li>
-      <li><a href="/products/financial-operations#expense-management">Expense Management</a></li>
+      <li><a href="/financial-operations#chargebacks">Chargebacks</a></li>
+      <li><a href="/financial-operations#invoice-management">Invoice Management</a></li>
+      <li><a href="/financial-operations#expense-management">Expense Management</a></li>
       <li><a href="/products/payment-analytics">Finance Analytics</a></li>
       <li><a href="/products/payment-analytics">MIS &amp; Reports</a></li>
 

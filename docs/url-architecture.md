@@ -173,12 +173,43 @@ Where a developer would need these, the page says so and links to developer supp
 - The homepage flow section links to the hub.
 - The floating enquiry on these pages reads "Talk to Payment Experts — Discuss your payment and financial infrastructure requirements."
 
+## 2e. Pay & Move Money and Financial Operations
+
+Rule applied (approved "split by evidence"): verified product capability → standalone page → indexable → in the sitemap; insufficient or unconfirmed capability → a section on the pillar page, not a standalone SEO page.
+
+| URL | Status | Words | Indexing |
+|---|---|---|---|
+| `/pay-and-move-money` | **Pillar** (new canonical) | 968 | Indexable; in sitemap |
+| `/financial-operations` | **Pillar** (new canonical) | 954 | Indexable; in sitemap |
+| `/products/payouts` | Kept | 666 | Unchanged; breadcrumb parent is now Pay & Move Money |
+| `/products/bulk-payouts` | New child | 836 | Indexable; in sitemap |
+| `/products/vendor-payments` | New child | 786 | Indexable; in sitemap |
+| `/products/employee-payments` | New child | 731 | Indexable; in sitemap |
+| `/products/partner-payments` | New child | 792 | Indexable; in sitemap |
+| `/products/reconciliation`, `/products/settlements`, `/products/refunds` | Kept | — | Breadcrumb parent is now Financial Operations |
+| `/products/payment-analytics` | Kept (Finance Analytics, MIS & Reports) | — | Breadcrumb parent is now Financial Operations |
+| `/products/pay-and-move-money`, `/products/financial-operations` | **301 → pillar** | — | Removed from sitemap |
+
+**Pillar-page sections (no standalone page):**
+- International Payments → `/pay-and-move-money#international-payments`
+- Chargebacks → `/financial-operations#chargebacks` (links to the Refund Policy's chargebacks section)
+- Invoice Management → `/financial-operations#invoice-management` (links to Payment Links)
+- Expense Management → `/financial-operations#expense-management`
+
+Each section states only what the site already publishes and says plainly where a capability is not yet described, with an "Ask about …" enquiry link.
+
+**Evidence for the four payout child pages:** the Payouts page and its FAQs as published in the baseline site (single or bulk payouts, "a batch of transfers in a single request", bank accounts and UPI IDs, saved beneficiaries, status tracking, failure reasons, payout report, payout webhooks, idempotency keys, "vendors, staff, freelancers, or channel partners"). Industry examples are not used as capability evidence. Where the API detail isn't published (the batch request format), the page says so and points to developer support.
+
+**Uniqueness:** the highest 5-word-shingle overlap among these pages, the pillars and the existing products is 28% (limit 40%).
+
 ## 3. Redirect map
 
 | From | To | Type |
 |---|---|---|
 | `/sandbox/`, `/developers/{page}/` | slash-less URL | 301 (existing trailing-slash rule, one hop) |
 | `/products/ai-and-intelligence` | `/ai-intelligence` | 301, one hop |
+| `/products/pay-and-move-money` | `/pay-and-move-money` | 301, one hop |
+| `/products/financial-operations` | `/financial-operations` | 301, one hop |
 | `/developers#sandbox` and the other old developer anchors | the new page | Client-side forward in `main.js`. A `#fragment` never reaches the server, so no 301 is possible or claimed. |
 
 No other redirects were created. Unknown `/developers/{x}` paths return 404.

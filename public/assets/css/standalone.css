@@ -292,3 +292,17 @@
   .ai-caps, .ai-arch-caps { grid-template-columns: 1fr; }
   .ai-visual { max-width: 460px; margin-inline: auto; }
 }
+
+/* Pillar hero visual: a vertical chain of nodes with a moving pulse. */
+.pl-visual { margin: 0; padding: clamp(24px, 3vw, 36px); border: 1px solid rgba(250, 249, 245, 0.14); border-radius: 18px; background: rgba(250, 249, 245, 0.03); }
+.pl-visual ol { display: grid; gap: 0; }
+.pl-visual li { position: relative; display: grid; grid-template-columns: 28px 1fr; column-gap: 16px; padding: 14px 0; }
+.pl-visual li::before { content: ''; position: absolute; left: 13px; top: 30px; bottom: -14px; width: 2px; background: linear-gradient(180deg, rgba(109, 213, 205, 0.7), rgba(109, 213, 205, 0.1)); }
+.pl-visual li:last-child::before { display: none; }
+.pl-node { grid-row: span 2; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--teal-300); background: radial-gradient(circle, rgba(109, 213, 205, 0.55) 0 35%, transparent 40%); animation: pl-pulse 3.2s ease-in-out infinite; animation-delay: calc(var(--i) * 0.8s); }
+.pl-visual li:last-child .pl-node { border-color: var(--orange-500); background: radial-gradient(circle, rgba(255, 85, 0, 0.55) 0 35%, transparent 40%); }
+.pl-visual strong { font-family: var(--font-serif); font-weight: 460; font-size: 1.25rem; color: var(--paper); }
+.pl-visual small { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250, 249, 245, 0.66); }
+@keyframes pl-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(109, 213, 205, 0); } 40% { box-shadow: 0 0 0 8px rgba(109, 213, 205, 0.18); } }
+@media (prefers-reduced-motion: reduce) { .pl-node { animation: none; } }
+.sp-item--section .sp-item-status { color: #6b4700; background: #fdf3df; border-color: #f3d9a4; }

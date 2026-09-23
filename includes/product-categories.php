@@ -29,6 +29,10 @@ function cat_slugify(string $label): string
 
 function cat_url(string $slug, ?string $item = null): string
 {
+    // The two pillars live at their own top-level URLs.
+    if (in_array($slug, ['pay-and-move-money', 'financial-operations'], true)) {
+        return '/' . $slug . ($item !== null ? '#' . cat_slugify($item) : '');
+    }
     if ($slug === 'ai-and-intelligence') {
         // Moved to its own hub; items have their own pages there.
         $children = ['Paynancial AI' => 'paynancial-ai', 'AI Fraud Detection' => 'fraud-detection', 'AI Reconciliation' => 'reconciliation',
@@ -72,10 +76,23 @@ function cat_pages(): array
             'related' => ['pay-and-move-money', 'financial-operations', 'ai-and-intelligence'],
         ],
         'pay-and-move-money' => [
+            'pillar' => true,
+            'secondary' => ['Explore Payouts', '/products/payouts', 'cta_click'],
+            'hero_nodes' => [['Your business', 'Dashboard or API'], ['Payouts', 'Single or batch'], ['Bank accounts', 'and UPI IDs'], ['Vendors · staff · partners', 'Paid and recorded']],
+            'flow' => [
+                ['Add the beneficiary', 'Save a bank account or UPI ID once and reuse it.'],
+                ['Initiate', 'Send a single payout or submit a batch, from the dashboard or API.'],
+                ['Processed', 'Paynancial processes each transfer and returns a status.'],
+                ['Tracked', 'Follow each payout from initiated to completed, with clear failure reasons.'],
+                ['Reported', 'Completed payouts appear in your payout report for reconciliation.'],
+            ],
+            'dev' => [['Payouts API', 'Create payouts with an idempotency key.', '/developers/api-reference#payouts'], ['Webhooks', 'Payout events as each payout changes state.', '/developers/webhooks'], ['Sandbox', 'Test payouts with no real funds.', '/sandbox'], ['SDKs', 'PHP, JavaScript and Python.', '/developers/sdks']],
+            'ai' => [['AI Cash-Flow Intelligence', 'Near-term liquidity forecasts that take money going out into account.', '/ai-intelligence/cash-flow-intelligence'], ['AI Financial Agents', 'Agents that route payouts within limits you set.', '/agentic-ai/financial-agents']],
+            'cross' => ['financial-operations', 'Every payout lands in the same reports and reconciliation as your incoming payments.'],
             'name'  => 'Pay & Move Money',
-            'title' => 'Pay & Move Money | Payouts to Bank Accounts & UPI | Paynancial',
+            'title' => 'Pay & Move Money | Payouts, Bulk, Vendor & Partner Payments | Paynancial',
             'description' => 'Send money out with Paynancial Payouts: single or bulk payouts to bank accounts and UPI IDs for vendors, employees and partners, from the dashboard or API, with status tracking and clear failure reasons.',
-            'h1'    => 'Pay vendors, employees and partners from one place.',
+            'h1'    => 'Move money with confidence — to vendors, staff and partners.',
             'lead'  => 'Send single or bulk payouts to bank accounts and UPI IDs, from the dashboard or straight from your own systems, and follow every payout to completion.',
             'answer' => 'Pay & Move Money is the part of Paynancial that sends money out. Payouts sends funds to bank accounts and UPI IDs — one at a time or in bulk — for vendors, employees, freelancers and partners, from the dashboard or the API, with status tracking and clear reasons when a payout fails.',
             'intro' => [
@@ -84,25 +101,38 @@ function cat_pages(): array
             ],
             'choose' => [
                 ['You pay one beneficiary at a time', 'Payouts', '/products/payouts'],
-                ['You pay many people at once', 'Bulk payouts (Payouts)', '/products/payouts'],
+                ['You pay many people at once', 'Bulk Payouts', '/products/bulk-payouts'],
                 ['You pay to UPI IDs', 'UPI Payments', '/products/upi-payments'],
                 ['You want to automate payouts from your systems', 'Payout API', '/developers/api-reference#payouts'],
             ],
             'items' => [
                 ['Payouts', 'page', '/products/payouts', 'Send funds to a bank account or UPI ID from the dashboard or API, with saved beneficiaries and status tracking.'],
-                ['Bulk Payouts', 'covered', '/products/payouts', 'Part of Payouts: pay one recipient or an entire batch in one action.'],
-                ['Vendor Payments', 'covered', '/products/payouts', 'Pay suppliers and vendors with Payouts, individually or in a batch.'],
-                ['Employee Payments', 'covered', '/products/payouts', 'Pay staff and freelancers with Payouts, with a clear record of every payout.'],
-                ['Partner Payments', 'covered', '/products/payouts', 'Pay channel and revenue-share partners with Payouts from your dashboard or API.'],
-                ['International Payments', 'request', null, 'International payments move money across borders and currencies, for example to pay an overseas supplier or accept payment from a customer abroad. ' . $ask],
+                ['Bulk Payouts', 'page', '/products/bulk-payouts', 'Submit a batch of payouts in one action or a single API request, and track every payout in it individually.'],
+                ['Vendor Payments', 'page', '/products/vendor-payments', 'Pay suppliers by bank transfer or UPI, one at a time or in a batch, with a record of every payment.'],
+                ['Employee Payments', 'page', '/products/employee-payments', 'Pay staff and freelancers the amounts your payroll process calculates. Paynancial is not a payroll system.'],
+                ['Partner Payments', 'page', '/products/partner-payments', 'Pay channel and business partners by bank transfer or UPI, triggered by your own systems through the API.'],
+                ['International Payments', 'section', null, 'What is published today: Payouts send funds to bank accounts and UPI IDs. Countries, currencies, foreign exchange and cross-border regulatory availability are not published. Talk to our team about your requirements before you plan around international payments.'],
             ],
             'related' => ['accept-and-collect', 'financial-operations', 'embedded-finance'],
         ],
         'financial-operations' => [
+            'pillar' => true,
+            'secondary' => ['Explore Reconciliation', '/products/reconciliation', 'cta_click'],
+            'hero_nodes' => [['Transactions', 'Recorded as they happen'], ['Settlements', 'Settled and pending'], ['Reconciliation', 'Matched in one place'], ['Reports', 'Exported or scheduled']],
+            'flow' => [
+                ['Recorded', 'Every transaction, settlement and refund is recorded as it happens.'],
+                ['Settled', 'Each transaction is tied to a settlement record.'],
+                ['Refunded', 'Refunds are issued against the original payment and tracked to completion.'],
+                ['Reconciled', 'Reconciliation views match payments against settlements and refunds.'],
+                ['Reported', 'Dashboards and reports you can export or schedule.'],
+            ],
+            'dev' => [['Refunds API', 'Full or partial refunds from your systems.', '/developers/api-reference#refunds'], ['Reports API', 'Transaction reports for a date range.', '/developers/api-reference#reports'], ['Webhooks', 'Refund and settlement events.', '/developers/webhooks'], ['Sandbox', 'Test with no real funds.', '/sandbox']],
+            'ai' => [['AI Reconciliation', 'Exception-first matching of settlements to transactions.', '/ai-intelligence/reconciliation'], ['AI Cash-Flow Intelligence', 'Near-term liquidity from live transaction data.', '/ai-intelligence/cash-flow-intelligence'], ['AI Revenue Forecasting', 'Forward-looking revenue numbers.', '/ai-intelligence/revenue-forecasting']],
+            'cross' => ['pay-and-move-money', 'Payouts you send are reported and reconciled alongside the payments you receive.'],
             'name'  => 'Financial Operations',
             'title' => 'Financial Operations | Reconciliation, Settlements, Refunds & Reports | Paynancial',
             'description' => 'The back office of your payments: reconciliation, settlements, refunds, analytics and reports on Paynancial — every transaction tied to a settlement record, with exportable and scheduled reports.',
-            'h1'    => 'The back office of every payment, handled.',
+            'h1'    => 'Bring financial operations into one connected workflow.',
             'lead'  => 'Reconcile payments against settlements and refunds, see what has settled and what is pending, issue refunds, and send your finance team the reports they need.',
             'answer' => 'Financial Operations is the part of Paynancial that happens after a payment: reconciliation, settlements, refunds, analytics and reporting. Every transaction is tied to a settlement record, refunds are tracked to completion, and reports can be exported or scheduled.',
             'intro' => [
@@ -121,9 +151,9 @@ function cat_pages(): array
                 ['Refunds', 'page', '/products/refunds', 'Full or partial refunds from the dashboard or API, tracked to completion.'],
                 ['Finance Analytics', 'page', '/products/payment-analytics', 'Transaction dashboards by method, status and period (Payment Analytics).'],
                 ['MIS & Reports', 'covered', '/products/payment-analytics', 'Part of Payment Analytics: exportable reports and scheduled delivery.'],
-                ['Chargebacks', 'request', null, 'A chargeback is when a cardholder disputes a payment through their bank and the amount is reversed unless the business shows the payment was valid. ' . $ask],
-                ['Invoice Management', 'request', null, 'Invoice management covers creating, sending and tracking invoices until they are paid. Payment Links can already be added to an invoice today. ' . $ask],
-                ['Expense Management', 'request', null, 'Expense management covers recording, approving and reconciling the money a business spends. ' . $ask],
+                ['Chargebacks', 'section', null, 'What is published today: every refund is tracked from request to completion, and Paynancial\'s Refund Policy sets out how chargebacks and disputes are handled under its terms. A chargeback management product is not yet described on this site. Ask our team.', ['Read the Refund Policy', '/legal/refund-policy#chargebacks']],
+                ['Invoice Management', 'section', null, 'What is published today: a Payment Link can be added to an invoice so the customer pays in one step, and each link shows whether it is active, paid, expired or disabled. Invoice creation and tracking as a product is not yet described on this site. Ask our team.', ['Explore Payment Links', '/products/payment-links']],
+                ['Expense Management', 'section', null, 'Expense management is not yet described on this site, so no capabilities are claimed here. Ask our team about your requirements.'],
             ],
             'related' => ['accept-and-collect', 'ai-and-intelligence', 'pay-and-move-money'],
         ],

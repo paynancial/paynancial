@@ -167,3 +167,8 @@ The highest text overlap between any two of the nine new pages is 33%.
   - **Added:** a direct answer, industry examples from the Solutions pages, API parameters, and four FAQs (up from two).
   - **API Reference:** the transaction-reports example that was already published on the Payment Analytics page is now listed there too, making six resources.
   - **Payment Gateway:** it keeps its approved Business Services cross-link.
+
+## Update: pillar pages
+
+Pay & Move Money and Financial Operations moved to top-level pillar pages (`/pay-and-move-money`, `/financial-operations`); the old `/products/…` category URLs 301 there. Bulk, Vendor, Employee and Partner Payments now have their own pages under `/products/`. International Payments, Chargebacks, Invoice Management and Expense Management stay as sections on the pillar pages. See `docs/url-architecture.md` §2e.
+

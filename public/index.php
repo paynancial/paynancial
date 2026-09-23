@@ -169,10 +169,19 @@ if (($segments[0] ?? '') === 'products' && ($segments[1] ?? '') === 'ai-and-inte
     header('Location: /ai-intelligence', true, 301);
     exit;
 }
+// Pay & Move Money and Financial Operations are top-level pillar pages.
+$pillarSlugs = ['pay-and-move-money', 'financial-operations'];
+if (($segments[0] ?? '') === 'products' && count($segments) === 2 && in_array($segments[1], $pillarSlugs, true)) {
+    header('Location: /' . $segments[1], true, 301);
+    exit;
+}
 require_once __DIR__ . '/../includes/product-capabilities.php';
 require_once __DIR__ . '/../includes/product-categories.php';
-if (($segments[0] ?? '') === 'products' && count($segments) === 2
-    && (($pc_page = pc_page($segments[1])) !== null || ($cat_page = cat_page($segments[1])) !== null)) {
+$pc_page = $cat_page = null;
+if ((count($segments) === 1 && in_array($segments[0], $pillarSlugs, true) && ($cat_page = cat_page($segments[0])) !== null)
+    || (($segments[0] ?? '') === 'products' && count($segments) === 2
+        && !in_array($segments[1], $pillarSlugs, true)
+        && (($pc_page = pc_page($segments[1])) !== null || ($cat_page = cat_page($segments[1])) !== null))) {
     // Capability pages (/products/{refunds,settlements,reconciliation,upi-payments})
     // and category pages (/products/{accept-and-collect,…}).
     ob_start();
