@@ -40,8 +40,8 @@ $footer_groups = [
         'blocks' => [
             ['AI Finance', [
                 ['Agentic Payments', '/agentic-ai'],
-                ['AI Financial Agents', '/agentic-ai#financial-agents'],
-                ['AI Orchestration', '/agentic-ai#payment-orchestration'],
+                ['AI Financial Agents', '/agentic-ai/financial-agents'],
+                ['AI Orchestration', '/agentic-ai/payment-orchestration'],
                 ['AI Governance', '/ai-governance'],
             ]],
             ['AI & Intelligence', [

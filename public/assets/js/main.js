@@ -477,6 +477,15 @@
   forwardLegacySolutionHash();
   window.addEventListener('hashchange', forwardLegacySolutionHash);
 
+  /* Legacy Agentic AI anchors that are now their own pages. */
+  function forwardLegacyAgenticHash() {
+    if (window.location.pathname !== '/agentic-ai') return;
+    var pages = { '#financial-agents': '/agentic-ai/financial-agents', '#payment-orchestration': '/agentic-ai/payment-orchestration' };
+    if (pages[window.location.hash]) window.location.replace(pages[window.location.hash]);
+  }
+  forwardLegacyAgenticHash();
+  window.addEventListener('hashchange', forwardLegacyAgenticHash);
+
   /* ---------------------------------------------------------------
      Page analytics hooks. The site has no analytics stack yet, so
      events go to window.dataLayer / gtag only if present, and are

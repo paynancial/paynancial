@@ -30,8 +30,8 @@ destinations.
 | AI Governance (Agentic AI column) | `/agentic-ai#governance` | 221 words | **Merged into one new page** | `/ai-governance` |
 | AI Governance (Trust column) | `/trust#ai-governance` | 110 words (+ oversight, auditability) | **Merged into one new page** | `/ai-governance` |
 | E-Commerce … Enterprise (8 industries) | `/solutions#…` | 2 sentences each | **New standalone pages** (see §2a) | `/solutions/{industry}` |
-| AI Financial Agents | `/agentic-ai#financial-agents` | 215 words | **Kept for now** — too thin; see §5 | — |
-| AI Orchestration | `/agentic-ai#payment-orchestration` | 175 words | **Kept for now** — too thin; see §5 | — |
+| AI Financial Agents | `/agentic-ai#financial-agents` | 215 words | **Expanded into a standalone page** (see §2b) | `/agentic-ai/financial-agents` |
+| AI Orchestration | `/agentic-ai#payment-orchestration` | 175 words | **Expanded into a standalone page** (see §2b) | `/agentic-ai/payment-orchestration` |
 | FAQs | `/support#faqs` | 5 FAQs | **Kept for now** — too thin; see §5 | — |
 | Our Journey | `/about#journey` | 591 words, part of About | **Kept** — the journey belongs on About | — |
 
@@ -105,6 +105,26 @@ Where a developer would need these, the page says so and links to developer supp
 - **Not converted:** the other six industries on `/solutions` (FinTech, Logistics, Real Estate, Insurance, Gaming, NGOs) are not in the header or footer menus. They stay as cards linking to a sales enquiry.
 - **Legacy links:** `/solutions#travel` and the other converted anchors forward client-side to the new page. `/solutions/startups` and `/solutions/saas` still return 404; their templates never existed.
 
+## 2b. Agentic AI pages
+
+| URL | Replaces | Words | Schema | Sitemap |
+|---|---|---|---|---|
+| `/agentic-ai/financial-agents` | `/agentic-ai#financial-agents` | 1,234 | WebPage, BreadcrumbList, FAQPage | Yes |
+| `/agentic-ai/payment-orchestration` | `/agentic-ai#payment-orchestration` | 1,023 | WebPage, BreadcrumbList, FAQPage | Yes |
+
+- **Content:** both pages expand the text already published on `/agentic-ai`, the Developer pages and AI Governance. The Financial Agents page covers:
+  - a definition;
+  - eight agent patterns, each with what stays with people;
+  - the manual-to-agentic path;
+  - boundaries;
+  - examples by business size;
+  - a getting-started sequence.
+
+  The Orchestration page covers the five safety rails, a worked retry-then-remind-then-cancel flow, a developer view with the published payout example, and a pre-launch test list.
+- **Claims:** no new capability, accuracy, savings or outcome claims. The AI & Intelligence products are linked to a sales enquiry, as in the header.
+- **Parent page:** the two sections on `/agentic-ai` are now short summaries that link to the new pages. The highest text overlap between any of `/agentic-ai`, the two new pages, `/ai-governance` and `/developers` is ≤10%.
+- **Legacy links:** `/agentic-ai#financial-agents` and `#payment-orchestration` forward client-side. Every other `/agentic-ai` section stays where it is.
+
 ## 3. Redirect map
 
 | From | To | Type |
@@ -123,7 +143,6 @@ Every new page is self-canonical at its slash-less URL, for example `https://pay
 | Group | Current state | Why it was not split | What would make it ready |
 |---|---|---|---|
 | Solutions industries (8) | 2 sentences each on `/solutions` | A page per industry would be thin, or the same template with the industry name swapped | Approved, industry-specific content: problems, product stack, use cases, FAQs |
-| Agentic AI children | 135–220 words per section | Below the site's 350-word bar for a standalone page | Expanded, approved content for each capability |
 | Resources / FAQs | 5 FAQs on `/support` | A dedicated FAQ page would be thin | A larger, approved FAQ set, then a `/resources` hub |
 | Our Journey | 591 words on `/about` | The journey is part of the About story; a separate page would duplicate it | — (recommended to keep) |
 | Products enquiry items (for example Payment Pages, UPI Payments, Recurring Payments; 25 in the header) | Link to the sales enquiry form | No product content exists; a page would have to invent features | Product specifications for each item |

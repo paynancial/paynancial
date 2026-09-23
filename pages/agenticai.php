@@ -115,18 +115,8 @@ $sectionCount = count($sections);
           <span class="sec-num">04 / <?= sprintf('%02d', $sectionCount) ?></span>
           <h2>AI Agents in Financial Operations</h2>
           <div class="legal-body">
-            <p>Concretely, here's where agentic patterns show up across financial operations today, each tied to a real capability in the Paynancial catalog:</p>
-            <ul>
-              <li><strong>Payment monitoring</strong> — continuous transaction review rather than a daily batch check, surfacing anomalies as they happen.</li>
-              <li><strong>Reconciliation assistance</strong> — matching settlements against transactions automatically and surfacing only genuine exceptions (AI Reconciliation).</li>
-              <li><strong>Exception handling</strong> — routing a failed payment, a disputed charge, or a mismatched invoice to the right next step instead of a shared queue.</li>
-              <li><strong>Transaction analysis</strong> — evaluating patterns for fraud risk in real time rather than after settlement (AI Fraud Detection).</li>
-              <li><strong>Cash-flow intelligence</strong> — forecasting near-term liquidity from live transaction data rather than a monthly spreadsheet (AI Cash-Flow Intelligence).</li>
-              <li><strong>Finance workflow orchestration</strong> — sequencing multi-step processes like a subscription retry-then-dun-then-cancel flow.</li>
-              <li><strong>Risk signals &amp; reporting</strong> — turning raw transaction volume into the specific numbers a finance lead actually needs (AI Revenue Forecasting, Payment Analytics).</li>
-              <li><strong>Customer support &amp; operational alerts</strong> — an AI Financial Assistant answering "why was this transaction declined" without a support ticket.</li>
-            </ul>
-            <div class="legal-callout"><strong>The line that matters:</strong> every item above assists with detection, analysis or a narrowly-scoped action. None of them removes the authorization and audit controls a business puts in place — see Governance below for exactly how that boundary is enforced.</div>
+            <p>Agentic patterns already show up across financial operations: payment monitoring, reconciliation assistance, exception handling, fraud screening, cash-flow forecasting, workflow orchestration, risk reporting and operational alerts. Each assists with detection, analysis or a narrowly scoped action — none removes the authorisation and audit controls a business puts in place.</p>
+            <p><a class="inline-link" href="/agentic-ai/financial-agents">Explore AI Financial Agents →</a></p>
           </div>
         </div>
 
@@ -134,8 +124,8 @@ $sectionCount = count($sections);
           <span class="sec-num">05 / <?= sprintf('%02d', $sectionCount) ?></span>
           <h2>AI Payment Orchestration</h2>
           <div class="legal-body">
-            <p>When an agent does initiate a payment or payout — say, an AI ops assistant clearing a vendor invoice under a pre-set limit — the request travels through exactly the same infrastructure a person's click would: an idempotency key so a retried request can't create a duplicate transaction, structured error codes the agent can act on programmatically rather than a message meant for a person, and a webhook firing the instant the payout's status changes.</p>
-            <p>What changes isn't the payment rail — it's the frequency and origin of requests. An agent might check status, retry, or re-verify far more often than a person naturally would, across a schedule that doesn't stop at 6pm. Orchestration, in this context, means the sequencing and safety rails that make that pattern reliable rather than risky: rate limits sized for continuous traffic, not just business-hours bursts, and a sandbox built specifically for testing an agent's retry and failure-handling logic before it ever touches a live key. See the Developers page for the specific technical patterns.</p>
+            <p>When an agent initiates a payment or payout, it travels through exactly the same infrastructure as a person's click — idempotency keys, structured error codes and webhooks. What changes is the frequency and origin of requests, and orchestration is the sequencing and safety rails that keep that pattern reliable.</p>
+            <p><a class="inline-link" href="/agentic-ai/payment-orchestration">Explore AI Payment Orchestration →</a></p>
           </div>
         </div>
 

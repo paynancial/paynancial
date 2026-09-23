@@ -1007,3 +1007,6 @@ section:last-of-type { border-bottom: none; }
 .brand-lockup--on-ink .brand-lockup-item:first-child { color: var(--paper); }
 .brand-lockup--on-paper { color: var(--slate); }
 .brand-lockup--on-paper .brand-lockup-item:first-child { color: var(--ink); }
+
+/* FAQ toggles inside long-form pages: 44px minimum tap target. */
+.legal-body details > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }

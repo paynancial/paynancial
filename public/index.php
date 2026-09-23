@@ -304,6 +304,32 @@ if (($segments[0] ?? '') === 'developers' && isset($segments[1])) {
 }
 
 // ---------------------------------------------------------------------
+// Agentic AI child pages: /agentic-ai/{page}. The hub (/agentic-ai) is a
+// public route below; unknown child slugs 404.
+// ---------------------------------------------------------------------
+if (($segments[0] ?? '') === 'agentic-ai' && isset($segments[1])) {
+    $agenticPages = ['financial-agents', 'payment-orchestration'];
+    $agenticFile = (count($segments) === 2 && in_array($segments[1], $agenticPages, true))
+        ? __DIR__ . '/../pages/agentic/' . $segments[1] . '.php'
+        : null;
+    ob_start();
+    if ($agenticFile === null || !is_file($agenticFile)) {
+        http_response_code(404);
+        include __DIR__ . '/../pages/404.php';
+    } else {
+        include $agenticFile;
+    }
+    $page_body = ob_get_clean();
+
+    include __DIR__ . '/../includes/site-head.php';
+    include __DIR__ . '/../includes/header.php';
+    echo '<main id="main-content">' . $page_body . '</main>';
+    include __DIR__ . '/../includes/footer.php';
+    include __DIR__ . '/../includes/site-foot.php';
+    exit;
+}
+
+// ---------------------------------------------------------------------
 // Legal pages: /legal/{slug}
 // ---------------------------------------------------------------------
 if (($segments[0] ?? '') === 'legal') {
