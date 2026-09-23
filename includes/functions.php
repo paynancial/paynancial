@@ -143,6 +143,25 @@ function organization_schema(): array
     ];
 }
 
+/**
+ * Brand positioning lockup — the Paynancial signature line
+ * (AI-Powered Financial Infrastructure · Global Payments · Secure & Trusted),
+ * set in the wordmark's serif so it reads as part of the brand, not body copy.
+ * Variants: on-ink (dark backgrounds), on-paper.
+ */
+function brand_lockup(string $variant = 'on-ink'): string
+{
+    $items = ['AI-Powered Financial Infrastructure', 'Global Payments', 'Secure &amp; Trusted'];
+    $html = '<p class="brand-lockup brand-lockup--' . e($variant) . '" aria-label="AI-Powered Financial Infrastructure. Global Payments. Secure and Trusted.">';
+    foreach ($items as $i => $item) {
+        $html .= '<span class="brand-lockup-item">' . $item . '</span>';
+        if ($i < count($items) - 1) {
+            $html .= '<span class="brand-lockup-dot" aria-hidden="true"></span>';
+        }
+    }
+    return $html . '</p>';
+}
+
 /** Simple flash-message helper (session-backed). */
 function flash(string $key, ?string $message = null)
 {

@@ -96,8 +96,8 @@ $sectionCount = count($sections);
           <span class="sec-num">05 / <?= sprintf('%02d', $sectionCount) ?></span>
           <h2>AI Governance</h2>
           <div class="legal-body">
-            <p>The operating principle behind every AI feature Paynancial offers is described in full on the <a class="inline-link" href="/agentic-ai#governance">Agentic AI</a> page: permissions define what an agent can do, policy limits cap how much, human oversight reviews anything above a threshold, every action is authenticated to a specific key or session, and every action is logged against the rule that authorized it.</p>
-            <p>What's confirmed today: this principle governs how our AI &amp; Intelligence products (AI Fraud Detection, AI Reconciliation, AI Financial Assistant, AI Cash-Flow Intelligence, AI Revenue Forecasting) are designed to operate. What's not yet published: a standalone, formally reviewed AI governance policy document, distinct from the product-level description above.</p>
+            <p>Every AI capability Paynancial offers is governed by five controls: permissions define what an agent can do, policy limits cap how much, human oversight reviews anything above a threshold, every action is authenticated to a specific key or session, and every action is logged against the rule that authorised it. A standalone, formally reviewed AI governance policy document has not yet been published.</p>
+            <p><a class="inline-link" href="/ai-governance">Read the full AI Governance page →</a></p>
           </div>
         </div>
 
@@ -105,7 +105,7 @@ $sectionCount = count($sections);
           <span class="sec-num">06 / <?= sprintf('%02d', $sectionCount) ?></span>
           <h2>Human Oversight</h2>
           <div class="legal-body">
-            <p>No AI capability on this site is positioned as removing a business's ability to require human approval. Spending limits, beneficiary allow-lists and approval thresholds are configured by the business using the platform, not fixed by Paynancial — a business decides how much of a workflow an agent handles unattended, and can tighten or loosen that at any time.</p>
+            <p>Spending limits, beneficiary allow-lists and approval thresholds are set by the business using the platform, not by Paynancial. <a class="inline-link" href="/ai-governance#oversight">How human oversight works →</a></p>
           </div>
         </div>
 
@@ -113,7 +113,7 @@ $sectionCount = count($sections);
           <span class="sec-num">07 / <?= sprintf('%02d', $sectionCount) ?></span>
           <h2>Auditability</h2>
           <div class="legal-body">
-            <p>Every write action against the API — a payment, a payout, a refund — is tied to the specific API key or session that made the request, and idempotency keys mean a retried request is recognized rather than treated as a new action. Webhooks provide a real-time, timestamped record of every state change, which is the same data an audit trail draws from.</p>
+            <p>Every write action is tied to the API key or session that made it, and webhooks keep a timestamped record of every state change. <a class="inline-link" href="/ai-governance#auditability">How auditability works →</a></p>
           </div>
         </div>
 
@@ -136,7 +136,7 @@ $sectionCount = count($sections);
           <h4>Related pages</h4>
           <div class="legal-related-links">
             <a href="/security">Security</a>
-            <a href="/agentic-ai#governance">Agentic AI Governance</a>
+            <a href="/ai-governance">Agentic AI Governance</a>
             <a href="/legal/privacy-policy">Privacy Policy</a>
             <a href="/legal/terms-conditions">Terms &amp; Conditions</a>
           </div>

@@ -143,15 +143,8 @@ $sectionCount = count($sections);
           <span class="sec-num">06 / <?= sprintf('%02d', $sectionCount) ?></span>
           <h2>Human-in-the-Loop &amp; AI Governance</h2>
           <div class="legal-body">
-            <p>None of the above is meant to sound risk-free, because it isn't — letting any system, human or AI, initiate a financial transaction is a decision with real consequences if the controls around it are weak. The governance model this is built on has five parts:</p>
-            <ul>
-              <li><strong>Permissions</strong> — an agent (or a person) can only take actions explicitly granted to its role or API key; nothing is enabled by default.</li>
-              <li><strong>Policy limits</strong> — spending caps, beneficiary allow-lists, and approval thresholds a business configures and can change at any time.</li>
-              <li><strong>Human oversight</strong> — actions above a set threshold, or matching a risk pattern, route to a person before completing, not after.</li>
-              <li><strong>Authentication &amp; authorization</strong> — every request is tied to a specific API key or user session, never an anonymous or implicit actor.</li>
-              <li><strong>Auditability</strong> — every action an agent takes is logged against the specific request, key, and rule that authorized it, so "why did this happen" always has a traceable answer.</li>
-            </ul>
-            <p>This is deliberately not "autonomous AI you have to trust blindly." It's closer to giving a new employee a defined scope of authority — one that can be widened as trust is earned and narrowed instantly if something looks wrong. For the full security and compliance model this sits inside, see the Trust Center.</p>
+            <p>Letting any system, human or AI, initiate a financial transaction is a decision with real consequences if the controls around it are weak. Every agent action on Paynancial is governed by five controls — permissions, policy limits, human oversight, authentication and auditability — and each of them is set by the business, not by the AI.</p>
+            <p><a class="inline-link" href="/ai-governance">Read how AI and agent actions are governed →</a></p>
           </div>
         </div>
 
@@ -189,7 +182,7 @@ $sectionCount = count($sections);
           <div class="legal-related-links">
             <a href="/technology">The Future of Financial Infrastructure</a>
             <a href="/trust">Trust Center</a>
-            <a href="/developers#agentic-ai">Agent-Ready APIs</a>
+            <a href="/developers#agent-ready">Agent-Ready APIs</a>
             <a href="/products">Products</a>
             <a href="/solutions">Solutions</a>
           </div>

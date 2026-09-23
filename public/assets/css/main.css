@@ -529,6 +529,7 @@ section:last-of-type { border-bottom: none; }
 .ft-brand-grid { display: grid; gap: 36px; align-items: end; }
 @media (min-width: 900px) { .ft-brand-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; } }
 .ft-logo img { height: 30px; width: auto; }
+.ft-brand-copy .brand-lockup { margin: 18px 0 0; font-size: 0.9rem; }
 .ft-statement { margin-top: 22px; font-family: var(--font-serif); font-size: clamp(1.45rem, 1.1rem + 1.3vw, 2.05rem); line-height: 1.18; color: var(--paper); max-width: 24ch; }
 .ft-sales { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 11px 20px; border-radius: 999px; background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 600; transition: background var(--transition), transform var(--transition); }
 .ft-sales:hover { background: #fff; transform: translateY(-1px); }
@@ -997,3 +998,12 @@ section:last-of-type { border-bottom: none; }
 .crosslink p { font-size: 0.92rem; color: var(--text-muted); max-width: 70ch; }
 .crosslink strong { color: var(--text); font-weight: 600; }
 .crosslink .card-link { margin-top: 0; }
+
+/* ---- Brand positioning lockup (brand_lockup()) ---- */
+.brand-lockup { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 0 0 22px; font-family: var(--font-serif); font-style: italic; font-weight: 340; font-size: 0.95rem; letter-spacing: 0.005em; }
+.brand-lockup-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange-500); flex-shrink: 0; }
+.brand-lockup-dot:first-of-type { background: var(--teal-300); }
+.brand-lockup--on-ink { color: rgba(250, 249, 245, 0.72); }
+.brand-lockup--on-ink .brand-lockup-item:first-child { color: var(--paper); }
+.brand-lockup--on-paper { color: var(--slate); }
+.brand-lockup--on-paper .brand-lockup-item:first-child { color: var(--ink); }

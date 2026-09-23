@@ -55,11 +55,11 @@ $catalog = [
         ['White-Label Payments', '/contact?intent=sales&product=white-label-payments'],
     ],
     'Developer Platform' => [
-        ['Payment APIs', '/developers#docs'],
-        ['Payout APIs', '/developers#docs'],
-        ['SDKs', '/developers#sdks'],
-        ['Webhooks', '/developers#webhooks'],
-        ['Sandbox', '/developers#sandbox'],
+        ['Payment APIs', '/developers/api-reference#payments'],
+        ['Payout APIs', '/developers/api-reference#payouts'],
+        ['SDKs', '/developers/sdks'],
+        ['Webhooks', '/developers/webhooks'],
+        ['Sandbox', '/sandbox'],
         ['API Dashboard', '/developers'],
     ],
 ];

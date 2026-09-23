@@ -187,6 +187,25 @@ Note: PHP's built-in server does not read `.htaccess`, so
   `permissions` / `role_permissions` / `user_permissions` for modules that
   need finer control than role alone.
 
+## Standalone pages and URL architecture
+
+Major destinations get their own canonical URL instead of a `#fragment` on
+a parent page. See `docs/url-architecture.md` for the fragment audit,
+URL, redirect and canonical maps, and the pages not yet converted.
+
+- Developer Hub `/developers` with `/developers/api-reference`,
+  `/developers/authentication`, `/developers/webhooks`, `/developers/sdks`,
+  `/developers/integration-guide`, plus `/sandbox`. All technical content
+  comes from `includes/developer-docs.php`, which only states facts
+  already published on the site.
+- `/ai-governance` — the single AI governance page. Agentic AI and the
+  Trust Center summarise it and link to it.
+- Template: `includes/standalone-ui.php` + `assets/css/standalone.css`
+  (full-width bands, hero, tables, code, Q&A, FAQ, related, CTA).
+- `brand_lockup()` (in `includes/functions.php`) renders the brand
+  signature — AI-Powered Financial Infrastructure · Global Payments ·
+  Secure & Trusted — in the hero of standalone pages and the footer.
+
 ## Business Services
 
 A Business Services vertical (company incorporation, registrations,

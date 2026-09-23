@@ -42,7 +42,7 @@ $footer_groups = [
                 ['Agentic Payments', '/agentic-ai'],
                 ['AI Financial Agents', '/agentic-ai#financial-agents'],
                 ['AI Orchestration', '/agentic-ai#payment-orchestration'],
-                ['AI Governance', '/agentic-ai#governance'],
+                ['AI Governance', '/ai-governance'],
             ]],
             ['AI & Intelligence', [
                 ['Paynancial AI', '/contact?intent=sales&product=paynancial-ai'],
@@ -59,15 +59,15 @@ $footer_groups = [
         'title' => 'Developers',
         'blocks' => [
             ['Build', [
-                ['Documentation', '/developers#docs'],
-                ['API Reference', '/developers#api-reference'],
-                ['SDKs', '/developers#sdks'],
+                ['Documentation', '/developers'],
+                ['API Reference', '/developers/api-reference'],
+                ['SDKs', '/developers/sdks'],
             ]],
             ['Connect', [
-                ['Webhooks', '/developers#webhooks'],
-                ['Authentication', '/developers#authentication'],
-                ['Sandbox', '/developers#sandbox'],
-                ['Integration Guide', '/developers#integration-guide'],
+                ['Webhooks', '/developers/webhooks'],
+                ['Authentication', '/developers/authentication'],
+                ['Sandbox', '/sandbox'],
+                ['Integration Guide', '/developers/integration-guide'],
             ]],
             ['Support', [
                 ['Developer Support', '/support'],
@@ -86,7 +86,7 @@ $footer_groups = [
             ['Trust', [
                 ['Security & Compliance', '/security'],
                 ['Trust Center', '/trust'],
-                ['AI Governance', '/trust#ai-governance'],
+                ['AI Governance', '/ai-governance'],
                 ['Privacy Policy', '/legal/privacy-policy'],
                 ['Terms & Conditions', '/legal/terms-conditions'],
                 ['Refund Policy', '/legal/refund-policy'],
@@ -119,6 +119,7 @@ $footer_groups = [
     <div class="container ft-brand-grid">
       <div class="ft-brand-copy">
         <a href="/" class="ft-logo" aria-label="Paynancial home"><img src="<?= asset('images/paynancial-logo-dark-bg.png') ?>" alt="Paynancial" width="520" height="118" loading="lazy"></a>
+        <?= brand_lockup('on-ink') ?>
         <p class="ft-statement">Payment &amp; financial infrastructure for modern businesses.</p>
         <a class="ft-sales" href="/contact?intent=sales"><?= e(cta_label()) ?> <span aria-hidden="true">→</span></a>
       </div>

@@ -87,8 +87,8 @@ $differentiators = [
 ];
 
 $stack = [
-    ['Agentic AI', 'Agents acting within limits a business sets — with human oversight and auditability.', [['Agentic AI in Finance', '/agentic-ai'], ['Governance', '/agentic-ai#governance']]],
-    ['Intelligence', 'Agent-ready APIs: idempotency, structured errors, audit trails.', [['Agent-Ready APIs', '/developers#agentic-ai']]],
+    ['Agentic AI', 'Agents acting within limits a business sets — with human oversight and auditability.', [['Agentic AI in Finance', '/agentic-ai'], ['Governance', '/ai-governance']]],
+    ['Intelligence', 'Agent-ready APIs: idempotency, structured errors, audit trails.', [['Agent-Ready APIs', '/developers#agent-ready']]],
     ['Financial operations', 'Settlements, refunds, reconciliation and reporting in one view.', [['Payment Analytics', '/products/payment-analytics']]],
     ['Payouts', 'Money out to vendors, employees and partners.', [['Payouts', '/products/payouts']]],
     ['Payments', 'Money in, through every major method.', [['Payment Gateway', '/products/payment-gateway'], ['Payment Links', '/products/payment-links'], ['Payment Collection', '/products/payment-collection']]],
@@ -286,7 +286,7 @@ $leaders = [
     </div>
     <ul class="ab-trust-links reveal">
       <li><a href="/security"><strong>Security &amp; Compliance</strong><span>How the platform is protected</span></a></li>
-      <li><a href="/trust#ai-governance"><strong>AI Governance</strong><span>Human oversight and auditability</span></a></li>
+      <li><a href="/ai-governance"><strong>AI Governance</strong><span>Human oversight and auditability</span></a></li>
       <li><a href="/legal/privacy-policy"><strong>Privacy Policy</strong><span>How we handle personal data</span></a></li>
       <li><a href="/legal/terms-conditions"><strong>Terms &amp; Conditions</strong><span>The terms of using Paynancial</span></a></li>
     </ul>

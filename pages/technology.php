@@ -139,7 +139,7 @@ $sectionCount = count($sections);
           <h2>Human + AI Collaboration, and Why Governance Comes First</h2>
           <div class="legal-body">
             <p>None of the previous eras required rethinking who's accountable when something goes wrong — a person always was. Agentic AI is the first shift where that question needs an explicit answer before adoption, not after: what's the agent authorized to do, who's notified when it acts, and how is every action traced back to the rule that permitted it.</p>
-            <p>That's not a reason to avoid agentic AI — it's the reason governance has to be part of the infrastructure, not an afterthought layered on top. The full model — permissions, policy limits, human oversight, authentication and audit trails — is covered on the <a class="inline-link" href="/agentic-ai#governance">Agentic AI</a> page and the <a class="inline-link" href="/trust">Trust Center</a>.</p>
+            <p>That's not a reason to avoid agentic AI — it's the reason governance has to be part of the infrastructure, not an afterthought layered on top. The full model — permissions, policy limits, human oversight, authentication and audit trails — is covered on the <a class="inline-link" href="/ai-governance">AI Governance</a> page and the <a class="inline-link" href="/trust">Trust Center</a>.</p>
           </div>
         </div>
 
@@ -167,7 +167,7 @@ $sectionCount = count($sections);
             <a href="/agentic-ai">Agentic AI in Finance</a>
             <a href="/trust">Trust Center</a>
             <a href="/about">About Paynancial</a>
-            <a href="/developers#agentic-ai">Agent-Ready APIs</a>
+            <a href="/developers#agent-ready">Agent-Ready APIs</a>
           </div>
         </div>
 

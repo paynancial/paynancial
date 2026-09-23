@@ -218,8 +218,8 @@ if (($segments[0] ?? '') === 'solutions' && isset($segments[1])) {
 }
 
 // ---------------------------------------------------------------------
-// Business Services (standalone pages — reachable by direct URL only; not
-// linked from the global header, menus, footer or sitemap):
+// Business Services (linked from the header mega-menu; eligible pages are
+// in the sitemap; not in the footer):
 //   /business-services
 //   /business-services/{service}
 //   /business-services/global-incorporation
@@ -263,6 +263,32 @@ if (($segments[0] ?? '') === 'business-services') {
 }
 
 // ---------------------------------------------------------------------
+// Developer Hub child pages: /developers/{page}. The hub itself
+// (/developers) is a public route below; unknown child slugs 404.
+// ---------------------------------------------------------------------
+if (($segments[0] ?? '') === 'developers' && isset($segments[1])) {
+    $devPages = ['api-reference', 'authentication', 'webhooks', 'sdks', 'integration-guide'];
+    $devFile = (count($segments) === 2 && in_array($segments[1], $devPages, true))
+        ? __DIR__ . '/../pages/developers/' . $segments[1] . '.php'
+        : null;
+    ob_start();
+    if ($devFile === null || !is_file($devFile)) {
+        http_response_code(404);
+        include __DIR__ . '/../pages/404.php';
+    } else {
+        include $devFile;
+    }
+    $page_body = ob_get_clean();
+
+    include __DIR__ . '/../includes/site-head.php';
+    include __DIR__ . '/../includes/header.php';
+    echo '<main id="main-content">' . $page_body . '</main>';
+    include __DIR__ . '/../includes/footer.php';
+    include __DIR__ . '/../includes/site-foot.php';
+    exit;
+}
+
+// ---------------------------------------------------------------------
 // Legal pages: /legal/{slug}
 // ---------------------------------------------------------------------
 if (($segments[0] ?? '') === 'legal') {
@@ -293,6 +319,8 @@ $publicRoutes = [
     'products'         => 'products',
     'pricing'          => 'pricing',
     'developers'       => 'developers',
+    'sandbox'          => 'sandbox',
+    'ai-governance'    => 'ai-governance',
     'partners'         => 'partners',
     'support'          => 'support',
     'contact'          => 'contact',

@@ -96,11 +96,11 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
             </div>
             <div>
               <div class="mega-col-title">Developer Platform</div>
-              <a class="mega-link mega-link-plain" href="/developers#docs"><strong>Payment APIs</strong></a>
-              <a class="mega-link mega-link-plain" href="/developers#docs"><strong>Payout APIs</strong></a>
-              <a class="mega-link mega-link-plain" href="/developers#sdks"><strong>SDKs</strong></a>
-              <a class="mega-link mega-link-plain" href="/developers#webhooks"><strong>Webhooks</strong></a>
-              <a class="mega-link mega-link-plain" href="/developers#sandbox"><strong>Sandbox</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/api-reference#payments"><strong>Payment APIs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/api-reference#payouts"><strong>Payout APIs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/sdks"><strong>SDKs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/webhooks"><strong>Webhooks</strong></a>
+              <a class="mega-link mega-link-plain" href="/sandbox"><strong>Sandbox</strong></a>
               <a class="mega-link mega-link-plain" href="/developers"><strong>API Dashboard</strong></a>
             </div>
           </div>
@@ -156,15 +156,15 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
           <div class="mega-menu">
             <div>
               <div class="mega-col-title">Build</div>
-              <a class="mega-link" href="/developers#docs"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
-              <a class="mega-link" href="/developers#integration-guide"><strong>Integration Guide</strong><span>Step-by-step setup for your stack</span></a>
-              <a class="mega-link" href="/developers#sdks"><strong>SDKs</strong><span>PHP, JavaScript, Python client libraries</span></a>
+              <a class="mega-link" href="/developers"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
+              <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guide</strong><span>Step-by-step setup for your stack</span></a>
+              <a class="mega-link" href="/developers/sdks"><strong>SDKs</strong><span>PHP, JavaScript, Python client libraries</span></a>
             </div>
             <div>
               <div class="mega-col-title">Reference</div>
-              <a class="mega-link" href="/developers#api-reference"><strong>API Reference</strong><span>Every endpoint, request &amp; response</span></a>
-              <a class="mega-link" href="/developers#sandbox"><strong>Sandbox</strong><span>Test integrations safely</span></a>
-              <a class="mega-link" href="/developers#webhooks"><strong>Webhooks</strong><span>Real-time event notifications</span></a>
+              <a class="mega-link" href="/developers/api-reference"><strong>API Reference</strong><span>Every endpoint, request &amp; response</span></a>
+              <a class="mega-link" href="/sandbox"><strong>Sandbox</strong><span>Test integrations safely</span></a>
+              <a class="mega-link" href="/developers/webhooks"><strong>Webhooks</strong><span>Real-time event notifications</span></a>
             </div>
           </div>
         </li>
@@ -174,8 +174,8 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
           <div class="mega-menu">
             <div>
               <div class="mega-col-title">Learn</div>
-              <a class="mega-link" href="/developers#docs"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
-              <a class="mega-link" href="/developers#integration-guide"><strong>Integration Guides</strong><span>Step-by-step setup for your stack</span></a>
+              <a class="mega-link" href="/developers"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
+              <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guides</strong><span>Step-by-step setup for your stack</span></a>
               <a class="mega-link" href="/support#faqs"><strong>FAQs</strong><span>Answers to common questions</span></a>
             </div>
             <div>
@@ -279,11 +279,11 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/contact?intent=sales&amp;product=white-label-payments">White-Label Payments</a></li>
 
       <li class="mobile-nav-group-label">Developer Platform</li>
-      <li><a href="/developers#docs">Payment APIs</a></li>
-      <li><a href="/developers#docs">Payout APIs</a></li>
-      <li><a href="/developers#sdks">SDKs</a></li>
-      <li><a href="/developers#webhooks">Webhooks</a></li>
-      <li><a href="/developers#sandbox">Sandbox</a></li>
+      <li><a href="/developers/api-reference#payments">Payment APIs</a></li>
+      <li><a href="/developers/api-reference#payouts">Payout APIs</a></li>
+      <li><a href="/developers/sdks">SDKs</a></li>
+      <li><a href="/developers/webhooks">Webhooks</a></li>
+      <li><a href="/sandbox">Sandbox</a></li>
       <li><a href="/developers">API Dashboard</a></li>
     </ul>
   </details>
@@ -319,20 +319,20 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
   <details>
     <summary>Developers <i class="chev" aria-hidden="true"></i></summary>
     <ul>
-      <li><a href="/developers#docs">API Documentation</a></li>
-      <li><a href="/developers#integration-guide">Integration Guide</a></li>
-      <li><a href="/developers#sdks">SDKs</a></li>
-      <li><a href="/developers#api-reference">API Reference</a></li>
-      <li><a href="/developers#sandbox">Sandbox</a></li>
-      <li><a href="/developers#webhooks">Webhooks</a></li>
+      <li><a href="/developers">API Documentation</a></li>
+      <li><a href="/developers/integration-guide">Integration Guide</a></li>
+      <li><a href="/developers/sdks">SDKs</a></li>
+      <li><a href="/developers/api-reference">API Reference</a></li>
+      <li><a href="/sandbox">Sandbox</a></li>
+      <li><a href="/developers/webhooks">Webhooks</a></li>
     </ul>
   </details>
   <a href="/pricing" class="nav-link">Pricing</a>
   <details>
     <summary>Resources <i class="chev" aria-hidden="true"></i></summary>
     <ul>
-      <li><a href="/developers#docs">API Documentation</a></li>
-      <li><a href="/developers#integration-guide">Integration Guides</a></li>
+      <li><a href="/developers">API Documentation</a></li>
+      <li><a href="/developers/integration-guide">Integration Guides</a></li>
       <li><a href="/support#faqs">FAQs</a></li>
       <li><a href="/support">Support Center</a></li>
       <li><a href="/security">Security &amp; Compliance</a></li>

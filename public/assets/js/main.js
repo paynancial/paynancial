@@ -446,6 +446,51 @@
   }
 
   /* ---------------------------------------------------------------
+     Legacy Developer anchors. /developers#sandbox etc. used to be
+     sections of one page; each is now its own page. A #fragment never
+     reaches the server, so it cannot be 301-redirected — forward old
+     bookmarks and external links here instead.
+     --------------------------------------------------------------- */
+  function forwardLegacyDevHash() {
+    if (window.location.pathname !== '/developers' || !window.location.hash) return;
+    var legacyDev = {
+      '#api-reference': '/developers/api-reference', '#authentication': '/developers/authentication',
+      '#webhooks': '/developers/webhooks', '#sdks': '/developers/sdks',
+      '#integration-guide': '/developers/integration-guide', '#sandbox': '/sandbox',
+      '#docs': '/developers#resources', '#agentic-ai': '/developers#agent-ready'
+    };
+    var target = legacyDev[window.location.hash];
+    if (target) window.location.replace(target);
+  }
+  forwardLegacyDevHash();
+  window.addEventListener('hashchange', forwardLegacyDevHash);
+
+  /* ---------------------------------------------------------------
+     Page analytics hooks. The site has no analytics stack yet, so
+     events go to window.dataLayer / gtag only if present, and are
+     always dispatched as a `paynancial:track` DOM event (the same
+     channel the floating enquiry widget uses).
+       [data-track-view="sandbox_view"] → fired once on page load
+       [data-track="request_sandbox_access"] → fired on click
+     --------------------------------------------------------------- */
+  function pnTrack(event, extra) {
+    var detail = { event: event, page_url: window.location.pathname };
+    if (extra) { for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) detail[k] = extra[k]; } }
+    try {
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(detail);
+      if (typeof window.gtag === 'function') window.gtag('event', event, detail);
+      document.dispatchEvent(new CustomEvent('paynancial:track', { detail: detail }));
+    } catch (e) { /* analytics must never break the page */ }
+  }
+  document.querySelectorAll('[data-track-view]').forEach(function (el) {
+    pnTrack(el.getAttribute('data-track-view'));
+  });
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-track]');
+    if (el) pnTrack(el.getAttribute('data-track'), { link_url: el.getAttribute('href') || '', link_text: (el.textContent || '').trim().slice(0, 80) });
+  });
+
+  /* ---------------------------------------------------------------
      Dashboard sidebar toggle (mobile)
      --------------------------------------------------------------- */
   var sidebarToggle = document.querySelector('.sidebar-toggle');
