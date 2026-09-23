@@ -193,8 +193,23 @@ $solutionPages = [
     'startups' => 'solutions-startups',
     'saas'     => 'solutions-saas',
 ];
+require_once __DIR__ . '/../includes/solutions-data.php';
+if (($segments[0] ?? '') === 'solutions' && isset($segments[1])
+    && count($segments) === 2 && ($sol_industry = sol_industry($segments[1])) !== null) {
+    // Industry pages: /solutions/{industry} (content in includes/solutions-data.php).
+    ob_start();
+    include __DIR__ . '/../pages/solutions/industry.php';
+    $page_body = ob_get_clean();
+
+    include __DIR__ . '/../includes/site-head.php';
+    include __DIR__ . '/../includes/header.php';
+    echo '<main id="main-content">' . $page_body . '</main>';
+    include __DIR__ . '/../includes/footer.php';
+    include __DIR__ . '/../includes/site-foot.php';
+    exit;
+}
 if (($segments[0] ?? '') === 'solutions' && isset($segments[1])) {
-    $solutionFile = $solutionPages[$segments[1]] ?? null;
+    $solutionFile = count($segments) === 2 ? ($solutionPages[$segments[1]] ?? null) : null;
     // Only serve a solutions page whose template actually exists; a missing
     // template used to render an empty 200 page (soft 404).
     if ($solutionFile !== null && !is_file(__DIR__ . '/../pages/' . $solutionFile . '.php')) {

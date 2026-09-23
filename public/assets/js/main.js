@@ -465,6 +465,18 @@
   forwardLegacyDevHash();
   window.addEventListener('hashchange', forwardLegacyDevHash);
 
+  /* Legacy Solutions anchors: /solutions#travel → /solutions/travel for the
+     industries that now have their own page. */
+  function forwardLegacySolutionHash() {
+    if (window.location.pathname !== '/solutions' || !window.location.hash) return;
+    var pages = { '#ecommerce': 'e-commerce', '#travel': 'travel', '#healthcare': 'healthcare', '#education': 'education',
+      '#retail': 'retail', '#hospitality': 'hospitality', '#professional-services': 'professional-services', '#enterprise': 'enterprise' };
+    var slug = pages[window.location.hash];
+    if (slug) window.location.replace('/solutions/' + slug);
+  }
+  forwardLegacySolutionHash();
+  window.addEventListener('hashchange', forwardLegacySolutionHash);
+
   /* ---------------------------------------------------------------
      Page analytics hooks. The site has no analytics stack yet, so
      events go to window.dataLayer / gtag only if present, and are

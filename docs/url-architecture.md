@@ -29,7 +29,7 @@ destinations.
 | Agent-Ready APIs | `/developers#agentic-ai` | Section | Section of the new hub | `/developers#agent-ready` |
 | AI Governance (Agentic AI column) | `/agentic-ai#governance` | 221 words | **Merged into one new page** | `/ai-governance` |
 | AI Governance (Trust column) | `/trust#ai-governance` | 110 words (+ oversight, auditability) | **Merged into one new page** | `/ai-governance` |
-| E-Commerce … Enterprise (8 industries) | `/solutions#…` | 2 sentences each | **Kept for now** — too thin; see §5 | — |
+| E-Commerce … Enterprise (8 industries) | `/solutions#…` | 2 sentences each | **New standalone pages** (see §2a) | `/solutions/{industry}` |
 | AI Financial Agents | `/agentic-ai#financial-agents` | 215 words | **Kept for now** — too thin; see §5 | — |
 | AI Orchestration | `/agentic-ai#payment-orchestration` | 175 words | **Kept for now** — too thin; see §5 | — |
 | FAQs | `/support#faqs` | 5 FAQs | **Kept for now** — too thin; see §5 | — |
@@ -82,6 +82,28 @@ therefore state **only facts already published on paynancial.com**:
 Where a developer would need these, the page says so and links to developer support.
 
 **To extend these pages:** add real specifications to `includes/developer-docs.php`, the single source for all developer content.
+
+## 2a. Solutions industry pages
+
+| URL | Replaces | Words | Schema | Sitemap |
+|---|---|---|---|---|
+| `/solutions/e-commerce` | `/solutions#ecommerce` | 893 | WebPage, BreadcrumbList, FAQPage | Yes |
+| `/solutions/travel` | `/solutions#travel` | 878 | same | Yes |
+| `/solutions/healthcare` | `/solutions#healthcare` | 842 | same | Yes |
+| `/solutions/education` | `/solutions#education` | 813 | same | Yes |
+| `/solutions/retail` | `/solutions#retail` | 791 | same | Yes |
+| `/solutions/hospitality` | `/solutions#hospitality` | 787 | same | Yes |
+| `/solutions/professional-services` | `/solutions#professional-services` | 809 | same | Yes |
+| `/solutions/enterprise` | `/solutions#enterprise` | 846 | same | Yes |
+
+- **Content:** all of it lives in `includes/solutions-data.php`. Each page covers:
+  - the industry's own challenges, payment journey and product stack;
+  - use cases and practical considerations;
+  - FAQs and related industries.
+- **Uniqueness:** 54–63% of each page's text is unique to it. The highest overlap between any two pages is 36% (5-word shingles), under the 40% ceiling.
+- **Claims:** the Paynancial side cites only capabilities published on the product pages (`sol_products()`). Industry challenges are described in general terms. There are no statistics, customer names, outcomes, certifications or regulatory claims. The healthcare page states that Paynancial is not a clinical-records system and does not change a provider's own obligations. The travel page sends other-currency questions to the team rather than claiming multi-currency support.
+- **Not converted:** the other six industries on `/solutions` (FinTech, Logistics, Real Estate, Insurance, Gaming, NGOs) are not in the header or footer menus. They stay as cards linking to a sales enquiry.
+- **Legacy links:** `/solutions#travel` and the other converted anchors forward client-side to the new page. `/solutions/startups` and `/solutions/saas` still return 404; their templates never existed.
 
 ## 3. Redirect map
 

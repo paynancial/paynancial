@@ -169,3 +169,11 @@
 .sp-btn-accent:hover { background: #b83d00; border-color: #b83d00; }
 .sp-band--paper .sp-card-num, .sp-band--dim .sp-card-num,
 .sp-band--paper .sp-step-num, .sp-band--dim .sp-step-num { color: #b83d00; }
+
+/* "In short" answer panel (industry hero aside) */
+.sp-glance { border: 1px solid rgba(250, 249, 245, 0.14); border-radius: 16px; padding: clamp(24px, 3vw, 36px); background: rgba(250, 249, 245, 0.04); backdrop-filter: blur(6px); }
+.sp-glance-label { display: block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-300); margin-bottom: 14px; }
+.sp-glance p { font-family: var(--font-serif); font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.5; color: var(--paper); }
+.sp-glance ul { display: grid; gap: 2px; margin-top: 22px; border-top: 1px solid rgba(250, 249, 245, 0.14); padding-top: 12px; }
+.sp-glance a { display: flex; justify-content: space-between; align-items: center; min-height: 44px; color: rgba(250, 249, 245, 0.86); font-weight: 500; border-bottom: 1px solid rgba(250, 249, 245, 0.08); }
+.sp-glance a:hover { color: var(--teal-300); }

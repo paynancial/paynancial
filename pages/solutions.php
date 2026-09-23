@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/solutions-data.php';
 $page_meta = [
     'title'       => 'Solutions | AI-Powered Financial Infrastructure | Paynancial',
     'description' => 'Payment infrastructure for startups, SaaS, SMEs, marketplaces and enterprises — across e-commerce, travel, healthcare, FinTech and more.',
@@ -71,7 +72,12 @@ $industries = [
           <h3><?= e($title) ?></h3>
           <p><?= e($desc) ?></p>
           <p class="text-muted" style="margin-top:10px;font-size:0.85rem;"><?= e($useCase) ?></p>
-          <a class="card-link" href="/contact?intent=sales&solution=<?= e($slug) ?>"><?= e($slug === 'enterprise' ? cta_contexts()['default']['label'] : cta_label()) ?> →</a>
+          <?php $pageSlug = sol_legacy_anchors()[$slug] ?? $slug; ?>
+          <?php if (sol_industry($pageSlug)): ?>
+          <a class="card-link" href="<?= e(sol_url($pageSlug)) ?>">Explore <?= e($title) ?> →</a>
+          <?php else: ?>
+          <a class="card-link" href="/contact?intent=sales&solution=<?= e($slug) ?>"><?= e(cta_label()) ?> →</a>
+          <?php endif; ?>
         </div>
       <?php endforeach; ?>
     </div>

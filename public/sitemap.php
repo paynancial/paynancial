@@ -63,6 +63,12 @@ foreach ($entries as $route => $template) {
     echo '  <url><loc>' . htmlspecialchars(site_url($route)) . '</loc>'
         . '<lastmod>' . gmdate('Y-m-d', (int) filemtime($file)) . '</lastmod></url>' . "\n";
 }
+require_once __DIR__ . '/../includes/solutions-data.php';
+$industryMtime = max((int) filemtime($pages . 'solutions/industry.php'), (int) filemtime(__DIR__ . '/../includes/solutions-data.php'));
+foreach (array_keys(sol_industries()) as $slug) {
+    echo '  <url><loc>' . htmlspecialchars(site_url('solutions/' . $slug)) . '</loc>'
+        . '<lastmod>' . gmdate('Y-m-d', $industryMtime) . '</lastmod></url>' . "\n";
+}
 require_once __DIR__ . '/../includes/business-services.php';
 $bsPages = __DIR__ . '/../pages/business-services/';
 foreach (bs_sitemap_paths() as $path) {

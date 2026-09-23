@@ -110,17 +110,17 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
           <div class="mega-menu">
             <div>
               <div class="mega-col-title">By Industry</div>
-              <a class="mega-link" href="/solutions#ecommerce"><strong>E-Commerce</strong><span>Fast, reliable checkout at scale</span></a>
-              <a class="mega-link" href="/solutions#travel"><strong>Travel</strong><span>High-value, multi-currency bookings</span></a>
-              <a class="mega-link" href="/solutions#healthcare"><strong>Healthcare</strong><span>Secure billing for clinics &amp; hospitals</span></a>
-              <a class="mega-link" href="/solutions#education"><strong>Education</strong><span>Fee collection made simple</span></a>
+              <a class="mega-link" href="/solutions/e-commerce"><strong>E-Commerce</strong><span>Fast, reliable checkout at scale</span></a>
+              <a class="mega-link" href="/solutions/travel"><strong>Travel</strong><span>High-value, multi-currency bookings</span></a>
+              <a class="mega-link" href="/solutions/healthcare"><strong>Healthcare</strong><span>Secure billing for clinics &amp; hospitals</span></a>
+              <a class="mega-link" href="/solutions/education"><strong>Education</strong><span>Fee collection made simple</span></a>
             </div>
             <div>
               <div class="mega-col-title">&nbsp;</div>
-              <a class="mega-link" href="/solutions#retail"><strong>Retail</strong><span>Online and in-store payment flows</span></a>
-              <a class="mega-link" href="/solutions#hospitality"><strong>Hospitality</strong><span>Bookings, deposits, and on-site payments</span></a>
-              <a class="mega-link" href="/solutions#professional-services"><strong>Professional Services</strong><span>Simple invoicing and collection</span></a>
-              <a class="mega-link" href="/solutions#enterprise"><strong>Enterprise</strong><span>Custom infrastructure for scale</span></a>
+              <a class="mega-link" href="/solutions/retail"><strong>Retail</strong><span>Online and in-store payment flows</span></a>
+              <a class="mega-link" href="/solutions/hospitality"><strong>Hospitality</strong><span>Bookings, deposits, and on-site payments</span></a>
+              <a class="mega-link" href="/solutions/professional-services"><strong>Professional Services</strong><span>Simple invoicing and collection</span></a>
+              <a class="mega-link" href="/solutions/enterprise"><strong>Enterprise</strong><span>Custom infrastructure for scale</span></a>
             </div>
           </div>
         </li>
@@ -290,14 +290,14 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
   <details>
     <summary>Solutions <i class="chev" aria-hidden="true"></i></summary>
     <ul>
-      <li><a href="/solutions#ecommerce">E-Commerce</a></li>
-      <li><a href="/solutions#travel">Travel</a></li>
-      <li><a href="/solutions#healthcare">Healthcare</a></li>
-      <li><a href="/solutions#education">Education</a></li>
-      <li><a href="/solutions#retail">Retail</a></li>
-      <li><a href="/solutions#hospitality">Hospitality</a></li>
-      <li><a href="/solutions#professional-services">Professional Services</a></li>
-      <li><a href="/solutions#enterprise">Enterprise</a></li>
+      <li><a href="/solutions/e-commerce">E-Commerce</a></li>
+      <li><a href="/solutions/travel">Travel</a></li>
+      <li><a href="/solutions/healthcare">Healthcare</a></li>
+      <li><a href="/solutions/education">Education</a></li>
+      <li><a href="/solutions/retail">Retail</a></li>
+      <li><a href="/solutions/hospitality">Hospitality</a></li>
+      <li><a href="/solutions/professional-services">Professional Services</a></li>
+      <li><a href="/solutions/enterprise">Enterprise</a></li>
     </ul>
   </details>
   <details<?= $bs_is_current ? ' open' : '' ?>>

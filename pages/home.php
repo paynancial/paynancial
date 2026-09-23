@@ -117,7 +117,7 @@ $industries = [
     </div>
     <div class="grid grid-4">
       <?php foreach ($industries as $slug => [$title, $useCase]): ?>
-        <a class="card reveal" href="/solutions#<?= e($slug) ?>">
+        <a class="card reveal" href="/solutions/<?= e($slug === 'ecommerce' ? 'e-commerce' : $slug) ?>">
           <h3 style="font-size:1.05rem;"><?= e($title) ?></h3>
           <p style="margin-top:8px;font-size:0.85rem;"><?= e($useCase) ?></p>
           <span class="card-link" style="margin-top:12px;">View solution →</span>

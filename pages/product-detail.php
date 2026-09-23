@@ -274,7 +274,7 @@ $page_meta = [
       </div>
       <div class="pill-list reveal">
         <?php foreach ($p['related_solutions'] as $slug): ?>
-          <a class="pill" href="/solutions#<?= e($slug) ?>"><?= e($solutionLabels[$slug] ?? $slug) ?></a>
+          <a class="pill" href="/solutions/<?= e($slug === 'ecommerce' ? 'e-commerce' : $slug) ?>"><?= e($solutionLabels[$slug] ?? $slug) ?></a>
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
