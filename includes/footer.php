@@ -1,8 +1,11 @@
 <?php
 /**
- * Site footer — brand strip, then five groups on a three-column grid:
- * row 1 Products & Solutions · Agentic AI · Developers, row 2
- * Resources & Trust (column 1) · Company (column 3). Every link points at
+ * Site footer — brand strip, then ONE navigation row of five parallel
+ * columns on desktop (>=1200px): Products & Solutions · Agentic AI ·
+ * Developers · Resources & Trust · Company. Tablet (768–1199px) groups
+ * them 3 + 2; mobile (<=767px) uses accordions. Structurally parallel:
+ * every column is heading → divider → labelled subgroups → CTA, with the
+ * CTAs sharing one baseline on desktop. Every link points at
  * an existing page or anchor; groups render from $footer_groups so a link
  * is defined exactly once. Descriptive text is justified. On narrow
  * screens each group collapses into an accordion (main.js; panels stay
@@ -17,6 +20,7 @@ $footer_groups = [
                 ['Payment Gateway', '/products/payment-gateway'],
                 ['Payment Links', '/products/payment-links'],
                 ['Payment Collection', '/products/payment-collection'],
+                ['Pricing', '/pricing'],
             ]],
             ['Money Movement', [
                 ['Payouts', '/products/payouts'],
@@ -28,12 +32,15 @@ $footer_groups = [
                 ['Healthcare', '/solutions#healthcare'],
                 ['Education', '/solutions#education'],
                 ['Retail', '/solutions#retail'],
+                ['Hospitality', '/solutions#hospitality'],
                 ['Enterprise', '/solutions#enterprise'],
             ]],
         ],
+        'cta'   => ['Explore Products', '/products'],
     ],
     'agentic' => [
         'title' => 'Agentic AI',
+        'badge' => 'New',
         'blocks' => [
             ['AI Finance', [
                 ['Agentic Payments', '/agentic-ai'],
@@ -42,7 +49,7 @@ $footer_groups = [
                 ['AI Governance', '/agentic-ai#governance'],
             ]],
         ],
-        'cta' => ['Explore AI', '/agentic-ai'],
+        'cta' => ['Explore Agentic AI', '/agentic-ai'],
     ],
     'developers' => [
         'title' => 'Developers',
@@ -56,6 +63,7 @@ $footer_groups = [
                 ['Webhooks', '/developers#webhooks'],
                 ['Authentication', '/developers#authentication'],
                 ['Sandbox', '/developers#sandbox'],
+                ['Integration Guide', '/developers#integration-guide'],
             ]],
             ['Support', [
                 ['Developer Support', '/support'],
@@ -84,16 +92,16 @@ $footer_groups = [
     ],
     'company' => [
         'title' => 'Company',
-        'intro_title' => 'Paynancial Technology Pvt. Ltd.',
-        'intro' => 'Building trusted financial infrastructure for modern businesses.',
         'blocks' => [
-            [null, [
+            ['About Us', [
                 ['About Paynancial', '/about'],
                 ['Our Journey', '/about#journey'],
                 ['Leadership', '/leadership'],
+            ]],
+            ['Work With Us', [
                 ['Careers', '/careers'],
-                ['Contact', '/contact'],
                 ['Partner Program', '/partners'],
+                ['Contact', '/contact'],
             ]],
         ],
         'cta' => ['About Paynancial', '/about'],
@@ -132,12 +140,6 @@ $footer_groups = [
         </button>
       </h3>
       <div class="ft-panel" id="<?= e($panelId) ?>">
-        <?php if (!empty($group['intro'])): ?>
-        <div class="ft-intro">
-          <?php if (!empty($group['intro_title'])): ?><strong><?= e($group['intro_title']) ?></strong><?php endif; ?>
-          <p><?= e($group['intro']) ?></p>
-        </div>
-        <?php endif; ?>
         <?php foreach ($group['blocks'] as $block): [$label, $links] = $block; $cls = $block[2] ?? ''; ?>
         <div class="ft-block <?= e($cls) ?>">
           <?php if ($label): ?><p class="ft-block-label"><?php if ($cls === 'is-trust'): ?><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><?php endif; ?><?= e($label) ?></p><?php endif; ?>
@@ -149,7 +151,9 @@ $footer_groups = [
         </div>
         <?php endforeach; ?>
         <?php if (!empty($group['cta'])): ?>
-        <a class="ft-cta" href="<?= e($group['cta'][1]) ?>"><?= e($group['cta'][0]) ?> <span aria-hidden="true">→</span></a>
+        <div class="ft-cta-row">
+          <a class="ft-cta" href="<?= e($group['cta'][1]) ?>"><?= e($group['cta'][0]) ?> <span aria-hidden="true">→</span></a>
+        </div>
         <?php endif; ?>
       </div>
     </div>

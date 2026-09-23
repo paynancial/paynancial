@@ -289,12 +289,12 @@
   });
 
   /* ---------------------------------------------------------------
-     Footer groups — accordions below 720px, always open above.
+     Footer groups — accordions at 767px and below, always open above.
      Without JS every group simply stays expanded.
      --------------------------------------------------------------- */
   var footer = document.querySelector('.ft');
   if (footer) {
-    var ftQuery = window.matchMedia('(max-width: 719px)');
+    var ftQuery = window.matchMedia('(max-width: 767px)');
     var ftGroups = footer.querySelectorAll('[data-ft-group]');
     var setGroup = function (group, open) {
       group.classList.toggle('is-open', open);
