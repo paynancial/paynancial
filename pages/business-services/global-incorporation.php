@@ -51,7 +51,7 @@ $featured = array_slice($popular, 0, 8, true);
       </div>
       <div class="bs-hero-links">
         <a class="bs-text-link" href="<?= e(bs_jurisdiction_url()) ?>">Find a Jurisdiction <?= bs_icon('arrow') ?></a>
-        <a class="bs-text-link" href="<?= e(bs_enquiry_url('expert')) ?>">Talk to an Expert <?= bs_icon('arrow') ?></a>
+        <a class="bs-text-link" href="<?= e(bs_enquiry_url('expert')) ?>"><?= e(cta_label()) ?> <?= bs_icon('arrow') ?></a>
       </div>
     </div>
     <?php include __DIR__ . '/_hero-map.php'; ?>
@@ -175,7 +175,7 @@ $featured = array_slice($popular, 0, 8, true);
 <?php bs_cta_band(
     'Planning to incorporate internationally?',
     'Tell us where you want to operate and our team will outline the structure, documents and next steps.',
-    'Talk to an Expert', bs_enquiry_url('expert'),
+    cta_label(), bs_enquiry_url('expert'),
     'Find a Jurisdiction', bs_jurisdiction_url()
 ); ?>
 

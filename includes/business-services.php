@@ -6,9 +6,8 @@
  * page, jurisdiction directory and jurisdiction pages all render from this
  * data, so adding a service or jurisdiction here publishes its page.
  *
- * STANDALONE: these pages are reachable by direct URL and link to each
- * other contextually, but are deliberately NOT linked from the global
- * header, mega-menus, footer or sitemap until that is approved.
+ * Linked from the primary header (Business Services mega-menu) and from
+ * approved contextual links. Not yet in the footer or sitemap.
  *
  * Content policy (see README "Content & claims policy"): no fees,
  * government charges, turnaround times, customer counts, country counts,
@@ -71,6 +70,20 @@ function bs_categories(): array
             'icon'     => 'comply',
             'services' => ['roc-compliance', 'annual-compliance', 'company-changes'],
         ],
+    ];
+}
+
+/**
+ * Header mega-menu columns (Business Services). Only services that have a
+ * page are listed; the Protect & Comply column combines trademarks with
+ * compliance.
+ */
+function bs_menu_columns(): array
+{
+    return [
+        ['label' => 'Start a Business',      'items' => ['company-incorporation', 'private-limited-company', 'llp-registration', 'opc-registration', 'partnership-registration']],
+        ['label' => 'Business Registration', 'items' => ['gst-registration', 'msme-registration', 'startup-registration', 'pan-tan-assistance']],
+        ['label' => 'Protect & Comply',      'items' => ['trademark-registration', 'trademark-search', 'roc-compliance', 'annual-compliance', 'company-changes']],
     ];
 }
 

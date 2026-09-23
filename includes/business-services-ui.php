@@ -197,7 +197,7 @@ function bs_other_jurisdiction_card(): void
         <h3>Don't see your preferred jurisdiction?</h3>
         <p>Speak with our team about your specific incorporation requirements.</p>
       </div>
-      <a class="btn btn-outline bs-btn-on-ink" href="<?= e(bs_enquiry_url('jurisdiction-other')) ?>">Talk to an Expert <?= bs_icon('arrow') ?></a>
+      <a class="btn btn-outline bs-btn-on-ink" href="<?= e(bs_enquiry_url('jurisdiction-other')) ?>"><?= e(cta_contexts()['incorporation']['label']) ?> <?= bs_icon('arrow') ?></a>
     </div>
     <?php
 }
@@ -223,8 +223,9 @@ function bs_payments_crosssell(): void
 }
 
 /** Closing CTA band. */
-function bs_cta_band(string $title, string $text, string $primaryLabel, string $primaryHref, string $secondaryLabel = 'Talk to an Expert', string $secondaryHref = ''): void
+function bs_cta_band(string $title, string $text, string $primaryLabel, string $primaryHref, string $secondaryLabel = '', string $secondaryHref = ''): void
 {
+    $secondaryLabel = $secondaryLabel !== '' ? $secondaryLabel : cta_label();
     $secondaryHref = $secondaryHref !== '' ? $secondaryHref : bs_enquiry_url('expert');
     ?>
     <section class="bs-section">
@@ -281,7 +282,7 @@ function bs_why_paynancial(): void
           <span class="eyebrow">Why Paynancial</span>
           <h2 id="bs-why-p-title">Why Choose Paynancial</h2>
           <p>Business services from the team building payment infrastructure for growing businesses — so the company you set up today is ready to transact tomorrow.</p>
-          <a href="<?= e(bs_enquiry_url('expert')) ?>" class="btn btn-outline bs-btn-on-ink">Talk to an Expert <?= bs_icon('arrow') ?></a>
+          <a href="<?= e(bs_enquiry_url('expert')) ?>" class="btn btn-outline bs-btn-on-ink"><?= e(cta_label()) ?> <?= bs_icon('arrow') ?></a>
         </div>
         <ul class="bs-why-list">
           <?php foreach ($why as [$icon, $title, $text]): ?>

@@ -131,7 +131,7 @@ $leaders = [
       <h2>Get in touch</h2>
       <p>Questions for the leadership team or the company at large — reach out and someone will get back to you.</p>
       <div class="hero-actions" style="margin-top:24px;">
-        <a href="/contact" class="btn btn-primary">Contact Us</a>
+        <a href="/contact" class="btn btn-primary"><?= e(cta_label()) ?></a>
       </div>
     </div>
   </div>

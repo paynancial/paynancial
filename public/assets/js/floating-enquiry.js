@@ -32,6 +32,8 @@
       action: action || event,
       page_url: window.location.pathname,
       page_type: root.getAttribute('data-fe-context') || 'default',
+      cta_context: root.getAttribute('data-fe-context') || 'default',
+      cta_label: root.getAttribute('data-fe-cta') || '',
       device_type: isMobile() ? 'mobile' : 'desktop'
     };
     try {
@@ -68,7 +70,7 @@
     if (!isOpen()) return;
     root.classList.remove('is-open');
     trigger.setAttribute('aria-expanded', 'false');
-    trigger.removeAttribute('aria-label');
+    trigger.setAttribute('aria-label', trigger.getAttribute('data-fe-label') || 'Contact options');
     document.documentElement.classList.remove('fe-lock');
     if (reason !== 'navigate') {
       var target = lastFocus && document.body.contains(lastFocus) && lastFocus !== document.body ? lastFocus : trigger;

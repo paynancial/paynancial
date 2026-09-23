@@ -110,7 +110,7 @@ $footer_groups = [
         <a href="/" class="ft-logo" aria-label="Paynancial home"><img src="<?= asset('images/paynancial-logo-dark-bg.png') ?>" alt="Paynancial" width="520" height="118" loading="lazy"></a>
         <p class="ft-statement">Building the financial infrastructure for an AI-native economy.</p>
         <p class="ft-sub">Payments, payouts, billing, reconciliation and financial intelligence — connected through one platform.</p>
-        <a class="ft-sales" href="/contact?intent=sales">Talk to Sales <span aria-hidden="true">→</span></a>
+        <a class="ft-sales" href="/contact?intent=sales"><?= e(cta_label()) ?> <span aria-hidden="true">→</span></a>
       </div>
       <form class="footer-newsletter ft-newsletter" id="newsletter-form" novalidate>
         <?= csrf_field() ?>

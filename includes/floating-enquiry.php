@@ -7,6 +7,7 @@
  * script reveals it, so without JavaScript nothing inert is shown (the
  * contact page remains the no-JS route). Styles: assets/css/floating-enquiry.css.
  * Behaviour: assets/js/floating-enquiry.js (deferred, no dependencies).
+ * Wording comes from the shared page-context CTA system (includes/cta-context.php).
  *
  * Contact details live ONLY in fe_channels(). Defaults are Paynancial's
  * existing published details (header WhatsApp link, MAIL_SALES_TO, contact
@@ -17,6 +18,8 @@
  */
 
 declare(strict_types=1);
+
+require_once __DIR__ . '/cta-context.php';
 
 /** Contact channels — the single source of truth for the widget. */
 function fe_channels(): array
@@ -46,77 +49,6 @@ function fe_format_phone(string $e164): string
 }
 
 /**
- * Page-context copy, matched by path prefix (first match wins, so list
- * more specific prefixes first). 'hover' is the phrase revealed on the
- * trigger on desktop hover; 'subject' pre-fills email; 'message'
- * pre-fills WhatsApp.
- */
-function fe_contexts(): array
-{
-    return [
-        ['prefix' => '/business-services/jurisdictions/', 'key' => 'jurisdiction',
-         'eyebrow' => 'International Incorporation', 'title' => 'Discuss your incorporation requirements',
-         'hover' => 'Talk to an Expert', 'subject' => 'Paynancial Business Services — International Incorporation Enquiry',
-         'message' => "Hi Paynancial, I'd like to discuss incorporating a company abroad."],
-        ['prefix' => '/business-services/global-incorporation', 'key' => 'incorporation',
-         'eyebrow' => 'Global Incorporation', 'title' => 'Need help choosing a jurisdiction?',
-         'hover' => 'Talk to an Expert', 'subject' => 'Paynancial Business Services — International Incorporation Enquiry',
-         'message' => "Hi Paynancial, I'd like help choosing a jurisdiction to incorporate in."],
-        ['prefix' => '/business-services/jurisdictions', 'key' => 'incorporation',
-         'eyebrow' => 'Global Incorporation', 'title' => 'Need help choosing a jurisdiction?',
-         'hover' => 'Talk to an Expert', 'subject' => 'Paynancial Business Services — International Incorporation Enquiry',
-         'message' => "Hi Paynancial, I'd like help choosing a jurisdiction to incorporate in."],
-        ['prefix' => '/business-services/company-incorporation', 'key' => 'incorporation',
-         'eyebrow' => 'Start Your Incorporation', 'title' => 'Need help choosing a structure or jurisdiction?',
-         'hover' => 'Talk to an Expert', 'subject' => 'Paynancial Business Services — Company Incorporation Enquiry',
-         'message' => "Hi Paynancial, I'd like to start a company incorporation."],
-        ['prefix' => '/business-services', 'key' => 'business-services',
-         'eyebrow' => 'Talk to an Incorporation Expert', 'title' => 'Need help setting up your business?',
-         'hover' => 'Talk to an Expert', 'subject' => 'Paynancial Business Services Enquiry',
-         'message' => "Hi Paynancial, I'd like help with business services."],
-        ['prefix' => '/developers', 'key' => 'developers',
-         'eyebrow' => 'Talk to Technical Sales', 'title' => 'Planning an integration?',
-         'hover' => 'Talk to Technical Sales', 'subject' => 'Paynancial Technical Sales Enquiry',
-         'message' => "Hi Paynancial, I'd like to talk to technical sales about an integration."],
-        ['prefix' => '/pricing', 'key' => 'pricing',
-         'eyebrow' => 'Talk to Sales', 'title' => 'Need help choosing the right solution?',
-         'hover' => 'Talk to Sales', 'subject' => 'Paynancial Sales Enquiry — Pricing',
-         'message' => "Hi Paynancial, I'd like to talk to sales about pricing."],
-        ['prefix' => '/products', 'key' => 'payments',
-         'eyebrow' => 'Talk to Payment Experts', 'title' => 'Need help choosing the right solution?',
-         'hover' => 'Talk to Payment Experts', 'subject' => 'Paynancial Sales Enquiry — Payments',
-         'message' => "Hi Paynancial, I'd like to talk to sales about your payment products."],
-        ['prefix' => '/solutions', 'key' => 'payments',
-         'eyebrow' => 'Talk to Payment Experts', 'title' => 'Need help choosing the right solution?',
-         'hover' => 'Talk to Payment Experts', 'subject' => 'Paynancial Sales Enquiry — Payments',
-         'message' => "Hi Paynancial, I'd like to talk to sales about your payment solutions."],
-    ];
-}
-
-function fe_default_context(): array
-{
-    return [
-        'key' => 'default', 'eyebrow' => 'Talk to Paynancial Sales', 'title' => 'How can we help?',
-        'hover' => 'Talk to Sales', 'subject' => 'Paynancial Sales Enquiry',
-        'message' => "Hi Paynancial, I'd like to talk to sales.",
-    ];
-}
-
-/** Resolve the context for a request path. */
-function fe_context_for(string $path): array
-{
-    $path = '/' . trim($path, '/');
-    foreach (fe_contexts() as $ctx) {
-        $p = rtrim($ctx['prefix'], '/');
-        $needsChild = str_ends_with($ctx['prefix'], '/');
-        if ($needsChild ? str_starts_with($path, $p . '/') : ($path === $p || str_starts_with($path, $p . '/'))) {
-            return $ctx;
-        }
-    }
-    return fe_default_context();
-}
-
-/**
  * Pages where the widget stays out of the way: the contact page already
  * lists every channel; auth and payment-link pages are focused tasks.
  */
@@ -138,7 +70,7 @@ function fe_render(string $requestUri): void
     if (fe_is_excluded($path)) {
         return;
     }
-    $ctx = fe_context_for($path);
+    $ctx = cta_context($path);
     $ch = fe_channels();
 
     $waHref    = 'https://wa.me/' . $ch['whatsapp']['number'] . '?text=' . rawurlencode($ctx['message']);
@@ -152,11 +84,10 @@ function fe_render(string $requestUri): void
     $mailIcon = $icon('<rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>');
     $phoneIcon = $icon('<path d="M20.5 16.6v2.6a1.8 1.8 0 0 1-2 1.8 17.7 17.7 0 0 1-7.7-2.7 17.4 17.4 0 0 1-5.4-5.4A17.7 17.7 0 0 1 2.7 5.2a1.8 1.8 0 0 1 1.8-2h2.6a1.8 1.8 0 0 1 1.8 1.5c.1.8.3 1.7.6 2.5a1.8 1.8 0 0 1-.4 1.9L8 10.2a14.4 14.4 0 0 0 5.4 5.4l1.1-1.1a1.8 1.8 0 0 1 1.9-.4c.8.3 1.7.5 2.5.6a1.8 1.8 0 0 1 1.6 1.9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>');
     ?>
-<div class="fe" data-fe hidden data-fe-context="<?= e($ctx['key']) ?>">
-  <button type="button" class="fe-trigger" data-fe-trigger aria-expanded="false" aria-controls="fe-panel" aria-haspopup="dialog">
+<div class="fe" data-fe hidden data-fe-context="<?= e($ctx['key']) ?>" data-fe-cta="<?= e($ctx['label']) ?>">
+  <button type="button" class="fe-trigger" data-fe-trigger aria-expanded="false" aria-controls="fe-panel" aria-haspopup="dialog" aria-label="<?= e($ctx['label']) ?>: contact options" data-fe-label="<?= e($ctx['label']) ?>: contact options">
     <span class="fe-dot" aria-hidden="true"></span>
-    <span class="fe-trigger-label" data-fe-label>Enquire</span>
-    <span class="fe-trigger-more" aria-hidden="true"><?= e($ctx['hover']) ?></span>
+    <span class="fe-trigger-label" aria-hidden="true"><span class="fe-label-full"><?= e($ctx['label']) ?></span><span class="fe-label-short">Enquire</span></span>
     <span class="fe-trigger-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="14" height="14" focusable="false"><path class="fe-chev" d="m7 14 5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </span>
@@ -167,9 +98,9 @@ function fe_render(string $requestUri): void
   <div class="fe-panel" id="fe-panel" role="dialog" aria-modal="false" aria-labelledby="fe-title" aria-describedby="fe-desc" data-fe-panel>
     <span class="fe-grabber" aria-hidden="true"></span>
     <div class="fe-head">
-      <span class="fe-eyebrow"><?= e($ctx['eyebrow']) ?></span>
-      <h2 class="fe-title" id="fe-title"><?= e($ctx['title']) ?></h2>
-      <p class="fe-desc" id="fe-desc">Reach the Paynancial team on the channel that suits you.</p>
+      <span class="fe-eyebrow"><?= e($ctx['area']) ?></span>
+      <h2 class="fe-title" id="fe-title"><?= e($ctx['label']) ?></h2>
+      <p class="fe-desc" id="fe-desc"><?= e($ctx['support']) ?></p>
       <button type="button" class="fe-x" data-fe-close aria-label="Close contact options">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>

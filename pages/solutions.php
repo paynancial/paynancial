@@ -50,7 +50,7 @@ $industries = [
           <span class="card-icon">◆</span>
           <h3><?= e($title) ?></h3>
           <p><?= e($desc) ?></p>
-          <span class="card-link"><?= str_starts_with($href, '/solutions/') ? 'Explore this solution' : 'Talk to sales' ?> →</span>
+          <span class="card-link"><?= str_starts_with($href, '/solutions/') ? 'Explore this solution' : cta_label() ?> →</span>
         </a>
       <?php endforeach; ?>
     </div>
@@ -71,7 +71,7 @@ $industries = [
           <h3><?= e($title) ?></h3>
           <p><?= e($desc) ?></p>
           <p class="text-muted" style="margin-top:10px;font-size:0.85rem;"><?= e($useCase) ?></p>
-          <a class="card-link" href="/contact?intent=sales&solution=<?= e($slug) ?>">Talk to sales →</a>
+          <a class="card-link" href="/contact?intent=sales&solution=<?= e($slug) ?>"><?= e($slug === 'enterprise' ? cta_contexts()['default']['label'] : cta_label()) ?> →</a>
         </div>
       <?php endforeach; ?>
     </div>
@@ -122,7 +122,7 @@ $industries = [
     <div class="cta-band reveal">
       <h2>Not sure which solution fits your business?</h2>
       <div class="hero-actions" style="justify-content:center;margin-top:24px;">
-        <a href="/contact?intent=sales" class="btn btn-primary">Talk to Sales</a>
+        <a href="/contact?intent=sales" class="btn btn-primary"><?= e(cta_label()) ?></a>
       </div>
     </div>
   </div>

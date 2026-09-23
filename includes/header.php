@@ -4,6 +4,9 @@
  * Expects $current_path to be set by the front controller (optional).
  */
 $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
+require_once __DIR__ . '/business-services.php';
+$bs_services = bs_services();
+$bs_is_current = str_starts_with((string) $current_path, '/business-services');
 ?>
 <a class="sr-only" href="#main-content">Skip to main content</a>
 <div class="utility-bar">
@@ -123,6 +126,33 @@ $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
           </div>
         </li>
         <li class="nav-item">
+          <button class="nav-link<?= $bs_is_current ? ' is-current' : '' ?>" aria-haspopup="true" aria-expanded="false" aria-controls="mega-business-services">Business Services <i class="chev" aria-hidden="true"></i></button>
+          <div class="mega-menu mega-menu-bs" id="mega-business-services">
+            <div class="mega-bs-head">
+              <span class="mega-bs-title">Business Services</span>
+              <a class="mega-bs-overview" href="/business-services">Explore all services <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="mega-bs-cols">
+              <?php foreach (bs_menu_columns() as $col): ?>
+              <div class="mega-bs-col">
+                <div class="mega-col-title"><?= e($col['label']) ?></div>
+                <?php foreach ($col['items'] as $slug): $svc = $bs_services[$slug]; ?>
+                <a class="mega-link mega-link-plain<?= !empty($svc['popular']) ? ' mega-link-lead' : '' ?>" href="/business-services/<?= e($slug) ?>"><strong><?= e($svc['short']) ?><?php if (!empty($svc['popular'])): ?> <em class="mega-badge">Popular</em><?php endif; ?></strong></a>
+                <?php endforeach; ?>
+              </div>
+              <?php endforeach; ?>
+            </div>
+            <div class="mega-bs-feature">
+              <span class="mega-bs-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+              <div class="mega-bs-feature-copy">
+                <strong>Start your business</strong>
+                <span>Company incorporation, registrations and compliance support.</span>
+              </div>
+              <a class="mega-bs-cta" href="/business-services/company-incorporation">Get Started <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
           <button class="nav-link" aria-haspopup="true" aria-expanded="false">Developers <i class="chev" aria-hidden="true"></i></button>
           <div class="mega-menu">
             <div>
@@ -140,7 +170,6 @@ $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
           </div>
         </li>
         <li class="nav-item"><a class="nav-link" href="/pricing">Pricing</a></li>
-        <li class="nav-item"><a class="nav-link" href="/partners">Partners</a></li>
         <li class="nav-item">
           <button class="nav-link" aria-haspopup="true" aria-expanded="false">Resources <i class="chev" aria-hidden="true"></i></button>
           <div class="mega-menu">
@@ -276,6 +305,22 @@ $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
       <li><a href="/solutions#enterprise">Enterprise</a></li>
     </ul>
   </details>
+  <details<?= $bs_is_current ? ' open' : '' ?>>
+    <summary>Business Services <i class="chev" aria-hidden="true"></i></summary>
+    <div class="mobile-subnav">
+      <a class="mobile-subnav-overview" href="/business-services">Business Services overview <span aria-hidden="true">&rarr;</span></a>
+      <?php foreach (bs_menu_columns() as $col): ?>
+      <details class="mobile-subgroup">
+        <summary><?= e($col['label']) ?> <i class="chev" aria-hidden="true"></i></summary>
+        <ul>
+          <?php foreach ($col['items'] as $slug): ?>
+          <li><a href="/business-services/<?= e($slug) ?>"><?= e($bs_services[$slug]['short']) ?></a></li>
+          <?php endforeach; ?>
+        </ul>
+      </details>
+      <?php endforeach; ?>
+    </div>
+  </details>
   <details>
     <summary>Developers <i class="chev" aria-hidden="true"></i></summary>
     <ul>
@@ -287,6 +332,7 @@ $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
       <li><a href="/developers#webhooks">Webhooks</a></li>
     </ul>
   </details>
+  <a href="/pricing" class="nav-link">Pricing</a>
   <details>
     <summary>Resources <i class="chev" aria-hidden="true"></i></summary>
     <ul>
@@ -309,7 +355,6 @@ $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
       <li><a href="/partners">Partners</a></li>
     </ul>
   </details>
-  <a href="/pricing" class="nav-link" style="font-weight:700;">Pricing</a>
   <div class="mobile-nav-actions">
     <a href="/contact" class="btn-contact btn-contact-outline">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>

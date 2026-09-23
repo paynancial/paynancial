@@ -55,7 +55,7 @@ $sections = $isIncorporation
           : e($s['summary']) ?></p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="<?= e($primaryHref) ?>"><?= e($primaryLabel) ?> <?= bs_icon('arrow') ?></a>
-        <a class="btn btn-outline" href="<?= e($expertHref) ?>">Talk to an Expert</a>
+        <a class="btn btn-outline" href="<?= e($expertHref) ?>"><?= e(cta_label()) ?></a>
       </div>
       <?php if ($isIncorporation): ?>
       <ul class="bs-trust-row">
@@ -258,5 +258,5 @@ $sections = $isIncorporation
     $isIncorporation ? 'Ready to Start Your Business?' : 'Get started with ' . $s['short'],
     'Share your requirements and we will come back with the right checklist, a written quote and next steps.',
     $primaryLabel, $primaryHref,
-    'Talk to an Expert', $expertHref
+    cta_label(), $expertHref
 ); ?>

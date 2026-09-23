@@ -317,7 +317,7 @@ $leaders = [
     <p>Whether you are taking your first online payment, running payouts at scale or wiring an agent into your finance stack — start with a conversation.</p>
     <div class="ab-hero-actions">
       <a class="btn btn-primary" href="/products">Explore Paynancial →</a>
-      <a class="btn btn-outline" href="/contact?intent=sales">Talk to Sales →</a>
+      <a class="btn btn-outline" href="/contact"><?= e(cta_label()) ?> →</a>
     </div>
     <p class="ab-final-links"><a href="/careers">Careers</a><span aria-hidden="true">·</span><a href="/contact">Contact</a><span aria-hidden="true">·</span><a href="/solutions">Solutions</a></p>
   </div>

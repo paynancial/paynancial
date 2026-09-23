@@ -27,7 +27,7 @@ $faqs = [
       <span class="card-icon">◆</span>
       <h3>Sales</h3>
       <p>Talk to our team about accepting payments with Paynancial.</p>
-      <a class="card-link" href="/contact?intent=sales">Contact Sales →</a>
+      <a class="card-link" href="/contact?intent=sales"><?= e(cta_label()) ?> →</a>
     </div>
     <div class="card reveal">
       <span class="card-icon">◆</span>

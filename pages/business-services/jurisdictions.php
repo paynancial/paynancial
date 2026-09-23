@@ -120,7 +120,7 @@ $page_meta = bs_page_meta(
       <span class="bs-empty-icon"><?= bs_icon('pin') ?></span>
       <h3>No listed jurisdiction matches your search yet</h3>
       <p>Requirements and availability vary. Tell us where you want to incorporate and our team will get back to you.</p>
-      <a class="btn btn-primary" href="<?= e(bs_enquiry_url('jurisdiction-other')) ?>">Talk to an Expert <?= bs_icon('arrow') ?></a>
+      <a class="btn btn-primary" href="<?= e(bs_enquiry_url('jurisdiction-other')) ?>"><?= e(cta_label()) ?> <?= bs_icon('arrow') ?></a>
     </div>
 
     <?php bs_other_jurisdiction_card(); ?>
@@ -140,7 +140,7 @@ $page_meta = bs_page_meta(
 <?php bs_cta_band(
     'Not sure which jurisdiction is right?',
     'Speak with our team about your business, markets and plans before you decide.',
-    'Talk to an Expert', bs_enquiry_url('expert'),
+    cta_label(), bs_enquiry_url('expert'),
     'Explore Global Incorporation', bs_url('global-incorporation')
 ); ?>
 

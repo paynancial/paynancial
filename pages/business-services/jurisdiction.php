@@ -66,7 +66,7 @@ $considerations = $j['considerations'] ?? [
           ? 'Paynancial supports incorporation in ' . e($name) . ' with expert guidance, structured documentation and end-to-end coordination.'
           : 'Planning to incorporate in ' . e($name) . '? Share your requirements and our team will confirm how we can help.' ?></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="<?= e($enquiry) ?>">Talk to an Expert <?= bs_icon('arrow') ?></a>
+        <a class="btn btn-primary" href="<?= e($enquiry) ?>"><?= e(cta_label()) ?> <?= bs_icon('arrow') ?></a>
         <a class="btn btn-outline" href="<?= e(bs_enquiry_url('quote')) ?>">Get a Quote</a>
       </div>
     </div>
@@ -128,7 +128,7 @@ $considerations = $j['considerations'] ?? [
           <h3>Structures are confirmed with you</h3>
           <p>The right structure in <?= e($name) ?> depends on your business activity, ownership and where you plan to operate. During your consultation we outline the options that fit, and the obligations that come with each.</p>
         </div>
-        <a class="bs-text-link" href="<?= e($enquiry) ?>">Talk to an Expert <?= bs_icon('arrow') ?></a>
+        <a class="bs-text-link" href="<?= e($enquiry) ?>"><?= e(cta_label()) ?> <?= bs_icon('arrow') ?></a>
       </div>
     <?php endif; ?>
   </div>
@@ -263,6 +263,6 @@ $considerations = $j['considerations'] ?? [
 <?php bs_cta_band(
     "Planning to incorporate in {$name}?",
     'Tell us about your business and our team will outline the structure, documents and next steps.',
-    'Talk to an Expert', $enquiry,
+    cta_label(), $enquiry,
     'Get a Quote', bs_enquiry_url('quote')
 ); ?>

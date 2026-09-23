@@ -6,8 +6,8 @@
  * Lists every indexable public page, with <lastmod> taken from the page
  * template's modification time. Deliberately excluded: utility pages
  * (login, password reset, signup verification), payment-link pages,
- * dashboards, and the standalone /business-services pages (pending
- * approval for sitemap inclusion; jurisdiction pages are noindex).
+ * dashboards, and the /business-services pages (linked from the header;
+ * sitemap inclusion pending approval; jurisdiction pages are noindex).
  */
 declare(strict_types=1);
 require_once __DIR__ . '/../includes/bootstrap.php';

@@ -8,6 +8,12 @@ on every page as part of the footer redesign.
 The live site could not be reached from the audit environment, so HTTPS/host
 redirects (http→https, www→apex) still need verifying on production.
 
+> **Update (header change, later commit):** Business Services was added to the
+> primary header and "Partners" removed from it (Partner Program remains under
+> the Company menu and `/partners` still returns 200). This does not change any
+> status code, canonical or robots value in the table below. Live HTTPS/www
+> redirect checks remain **deferred — not yet verified** against the live domain.
+
 ## What P0 changed
 
 | Change | URLs affected | Why |

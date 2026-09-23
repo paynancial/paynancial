@@ -173,7 +173,7 @@ $page_meta = [
       <p class="text-muted" style="margin-top:8px;"><?= e($p['who_for']) ?></p>
       <div class="hero-actions" style="margin-top:24px;">
         <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-primary">Get Started</a>
-        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-outline">Talk to Sales</a>
+        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-outline"><?= e(cta_label()) ?></a>
       </div>
     </div>
   </div>
@@ -295,7 +295,7 @@ $page_meta = [
       <h2>Ready to start with <?= e($p['eyebrow']) ?>?</h2>
       <div class="hero-actions" style="justify-content:center;margin-top:24px;">
         <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-primary">Get Started</a>
-        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-outline">Talk to Sales</a>
+        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-outline"><?= e(cta_label()) ?></a>
       </div>
     </div>
   </div>

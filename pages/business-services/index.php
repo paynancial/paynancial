@@ -37,7 +37,7 @@ $popular = bs_popular_jurisdictions();
       <p class="lead">Company incorporation, registrations and compliance services designed for entrepreneurs and growing businesses — with expert guidance, a transparent process and end-to-end support from Paynancial.</p>
       <div class="hero-actions">
         <a href="<?= e(bs_url('company-incorporation')) ?>" class="btn btn-primary">Get Started Now <?= bs_icon('arrow') ?></a>
-        <a href="<?= e(bs_enquiry_url('expert')) ?>" class="btn btn-outline">Talk to an Expert</a>
+        <a href="<?= e(bs_enquiry_url('expert')) ?>" class="btn btn-outline"><?= e(cta_label()) ?></a>
       </div>
       <ul class="bs-hero-points">
         <li><?= bs_icon('check') ?>Expert Guidance</li>
