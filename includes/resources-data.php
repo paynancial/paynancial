@@ -32,8 +32,7 @@ function res_faq_directory(): array
         $productPages[] = [$c['name'], cat_url($slug), 'faq', $q('category:' . $slug)];
     }
     foreach ($products as $slug => $name) {
-        $capability = in_array($slug, ['refunds', 'settlements', 'reconciliation', 'upi-payments'], true);
-        $productPages[] = [$name, '/products/' . $slug, $capability ? 'faq' : 'faqs', $q('product:' . $slug)];
+        $productPages[] = [$name, '/products/' . $slug, 'faq', $q('product:' . $slug)];
     }
     $industryPages = [];
     foreach (sol_industries() as $slug => $ind) {

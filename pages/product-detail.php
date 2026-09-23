@@ -12,6 +12,12 @@ $products = [
         'headline' => 'Accept every way your customers want to pay.',
         'subhead'  => 'One integration for cards, UPI, netbanking and wallets — with clear, reconciled settlement reporting behind every transaction.',
         'who_for'  => 'For businesses taking payments on a website, app, or custom checkout.',
+        'title'    => 'Payment Gateway | Accept Cards, UPI, Netbanking & Wallets | Paynancial',
+        'description' => 'Accept cards, UPI, netbanking and wallets through one Paynancial integration — hosted or custom checkout, real-time status, full or partial refunds and settlement reporting behind every transaction.',
+        'answer'   => 'The Paynancial Payment Gateway accepts cards, UPI, netbanking and wallets through a single integration, on a hosted checkout page or your own custom checkout, returns a real-time status for every transaction and ties each one to a settlement record you can reconcile against.',
+        'step_titles' => ['Customer pays', 'Real-time status', 'Queued for settlement', 'Reconciled'],
+        'api'      => 'payments',
+        'related'  => ['upi-payments', 'refunds', 'settlements', 'category:accept-and-collect'],
         'features' => [
             ['Multiple payment methods', 'Cards, UPI, netbanking and wallets through a single API and checkout.'],
             ['Hosted or custom checkout', 'Use our hosted checkout page or build your own UI on top of the API.'],
@@ -37,6 +43,12 @@ $products = [
         'headline' => 'Get paid without writing a line of code.',
         'subhead'  => 'Create a secure, shareable payment link in seconds and send it over email, chat, or SMS — no website required.',
         'who_for'  => 'For businesses that need to collect a one-off or occasional payment without building a checkout.',
+        'title'    => 'Payment Links | Get Paid Without a Website | Paynancial',
+        'description' => 'Create a secure, shareable Paynancial payment link in under a minute — fixed or open amount, expiry date, branded payment page — and send it by email, WhatsApp, SMS or on an invoice.',
+        'answer'   => 'Paynancial Payment Links let you create a secure, shareable link from the dashboard in under a minute, with a fixed or open amount and an optional expiry date, and send it by email, WhatsApp, SMS or on an invoice — no website or checkout needed.',
+        'step_titles' => ['Create the link', 'Share it', 'Customer pays', 'See it reflected'],
+        'api'      => 'payment_links',
+        'related'  => ['product:payment-gateway', 'reconciliation', 'category:accept-and-collect', 'product:payment-analytics'],
         'features' => [
             ['No code required', 'Generate a link from the dashboard in under a minute.'],
             ['Fixed or open amount', 'Set a fixed price, or let the customer enter the amount they owe.'],
@@ -62,6 +74,12 @@ $products = [
         'headline' => 'Automate recurring and bulk collections.',
         'subhead'  => 'Collect subscription payments, instalments, or bulk dues on schedule, with reconciliation built into every cycle.',
         'who_for'  => 'For businesses collecting recurring fees, instalments, or payments from many customers at once.',
+        'title'    => 'Smart Collections | Recurring & Bulk Payment Collection | Paynancial',
+        'description' => 'Automate recurring subscription, instalment and bulk collections with Paynancial — scheduled collection, retries for failed attempts, customer notifications and automatic reconciliation.',
+        'answer'   => 'Paynancial Payment Collection (Smart Collections) collects subscription payments, instalments and bulk dues on a schedule, retries failed attempts on a defined schedule, keeps customers informed, and reconciles every collection against the customer and cycle it belongs to.',
+        'step_titles' => ['Set the schedule', 'Collection runs', 'Results recorded', 'Reconciled report'],
+        'api'      => 'collections',
+        'related'  => ['reconciliation', 'category:accept-and-collect', 'product:payment-analytics', 'product:payment-links'],
         'features' => [
             ['Recurring collection', 'Set up a schedule for subscription or instalment payments.'],
             ['Bulk collection', 'Collect from a batch of customers in a single run.'],
@@ -87,6 +105,12 @@ $products = [
         'headline' => 'Send money to vendors, employees and partners.',
         'subhead'  => 'Move funds out to bank accounts and UPI IDs directly from your dashboard or API, with a clear record of every payout.',
         'who_for'  => 'For businesses paying vendors, staff, freelancers, or channel partners.',
+        'title'    => 'Payouts | Send Money to Bank Accounts & UPI IDs | Paynancial',
+        'description' => 'Send single or bulk payouts to bank accounts and UPI IDs with Paynancial — from the dashboard or API, with saved beneficiaries, status tracking and clear failure reasons.',
+        'answer'   => 'Paynancial Payouts sends money to bank accounts and UPI IDs — one payout at a time or a whole batch — from the dashboard or the API, with saved beneficiaries, status tracking from initiated to completed, and clear reasons when a payout fails.',
+        'step_titles' => ['Choose the beneficiary', 'Send', 'Processed', 'Recorded'],
+        'api'      => 'payouts',
+        'related'  => ['upi-payments', 'category:pay-and-move-money', 'settlements', 'product:payment-analytics'],
         'features' => [
             ['Bank & UPI payouts', 'Send funds to a bank account or UPI ID.'],
             ['Single or bulk payouts', 'Pay one recipient or an entire batch in one action.'],
@@ -112,6 +136,12 @@ $products = [
         'headline' => 'Understand every transaction, not just the total.',
         'subhead'  => 'Dashboards and exportable reports covering performance, settlements, and reconciliation — so your finance team spends less time chasing numbers.',
         'who_for'  => 'For finance and operations teams who need visibility into payment performance without building it themselves.',
+        'title'    => 'Payment Analytics | Dashboards, Settlements & Reports | Paynancial',
+        'description' => 'Paynancial Payment Analytics: transaction dashboards by method, status and period, settlement visibility, reconciliation views, refund tracking, and exportable or scheduled reports.',
+        'answer'   => 'Paynancial Payment Analytics records every transaction, settlement and refund as it happens and organises them into dashboards you can filter by method, status and date — with settlement visibility, reconciliation views, refund tracking and reports you can export or schedule.',
+        'step_titles' => ['Recorded', 'Organised', 'Reported', 'Reconciled'],
+        'api'      => 'reports',
+        'related'  => ['reconciliation', 'settlements', 'refunds', 'category:financial-operations'],
         'features' => [
             ['Transaction dashboards', 'Filter and break down transactions by method, status, and time period.'],
             ['Settlement visibility', 'See what has settled, what is pending, and when it is due.'],
@@ -138,151 +168,114 @@ if (!isset($products[$product_slug])) {
     return;
 }
 
+require_once __DIR__ . '/../includes/standalone-ui.php';
+require_once __DIR__ . '/../includes/developer-docs.php';
+require_once __DIR__ . '/../includes/solutions-data.php';
+require_once __DIR__ . '/../includes/product-capabilities.php';
+require_once __DIR__ . '/../includes/product-categories.php';
+
 $p = $products[$product_slug];
-$solutionLabels = [
-    'ecommerce' => 'E-Commerce', 'travel' => 'Travel', 'healthcare' => 'Healthcare', 'education' => 'Education',
-    'retail' => 'Retail', 'hospitality' => 'Hospitality', 'professional-services' => 'Professional Services', 'enterprise' => 'Enterprise',
-];
-$productOrder = ['payment-gateway', 'payment-links', 'payment-collection', 'payouts', 'payment-analytics'];
+$faqs = $p['faqs'];
+$path = '/products/' . $product_slug;
+$trail = [['Home', '/'], ['Products', '/products'], [$p['eyebrow'], $path]];
+$page_meta = sp_meta([
+    'title'       => $p['title'],
+    'description' => $p['description'],
+    'path'        => $path,
+    'h1'          => $p['headline'],
+    'trail'       => $trail,
+    'faqs'        => $faqs,
+]);
+$resource = dev_resources()[$p['api']];
+$apiAnchor = str_replace('_', '-', $p['api']);
 
-$page_meta = [
-    'title'       => $p['eyebrow'] . ' | Paynancial',
-    'description' => $p['subhead'],
-];
+// Industries that use this product, with the industry page's own example.
+$industries = sol_industries();
+$stem = rtrim($p['eyebrow'], 's');
+$uses = [];
+foreach ($p['related_solutions'] as $legacySlug) {
+    $slug = sol_legacy_anchors()[$legacySlug] ?? $legacySlug;
+    $ind = $industries[$slug];
+    $text = $ind['lead'];
+    foreach ($ind['scenarios'] as [$who, $what]) {
+        if (stripos($what, $stem) !== false) {
+            $text = $who . ': ' . lcfirst($what);
+            break;
+        }
+    }
+    $uses[] = [$ind['name'], $text, sol_url($slug)];
+}
+
+sp_track_view('product_page_view');
+sp_hero([
+    'trail'     => $trail,
+    'eyebrow'   => 'Products · ' . $p['eyebrow'],
+    'h1'        => $p['headline'],
+    'lead'      => $p['subhead'],
+    'primary'   => [cta_label(), '/contact?intent=sales&product=' . $product_slug, 'cta_click'],
+    'secondary' => ['Read the API docs', '/developers/api-reference#' . $apiAnchor, 'api_reference_click'],
+    'values'    => array_slice(array_map(fn ($f) => $f[0], $p['features']), 0, 4),
+    'aside'     => sp_code(dev_resource_code($resource), 'POST ' . $resource['path']),
+]);
 ?>
-<section style="padding-top:56px;">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow"><?= e($p['eyebrow']) ?></span>
-      <h1><?= e($p['headline']) ?></h1>
-      <p class="lead"><?= e($p['subhead']) ?></p>
-      <p class="text-muted" style="margin-top:8px;"><?= e($p['who_for']) ?></p>
-      <div class="hero-actions" style="margin-top:24px;">
-        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-primary">Get Started</a>
-        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-outline"><?= e(cta_label()) ?></a>
+
+<?php sp_band_open('overview'); ?>
+  <div class="sp-split">
+    <?php sp_head('overview', 'Overview', 'What ' . $p['eyebrow'] . ' does.'); ?>
+    <div class="sp-prose reveal">
+      <p><strong><?= e($p['answer']) ?></strong></p>
+      <p><?= e($p['who_for']) ?></p>
+    </div>
+  </div>
+<?php sp_band_close(); ?>
+
+<?php sp_band_open('features', 'ink'); ?>
+  <?php sp_head('features', 'What\'s included', 'Everything ' . $p['eyebrow'] . ' gives you.'); ?>
+  <?php sp_answers($p['features']); ?>
+<?php sp_band_close(); ?>
+
+<?php sp_band_open('how-it-works', 'dim'); ?>
+  <?php sp_head('how-it-works', 'How it works', 'From setup to settlement.'); ?>
+  <?php sp_steps(array_map(null, $p['step_titles'], $p['how_it_works'])); ?>
+<?php sp_band_close(); ?>
+
+<?php sp_band_open('industries'); ?>
+  <?php sp_head('industries', 'Built for your industry', 'Where ' . $p['eyebrow'] . ' is used.', 'Illustrative examples from Paynancial\'s industry pages.'); ?>
+  <?php sp_related($uses); ?>
+<?php sp_band_close(); ?>
+
+<?php sp_band_open('developers', 'dim'); ?>
+  <div class="sp-split sp-split--even">
+    <div>
+      <?php sp_head('developers', 'For developers', 'Call it from your own code.', $resource['does'] . ' The same API powers the dashboard, your systems and any agent working for you.'); ?>
+      <div class="sp-prose reveal">
+        <ul>
+          <li><a class="inline-link" href="/developers/api-reference#<?= e($apiAnchor) ?>">API Reference: <?= e($resource['name']) ?></a></li>
+          <li><a class="inline-link" href="/developers/webhooks">Webhooks</a> — real-time events for payments, payouts, refunds and settlements.</li>
+          <li><a class="inline-link" href="/sandbox">Sandbox</a> — test with no real funds involved.</li>
+        </ul>
       </div>
     </div>
+    <?php sp_table(['Parameter', 'Description'], array_map(fn ($x) => ['<code>' . e($x[0]) . '</code>', $x[1]], $resource['params']), $resource['name'] . ' parameters'); ?>
   </div>
-</section>
+<?php sp_band_close(); ?>
 
-<section class="section-subtle">
-  <div class="container">
-    <div class="section-head reveal">
-      <h2>What's included</h2>
-    </div>
-    <div class="grid grid-3">
-      <?php foreach ($p['features'] as [$title, $desc]): ?>
-        <div class="card reveal">
-          <span class="card-icon"><?= e($p['icon']) ?></span>
-          <h3><?= e($title) ?></h3>
-          <p><?= e($desc) ?></p>
-        </div>
-      <?php endforeach; ?>
-    </div>
+<?php sp_band_open('faq'); ?>
+  <div class="sp-split">
+    <?php sp_head('faq', 'FAQ', $p['eyebrow'] . ' questions.'); ?>
+    <?php sp_faq($faqs); ?>
   </div>
-</section>
+<?php sp_band_close(); ?>
 
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">How it works</span>
-      <h2>From setup to settlement</h2>
-    </div>
-    <div class="journey reveal">
-      <?php foreach ($p['how_it_works'] as $i => $step): ?>
-        <div class="journey-step">
-          <div class="num"><?= $i + 1 ?></div>
-          <strong><?= e($step) ?></strong>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
+<?php sp_band_open('related', 'dim'); ?>
+  <?php sp_head('related', 'Related', 'Works well with.'); ?>
+  <?php sp_related(array_map('pc_related_card', $p['related'])); ?>
+  <?php if ($product_slug === 'payment-gateway'): ?>
+  <?php business_services_crosslink('Need to set up your business first?', 'Paynancial Business Services can help with company incorporation and the registrations a business typically needs before going live with payments.'); ?>
+  <?php endif; ?>
+<?php sp_band_close(); ?>
 
-<section class="section-subtle" id="api-sample">
-  <div class="container">
-    <div style="display:grid;gap:48px;grid-template-columns:1fr;align-items:center;" class="grid-2">
-      <div class="reveal">
-        <span class="eyebrow">For Developers</span>
-        <h2>Call it directly from your own code</h2>
-        <p class="lead">Every product on this page is also a documented API endpoint — build it into your own systems when the dashboard isn't enough.</p>
-        <a href="/developers" class="btn btn-primary" style="margin-top:24px;">Explore API Documentation</a>
-      </div>
-      <div class="code-panel reveal">
-        <div class="code-tabs">
-          <button class="code-tab is-active" data-lang="php">PHP</button>
-          <button class="code-tab" data-lang="curl">cURL</button>
-        </div>
-        <div class="code-body">
-          <button class="copy-btn" type="button">Copy</button>
-          <pre data-code-block="php"><code>$client = new Paynancial\Client('YOUR_API_KEY');
-
-<?= $p['code_php'] ?></code></pre>
-          <pre data-code-block="curl" style="display:none"><code><?= $p['code_curl'] ?></code></pre>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="faqs">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">FAQs</span>
-      <h2>Common questions</h2>
-    </div>
-    <div class="grid grid-2">
-      <?php foreach ($p['faqs'] as [$q, $a]): ?>
-        <div class="card reveal">
-          <h3 style="font-size:1rem;"><?= e($q) ?></h3>
-          <p style="margin-top:8px;"><?= e($a) ?></p>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<section class="section-subtle">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Explore More</span>
-      <h2>Other Paynancial products</h2>
-    </div>
-    <div class="pill-list reveal">
-      <?php foreach ($productOrder as $slug): if ($slug === $product_slug) continue; ?>
-        <a class="pill" href="/products/<?= e($slug) ?>"><?= e($products[$slug]['eyebrow']) ?></a>
-      <?php endforeach; ?>
-    </div>
-    <?php if (!empty($p['related_solutions'])): ?>
-      <div class="section-head reveal" style="margin-top:36px;">
-        <span class="eyebrow">Used By</span>
-        <h2>Common in these industries</h2>
-      </div>
-      <div class="pill-list reveal">
-        <?php foreach ($p['related_solutions'] as $slug): ?>
-          <a class="pill" href="/solutions/<?= e($slug === 'ecommerce' ? 'e-commerce' : $slug) ?>"><?= e($solutionLabels[$slug] ?? $slug) ?></a>
-        <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
-  </div>
-</section>
-
-<?php if ($product_slug === 'payment-gateway'): ?>
-<section style="padding:0 0 8px;border-bottom:none;">
-  <div class="container">
-    <?php business_services_crosslink('Need to set up your business first?', 'Paynancial Business Services can help with company incorporation and the registrations a business typically needs before going live with payments.', '/business-services/company-incorporation'); ?>
-  </div>
-</section>
-<?php endif; ?>
-
-<section>
-  <div class="container">
-    <div class="cta-band reveal">
-      <h2>Ready to start with <?= e($p['eyebrow']) ?>?</h2>
-      <div class="hero-actions" style="justify-content:center;margin-top:24px;">
-        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-primary">Get Started</a>
-        <a href="/contact?intent=sales&product=<?= e($product_slug) ?>" class="btn btn-outline"><?= e(cta_label()) ?></a>
-      </div>
-    </div>
-  </div>
-</section>
+<?php sp_cta('Ready to start with ' . $p['eyebrow'] . '?', 'Tell us how your business takes and moves money, and we will help you get started.', [
+    [cta_label(), '/contact?intent=sales&product=' . $product_slug, 'cta_click'],
+    ['Explore all products', '/products', 'cta_click'],
+]); ?>

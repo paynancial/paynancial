@@ -7,7 +7,7 @@
  * Content rule: every technical fact here was already published on
  * paynancial.com before these pages existed (developers, homepage and
  * product pages): the base URL, basic-auth API keys, sandbox and live
- * keys, the five example resources and their example parameters,
+ * keys, the six example resources and their example parameters,
  * idempotency keys, the three example error codes, webhook event
  * categories and the PHP/JavaScript/Python SDKs. Nothing is added
  * beyond that — no extra endpoints, event names, parameters, limits,
@@ -79,7 +79,7 @@ function dev_resources(): array
             'does'   => 'Refund all or part of an existing payment.',
             'params' => [['payment_id', 'The payment being refunded'], ['amount', 'Amount to refund, in paise']],
             'returns'=> 'A refund object.',
-            'product'=> ['Payment Analytics', '/products/payment-analytics'],
+            'product'=> ['Refunds', '/products/refunds'],
             'php'    => "\$refund = \$client->refunds->create([\n    'payment_id' => 'pay_9F3kd82',\n    'amount'     => 20000,\n]);",
             'js'     => "const refund = await client.refunds.create({\n  payment_id: 'pay_9F3kd82',\n  amount: 20000,\n});",
             'python' => "refund = client.refunds.create(\n    payment_id='pay_9F3kd82',\n    amount=20000,\n)",
@@ -114,6 +114,16 @@ function dev_resources(): array
             'product'=> ['Payment Collection', '/products/payment-collection'],
             'php'    => "\$collection = \$client->collections->create([\n    'customer_id' => 'cust_7Fk21',\n    'amount'      => 150000, // in paise\n    'schedule'    => 'monthly',\n]);\n\necho \$collection->id;",
             'curl'   => "curl " . DEV_API_BASE . "/collections \\\n  -u YOUR_API_KEY: \\\n  -d customer_id=cust_7Fk21 \\\n  -d amount=150000 \\\n  -d schedule=monthly",
+        ],
+        'reports' => [
+            'name'   => 'Transaction reports',
+            'path'   => '/reports/transactions',
+            'does'   => 'Generate a transaction report for a date range, for your finance team or accounting system.',
+            'params' => [['from', 'Start date, e.g. 2026-08-01'], ['to', 'End date, e.g. 2026-08-31'], ['format', 'Report format; the published example uses <code>csv</code>']],
+            'returns'=> 'A report object; the examples read its <code>download_url</code>.',
+            'product'=> ['Payment Analytics', '/products/payment-analytics'],
+            'php'    => "\$report = \$client->reports->transactions([\n    'from'   => '2026-08-01',\n    'to'     => '2026-08-31',\n    'format' => 'csv',\n]);\n\necho \$report->download_url;",
+            'curl'   => "curl " . DEV_API_BASE . "/reports/transactions \\\n  -u YOUR_API_KEY: \\\n  -d from=2026-08-01 \\\n  -d to=2026-08-31 \\\n  -d format=csv",
         ],
     ];
 }

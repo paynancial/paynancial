@@ -202,6 +202,11 @@ function pc_related_card(string $key): array
         'payouts' => ['Payouts', 'Send money to bank accounts and UPI IDs.'],
         'payment-analytics' => ['Payment Analytics', 'Dashboards, settlements, reconciliation and reports.'],
     ];
+    if (str_starts_with($key, 'category:')) {
+        require_once __DIR__ . '/product-categories.php';
+        $c = cat_page(substr($key, 9));
+        return [$c['name'], $c['lead'], cat_url($c['slug'])];
+    }
     if (str_starts_with($key, 'product:')) {
         $slug = substr($key, 8);
         return [$products[$slug][0], $products[$slug][1], '/products/' . $slug];

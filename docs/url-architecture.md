@@ -65,8 +65,8 @@ therefore state **only facts already published on paynancial.com**:
 - the base URL `https://api.paynancial.com/v1`;
 - HTTP basic authentication with the API key as the username;
 - sandbox and live keys, managed from the dashboard;
-- five resources with the parameters used in the published examples:
-  payments, refunds, payouts, payment links and collections;
+- six resources with the parameters used in the published examples:
+  payments, refunds, payouts, payment links, collections and transaction reports;
 - idempotency keys (`Idempotency-Key` header);
 - three example error codes: `insufficient_funds`, `invalid_method`, `rate_limited`;
 - webhook event families: payments, payouts, refunds, settlements;

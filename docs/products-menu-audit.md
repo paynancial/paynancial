@@ -153,4 +153,17 @@ The highest text overlap between any two of the nine new pages is 33%.
 
 **Pre-existing issues outside this change:**
 - The site-wide teal `.btn-primary` (white on `#00a69d`) is about 3:1 contrast, below WCAG AA. Changing it is a brand-wide visual change, so it is left for a decision.
-- The five original product pages (`/products/payment-gateway` and the others) still use the older layout and are 322–335 words. They are candidates for the full-width template.
+- ~~The five original product pages still use the older layout.~~ **Done:** all five now use the full-width template.
+
+  | Page | Words before | Words after |
+  |---|---|---|
+  | `/products/payment-gateway` | ~330 | 774 |
+  | `/products/payment-links` | ~330 | 737 |
+  | `/products/payment-collection` | ~330 | 650 |
+  | `/products/payouts` | ~330 | 671 |
+  | `/products/payment-analytics` | ~330 | 697 |
+
+  - **Content kept:** each page's existing headline, features, how-it-works steps and API example.
+  - **Added:** a direct answer, industry examples from the Solutions pages, API parameters, and four FAQs (up from two).
+  - **API Reference:** the transaction-reports example that was already published on the Payment Analytics page is now listed there too, making six resources.
+  - **Payment Gateway:** it keeps its approved Business Services cross-link.
