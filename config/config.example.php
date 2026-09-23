@@ -50,6 +50,15 @@ define('MAIL_FROM_NAME', 'Paynancial');
 define('MAIL_SALES_TO', 'hello@paynancial.com');
 
 // ---------------------------------------------------------------------
+// Cloudflare Turnstile — "Request a Callback" form in the floating widget.
+// Prefer ENVIRONMENT VARIABLES (TURNSTILE_SITE_KEY, TURNSTILE_SECRET_KEY);
+// constants here are a fallback. Never commit a real secret key.
+// If either key is missing, the callback form is simply not shown.
+// ---------------------------------------------------------------------
+// define('TURNSTILE_SITE_KEY', '');
+// define('TURNSTILE_SECRET_KEY', '');
+
+// ---------------------------------------------------------------------
 // Uploads
 // ---------------------------------------------------------------------
 define('UPLOAD_MAX_BYTES', 5 * 1024 * 1024); // 5MB

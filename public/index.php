@@ -40,6 +40,7 @@ if (($segments[0] ?? '') === 'api') {
         'api/auth/logout'           => __DIR__ . '/../api/auth/logout.php',
         'api/auth/forgot-password'  => __DIR__ . '/../api/auth/forgot-password.php',
         'api/contact/submit'        => __DIR__ . '/../api/contact/submit.php',
+        'api/enquiry/callback'      => __DIR__ . '/../api/enquiry/callback.php',
         'api/newsletter/subscribe'  => __DIR__ . '/../api/newsletter/subscribe.php',
         'api/partner/recommend'     => __DIR__ . '/../api/partner/recommend.php',
         'api/partner/assistant'     => __DIR__ . '/../api/partner/assistant.php',
@@ -108,7 +109,7 @@ $dashboardAreas = [
     'admin'       => ['roles' => ['admin', 'super_admin'],             'dir' => 'admin',    'pages' => [
         'dashboard', 'users', 'transactions', 'cms', 'enquiries',
         'partner-applications', 'products', 'commission-rules', 'customer-applications', 'customer-kyc',
-        'change-requests', 'audit-logs', 'content-governance',
+        'change-requests', 'audit-logs', 'content-governance', 'anti-spam',
     ]],
     'super-admin' => ['roles' => ['super_admin'],                      'dir' => 'admin',    'pages' => ['dashboard']],
 ];

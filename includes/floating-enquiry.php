@@ -1,7 +1,12 @@
 <?php
 /**
  * FloatingEnquiryWidget — persistent, secondary sales-contact channel for
- * the public marketing site (WhatsApp · Email · Call Sales).
+ * the public marketing site (WhatsApp · Email · Call Sales · Request a Callback).
+ *
+ * WhatsApp, Email and Call are direct links: no CAPTCHA, ever. Only the
+ * "Request a Callback" form submits data to Paynancial, so only it is
+ * protected (Cloudflare Turnstile + server-side checks, includes/anti-spam.php).
+ * The form is rendered only when that protection is fully configured.
  *
  * Rendered once from includes/footer.php. The wrapper ships `hidden` and the
  * script reveals it, so without JavaScript nothing inert is shown (the
@@ -20,6 +25,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/cta-context.php';
+require_once __DIR__ . '/anti-spam.php';
 
 /** Contact channels — the single source of truth for the widget. */
 function fe_channels(): array
@@ -82,6 +88,8 @@ function fe_render(string $requestUri): void
     $arrow = $icon('<path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>');
     $waIcon = $icon('<path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/>');
     $mailIcon = $icon('<rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>');
+    $formOn = as_form_available();
+    $callbackIcon = $icon('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.2 3.4c-.5.4-1.3 0-1.3-.6V16H5.5A1.5 1.5 0 0 1 4 14.5v-9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>');
     $phoneIcon = $icon('<path d="M20.5 16.6v2.6a1.8 1.8 0 0 1-2 1.8 17.7 17.7 0 0 1-7.7-2.7 17.4 17.4 0 0 1-5.4-5.4A17.7 17.7 0 0 1 2.7 5.2a1.8 1.8 0 0 1 1.8-2h2.6a1.8 1.8 0 0 1 1.8 1.5c.1.8.3 1.7.6 2.5a1.8 1.8 0 0 1-.4 1.9L8 10.2a14.4 14.4 0 0 0 5.4 5.4l1.1-1.1a1.8 1.8 0 0 1 1.9-.4c.8.3 1.7.5 2.5.6a1.8 1.8 0 0 1 1.6 1.9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>');
     ?>
 <div class="fe" data-fe hidden data-fe-context="<?= e($ctx['key']) ?>" data-fe-cta="<?= e($ctx['label']) ?>">
@@ -128,12 +136,78 @@ function fe_render(string $requestUri): void
           <span class="fe-go"><?= $arrow ?></span>
         </a>
       </li>
+      <?php if ($formOn): ?>
+      <li>
+        <button type="button" class="fe-action" data-fe-open-form aria-label="Request a callback: send an enquiry">
+          <span class="fe-icon"><?= $callbackIcon ?></span>
+          <span class="fe-text"><strong>Request a Callback</strong><span>Send an Enquiry</span></span>
+          <span class="fe-go"><?= $arrow ?></span>
+        </button>
+      </li>
+      <?php endif; ?>
     </ul>
 
     <div class="fe-foot">
       <a class="fe-form-link" href="/contact?intent=sales" data-fe-action="form">Prefer a form? Send a detailed enquiry <?= $arrow ?></a>
       <button type="button" class="fe-close-btn" data-fe-close>Close</button>
     </div>
+
+    <?php if ($formOn): ?>
+    <form class="fe-form" data-fe-form hidden novalidate aria-labelledby="fe-title"
+          data-endpoint="/api/enquiry/callback" data-sitekey="<?= e(as_site_key()) ?>" data-captcha-src="<?= e(AS_TURNSTILE_SCRIPT_URL) ?>">
+      <button type="button" class="fe-back" data-fe-back><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M19 12H5M11 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>All contact options</button>
+      <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+      <input type="hidden" name="context" value="<?= e($ctx['key']) ?>">
+      <div class="fe-field">
+        <label for="fe-name">Name <span aria-hidden="true">*</span></label>
+        <input id="fe-name" name="name" type="text" autocomplete="name" maxlength="100" required aria-describedby="fe-name-err">
+        <span class="fe-err" id="fe-name-err"></span>
+      </div>
+      <div class="fe-field">
+        <label for="fe-email">Business email <span aria-hidden="true">*</span></label>
+        <input id="fe-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="190" required aria-describedby="fe-email-err">
+        <span class="fe-err" id="fe-email-err"></span>
+      </div>
+      <div class="fe-field">
+        <label for="fe-phone">Phone <span aria-hidden="true">*</span></label>
+        <input id="fe-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" required aria-describedby="fe-phone-err">
+        <span class="fe-err" id="fe-phone-err"></span>
+      </div>
+      <div class="fe-field">
+        <label for="fe-company">Company <span class="fe-opt">(optional)</span></label>
+        <input id="fe-company" name="company" type="text" autocomplete="organization" maxlength="150" aria-describedby="fe-company-err">
+        <span class="fe-err" id="fe-company-err"></span>
+      </div>
+      <div class="fe-field">
+        <label for="fe-requirement">Requirement <span class="fe-opt">(optional)</span></label>
+        <select id="fe-requirement" name="requirement" aria-describedby="fe-requirement-err">
+          <option value="">Choose one</option>
+          <?php foreach (as_requirements() as $v => $l): ?><option value="<?= e($v) ?>"><?= e($l) ?></option><?php endforeach; ?>
+        </select>
+        <span class="fe-err" id="fe-requirement-err"></span>
+      </div>
+      <div class="fe-field">
+        <label for="fe-message">Message <span class="fe-opt">(optional)</span></label>
+        <textarea id="fe-message" name="message" rows="3" maxlength="2000" aria-describedby="fe-message-err"></textarea>
+        <span class="fe-err" id="fe-message-err"></span>
+      </div>
+      <div class="fe-hp" aria-hidden="true">
+        <label for="fe-company-website">Company website</label>
+        <input id="fe-company-website" name="company_website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="fe-captcha" data-fe-captcha></div>
+      <p class="fe-status" data-fe-status role="alert" aria-live="assertive"></p>
+      <button type="submit" class="fe-submit" data-fe-submit><span>Send Enquiry</span><?= $arrow ?></button>
+      <p class="fe-note">We use these details only to respond to your enquiry. To prevent abuse, this form is checked by Cloudflare Turnstile. See our <a href="/legal/privacy-policy">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="fe-done" data-fe-done hidden tabindex="-1">
+      <span class="fe-done-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" focusable="false"><path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3>Thank you — we've received your enquiry.</h3>
+      <p>A Paynancial expert will call you back.<span data-fe-ref></span></p>
+      <button type="button" class="fe-submit fe-done-btn" data-fe-close>Done</button>
+    </div>
+    <?php endif; ?>
   </div>
 </div>
 <script src="<?= e(asset('js/floating-enquiry.js')) ?>" defer></script>

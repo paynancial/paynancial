@@ -96,7 +96,7 @@ function gov_review_items(): array
     $pending = ['legal_review' => 'pending', 'regulatory_review' => 'pending', 'reviewer' => null,
         'note' => 'Hold content changes. After review: verified wording, correct regulatory references, applicability, dates, sources and Paynancial-specific obligations.'];
     return [
-        '/legal/privacy-policy'   => ['title' => 'Privacy Policy'] + $pending,
+        '/legal/privacy-policy'   => ['title' => 'Privacy Policy'] + ['note' => $pending['note'] . ' Also add: enquiry-form submissions (floating "Request a Callback") and anti-abuse processing by Cloudflare Turnstile — a short notice is shown on the form meanwhile.'] + $pending,
         '/legal/terms-conditions' => ['title' => 'Terms & Conditions'] + $pending,
     ];
 }

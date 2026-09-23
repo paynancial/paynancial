@@ -48,6 +48,7 @@ function dashboard_nav_items(string $area): array
             ['label' => 'Enquiries', 'page' => 'enquiries'],
             ['label' => 'CMS', 'page' => 'cms'],
             ['label' => 'Content Governance', 'page' => 'content-governance'],
+            ['group' => 'Settings', 'label' => 'Floating Enquiry Anti-Spam', 'page' => 'anti-spam'],
             ['group' => 'Partner Hub', 'label' => 'Partner Applications', 'page' => 'partner-applications'],
             ['group' => 'Partner Hub', 'label' => 'Customer Applications', 'page' => 'customer-applications'],
             ['group' => 'Partner Hub', 'label' => 'Customer eKYC', 'page' => 'customer-kyc'],
