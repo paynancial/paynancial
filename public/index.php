@@ -18,7 +18,11 @@ if ($requestPath !== '/' && str_ends_with($requestPath, '/')
     && in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', ['GET', 'HEAD'], true)
     && !str_starts_with($requestPath, '/api/')) {
     $query = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY);
-    header('Location: ' . rtrim($requestPath, '/') . ($query ? '?' . $query : ''), true, 301);
+    $target = rtrim($requestPath, '/');
+    // Moved pages: go straight to the final URL in one hop.
+    $moved = ['/partners' => '/partner-program'];
+    $target = $moved[$target] ?? $target;
+    header('Location: ' . $target . ($query ? '?' . $query : ''), true, 301);
     exit;
 }
 $path = trim($requestPath, '/');
@@ -169,6 +173,12 @@ if (($segments[0] ?? '') === 'products' && ($segments[1] ?? '') === 'ai-and-inte
     header('Location: /ai-intelligence', true, 301);
     exit;
 }
+// The Partner Program information page moved to /partner-program: one hop, permanent.
+if ($path === 'partners') {
+    header('Location: /partner-program', true, 301);
+    exit;
+}
+
 // Pay & Move Money, Financial Operations and Embedded Finance are top-level pillar pages.
 $pillarSlugs = ['pay-and-move-money', 'financial-operations', 'embedded-finance'];
 if (($segments[0] ?? '') === 'products' && count($segments) === 2 && in_array($segments[1], $pillarSlugs, true)) {
@@ -420,7 +430,7 @@ $publicRoutes = [
     'ai-intelligence'  => 'ai-intelligence',
     'resources'        => 'resources',
     'resources/faqs'   => 'resources-faqs',
-    'partners'         => 'partners',
+    'partner-program'  => 'partner-program',
     'support'          => 'support',
     'contact'          => 'contact',
     'careers'          => 'careers',

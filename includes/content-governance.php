@@ -82,6 +82,7 @@ function gov_content_items(): array
     ];
     $items['/blog'] = $utility('Empty placeholder for the future Paynancial Insights / Regulatory Insights programme; indexable only once it has substantial original content and passes review.');
     $items['/signup'] = $utility('Account sign-up form — a utility page, not an organic landing page.');
+    $items['/partner/register'] = $utility('Partner application form — a conversion endpoint. The search-visible page is /partner-program.');
     return $items;
 }
 

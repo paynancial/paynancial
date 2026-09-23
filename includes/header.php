@@ -200,7 +200,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <div class="mega-col-title">Connect</div>
               <a class="mega-link" href="/contact"><strong>Contact</strong><span>Talk to sales or support</span></a>
               <a class="mega-link" href="/blog"><strong>News / Blog</strong><span>Company updates &amp; announcements</span></a>
-              <a class="mega-link" href="/partners"><strong>Partners</strong><span>Grow with the Paynancial partner program</span></a>
+              <a class="mega-link" href="/partner-program"><strong>Partner Program</strong><span>Referral, reseller and technology partnerships</span></a>
             </div>
           </div>
         </li>
@@ -349,7 +349,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/careers">Careers</a></li>
       <li><a href="/contact">Contact</a></li>
       <li><a href="/blog">News / Blog</a></li>
-      <li><a href="/partners">Partners</a></li>
+      <li><a href="/partner-program">Partner Program</a></li>
     </ul>
   </details>
   <div class="mobile-nav-actions">

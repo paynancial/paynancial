@@ -491,3 +491,12 @@ After the change: 111 URLs, all 200; sitemap 77 URLs (was 93); no noindex page i
 Result: sitemap 75 URLs; no noindex page in the sitemap; no canonical conflicts.
 
 **Also fixed:** the sticky in-page menu on pillar, product, developer and AI pages now sits flush under the header at every width (it previously left a 20–23px gap where page text showed through, and sticky headings slid under it).
+
+## Partner Program decision — implementation status
+
+| Item | Implemented |
+|---|---|
+| `/partner/register` | Live and functional; `noindex, follow`; not in sitemap; explicitly allowed in robots.txt (`Allow: /partner/register` above `Disallow: /partner/`) so the noindex is seen, while partner dashboards stay disallowed |
+| Search-visible Partner Program page | New canonical `/partner-program` (1,288 words, built only from published programme facts: partner types, applicant types, engagement models, 7-step application, onboarding stages, document types, agreements, Partner Hub sections). Indexable and in the sitemap. `/partners` and `/partners/` 301 to it in one hop |
+| Primary CTA | "Apply as a Partner →" → `/partner/register` |
+| Header | No standalone "Partners" item; "Partner Program" stays in the Company menu (desktop and mobile), plus footer and contextual links |

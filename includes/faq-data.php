@@ -43,6 +43,14 @@ function faq_sets(): array
             ['Can I receive the same event more than once?', 'Design for it. Any system that retries delivery can deliver an event twice, so make your handler safe to run more than once for the same event.'],
             ['How do I test webhooks?', 'Test your handler in the Sandbox before going live, and confirm with developer support how events are delivered for sandbox activity.'],
         ],
+        'partner-program' => [
+            ['What is the Paynancial Partner Program?', 'A programme for businesses and individuals who refer, resell or integrate Paynancial. Approved partners work from the Paynancial Partner Hub, where they enroll customers, track approvals, monitor transactions and manage commission.'],
+            ['What types of partner are there?', 'Referral partners refer businesses and earn commission on successful onboarding; reseller partners resell Paynancial products under their own commercial relationship with merchants; technology partners integrate Paynancial into their own software platform or marketplace.'],
+            ['Who can apply?', 'Individuals, companies, agencies, technology partners, resellers, consultants, distributors, enterprise partners and others. The application asks which describes you and how you plan to work with Paynancial.'],
+            ['What documents do I need?', 'It depends on your partner type — the application shows the list once you choose it. Examples include company registration, tax registration, GST / VAT registration, a business licence, authorised signatory ID, address proof and bank details proof.'],
+            ['What happens after I apply?', 'You receive an application ID by email. Your details and documents are reviewed, including a compliance review; once approved, you receive login credentials for the Partner Hub.'],
+            ['How is commission handled?', 'Commission terms are set out in the commission agreement you accept when you apply, and commission is tracked and managed in the Partner Hub.'],
+        ],
         'payment-apis' => [
             ['What are the Paynancial Payment APIs?', 'The money-in resources of the Paynancial REST API: Payments, Payment Links, Collections, Refunds and transaction reports. Every call goes to https://api.paynancial.com/v1 and is authenticated with your API key.'],
             ['Which API should I use to charge a customer?', 'Payments for a checkout in your own website or app, Payment Links to get paid without a checkout, and Collections for recurring or scheduled charges. Refunds give money back, in full or in part.'],

@@ -328,7 +328,7 @@ function pc_pages(): array
             'what' => [
                 'Businesses that sell through channel partners, resellers or referral partners owe them money on a regular cycle. The amounts are usually worked out in a partner or commission system — the payment itself still has to be made, recorded and reconciled.',
                 '<a class="inline-link" href="/products/payouts">Payouts</a> is that payment step. Because it is API-first, the system that calculates what partners are owed can trigger the payouts directly, with idempotency keys so a retried run never pays a partner twice.',
-                'Note: this page is about paying your own partners. Becoming a partner of Paynancial is a different thing — see the <a class="inline-link" href="/partners">Partner Program</a>.',
+                'Note: this page is about paying your own partners. Becoming a partner of Paynancial is a different thing — see the <a class="inline-link" href="/partner-program">Partner Program</a>.',
             ],
             'steps' => [
                 ['Calculate', 'Your partner or commission system works out what each partner is owed.'],
@@ -747,7 +747,7 @@ function pc_pages(): array
             'surfaces' => [
                 ['Payment Gateway', 'Methods, hosted or custom checkout. See <a class="inline-link" href="/products/payment-gateway">Payment Gateway</a>.'],
                 ['Payments API', '<code>POST /payments</code>. See the <a class="inline-link" href="/developers/api-reference#payments">API Reference</a>.'],
-                ['Partner Hub', 'Enrolment, KYC submission and approvals. See <a class="inline-link" href="/partners">Partners</a>.'],
+                ['Partner Hub', 'Enrolment, KYC submission and approvals. See <a class="inline-link" href="/partner-program">Partners</a>.'],
                 ['Webhooks', 'Payment events for your product. See <a class="inline-link" href="/developers/webhooks">Webhooks</a>.'],
             ],
             'india' => [
@@ -1000,7 +1000,7 @@ function pc_pages(): array
             'lead'  => 'White-label payments put your brand, not the payment provider\'s, in front of your customers. Paynancial publishes a custom checkout built on the API and partner programmes; a full white-label offering is something to confirm with our team.',
             'answer' => 'White-label payments present payments under a platform\'s own brand instead of the payment provider\'s. Paynancial does not describe a white-label product on this site. What it does publish: you can build your own checkout UI on top of the API, technology partners embed Paynancial\'s APIs in their own software, and reseller partners resell Paynancial products under their own commercial relationship with merchants.',
             'values' => ['Custom checkout', 'Technology partners', 'Reseller partners', 'Talk to our team'],
-            'secondary' => ['Explore partnerships', '/partners', 'cta_click'],
+            'secondary' => ['Explore partnerships', '/partner-program', 'cta_click'],
             'availability' => 'White-label payments are not described as a Paynancial product. This page covers the published building blocks: custom checkout, and the technology and reseller partner programmes.',
             'confirm' => ['Branding on checkout, receipts and statements', 'Branded dashboards for your merchants', 'Commercial terms for resellers', 'Who carries which responsibilities to merchants'],
             'what' => [
@@ -1025,7 +1025,7 @@ function pc_pages(): array
             ],
             'surfaces' => [
                 ['Payment Gateway', 'Custom checkout. See <a class="inline-link" href="/products/payment-gateway">Payment Gateway</a>.'],
-                ['Partners', 'Technology, reseller and referral programmes. See <a class="inline-link" href="/partners">Partners</a>.'],
+                ['Partners', 'Technology, reseller and referral programmes. See <a class="inline-link" href="/partner-program">Partners</a>.'],
                 ['Reports API', 'Data for your own dashboards. See the <a class="inline-link" href="/developers/api-reference#reports">API Reference</a>.'],
                 ['Our team', 'White-label requirements. <a class="inline-link" href="/contact?intent=sales&amp;product=white-label-payments">Ask about white-label payments</a>.'],
             ],

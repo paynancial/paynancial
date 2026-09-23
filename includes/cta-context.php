@@ -115,6 +115,7 @@ function cta_context_key(string $path): string
         'leadership'  => 'company',
         'careers'     => 'company',
         'partners'    => 'company',
+        'partner-program' => 'company',
         'partner'     => 'company',
     ];
     return $map[$first] ?? 'default';

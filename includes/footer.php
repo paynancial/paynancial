@@ -105,7 +105,7 @@ $footer_groups = [
             ]],
             ['Work With Us', [
                 ['Careers', '/careers'],
-                ['Partner Program', '/partners'],
+                ['Partner Program', '/partner-program'],
                 ['Contact', '/contact'],
             ]],
         ],

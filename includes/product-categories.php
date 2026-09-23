@@ -220,7 +220,7 @@ function cat_pages(): array
                 ['You want to take payments inside your product', 'Payments API', '/developers/api-reference#payments'],
                 ['You bill your customers on a schedule', 'Payment Collection', '/products/payment-collection'],
                 ['You pay sellers, creators or partners', 'Payouts', '/products/payouts'],
-                ['You want to build on Paynancial as a technology partner', 'Partners', '/partners'],
+                ['You want to build on Paynancial as a technology partner', 'Partners', '/partner-program'],
                 ['You want to test first', 'Sandbox', '/sandbox'],
             ],
             'items' => [

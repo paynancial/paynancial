@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /customer/
+Allow: /partner/register
 Disallow: /partner/
 Disallow: /employee/
 Disallow: /hrms/
