@@ -299,7 +299,7 @@ function sol_industries(): array
                 ['Can I ask guests for an advance deposit?', 'Yes. Send a payment link with a fixed amount and an expiry date.'],
                 ['Can I refund a cancelled booking?', 'Yes. Refunds can be full or partial and are tracked through to completion.'],
                 ['Can I pay my vendors through Paynancial?', 'Yes. Payouts sends funds to bank accounts or UPI IDs, individually or in bulk.'],
-                ['Do guests need an account to pay?', 'No. A payment link works on its own; guests pay with the method they prefer.'],
+                ['Do guests need an account to pay?', 'No. A payment link works on its own; guests pay on a secure payment page without creating an account.'],
             ],
             'related' => ['travel', 'retail', 'e-commerce'],
         ],

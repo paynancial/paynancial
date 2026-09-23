@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../includes/product-categories.php';
 $page_meta = [
     'title'       => 'Products | Paynancial Payment Platform',
     'description' => 'Payment Gateway, Payouts, Financial Operations, AI & Intelligence, Embedded Finance and a full Developer Platform — the complete Paynancial product suite.',
@@ -14,45 +15,45 @@ $catalog = [
     'Accept & Collect' => [
         ['Payment Gateway', '/products/payment-gateway'],
         ['Payment Links', '/products/payment-links'],
-        ['Payment Pages', '/contact?intent=sales&product=payment-pages'],
-        ['UPI Payments', '/contact?intent=sales&product=upi-payments'],
-        ['Recurring Payments', '/contact?intent=sales&product=recurring-payments'],
-        ['Subscription Billing', '/contact?intent=sales&product=subscription-billing'],
+        ['Payment Pages', '/products/accept-and-collect#payment-pages'],
+        ['UPI Payments', '/products/upi-payments'],
+        ['Recurring Payments', '/products/payment-collection'],
+        ['Subscription Billing', '/products/payment-collection'],
         ['Smart Collections', '/products/payment-collection'],
     ],
     'Pay & Move Money' => [
         ['Payouts', '/products/payouts'],
-        ['Bulk Payouts', '/contact?intent=sales&product=bulk-payouts'],
-        ['Vendor Payments', '/contact?intent=sales&product=vendor-payments'],
-        ['Employee Payments', '/contact?intent=sales&product=employee-payments'],
-        ['Partner Payments', '/contact?intent=sales&product=partner-payments'],
-        ['International Payments', '/contact?intent=sales&product=international-payments'],
+        ['Bulk Payouts', '/products/payouts'],
+        ['Vendor Payments', '/products/payouts'],
+        ['Employee Payments', '/products/payouts'],
+        ['Partner Payments', '/products/payouts'],
+        ['International Payments', '/products/pay-and-move-money#international-payments'],
     ],
     'Financial Operations' => [
-        ['Reconciliation', '/products/payment-analytics'],
-        ['Settlements', '/products/payment-analytics'],
-        ['Refunds', '/products/payment-analytics'],
-        ['Chargebacks', '/contact?intent=sales&product=chargebacks'],
-        ['Invoice Management', '/contact?intent=sales&product=invoice-management'],
-        ['Expense Management', '/contact?intent=sales&product=expense-management'],
+        ['Reconciliation', '/products/reconciliation'],
+        ['Settlements', '/products/settlements'],
+        ['Refunds', '/products/refunds'],
+        ['Chargebacks', '/products/financial-operations#chargebacks'],
+        ['Invoice Management', '/products/financial-operations#invoice-management'],
+        ['Expense Management', '/products/financial-operations#expense-management'],
         ['Finance Analytics', '/products/payment-analytics'],
-        ['MIS & Reports', '/contact?intent=sales&product=mis-reports'],
+        ['MIS & Reports', '/products/payment-analytics'],
     ],
     'AI & Intelligence' => [
-        ['Paynancial AI', '/contact?intent=sales&product=paynancial-ai'],
-        ['AI Fraud Detection', '/contact?intent=sales&product=ai-fraud-detection'],
-        ['AI Reconciliation', '/contact?intent=sales&product=ai-reconciliation'],
-        ['AI Financial Assistant', '/contact?intent=sales&product=ai-financial-assistant'],
-        ['AI Cash-Flow Intelligence', '/contact?intent=sales&product=ai-cash-flow-intelligence'],
-        ['AI Revenue Forecasting', '/contact?intent=sales&product=ai-revenue-forecasting'],
+        ['Paynancial AI', '/products/ai-and-intelligence#paynancial-ai'],
+        ['AI Fraud Detection', '/products/ai-and-intelligence#ai-fraud-detection'],
+        ['AI Reconciliation', '/products/ai-and-intelligence#ai-reconciliation'],
+        ['AI Financial Assistant', '/products/ai-and-intelligence#ai-financial-assistant'],
+        ['AI Cash-Flow Intelligence', '/products/ai-and-intelligence#ai-cash-flow-intelligence'],
+        ['AI Revenue Forecasting', '/products/ai-and-intelligence#ai-revenue-forecasting'],
     ],
     'Embedded Finance' => [
-        ['Embedded Payments', '/contact?intent=sales&product=embedded-payments'],
-        ['Embedded Payouts', '/contact?intent=sales&product=embedded-payouts'],
-        ['Embedded Billing', '/contact?intent=sales&product=embedded-billing'],
-        ['Wallet Infrastructure', '/contact?intent=sales&product=wallet-infrastructure'],
-        ['Split Payments', '/contact?intent=sales&product=split-payments'],
-        ['White-Label Payments', '/contact?intent=sales&product=white-label-payments'],
+        ['Embedded Payments', '/products/embedded-finance#embedded-payments'],
+        ['Embedded Payouts', '/products/embedded-finance#embedded-payouts'],
+        ['Embedded Billing', '/products/embedded-finance#embedded-billing'],
+        ['Wallet Infrastructure', '/products/embedded-finance#wallet-infrastructure'],
+        ['Split Payments', '/products/embedded-finance#split-payments'],
+        ['White-Label Payments', '/products/embedded-finance#white-label-payments'],
     ],
     'Developer Platform' => [
         ['Payment APIs', '/developers/api-reference#payments'],
@@ -60,7 +61,7 @@ $catalog = [
         ['SDKs', '/developers/sdks'],
         ['Webhooks', '/developers/webhooks'],
         ['Sandbox', '/sandbox'],
-        ['API Dashboard', '/developers'],
+        ['Developer Hub', '/developers'],
     ],
 ];
 ?>
@@ -102,7 +103,8 @@ $catalog = [
     <div class="ledger reveal catalog-list">
       <?php foreach ($catalog as $category => $items): ?>
         <div class="ledger-row catalog-row" id="cat-<?= e(strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($category)))) ?>">
-          <span class="ledger-tag"><?= e($category) ?></span>
+          <?php $catSlug = cat_for_column($category); ?>
+          <span class="ledger-tag"><?php if ($catSlug): ?><a href="<?= e(cat_url($catSlug)) ?>"><?= e($category) ?> →</a><?php elseif ($category === 'Developer Platform'): ?><a href="/developers"><?= e($category) ?> →</a><?php else: ?><?= e($category) ?><?php endif; ?></span>
           <div class="pill-list">
             <?php foreach ($items as [$label, $href]): ?>
               <a class="pill" href="<?= e($href) ?>"><?= e($label) ?></a>

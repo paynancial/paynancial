@@ -109,3 +109,48 @@ A page for any of these would have to invent features. Each needs, from the prod
 6. Limits, eligibility or pricing notes that may be published.
 
 **Label fix.** "API Dashboard" opens the Developer Hub. Either relabel it "Developer Hub" or point it at the dashboard login.
+
+## Outcome (implemented)
+
+**New capability pages (tier 1).** All four use the standalone template, with FAQs in `faq-data.php` (`product:{slug}`):
+
+| Page | Words |
+|---|---|
+| `/products/refunds` | 793 |
+| `/products/settlements` | 696 |
+| `/products/reconciliation` | 725 |
+| `/products/upi-payments` | 767 |
+
+**New category pages, one per menu column:**
+
+| Page | Words |
+|---|---|
+| `/products/accept-and-collect` | 817 |
+| `/products/pay-and-move-money` | 790 |
+| `/products/financial-operations` | 775 |
+| `/products/ai-and-intelligence` | 841 |
+| `/products/embedded-finance` | 824 |
+
+Each category page has:
+- an overview and a "where to start" table;
+- a catalog card for every item in that menu column, marked as Product page, Included or On request;
+- the shared platform band, FAQs, related categories and a CTA.
+
+The highest text overlap between any two of the nine new pages is 33%.
+
+**Menu changes:**
+- The six Products column titles are now links: five to their category page and Developer Platform to `/developers`. The mobile menu and the `/products` catalog match.
+- Tier 2 items link to the product page that covers them.
+- Tier 3 and tier 4 items link to their card on the category page, for example `/products/financial-operations#chargebacks`. Each card gives a general definition of the term (not a Paynancial feature claim) and an "Ask about …" enquiry link.
+- No item in the Products menu links straight to the enquiry form any more.
+- "API Dashboard" is now "Developer Hub".
+
+**Unverified claims removed while building:**
+- UPI on payment links: the site never says payment links accept UPI.
+- "Pay with the method they prefer" on Payment Links (Hospitality FAQ).
+
+**Still needs product specifications (tier 4)** before a full page can be written: Payment Pages, International Payments, Chargebacks, Invoice Management, Expense Management, Paynancial AI, and the six Embedded Finance items.
+
+**Pre-existing issues outside this change:**
+- The site-wide teal `.btn-primary` (white on `#00a69d`) is about 3:1 contrast, below WCAG AA. Changing it is a brand-wide visual change, so it is left for a decision.
+- The five original product pages (`/products/payment-gateway` and the others) still use the older layout and are 322–335 words. They are candidates for the full-width template.

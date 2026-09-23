@@ -164,6 +164,23 @@ if (($segments[0] ?? '') === 'pay' && isset($segments[1])) {
 // ---------------------------------------------------------------------
 // Product detail pages: /products/{slug}
 // ---------------------------------------------------------------------
+require_once __DIR__ . '/../includes/product-capabilities.php';
+require_once __DIR__ . '/../includes/product-categories.php';
+if (($segments[0] ?? '') === 'products' && count($segments) === 2
+    && (($pc_page = pc_page($segments[1])) !== null || ($cat_page = cat_page($segments[1])) !== null)) {
+    // Capability pages (/products/{refunds,settlements,reconciliation,upi-payments})
+    // and category pages (/products/{accept-and-collect,…}).
+    ob_start();
+    include __DIR__ . '/../pages/products/' . ($pc_page !== null ? 'capability.php' : 'category.php');
+    $page_body = ob_get_clean();
+
+    include __DIR__ . '/../includes/site-head.php';
+    include __DIR__ . '/../includes/header.php';
+    echo '<main id="main-content">' . $page_body . '</main>';
+    include __DIR__ . '/../includes/footer.php';
+    include __DIR__ . '/../includes/site-foot.php';
+    exit;
+}
 if (($segments[0] ?? '') === 'products' && isset($segments[1])) {
     $product_slug = $segments[1];
     $product_not_found = false;

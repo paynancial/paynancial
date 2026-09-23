@@ -13,6 +13,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/faq-data.php';
 require_once __DIR__ . '/solutions-data.php';
 require_once __DIR__ . '/business-services.php';
+require_once __DIR__ . '/product-categories.php';
 
 /**
  * FAQ directory: topic groups, each a list of pages with their questions.
@@ -24,10 +25,15 @@ function res_faq_directory(): array
     $products = [
         'payment-gateway' => 'Payment Gateway', 'payment-links' => 'Payment Links',
         'payment-collection' => 'Payment Collection', 'payouts' => 'Payouts', 'payment-analytics' => 'Payment Analytics',
+        'refunds' => 'Refunds', 'settlements' => 'Settlements', 'reconciliation' => 'Reconciliation', 'upi-payments' => 'UPI Payments',
     ];
     $productPages = [];
+    foreach (cat_pages() as $slug => $c) {
+        $productPages[] = [$c['name'], cat_url($slug), 'faq', $q('category:' . $slug)];
+    }
     foreach ($products as $slug => $name) {
-        $productPages[] = [$name, '/products/' . $slug, 'faqs', $q('product:' . $slug)];
+        $capability = in_array($slug, ['refunds', 'settlements', 'reconciliation', 'upi-payments'], true);
+        $productPages[] = [$name, '/products/' . $slug, $capability ? 'faq' : 'faqs', $q('product:' . $slug)];
     }
     $industryPages = [];
     foreach (sol_industries() as $slug => $ind) {

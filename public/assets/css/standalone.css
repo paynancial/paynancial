@@ -200,3 +200,16 @@
 .sp-cards { gap: 16px; background: transparent; border: 0; }
 .sp-card { border: 1px solid var(--border); border-radius: 14px; }
 .sp-band--dim .sp-card { background: #fff; }
+
+/* Product category catalog: one card per menu item, anchorable. */
+.sp-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.sp-item { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: var(--paper); scroll-margin-top: 150px; }
+.sp-item:target { border-color: var(--teal-500); box-shadow: 0 0 0 3px var(--teal-100); }
+.sp-item h3 { font-family: var(--font-serif); font-weight: 460; font-size: 1.3rem; color: var(--ink); }
+.sp-item p { color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; }
+.sp-item-status { align-self: flex-start; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--slate); }
+.sp-item--page .sp-item-status { color: var(--teal-900); background: var(--teal-50); border-color: var(--teal-100); }
+.sp-item--request .sp-item-status { color: #8a3100; background: var(--orange-50); border-color: #ffd4bd; }
+.sp-item-link { margin-top: auto; padding-top: 6px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; font-size: 0.9rem; color: var(--teal-700); }
+.sp-item-link:hover { color: var(--ink); }
+[id] { scroll-margin-top: 150px; }

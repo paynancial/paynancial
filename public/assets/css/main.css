@@ -1010,3 +1010,16 @@ section:last-of-type { border-bottom: none; }
 
 /* FAQ toggles inside long-form pages: 44px minimum tap target. */
 .legal-body details > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
+
+/* Products menu: column titles link to their category page. */
+.mega-col-title.mega-col-link { display: flex; align-items: center; gap: 6px; color: var(--teal-700); min-height: 32px; border-radius: 8px; transition: color var(--gh-transition), background var(--gh-transition); }
+.mega-col-title.mega-col-link span { transition: transform var(--gh-transition); }
+.mega-col-title.mega-col-link:hover { color: var(--ink); background: var(--paper-dim); }
+.mega-col-title.mega-col-link:hover span { transform: translateX(2px); }
+.mobile-nav-group-label a { color: inherit; display: flex; align-items: center; min-height: 36px; }
+.mobile-nav-group-label a::after { content: '→'; margin-left: 6px; }
+
+/* Business Services menu CTA: deeper orange so white text meets WCAG AA
+   (4.6:1), matching the standalone pages' primary buttons. */
+.mega-bs-cta { background: #d14600; }
+.mega-bs-cta:hover { background: #b83d00; }

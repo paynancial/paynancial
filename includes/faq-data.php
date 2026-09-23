@@ -126,6 +126,60 @@ function faq_sets(): array
                 ['Can I export data for my accounting system?', 'Yes — reports can be exported in common formats for use outside the dashboard.'],
                 ['Does this show real customer data or sample data?', 'Analytics reflect your own account’s real transactions and settlements — there is no sample or simulated data in your dashboard.'],
             ],
+        'product:refunds' => [
+            ['Can I issue a partial refund?', 'Yes. Refunds can be full or partial — for example one item from an order, or a shipping charge.'],
+            ['Can I refund from the dashboard and the API?', 'Yes. Support teams can refund from the dashboard, and your systems can refund with the Refunds API by sending the payment ID and amount.'],
+            ['How do I know when a refund is complete?', 'Refunds are tracked from request through to completion in Payment Analytics, and refund webhooks tell your systems as a refund changes state.'],
+            ['How do I avoid refunding twice?', 'Send an idempotency key with every refund request. A retry with the same key returns the original refund instead of creating a second one.'],
+        ],
+        'product:settlements' => [
+            ['What is a settlement?', 'The step where money from your customers\' payments is paid out to your business account. On Paynancial, every transaction is tied to a settlement record.'],
+            ['How can I see what has settled?', 'Payment Analytics shows what has settled, what is pending and when it is due.'],
+            ['Can my systems be notified when funds settle?', 'Yes. Settlements are one of the four webhook event families, so your system receives an event when funds are settled to your account.'],
+            ['Can I export settlement data?', 'Yes. Reports can be exported in formats your finance team already uses, or scheduled for regular delivery.'],
+        ],
+        'product:reconciliation' => [
+            ['What does Paynancial reconcile?', 'Payments against settlements and refunds. Every transaction is tied to a settlement record, and every collection is matched to the customer and cycle it belongs to.'],
+            ['Is reconciliation automatic?', 'Collections are reconciled automatically against the customer and cycle they belong to. Reconciliation views in Payment Analytics show payments, refunds and settlements side by side, with discrepancies surfaced clearly.'],
+            ['Can I reconcile in my own accounting system?', 'Yes. Export reports, or use payment, refund and settlement webhooks to update your own systems as things change.'],
+            ['What is AI Reconciliation?', 'An AI capability that matches settlements against transactions and surfaces only genuine exceptions for a person to review. Ask our team about availability.'],
+        ],
+        'product:upi-payments' => [
+            ['Can I accept UPI payments with Paynancial?', 'Yes. UPI is one of the payment methods on the Payment Gateway, alongside cards, netbanking and wallets, through a single integration.'],
+            ['Can I send payouts to a UPI ID?', 'Yes. Payouts can be sent to a beneficiary\'s bank account or UPI ID, one at a time or in bulk.'],
+            ['How do I send a UPI payout with the API?', 'Create a payout with the beneficiary, the amount in paise and mode set to upi, and send an idempotency key so a retry never pays twice.'],
+            ['Can I see UPI payments separately in reports?', 'Yes. Payment Analytics breaks transactions down by payment method, status and time period.'],
+        ],
+        'category:accept-and-collect' => [
+            ['What are the ways to accept payments with Paynancial?', 'At checkout with the Payment Gateway (cards, UPI, netbanking and wallets), without a website using Payment Links, and on a schedule or in bulk with Smart Collections.'],
+            ['Do I need a website to get paid?', 'No. Payment Links let you share a secure link by email, WhatsApp, SMS or on an invoice, and the customer pays on a secure payment page.'],
+            ['Can I collect recurring payments?', 'Yes. Smart Collections sets up a schedule for subscription or instalment payments, retries failed attempts and reconciles each collection automatically.'],
+            ['Do I need a separate integration for each product?', 'No. The Accept & Collect products share one REST API, the same webhooks and the same settlement records.'],
+        ],
+        'category:pay-and-move-money' => [
+            ['How do I pay vendors and employees with Paynancial?', 'With Payouts: add or select a beneficiary\'s bank account or UPI ID, then send a single payout or submit a batch, from the dashboard or the API.'],
+            ['Can I pay many people at once?', 'Yes. Payouts supports bulk payouts, so you can pay an entire batch in one action and track each payout individually.'],
+            ['How do I know a payout went through?', 'Each payout is tracked from initiated to completed, with a clear reason if it fails, and payout webhooks notify your systems as its status changes.'],
+            ['Does Paynancial support international payments?', 'Ask our team about availability for your business. The Payouts product sends funds to bank accounts and UPI IDs.'],
+        ],
+        'category:financial-operations' => [
+            ['What does Financial Operations cover?', 'Everything after a payment is taken: reconciliation, settlements, refunds, analytics and reporting.'],
+            ['How does Paynancial help with reconciliation?', 'Every transaction is tied to a settlement record, collections are reconciled automatically, and Payment Analytics shows payments, refunds and settlements side by side with discrepancies surfaced clearly.'],
+            ['Can reports be sent to my finance team automatically?', 'Yes. Reports can be exported in common formats or scheduled for recurring delivery.'],
+            ['Does Paynancial handle chargebacks?', 'Ask our team about chargeback handling for your business.'],
+        ],
+        'category:ai-and-intelligence' => [
+            ['What AI capabilities does Paynancial offer?', 'AI Fraud Detection, AI Reconciliation, AI Financial Assistant, AI Cash-Flow Intelligence and AI Revenue Forecasting. Ask our team about availability for your business.'],
+            ['Does Paynancial\'s AI make decisions on its own?', 'No. Each capability surfaces a recommendation or takes a narrowly scoped action within limits your business sets; anything above a threshold routes to a person.'],
+            ['What data do the AI capabilities use?', 'Your Paynancial payments data — transactions, settlements and refunds — which is what they analyse and reconcile.'],
+            ['How is Paynancial\'s AI governed?', 'By five controls: permissions, policy limits, human oversight, authentication and auditability. See the AI Governance page.'],
+        ],
+        'category:embedded-finance' => [
+            ['What is embedded finance?', 'Putting financial services — payments, payouts, billing, wallets — directly inside a platform\'s own product, so its users never have to leave it.'],
+            ['What does embedded finance build on at Paynancial?', 'The same foundation as any Paynancial integration: a REST API, idempotent requests, real-time webhooks and payouts to bank accounts and UPI IDs.'],
+            ['Which embedded finance products are available?', 'Embedded payments, embedded payouts, embedded billing, wallet infrastructure, split payments and white-label payments are available to discuss with our team, so you can confirm what fits your platform.'],
+            ['Can I test before building?', 'Yes. The Paynancial Sandbox lets you build and test against the API with no real funds involved.'],
+        ],
     ];
 }
 
