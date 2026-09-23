@@ -93,6 +93,25 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
 </div>
 
 <div class="panel">
+  <h2>Legal documents — review status</h2>
+  <p class="text-muted">Live and unchanged. No edits to legal or regulatory wording until qualified review is completed; no reviewer is named until one has actually reviewed them.</p>
+  <table class="data-table">
+    <thead><tr><th>Document</th><th>Legal review</th><th>Regulatory review</th><th>Reviewer</th><th>Next step</th></tr></thead>
+    <tbody>
+      <?php foreach (gov_review_items() as $path => $d): ?>
+      <tr>
+        <td><a href="<?= e($path) ?>" target="_blank" rel="noopener"><?= e($d['title']) ?></a></td>
+        <td><?= e(ucfirst($d['legal_review'])) ?></td>
+        <td><?= e(ucfirst($d['regulatory_review'])) ?></td>
+        <td><?= e($d['reviewer'] ?? '—') ?></td>
+        <td><?= e($d['note']) ?></td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel">
   <h2>Drafts held back from public pages</h2>
   <ul>
     <li>“Compliance in India” bands — all references above (source verification pending).</li>

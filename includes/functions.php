@@ -107,19 +107,39 @@ function seo_meta(array $meta): void
     $description = $meta['description'] ?? 'Paynancial — secure, intelligent payment technology for modern businesses.';
     $canonical   = $meta['canonical'] ?? site_url(canonical_path($_SERVER['REQUEST_URI'] ?? '/'));
     $image       = $meta['image'] ?? site_url('/assets/images/paynancial-icon.png');
+    $robots      = $meta['robots'] ?? '';
+
+    // A genuine 404 has no canonical (never the homepage or any other URL)
+    // and is not indexed.
+    $is404 = http_response_code() === 404;
+    if ($is404) {
+        $canonical = null;
+        $robots = 'noindex, follow';
+    }
+    // Publishing gate: governed pages (unconfirmed capabilities, /blog,
+    // /signup …) stay live but noindex until approved — content-governance.php.
+    require_once __DIR__ . '/content-governance.php';
+    $govPath = '/' . trim((string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
+    if (!$is404 && !gov_indexable($govPath === '/' ? '/' : rtrim($govPath, '/'))) {
+        $robots = 'noindex, follow';
+    }
     ?>
     <title><?= e($title) ?></title>
     <meta name="description" content="<?= e($description) ?>">
-    <?php if (!empty($meta['robots'])): ?>
-    <meta name="robots" content="<?= e($meta['robots']) ?>">
+    <?php if ($robots !== ''): ?>
+    <meta name="robots" content="<?= e($robots) ?>">
     <?php endif; ?>
+    <?php if ($canonical !== null): ?>
     <link rel="canonical" href="<?= e($canonical) ?>">
+    <?php endif; ?>
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Paynancial">
     <meta property="og:title" content="<?= e($title) ?>">
     <meta property="og:description" content="<?= e($description) ?>">
+    <?php if ($canonical !== null): ?>
     <meta property="og:url" content="<?= e($canonical) ?>">
+    <?php endif; ?>
     <meta property="og:image" content="<?= e($image) ?>">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?= e($title) ?>">

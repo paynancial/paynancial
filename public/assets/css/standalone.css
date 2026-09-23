@@ -47,7 +47,7 @@
 /* ---- Layout primitives ---------------------------------------------- */
 .sp-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
 .sp-split--even { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.sp-split > .sp-head { margin-bottom: 0; position: sticky; top: 110px; }
+.sp-split > .sp-head { margin-bottom: 0; position: sticky; top: calc(var(--header-h, var(--header-height)) + var(--sp-index-h, 0px) + 24px); }
 .sp-prose p + p { margin-top: 14px; }
 .sp-prose p, .sp-prose li { line-height: 1.75; color: var(--text-muted); }
 .sp-prose strong { color: var(--text); font-weight: 600; }
@@ -126,7 +126,7 @@
 .sp-related-card em { margin-top: auto; padding-top: 8px; font-style: normal; font-weight: 600; font-size: 0.86rem; color: var(--teal-700); }
 
 /* In-page section index (long pages) */
-.sp-index { position: sticky; top: calc(var(--header-height) + 8px); z-index: 20; background: rgba(250, 249, 245, 0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+.sp-index { position: sticky; top: var(--header-h, var(--header-height)); z-index: 20; background: rgba(250, 249, 245, 0.985); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
 .sp-index ul { display: flex; gap: 4px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
 .sp-index ul::-webkit-scrollbar { display: none; }
 .sp-index a { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 14px; border-radius: 999px; font-size: 0.84rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
@@ -152,7 +152,6 @@
   .sp-actions { flex-direction: column; align-items: stretch; }
   .sp-actions .btn { justify-content: center; }
   .sp-step { padding-right: 0; }
-  .sp-index { top: 60px; }
 }
 
 /* Code tabs: reset native button chrome so inactive tabs stay legible. */
@@ -203,7 +202,7 @@
 
 /* Product category catalog: one card per menu item, anchorable. */
 .sp-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-.sp-item { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: var(--paper); scroll-margin-top: 150px; }
+.sp-item { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: var(--paper); scroll-margin-top: calc(var(--header-h, var(--header-height)) + var(--sp-index-h, 0px) + 16px); }
 .sp-item:target { border-color: var(--teal-500); box-shadow: 0 0 0 3px var(--teal-100); }
 .sp-item h3 { font-family: var(--font-serif); font-weight: 460; font-size: 1.3rem; color: var(--ink); }
 .sp-item p { color: var(--text-muted); line-height: 1.65; font-size: 0.95rem; }
@@ -212,7 +211,7 @@
 .sp-item--request .sp-item-status { color: #8a3100; background: var(--orange-50); border-color: #ffd4bd; }
 .sp-item-link { margin-top: auto; padding-top: 6px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; font-size: 0.9rem; color: var(--teal-700); }
 .sp-item-link:hover { color: var(--ink); }
-[id] { scroll-margin-top: 150px; }
+[id] { scroll-margin-top: calc(var(--header-h, var(--header-height)) + var(--sp-index-h, 0px) + 16px); }
 
 /* Hero code caption: must beat the later .sp-code figcaption rule. */
 .sp-hero .sp-hero-aside .sp-code figcaption { color: rgba(250, 249, 245, 0.66); }
@@ -243,7 +242,7 @@
 .ai-flow--vertical .ai-flow-step::after { top: 26px; left: -7px; }
 
 .ai-caps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.ai-cap { display: flex; flex-direction: column; gap: 12px; padding: 28px; border: 1px solid var(--border); border-radius: 16px; background: #fff; scroll-margin-top: 150px; }
+.ai-cap { display: flex; flex-direction: column; gap: 12px; padding: 28px; border: 1px solid var(--border); border-radius: 16px; background: #fff; scroll-margin-top: calc(var(--header-h, var(--header-height)) + var(--sp-index-h, 0px) + 16px); }
 .ai-cap--platform { grid-column: 1 / -1; background: linear-gradient(120deg, var(--ink) 0%, #0f3b35 100%); border-color: transparent; }
 .ai-cap.ai-cap--platform h3, .ai-cap.ai-cap--platform p, .ai-cap.ai-cap--platform dd { color: var(--paper); }
 .ai-cap.ai-cap--platform .ai-cap-kicker, .ai-cap.ai-cap--platform dt { color: var(--teal-300); }

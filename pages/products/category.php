@@ -98,7 +98,7 @@ sp_hero([
 
 <?php sp_band_open('catalog'); ?>
   <?php sp_head('catalog', 'The catalog', 'Everything in ' . $cat['name'] . '.', $pillar
-      ? 'Products with their own page link straight to it. Items marked “Details on request” are described here only as far as the site already publishes — ask our team for the rest.'
+      ? 'Products with their own page link straight to it. Items marked “Guide” explain a topic using only what the site already publishes — the capability itself is not confirmed, so ask our team.'
       : 'Products with their own page link straight to it. Items marked “On request” are available to discuss with our team.'); ?>
   <div class="sp-items">
     <?php foreach ($cat['items'] as $item): [$label, $kind, $href, $desc] = $item; $extra = $item[4] ?? null; $id = cat_slugify($label); ?>

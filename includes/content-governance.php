@@ -74,7 +74,30 @@ function gov_content_items(): array
     ] as $slug => $what) {
         $items['/ai-intelligence/' . $slug] = $unconfirmed($what);
     }
+    // Utility / placeholder pages: live and crawlable (not blocked in
+    // robots.txt, so the noindex is seen), but not organic landing pages.
+    $utility = static fn (string $reason) => [
+        'stage' => 'content_review', 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
+        'professional_review' => 'not_applicable', 'approved_by' => null, 'approved_on' => null, 'reason' => $reason,
+    ];
+    $items['/blog'] = $utility('Empty placeholder for the future Paynancial Insights / Regulatory Insights programme; indexable only once it has substantial original content and passes review.');
+    $items['/signup'] = $utility('Account sign-up form — a utility page, not an organic landing page.');
     return $items;
+}
+
+/**
+ * Legal documents under review. Content is held unchanged (no edits to the
+ * RBI / KYC / DPDP wording) until a qualified legal and regulatory review is
+ * completed; the pages stay live and indexable. No reviewer is named.
+ */
+function gov_review_items(): array
+{
+    $pending = ['legal_review' => 'pending', 'regulatory_review' => 'pending', 'reviewer' => null,
+        'note' => 'Hold content changes. After review: verified wording, correct regulatory references, applicability, dates, sources and Paynancial-specific obligations.'];
+    return [
+        '/legal/privacy-policy'   => ['title' => 'Privacy Policy'] + $pending,
+        '/legal/terms-conditions' => ['title' => 'Terms & Conditions'] + $pending,
+    ];
 }
 
 function gov_item(string $path): ?array

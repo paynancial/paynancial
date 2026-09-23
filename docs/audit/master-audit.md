@@ -476,4 +476,18 @@ Each phase ships as its own commit(s) on a branch, is tested locally (crawl, ove
 
 After the change: 111 URLs, all 200; sitemap 77 URLs (was 93); no noindex page in the sitemap; no page overflow at 5 widths on the changed templates.
 
-**Still pending (not in the approved list):** `/blog` and `/signup` noindex; 404 self-canonical; Privacy Policy and Terms reference RBI / KYC obligations and the DPDP Act — legal documents, flagged for legal review rather than edited.
+## Final decisions on remaining items — implementation status
+
+| Item | Decision | Implemented |
+|---|---|---|
+| `/blog` | Live, `noindex, follow`, not in sitemap; not blocked in robots.txt | Yes — governed utility page in `content-governance.php`; noindex applied centrally in `seo_meta()` |
+| `/signup` | Live, `noindex, follow`, not in sitemap; not blocked in robots.txt | Yes — same mechanism |
+| 404 pages | HTTP 404, no canonical, not indexed, not in sitemap | Yes — `seo_meta()` omits canonical and og:url and sets `noindex, follow` whenever the response is 404 (checked on 9 missing-URL patterns). 404s are not converted to 200s; the branded 404 template is unchanged |
+| Privacy Policy, Terms | Live, content held; Legal Review = Pending, Regulatory Review = Pending; no reviewer named | Yes — `gov_review_items()`, shown in `/admin/content-governance`; no wording changed |
+| Official sources | Verify only after access | Still blocked by network policy; nothing marked verified |
+
+**Other utility pages, audited individually (no mass noindex):** `/forgot-password`, `/reset-password`, `/signup/verify` and payment-link pages (`/pay/…`) were already noindex; `/login` renders the homepage and canonicalises to `/` (not in the sitemap) — correct; dashboards are behind login and disallowed in robots.txt — correct; `/contact` stays indexable (genuine contact intent); `/partner/register` stays indexable for now (partner-programme intent, 315 words) — revisit if it should be treated as a form-only page.
+
+Result: sitemap 75 URLs; no noindex page in the sitemap; no canonical conflicts.
+
+**Also fixed:** the sticky in-page menu on pillar, product, developer and AI pages now sits flush under the header at every width (it previously left a 20–23px gap where page text showed through, and sticky headings slid under it).

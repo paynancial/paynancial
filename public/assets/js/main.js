@@ -102,8 +102,29 @@
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', updateHeaderHeightVar);
+    /* The header shrinks with a CSS transition when it becomes sticky, so
+       re-measure whenever its size actually changes, not only on toggle. */
+    siteHeader.addEventListener('transitionend', updateHeaderHeightVar);
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(updateHeaderHeightVar).observe(siteHeader);
+    }
     onScroll();
     updateHeaderHeightVar();
+  }
+
+  /* In-page section nav (.sp-index) height, so sticky headings and anchor
+     targets sit below it instead of underneath it. */
+  var spIndex = document.querySelector('.sp-index');
+  if (spIndex) {
+    var setIndexHeight = function () {
+      document.documentElement.style.setProperty('--sp-index-h', spIndex.offsetHeight + 'px');
+    };
+    setIndexHeight();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(setIndexHeight).observe(spIndex);
+    } else {
+      window.addEventListener('resize', setIndexHeight);
+    }
   }
 
   /* ---------------------------------------------------------------
