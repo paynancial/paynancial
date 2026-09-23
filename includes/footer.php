@@ -1,10 +1,12 @@
 <?php
 /**
- * Site footer — five primary groups (Products & Solutions, Agentic AI,
- * Developers, Resources & Trust, Company). Every link points at an
- * existing page or anchor; groups render from $footer_groups so a link is
- * defined exactly once. On narrow screens each group collapses into an
- * accordion (behaviour in main.js; panels stay open without JavaScript).
+ * Site footer — brand strip, then five groups on a three-column grid:
+ * row 1 Products & Solutions · Agentic AI · Developers, row 2
+ * Resources & Trust (column 1) · Company (column 3). Every link points at
+ * an existing page or anchor; groups render from $footer_groups so a link
+ * is defined exactly once. Descriptive text is justified. On narrow
+ * screens each group collapses into an accordion (main.js; panels stay
+ * open without JavaScript).
  * Business Services is intentionally not linked here yet.
  */
 $footer_groups = [
@@ -16,7 +18,7 @@ $footer_groups = [
                 ['Payment Links', '/products/payment-links'],
                 ['Payment Collection', '/products/payment-collection'],
             ]],
-            ['Money Movement & Operations', [
+            ['Money Movement', [
                 ['Payouts', '/products/payouts'],
                 ['Payment Analytics', '/products/payment-analytics'],
             ]],
@@ -26,44 +28,40 @@ $footer_groups = [
                 ['Healthcare', '/solutions#healthcare'],
                 ['Education', '/solutions#education'],
                 ['Retail', '/solutions#retail'],
-                ['Hospitality', '/solutions#hospitality'],
                 ['Enterprise', '/solutions#enterprise'],
             ]],
         ],
-        'cta' => ['Explore Products', '/products'],
-        'extra' => ['Pricing', '/pricing'],
     ],
     'agentic' => [
         'title' => 'Agentic AI',
-        'badge' => 'New',
-        'intro' => 'How AI agents change payments and financial operations, and what the infrastructure underneath must guarantee.',
         'blocks' => [
-            [null, [
-                ['Agentic AI in Finance', '/agentic-ai'],
+            ['AI Finance', [
+                ['Agentic Payments', '/agentic-ai'],
                 ['AI Financial Agents', '/agentic-ai#financial-agents'],
-                ['AI Payment Orchestration', '/agentic-ai#payment-orchestration'],
-                ['Human-in-the-Loop Governance', '/agentic-ai#governance'],
-                ['Agent-Ready APIs', '/developers#agentic-ai'],
-                ['The Future of Financial Infrastructure', '/technology'],
+                ['AI Orchestration', '/agentic-ai#payment-orchestration'],
+                ['AI Governance', '/agentic-ai#governance'],
             ]],
         ],
-        'cta' => ['Explore Agentic AI', '/agentic-ai'],
+        'cta' => ['Explore AI', '/agentic-ai'],
     ],
     'developers' => [
         'title' => 'Developers',
         'blocks' => [
-            [null, [
+            ['Build', [
                 ['Documentation', '/developers#docs'],
                 ['API Reference', '/developers#api-reference'],
                 ['SDKs', '/developers#sdks'],
+            ]],
+            ['Connect', [
                 ['Webhooks', '/developers#webhooks'],
-                ['Sandbox', '/developers#sandbox'],
                 ['Authentication', '/developers#authentication'],
-                ['Integration Guide', '/developers#integration-guide'],
+                ['Sandbox', '/developers#sandbox'],
+            ]],
+            ['Support', [
                 ['Developer Support', '/support'],
             ]],
         ],
-        'cta' => ['Go to Developer Center', '/developers'],
+        'cta' => ['Developer Center', '/developers'],
     ],
     'trust' => [
         'title' => 'Resources & Trust',
@@ -86,7 +84,8 @@ $footer_groups = [
     ],
     'company' => [
         'title' => 'Company',
-        'intro' => 'Paynancial Technology Pvt. Ltd. — a technology-first FinTech company building secure, intelligent payment infrastructure.',
+        'intro_title' => 'Paynancial Technology Pvt. Ltd.',
+        'intro' => 'Building trusted financial infrastructure for modern businesses.',
         'blocks' => [
             [null, [
                 ['About Paynancial', '/about'],
@@ -108,8 +107,7 @@ $footer_groups = [
     <div class="container ft-brand-grid">
       <div class="ft-brand-copy">
         <a href="/" class="ft-logo" aria-label="Paynancial home"><img src="<?= asset('images/paynancial-logo-dark-bg.png') ?>" alt="Paynancial" width="520" height="118" loading="lazy"></a>
-        <p class="ft-statement">Building the financial infrastructure for an AI-native economy.</p>
-        <p class="ft-sub">Payments, payouts, billing, reconciliation and financial intelligence — connected through one platform.</p>
+        <p class="ft-statement">Payment &amp; financial infrastructure for modern businesses.</p>
         <a class="ft-sales" href="/contact?intent=sales"><?= e(cta_label()) ?> <span aria-hidden="true">→</span></a>
       </div>
       <form class="footer-newsletter ft-newsletter" id="newsletter-form" novalidate>
@@ -134,7 +132,12 @@ $footer_groups = [
         </button>
       </h3>
       <div class="ft-panel" id="<?= e($panelId) ?>">
-        <?php if (!empty($group['intro'])): ?><p class="ft-intro"><?= e($group['intro']) ?></p><?php endif; ?>
+        <?php if (!empty($group['intro'])): ?>
+        <div class="ft-intro">
+          <?php if (!empty($group['intro_title'])): ?><strong><?= e($group['intro_title']) ?></strong><?php endif; ?>
+          <p><?= e($group['intro']) ?></p>
+        </div>
+        <?php endif; ?>
         <?php foreach ($group['blocks'] as $block): [$label, $links] = $block; $cls = $block[2] ?? ''; ?>
         <div class="ft-block <?= e($cls) ?>">
           <?php if ($label): ?><p class="ft-block-label"><?php if ($cls === 'is-trust'): ?><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><?php endif; ?><?= e($label) ?></p><?php endif; ?>
@@ -145,10 +148,9 @@ $footer_groups = [
           </ul>
         </div>
         <?php endforeach; ?>
-        <div class="ft-cta-row">
-          <a class="ft-cta" href="<?= e($group['cta'][1]) ?>"><?= e($group['cta'][0]) ?> <span aria-hidden="true">→</span></a>
-          <?php if (!empty($group['extra'])): ?><a class="ft-extra" href="<?= e($group['extra'][1]) ?>"><?= e($group['extra'][0]) ?></a><?php endif; ?>
-        </div>
+        <?php if (!empty($group['cta'])): ?>
+        <a class="ft-cta" href="<?= e($group['cta'][1]) ?>"><?= e($group['cta'][0]) ?> <span aria-hidden="true">→</span></a>
+        <?php endif; ?>
       </div>
     </div>
     <?php endforeach; ?>

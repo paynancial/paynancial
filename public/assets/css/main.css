@@ -519,8 +519,7 @@ section:last-of-type { border-bottom: none; }
 .ft-brand-grid { display: grid; gap: 36px; align-items: end; }
 @media (min-width: 900px) { .ft-brand-grid { grid-template-columns: 1.2fr 1fr; gap: 64px; } }
 .ft-logo img { height: 30px; width: auto; }
-.ft-statement { margin-top: 22px; font-family: var(--font-serif); font-size: clamp(1.45rem, 1.1rem + 1.3vw, 2.05rem); line-height: 1.18; color: var(--paper); max-width: 22ch; text-wrap: balance; }
-.ft-sub { margin-top: 12px; font-size: 0.92rem; color: rgba(250,249,245,0.6); max-width: 52ch; }
+.ft-statement { margin-top: 22px; font-family: var(--font-serif); font-size: clamp(1.45rem, 1.1rem + 1.3vw, 2.05rem); line-height: 1.18; color: var(--paper); max-width: 24ch; }
 .ft-sales { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 11px 20px; border-radius: 999px; background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 600; transition: background var(--transition), transform var(--transition); }
 .ft-sales:hover { background: #fff; transform: translateY(-1px); }
 .ft-sales span { color: var(--orange-600); transition: transform var(--transition); }
@@ -537,12 +536,21 @@ section:last-of-type { border-bottom: none; }
 .footer-newsletter-msg.is-error { color: #ff8a6a; }
 .footer-badge { font-family: var(--font-mono); font-size: 0.58rem; font-weight: 500; letter-spacing: 0.02em; color: var(--ink); background: var(--orange-500); padding: 2px 6px; border-radius: 4px; text-transform: none; vertical-align: 2px; margin-left: 4px; }
 
-.ft-nav { display: grid; gap: 40px 32px; padding-top: 52px; padding-bottom: 56px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 720px) { .ft-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (min-width: 1100px) { .ft-nav { grid-template-columns: 1.3fr 1.1fr 0.95fr 1.1fr 0.95fr; gap: 40px; } }
+.ft-nav { display: grid; gap: 48px 48px; padding-top: 56px; padding-bottom: 60px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Three aligned columns: row 1 Products & Solutions · Agentic AI · Developers;
+   row 2 Resources & Trust under column 1, Company under column 3. */
+@media (min-width: 720px) {
+  .ft-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px 64px; }
+  .ft-group-trust { grid-column: 1; }
+  .ft-group-company { grid-column: 3; }
+}
 .ft-title { display: flex; align-items: center; justify-content: space-between; margin: 0 0 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border-on-ink); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); }
 .ft-toggle { display: none; }
-.ft-intro { font-size: 0.8rem; line-height: 1.55; color: rgba(250,249,245,0.5); margin-bottom: 14px; }
+.ft-intro { margin-bottom: 16px; }
+.ft-intro strong { display: block; font-size: 0.88rem; font-weight: 600; color: var(--paper); }
+.ft-intro p { margin-top: 6px; font-size: 0.84rem; line-height: 1.6; color: rgba(250,249,245,0.58); max-width: 34ch; }
+/* Descriptive copy is justified (last line left-aligned, hyphenated to avoid rivers). */
+.ft-intro p { text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
 .ft-block + .ft-block { margin-top: 18px; }
 .ft-block-label { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(109, 213, 205, 0.75); margin-bottom: 8px; }
 .ft-block ul { display: grid; gap: 2px; }
@@ -553,13 +561,14 @@ section:last-of-type { border-bottom: none; }
 .ft-block.is-trust { margin-top: 20px; padding: 14px 16px 12px; border: 1px solid rgba(109, 213, 205, 0.22); border-radius: 12px; background: linear-gradient(160deg, rgba(0, 166, 157, 0.1), rgba(0, 166, 157, 0.02)); }
 .ft-block.is-trust .ft-block-label { color: var(--teal-300); }
 .ft-block.is-trust a { color: rgba(250,249,245,0.78); }
-.ft-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 18px; }
-.ft-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; color: var(--teal-300); }
+.ft-cta {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 9px 16px; border-radius: 999px;
+  border: 1px solid rgba(109, 213, 205, 0.4); font-size: 0.8rem; font-weight: 600; color: var(--teal-300);
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
 .ft-cta span { transition: transform var(--transition); }
-.ft-cta:hover { color: var(--paper); }
+.ft-cta:hover { background: var(--teal-300); border-color: var(--teal-300); color: var(--ink); }
 .ft-cta:hover span { transform: translateX(3px); }
-.ft-extra { font-size: 0.82rem; color: rgba(250,249,245,0.55); border-bottom: 1px solid rgba(250,249,245,0.2); }
-.ft-extra:hover { color: var(--paper); }
 
 /* Mobile accordion (only once main.js has marked the footer interactive) */
 @media (max-width: 719px) {
