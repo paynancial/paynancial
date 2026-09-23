@@ -39,6 +39,13 @@ received `noindex`.
 
 ## URL table
 
+> **Local code results only — not live-domain verification.** Every status code,
+> redirect, canonical and robots value below was produced by running this
+> repository's code on a local PHP server. None of it has been tested against
+> paynancial.com. HTTPS, www→apex, live status codes, live canonical output and
+> live robots behaviour remain **NOT VERIFIED / BLOCKED** until the live domain
+> can be accessed and tested.
+
 | URL | Before | After | Canonical before → after | Robots after | Main content |
 |---|---|---|---|---|---|
 | `/` | 200 | 200 | / | index (default) | changed |
@@ -88,7 +95,7 @@ received `noindex`.
 | `/customer` | 302 → /?login=required | 302 → /?login=required | — | index (default) | unchanged |
 | `/nonexistent` | 404 | 404 | /nonexistent | index (default) | unchanged |
 
-## Regression checks
+## Regression checks (local code, not live domain)
 
 - Every "changed" marketing page was diffed: `/products/payment-links`,
   `/payment-collection`, `/payouts`, `/payment-analytics` differ only by
