@@ -8,8 +8,8 @@
  * AI pages, the AI Governance model and the Trust Center's verified
  * security facts). No accuracy, detection rates, savings, model names,
  * certifications or customer claims. Availability of every AI capability
- * is "on request" until the business confirms it, so child pages are
- * noindex and out of the sitemap (see ai_child_indexable()).
+ * is "on request" until the business confirms it (ai_confirmed()); the
+ * pages say so, and are indexable at the owner's request.
  */
 
 declare(strict_types=1);
@@ -25,9 +25,14 @@ function ai_confirmed(): array
     ];
 }
 
+/**
+ * Every child page is indexable (owner's request): each one states that the
+ * capability is available on request, so indexing makes no availability
+ * claim. ai_confirmed() still records which capabilities are confirmed.
+ */
 function ai_child_indexable(string $slug): bool
 {
-    return (ai_confirmed()[$slug] ?? false) === true;
+    return isset(ai_confirmed()[$slug]);
 }
 
 function ai_url(string $slug = ''): string
@@ -96,6 +101,15 @@ function ai_children(): array
                 ['Set limits before anything acts', 'Define permissions, caps and approval thresholds first.'],
                 ['Review the audit trail', 'Every action is logged against the rule that authorised it — use it.'],
             ],
+            'india' => [
+                'title' => 'AI for how India pays.',
+                'items' => [
+                    ['High volumes, small tickets', 'UPI has made high-volume, low-value digital payments normal in India. Reviewing each one by hand does not scale — AI helps surface the few that need a person\'s attention.'],
+                    ['Personal data', 'Payment records carry personal data governed by the Digital Personal Data Protection Act, 2023, so AI that works on them has to respect consent and purpose limits.'],
+                    ['Accountability stays with people', 'Every Paynancial AI capability works within permissions and limits a business sets, with a person — or a policy a person configured — as the authority.'],
+                    ['Available on request', 'These capabilities are available to discuss with our team, so you can confirm what fits your business before you plan around them.'],
+                ],
+            ],
             'related' => ['ai:hub', 'ai:fraud-detection', 'ai:reconciliation', 'ai:cash-flow-intelligence'],
         ],
         'fraud-detection' => [
@@ -138,6 +152,15 @@ function ai_children(): array
                 ['Keep a person on the flagged cases', 'The value is in reviewing the few that matter, quickly.'],
                 ['Review decisions regularly', 'Use the audit trail to tune thresholds over time.'],
             ],
+            'india' => [
+                'title' => 'Payment fraud in India.',
+                'items' => [
+                    ['Report cyber fraud fast', 'Customers in India can report cyber fraud on the national cybercrime helpline 1930 or at cybercrime.gov.in. Speed matters for recovering funds.'],
+                    ['A UPI PIN is only for paying', 'You never need to enter a UPI PIN to receive money. Fake requests that ask for one are a common scam.'],
+                    ['Social engineering', 'Phishing links, fake customer-care numbers and impersonation are frequent routes to fraud — pattern-based screening looks at behaviour, not just amounts.'],
+                    ['People decide', 'Transactions above the thresholds your business sets, or matching a risk pattern, go to a person before they complete.'],
+                ],
+            ],
             'related' => ['ai:paynancial-ai', 'ai:reconciliation', 'product:payment-gateway', 'ai:hub'],
         ],
         'reconciliation' => [
@@ -177,6 +200,15 @@ function ai_children(): array
                 ['Use a reference on every payment', 'Order, invoice or booking IDs make matching and exceptions easy to read.'],
                 ['Resolve exceptions daily', 'Small, recent exceptions are quicker to resolve than a month\'s backlog.'],
                 ['Keep the audit trail', 'Every match and exception is traceable to the rule behind it.'],
+            ],
+            'india' => [
+                'title' => 'Reconciliation for businesses in India.',
+                'items' => [
+                    ['Many small transactions', 'With UPI, a day\'s takings can be thousands of small payments. Exception-first matching lets your team look only at what does not match.'],
+                    ['Failed transaction reversals', 'Failed digital transactions have RBI turnaround times for reversal, so spotting an unmatched debit early matters for your customers.'],
+                    ['Books your CA can use', 'Matched payment, settlement and refund records give your accountant or CA a clean starting point at month-end.'],
+                    ['Amounts to the paisa', 'The API works in paise for INR, so matching happens on exact amounts.'],
+                ],
             ],
             'related' => ['reconciliation', 'settlements', 'ai:paynancial-ai', 'category:financial-operations'],
         ],
@@ -218,6 +250,15 @@ function ai_children(): array
                 ['Keep a route to a person', 'Make sure unanswered questions reach someone quickly.'],
                 ['Never share API keys in questions', 'The assistant never needs your keys.'],
             ],
+            'india' => [
+                'title' => 'Payment questions in India.',
+                'items' => [
+                    ['UPI complaints in the app', 'For a UPI payment debited but not credited, a customer can raise a complaint from within their UPI app through NPCI\'s dispute mechanism.'],
+                    ['The RBI Ombudsman', 'If a complaint to an RBI-regulated entity is not resolved satisfactorily, the customer can escalate it to the RBI Ombudsman at cms.rbi.org.in.'],
+                    ['Not advice', 'The assistant answers routine payment questions. It does not give legal, accounting or investment advice.'],
+                    ['Answers without a ticket', 'Questions like "why was this transaction declined?" are answered from your payments data, without a support ticket.'],
+                ],
+            ],
             'related' => ['ai:paynancial-ai', 'ai:fraud-detection', 'product:payment-gateway', 'ai:hub'],
         ],
         'cash-flow-intelligence' => [
@@ -258,6 +299,15 @@ function ai_children(): array
                 ['Keep payouts and collections on Paynancial', 'The more of your money movement it sees, the more complete the picture.'],
                 ['Keep people on funding decisions', 'A forecast informs; your team decides.'],
             ],
+            'india' => [
+                'title' => 'Cash planning for businesses in India.',
+                'items' => [
+                    ['Settlements set the timing', 'Cash you can use depends on when settlements arrive, which is why forecasts start from settlement records, not just sales.'],
+                    ['Plan for GST and TDS', 'Tax payments such as GST and TDS are fixed outflows. A forecast built on payment data does not see them, so add them to your own plan.'],
+                    ['Festive peaks', 'Many Indian businesses see seasonal peaks around festivals; live transaction data shows the build-up as it happens, not a month later.'],
+                    ['Decisions stay with people', 'Forecasts inform treasury decisions; they do not make them.'],
+                ],
+            ],
             'related' => ['ai:revenue-forecasting', 'settlements', 'ai:paynancial-ai', 'ai:hub'],
         ],
         'revenue-forecasting' => [
@@ -297,6 +347,15 @@ function ai_children(): array
                 ['Agree the numbers you plan with', 'Decide which revenue figures matter to your plan first.'],
                 ['Combine with cash-flow', 'Revenue and liquidity together give the fuller picture.'],
                 ['Keep people on the plan', 'A forecast informs the plan; people own it.'],
+            ],
+            'india' => [
+                'title' => 'Revenue planning in India.',
+                'items' => [
+                    ['April to March', 'India\'s financial year runs from April to March. Forecasts are most useful when they line up with it.'],
+                    ['Advance tax', 'Businesses in India pay advance tax in instalments during the year based on estimated income. A revenue forecast is one input your CA can use.'],
+                    ['Festive and seasonal cycles', 'Seasonal peaks around festivals and sales events show up in transaction volume first.'],
+                    ['A forecast, not a promise', 'Forecasts are estimates from past and current transaction data. They are not guarantees of future revenue.'],
+                ],
             ],
             'related' => ['ai:cash-flow-intelligence', 'ai:paynancial-ai', 'product:payment-analytics', 'ai:hub'],
         ],

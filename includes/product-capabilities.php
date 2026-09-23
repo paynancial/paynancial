@@ -363,8 +363,9 @@ function pc_pages(): array
         // Analytics + Reports API) and Chargebacks (the published Refund
         // Policy's chargeback process). International Payments, Invoice
         // Management and Expense Management are informative guides with the
-        // published facts only; they stay noindex (and out of the sitemap)
-        // until the business confirms each capability — remove 'robots' then.
+        // published facts only ('guide' => true): indexable at the owner's
+        // request, but with no Service schema, since the capability itself is
+        // not confirmed.
         'mis-reports' => [
             'parent' => ['Financial Operations', '/financial-operations'],
             'name'  => 'MIS & Reports',
@@ -475,7 +476,7 @@ function pc_pages(): array
         ],
         'international-payments' => [
             'parent' => ['Pay & Move Money', '/pay-and-move-money'],
-            'robots' => 'noindex, follow',
+            'guide' => true,
             'name'  => 'International Payments',
             'title' => 'International Payments | Cross-Border Payments for Indian Businesses | Paynancial',
             'description' => 'What Paynancial publishes today about international payments, what cross-border payments involve for a business in India, and what to confirm with our team before you plan around them.',
@@ -530,7 +531,7 @@ function pc_pages(): array
         ],
         'invoice-management' => [
             'parent' => ['Financial Operations', '/financial-operations'],
-            'robots' => 'noindex, follow',
+            'guide' => true,
             'name'  => 'Invoice Management',
             'title' => 'Invoice Payments | Put a Payment Link on Every Invoice | Paynancial',
             'description' => 'Get invoices paid in one step with Paynancial: add a Payment Link to an invoice, track whether each link is active, paid, expired or disabled, and collect recurring invoices with Smart Collections. What is published today, and what to confirm.',
@@ -587,7 +588,7 @@ function pc_pages(): array
         ],
         'expense-management' => [
             'parent' => ['Financial Operations', '/financial-operations'],
-            'robots' => 'noindex, follow',
+            'guide' => true,
             'name'  => 'Expense Management',
             'title' => 'Expense Management | Pay Vendors and Staff, Tracked and Reported | Paynancial',
             'description' => 'What Paynancial publishes today for business spending in India — paying vendors and staff through Payouts to bank accounts and UPI IDs, with every payout tracked and reported — and what an expense management product would add.',

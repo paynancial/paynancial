@@ -212,11 +212,13 @@ Each section states only what the site already publishes and says plainly where 
 |---|---|---|
 | `/products/mis-reports` | Payment Analytics reports + Reports API (verified) | Indexable; in sitemap |
 | `/products/chargebacks` | Chargeback process in the published Refund Policy (verified) | Indexable; in sitemap |
-| `/products/international-payments` | Guide: published payout facts + India context; no cross-border claim | `noindex, follow` until confirmed |
-| `/products/invoice-management` | Guide: Payment Links + Smart Collections; no invoicing claim | `noindex, follow` until confirmed |
-| `/products/expense-management` | Guide: payout side of spending; no expense-product claim | `noindex, follow` until confirmed |
+| `/products/international-payments` | Guide: published payout facts + India context; no cross-border claim | Indexable (owner's request); no Service schema |
+| `/products/invoice-management` | Guide: Payment Links + Smart Collections; no invoicing claim | Indexable (owner's request); no Service schema |
+| `/products/expense-management` | Guide: payout side of spending; no expense-product claim | Indexable (owner's request); no Service schema |
 
-To index a guide page once the capability is confirmed: remove its `'robots'` line in `includes/product-capabilities.php` and add it to `public/sitemap.php`.
+The guide pages are indexable at the owner's request. Each still states plainly what is not offered, and they carry no `Service` schema so the markup makes no availability claim.
+
+**AI & Intelligence children** are now indexable and in the sitemap as well (owner's request). Each page states that the capability is available on request; `ai_confirmed()` still records which are confirmed. Every AI page and the hub has an "In India" band and a regulatory band (RBI FREE-AI, fraud risk management, digital payment security controls, DPDP Act, ODR, UDIR, RBI Integrated Ombudsman).
 
 **India local signals (site-wide):** `<html lang="en-IN">`, `og:locale en_IN`, `inLanguage: en-IN`, Organization `address` (Patna, Bihar, IN — "based in", not a registered-office claim), and a `Service` schema with `areaServed: India` on every product, capability and pillar page. Each new page also has an "In India" band.
 

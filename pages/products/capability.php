@@ -21,7 +21,7 @@ $page_meta = sp_meta([
     'trail'       => $trail,
     'faqs'        => $faqs,
     'robots'      => $pc['robots'] ?? '',
-    'service'     => ($pc['family'] ?? '') === 'ai' ? '' : $pc['name'],
+    'service'     => (($pc['family'] ?? '') === 'ai' || !empty($pc['guide'])) ? '' : $pc['name'],
 ]);
 $india = $pc['india'] ?? null;
 $tone = fn (string $a, string $b) => $india ? $b : $a; // keep bands alternating when the India band is present
@@ -87,7 +87,7 @@ sp_hero([
 <?php sp_band_close(); ?>
 <?php endif; ?>
 
-<?php if (($pc['family'] ?? '') !== 'ai') { sp_regulatory($pc['slug'], $noun . ' in India'); } ?>
+<?php sp_regulatory((($pc['family'] ?? '') === 'ai' ? 'ai:' : '') . $pc['slug'], (($pc['family'] ?? '') === 'ai' ? 'AI in payments' : $noun) . ' in India'); ?>
 
 <?php sp_band_open('practices', $tone('dim', 'paper')); ?>
   <div class="sp-split">

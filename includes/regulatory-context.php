@@ -39,6 +39,9 @@ function reg_items(): array
         'tokenisation' => ['Card-on-File tokenisation', 'RBI', 'Merchants and payment aggregators may not store customers\' actual card numbers. A card saved for repeat payments is replaced by a token, created with the customer\'s consent.'],
         'security' => ['Digital Payment Security Controls', 'RBI', 'RBI\'s expectations for governance, secure application design, authentication and fraud-risk monitoring in digital payment products offered by regulated entities.'],
         'kyc' => ['Know Your Customer (KYC) Direction', 'RBI', 'Customer due diligence obligations for RBI-regulated entities. Payment aggregators apply due diligence to the merchants they onboard.'],
+        'free-ai' => ['Responsible and ethical AI in the financial sector (FREE-AI)', 'RBI', 'An RBI framework for the responsible and ethical enablement of AI in financial services, centred on governance, accountability, fairness, transparency, consumer protection and managing AI risk.'],
+        'fraud-rm' => ['Fraud risk management directions', 'RBI', 'RBI directions requiring regulated entities to run fraud risk management — early warning signals, monitoring, reporting and board oversight — across their products, including digital payments.'],
+        'ombudsman' => ['Reserve Bank – Integrated Ombudsman Scheme', 'RBI', 'Customers of RBI-regulated entities can escalate a complaint that is not resolved satisfactorily to the RBI Ombudsman, online at cms.rbi.org.in.'],
         'dpdp' => ['Digital Personal Data Protection Act, 2023', 'Act of Parliament', 'India\'s law on processing digital personal data — including the personal data in payment records — based on consent, purpose limitation and security safeguards.'],
     ];
 }
@@ -69,6 +72,13 @@ function reg_page_map(): array
         'pillar:pay-and-move-money' => ['pss-act', 'upi', 'imps', 'nach', 'tat', 'fema'],
         'pillar:financial-operations' => ['pa-pg', 'tat', 'odr', 'udir', 'dpdp'],
         'pillar:embedded-finance'   => ['pss-act', 'pa-pg', 'kyc', 'tokenisation', 'dpdp'],
+        'ai:hub'                    => ['free-ai', 'fraud-rm', 'security', 'dpdp', 'odr', 'ombudsman'],
+        'ai:paynancial-ai'          => ['free-ai', 'security', 'fraud-rm', 'dpdp'],
+        'ai:fraud-detection'        => ['fraud-rm', 'security', 'udir', 'tokenisation', 'dpdp'],
+        'ai:reconciliation'         => ['tat', 'pa-pg', 'free-ai', 'dpdp'],
+        'ai:financial-assistant'    => ['odr', 'ombudsman', 'udir', 'free-ai', 'dpdp'],
+        'ai:cash-flow-intelligence' => ['free-ai', 'pa-pg', 'dpdp'],
+        'ai:revenue-forecasting'    => ['free-ai', 'dpdp'],
         'pillar:accept-and-collect' => ['pa-pg', 'tokenisation', 'emandate', 'upi', 'tat'],
     ];
 }

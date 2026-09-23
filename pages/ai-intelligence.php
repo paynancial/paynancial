@@ -243,6 +243,20 @@ sp_hero([
   </div>
 <?php sp_band_close(); ?>
 
+<?php sp_band_open('india', 'dim'); ?>
+  <div class="sp-split">
+    <?php sp_head('india', 'In India', 'AI for how businesses in India pay and get paid.', 'Built around the realities of Indian digital payments — with people, not models, accountable for decisions.'); ?>
+    <?php sp_answers([
+        ['UPI-scale volumes', 'UPI has made high-volume, low-value digital payments normal. AI helps surface the few transactions and mismatches that need a person, instead of reviewing every one.'],
+        ['Fraud awareness', 'Customers can report cyber fraud on the national helpline 1930 or at cybercrime.gov.in, and a UPI PIN is never needed to receive money — two messages worth repeating to your customers.'],
+        ['Personal data', 'Payment records carry personal data governed by the Digital Personal Data Protection Act, 2023, so AI that works on them has to respect consent and purpose limits.'],
+        ['Planning to the Indian calendar', 'The financial year runs April to March, and festive seasons drive peaks — forecasts are most useful when they line up with both.'],
+    ]); ?>
+  </div>
+<?php sp_band_close(); ?>
+
+<?php sp_regulatory('ai:hub', 'AI in payments in India'); ?>
+
 <?php sp_band_open('developers', 'dim'); ?>
   <?php sp_head('developers', 'Developer platform', 'Build with financial intelligence.', 'The AI capabilities work on the data your integration creates. Today, developers build on the published Paynancial API; APIs for the AI capabilities themselves are not published — ask our team about availability.'); ?>
   <?php sp_related([
