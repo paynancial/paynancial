@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /customer/
+Disallow: /partner/
+Disallow: /employee/
+Disallow: /hrms/
+Disallow: /admin/
+Disallow: /super-admin/
+Disallow: /api/
+
+Sitemap: https://paynancial.com/sitemap.xml

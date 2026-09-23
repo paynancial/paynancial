@@ -1,0 +1,5 @@
+# Defense in depth: if the hosting control panel cannot be pointed at
+# /public as the document root, this blocks direct access to everything
+# outside it. Preferred setup is still: set the domain's document root
+# to the /public folder (see README "Installation").
+Require all denied
