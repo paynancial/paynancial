@@ -278,6 +278,12 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
   left: 0; transform: translateY(6px);
 }
 .nav-item.is-open .mega-menu.mega-menu-wide { transform: translateY(0); }
+/* Solutions (second item) sits near the left edge on narrower desktops:
+   anchor its menu to the item's left edge instead of centring it. */
+@media (max-width: 1439px) {
+  .main-nav > li:nth-child(2) > .mega-menu { left: 0; transform: translateY(6px); }
+  .main-nav > li.is-open:nth-child(2) > .mega-menu { transform: translateY(0); }
+}
 /* Centre the wide Products menu under the whole header (the sticky header is
    its containing block) so it can never run past the viewport, whatever the
    position of the Products item. */
@@ -912,16 +918,74 @@ section:last-of-type { border-bottom: none; }
 .cookie-toggle.locked { background: var(--text-muted); opacity: 0.5; cursor: not-allowed; }
 .cookie-toggle.locked::after { transform: translateX(18px); }
 
-/* Header fit on narrower desktops (six primary items + two CTAs) */
+/* ---------------------------------------------------------------------
+   Header: Business Services mega-menu + mobile sub-navigation
+   --------------------------------------------------------------------- */
+/* ---- Header: current-section marker (subtle, same as hover weight) ---- */
+.nav-link.is-current { color: var(--teal-700); }
+.nav-link.is-current::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 3px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--teal-500), var(--orange-500));
+}
+/* Seven primary items + two CTAs: tighten item padding on narrower desktops
+   so the row never wraps or overflows. */
 @media (min-width: 1080px) and (max-width: 1199px) {
   .site-header .container { gap: 12px; padding-inline: 16px; }
   .main-nav .nav-link { padding-inline: 7px !important; font-size: 0.84rem !important; }
+  .nav-link.is-current::after { left: 7px !important; right: 7px !important; }
   .site-header .btn-contact, .site-header .btn-login-signup { padding-inline: 12px; font-size: 0.8rem; }
 }
 @media (min-width: 1080px) and (max-width: 1279px) {
   .main-nav .nav-link { padding-inline: 9px; font-size: 0.86rem; }
+  .nav-link.is-current::after { left: 9px; right: 9px; }
   .site-header .header-actions > .btn-contact { padding-inline: 12px; }
 }
+
+/* ---- Business Services mega-menu ---- */
+.mega-menu.mega-menu-bs {
+  display: block; width: min(780px, 94vw); padding: 0; overflow: hidden;
+  border-radius: var(--gh-radius-dropdown);
+}
+.mega-bs-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 18px 24px 4px; }
+.mega-bs-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 500; color: var(--ink); }
+.mega-bs-overview { font-size: 0.78rem; font-weight: 600; color: var(--teal-700); }
+.mega-bs-overview:hover { color: var(--ink); }
+.mega-bs-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 8px; padding: 6px 12px 14px; }
+.mega-bs-col .mega-col-title { color: var(--teal-700); padding: 10px 12px 6px; }
+.mega-link.mega-link-lead strong { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.mega-bs-feature {
+  display: flex; align-items: center; gap: 16px; padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(100deg, var(--teal-50) 0%, rgba(234, 251, 250, 0.35) 55%, var(--paper) 100%);
+}
+.mega-bs-feature-icon { width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; display: grid; place-items: center; background: #fff; border: 1px solid var(--teal-100); color: var(--teal-700); }
+.mega-bs-feature-icon svg { width: 20px; height: 20px; }
+.mega-bs-feature-copy { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.mega-bs-feature-copy strong { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+.mega-bs-feature-copy span { font-size: 0.82rem; color: var(--text-muted); }
+.mega-bs-cta {
+  display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; padding: 9px 16px; border-radius: 999px;
+  background: var(--orange-500); color: #fff; font-size: 0.8rem; font-weight: 600; transition: background var(--gh-transition), transform var(--gh-transition);
+}
+.mega-bs-cta:hover { background: var(--orange-600); transform: translateY(-1px); }
+/* Narrower desktops: centre the menu under the whole header (like the wide
+   Products menu) so it never runs past either edge of the viewport. */
+@media (max-width: 1279px) {
+  .main-nav > li:has(> .mega-menu-bs) { position: static; }
+  .main-nav > li:has(> .mega-menu-bs) > .mega-menu-bs { top: 100%; left: 50%; transform: translateX(-50%) translateY(6px); }
+  .main-nav > li.is-open:has(> .mega-menu-bs) > .mega-menu-bs { transform: translateX(-50%) translateY(0); }
+}
+
+/* ---- Mobile drawer: nested Business Services groups ---- */
+.mobile-subnav { display: grid; gap: 2px; margin-top: 10px; }
+.mobile-subnav-overview { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.9rem; font-weight: 500; color: var(--teal-700); }
+.mobile-nav details.mobile-subgroup { border-bottom: none; border-left: 2px solid var(--border); padding: 10px 0 10px 14px; }
+.mobile-nav details.mobile-subgroup[open] { border-left-color: var(--teal-500); }
+.mobile-nav details.mobile-subgroup > summary { font-size: 0.92rem; color: var(--text); }
+.mobile-nav summary .chev { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform var(--gh-transition); align-self: center; }
+.mobile-nav details[open] > summary .chev { transform: rotate(-135deg); }
+/* Touch targets: at least 44px tall in the Business Services drawer group. */
+.mobile-subnav .mobile-subgroup > summary, .mobile-subnav-overview, .mobile-subnav ul a { min-height: 44px; display: flex; align-items: center; }
 
 
 /* Contextual cross-link (payments page → Business Services) */

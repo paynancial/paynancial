@@ -4,6 +4,8 @@
  * Expects $current_path to be set by the front controller (optional).
  */
 $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
+require_once __DIR__ . '/business-services.php';
+$bs_is_current = str_starts_with((string) $current_path, '/business-services');
 ?>
 <a class="sr-only" href="#main-content">Skip to main content</a>
 <div class="utility-bar">
@@ -119,6 +121,33 @@ $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
               <a class="mega-link" href="/solutions#hospitality"><strong>Hospitality</strong><span>Bookings, deposits, and on-site payments</span></a>
               <a class="mega-link" href="/solutions#professional-services"><strong>Professional Services</strong><span>Simple invoicing and collection</span></a>
               <a class="mega-link" href="/solutions#enterprise"><strong>Enterprise</strong><span>Custom infrastructure for scale</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link<?= $bs_is_current ? ' is-current' : '' ?>" aria-haspopup="true" aria-expanded="false" aria-controls="mega-business-services">Business Services <i class="chev" aria-hidden="true"></i></button>
+          <div class="mega-menu mega-menu-bs" id="mega-business-services">
+            <div class="mega-bs-head">
+              <span class="mega-bs-title">Business Services</span>
+              <a class="mega-bs-overview" href="/business-services">Explore all services <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="mega-bs-cols">
+              <?php foreach (bs_menu_columns() as $col): ?>
+              <div class="mega-bs-col">
+                <div class="mega-col-title"><?= e($col['label']) ?></div>
+                <?php foreach ($col['items'] as $item): [$label, $href, $popular] = bs_menu_item($item); ?>
+                <a class="mega-link mega-link-plain<?= $popular ? ' mega-link-lead' : '' ?>" href="<?= e($href) ?>"><strong><?= e($label) ?></strong></a>
+                <?php endforeach; ?>
+              </div>
+              <?php endforeach; ?>
+            </div>
+            <div class="mega-bs-feature">
+              <span class="mega-bs-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+              <div class="mega-bs-feature-copy">
+                <strong>Start your business</strong>
+                <span>Company incorporation, registrations and compliance support.</span>
+              </div>
+              <a class="mega-bs-cta" href="/business-services/company-incorporation">Get Started <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </li>
@@ -274,6 +303,22 @@ $current_path = $current_path ?? ($_SERVER['REQUEST_URI'] ?? '/');
       <li><a href="/solutions#professional-services">Professional Services</a></li>
       <li><a href="/solutions#enterprise">Enterprise</a></li>
     </ul>
+  </details>
+  <details<?= $bs_is_current ? ' open' : '' ?>>
+    <summary>Business Services <i class="chev" aria-hidden="true"></i></summary>
+    <div class="mobile-subnav">
+      <a class="mobile-subnav-overview" href="/business-services">Business Services overview <span aria-hidden="true">&rarr;</span></a>
+      <?php foreach (bs_menu_columns() as $col): ?>
+      <details class="mobile-subgroup">
+        <summary><?= e($col['label']) ?> <i class="chev" aria-hidden="true"></i></summary>
+        <ul>
+          <?php foreach ($col['items'] as $item): [$label, $href] = bs_menu_item($item); ?>
+          <li><a href="<?= e($href) ?>"><?= e($label) ?></a></li>
+          <?php endforeach; ?>
+        </ul>
+      </details>
+      <?php endforeach; ?>
+    </div>
   </details>
   <details>
     <summary>Developers <i class="chev" aria-hidden="true"></i></summary>

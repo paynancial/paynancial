@@ -10,7 +10,7 @@
  * is defined exactly once. Descriptive text is justified. On narrow
  * screens each group collapses into an accordion (main.js; panels stay
  * open without JavaScript).
- * Business Services is intentionally not linked here yet.
+ * Business Services is in the header mega-menu but not linked here.
  */
 $footer_groups = [
     'products' => [

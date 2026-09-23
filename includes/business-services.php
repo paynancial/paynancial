@@ -6,9 +6,10 @@
  * page, jurisdiction directory and jurisdiction pages all render from this
  * data, so adding a service or jurisdiction here publishes its page.
  *
- * Navigation-independent but discovery-enabled: NOT in the header or
- * footer; reachable through approved contextual links; eligible pages are
- * listed in the XML sitemap (see bs_sitemap_paths()).
+ * Linked from the primary header (Business Services mega-menu, see
+ * bs_menu_columns()) and from approved contextual links. NOT in the
+ * footer. Eligible pages are listed in the XML sitemap (see
+ * bs_sitemap_paths()).
  *
  * Content policy (see README "Content & claims policy"): no fees,
  * government charges, turnaround times, customer counts, country counts,
@@ -72,6 +73,30 @@ function bs_categories(): array
             'services' => ['roc-compliance', 'annual-compliance', 'company-changes'],
         ],
     ];
+}
+
+/**
+ * Header mega-menu columns. An item is a service slug (links to that
+ * service's existing page) or [label, href] for an item that has no page
+ * yet and goes to a sales enquiry instead.
+ */
+function bs_menu_columns(): array
+{
+    return [
+        ['label' => 'Start a Business',      'items' => ['company-incorporation', 'private-limited-company', 'llp-registration', 'opc-registration', 'partnership-registration']],
+        ['label' => 'Business Registration', 'items' => ['gst-registration', 'msme-registration', 'startup-registration', 'pan-tan-assistance', ['Professional Tax', '/contact?intent=sales&product=professional-tax']]],
+        ['label' => 'Protect & Comply',      'items' => ['trademark-registration', 'trademark-search', 'roc-compliance', 'annual-compliance', 'company-changes']],
+    ];
+}
+
+/** Resolve a bs_menu_columns() item to [label, href, popular]. */
+function bs_menu_item(string|array $item): array
+{
+    if (is_array($item)) {
+        return [$item[0], $item[1], false];
+    }
+    $svc = bs_service($item);
+    return [$svc['short'], bs_url($item), !empty($svc['popular'])];
 }
 
 /**

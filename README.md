@@ -187,13 +187,14 @@ Note: PHP's built-in server does not read `.htaccess`, so
   `permissions` / `role_permissions` / `user_permissions` for modules that
   need finer control than role alone.
 
-## Business Services (standalone pages)
+## Business Services
 
 A Business Services vertical (company incorporation, registrations,
 trademarks, compliance and international incorporation) lives under
-`/business-services`. It is **navigation-independent but discovery-enabled**:
-not in the header or footer; reachable through contextual links on the
-homepage, Payment Gateway, Solutions and Pricing; eligible pages are in
+`/business-services`. It is in the primary header (Business Services
+mega-menu between Solutions and Developers, built from `bs_menu_columns()`)
+but not in the footer; it also has contextual links on the homepage,
+Payment Gateway, Solutions and Pricing; eligible pages are in
 `sitemap.xml` (`docs/business-services-sitemap-eligibility.md`). Jurisdiction
 pages stay `noindex` and UNCONFIRMED until approved in
 `docs/jurisdiction-approval-matrix.md`.
