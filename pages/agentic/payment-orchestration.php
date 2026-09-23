@@ -4,16 +4,11 @@
  * from the section of the same name on /agentic-ai, which now summarises
  * and links here. Technical facts come from includes/developer-docs.php.
  */
+require_once __DIR__ . '/../../includes/faq-data.php';
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
-$faqs = [
-    ['What is AI payment orchestration?', 'The sequencing and safety rails that let software — including AI agents — initiate, retry and track payments and payouts reliably. The payment rail is the same one a person\'s click uses; orchestration is what makes frequent, round-the-clock, automated requests safe.'],
-    ['Does an AI agent use a different payment system from a person?', 'No. An agent-initiated payment or payout travels through exactly the same infrastructure as one a person starts: the same API, idempotency keys, structured error codes and webhooks.'],
-    ['How do you stop an agent paying twice?', 'Every write request carries an idempotency key. If an agent retries after a timeout with the same key, the API returns the original result instead of creating a second payment or payout.'],
-    ['How does an agent know what went wrong?', 'Errors carry a stable code — such as insufficient_funds, invalid_method or rate_limited — that an agent can branch on programmatically, rather than a message written for a person.'],
-    ['Where should agent workflows be tested?', 'In the sandbox, before the agent is given a live key — including how it retries, how it handles each error and how it behaves under rate limits.'],
-];
+$faqs = faq_set('payment-orchestration');
 $trail = [['Home', '/'], ['Agentic AI', '/agentic-ai'], ['AI Payment Orchestration', '/agentic-ai/payment-orchestration']];
 $page_meta = sp_meta([
     'title'       => 'AI Payment Orchestration | Safe Rails for Agent Payments | Paynancial',

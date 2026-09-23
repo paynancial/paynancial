@@ -177,3 +177,26 @@
 .sp-glance ul { display: grid; gap: 2px; margin-top: 22px; border-top: 1px solid rgba(250, 249, 245, 0.14); padding-top: 12px; }
 .sp-glance a { display: flex; justify-content: space-between; align-items: center; min-height: 44px; color: rgba(250, 249, 245, 0.86); font-weight: 500; border-bottom: 1px solid rgba(250, 249, 245, 0.08); }
 .sp-glance a:hover { color: var(--teal-300); }
+
+/* FAQ hub: search and topic directory */
+.sp-faq-search-band { padding: clamp(28px, 4vw, 44px) 0; border-bottom: 1px solid var(--border); }
+.sp-faq-search { display: block; max-width: 760px; }
+.sp-faq-search input { width: 100%; min-height: 52px; margin-top: 4px; padding: 12px 18px; border: 1.5px solid var(--border); border-radius: 12px; background: #fff; font-size: 1rem; color: var(--ink); }
+.sp-faq-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-color: var(--teal-500); }
+.sp-faq-empty { margin-top: 14px; color: var(--text-muted); }
+.sp-faqdir { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.sp-faqdir-page { border: 1px solid var(--border); border-radius: 14px; background: var(--paper); padding: 22px 24px; }
+.sp-band--dim .sp-faqdir-page { background: #fff; }
+.sp-faqdir-page h3 { font-family: var(--font-serif); font-weight: 460; font-size: 1.2rem; }
+.sp-faqdir-page h3 a { color: var(--ink); }
+.sp-faqdir-page h3 a:hover { color: var(--teal-700); }
+.sp-faqdir-page ul { margin-top: 10px; display: grid; }
+.sp-faqdir-page li a { display: flex; align-items: center; min-height: 44px; padding: 8px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.93rem; line-height: 1.45; }
+.sp-faqdir-page li a:hover { color: var(--teal-700); }
+[data-faq-hidden] { display: none !important; }
+
+/* Card grids: separate bordered cards, so an incomplete last row leaves
+   clean space instead of grey filler cells. */
+.sp-cards { gap: 16px; background: transparent; border: 0; }
+.sp-card { border: 1px solid var(--border); border-radius: 14px; }
+.sp-band--dim .sp-card { background: #fff; }

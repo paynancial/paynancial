@@ -1,14 +1,6 @@
 <?php
-$faqs = [
-    ['Is Paynancial\'s AI making financial decisions on its own?', 'No. Every AI capability Paynancial offers — fraud scoring, reconciliation matching, cash-flow forecasting — surfaces a recommendation or takes a narrowly scoped action inside limits a business sets. A person or a policy a person configured is always the authority; the AI is the layer that reduces how much of the repetitive work reaches a human before a decision gets made.'],
-    ['What\'s the difference between "AI-powered" and "agentic"?', 'AI-powered usually means a model analyzes something and shows you the result — a fraud score, a forecast. Agentic goes one step further: the system takes the next action too, like retrying a failed charge or routing a payout for approval, without a person clicking through each step.'],
-    ['Can an AI agent move money without anyone approving it?', 'Only within limits a business explicitly configures — a payout ceiling, an approval workflow, a list of pre-authorized beneficiaries. Nothing here removes a business\'s ability to require human sign-off; it changes how much of the routine work happens before a human is asked to weigh in.'],
-    ['How is this different from the automation we already have?', 'Traditional automation follows a fixed script: if X, then always Y. An agent evaluates context each time — is this failed payment worth retrying, does this transaction pattern look like the last 200 or like none of them — and its behavior can be reasoned about and adjusted, not just re-coded.'],
-    ['What happens if an agent makes a mistake?', 'The same way any API-driven action is handled today: idempotency keys prevent a duplicate charge or payout, every action is logged against the request that triggered it, and webhooks notify a business in real time so an error surfaces immediately rather than at month-end reconciliation.'],
-    ['Do we need to change our integration to support agentic workflows?', 'No — the same Payment, Payout and Reconciliation APIs your team already integrates with are what an agent calls too. See the Developers page for the specific patterns (idempotency keys, structured errors, webhooks) that make an API safe for either kind of caller.'],
-    ['Is this only relevant for large enterprises with engineering teams?', 'No — the earliest and simplest version of this is a solo founder\'s AI bookkeeping assistant flagging a mismatched transaction. The infrastructure scales up to enterprise treasury agents, but the starting point is available to any business already using Paynancial\'s dashboard or API.'],
-    ['Where can I read about the security model behind this?', 'The Trust Center covers access controls, authentication, audit trails and the governance model specifically for agent-initiated actions — see the Governance section on this page for a summary, or visit the Trust Center for the full picture.'],
-];
+require_once __DIR__ . '/../includes/faq-data.php';
+$faqs = faq_set('agentic-ai');
 $page_meta = [
     'title'       => 'Agentic AI in Finance | Paynancial',
     'description' => 'What agentic AI actually means for payments and financial operations — and how Paynancial builds for AI agents acting within human-defined limits, from small business to enterprise.',

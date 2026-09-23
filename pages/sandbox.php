@@ -1,16 +1,10 @@
 <?php
 /** Sandbox — /sandbox (standalone; transactional developer intent). */
+require_once __DIR__ . '/../includes/faq-data.php';
 require_once __DIR__ . '/../includes/standalone-ui.php';
 require_once __DIR__ . '/../includes/developer-docs.php';
 
-$faqs = [
-    ['What is the Paynancial Sandbox?', 'A test environment for your Paynancial integration. Requests made with a sandbox API key run in the sandbox, so you can build and test a complete integration with no real funds involved.'],
-    ['How do I get sandbox API keys?', 'Request sandbox access through the contact page. Once your access is set up, sandbox and live API keys are managed from your Paynancial dashboard.'],
-    ['How do I test payments?', 'Make the same API calls you will make in production — create a payment, a payment link, a payout or a collection — authenticated with your sandbox key. The API Reference has an example for each.'],
-    ['What is the difference between sandbox and live mode?', 'A sandbox key runs requests in the sandbox, where no real money moves. A live key processes real payments and payouts. Confirm with developer support whether anything else differs between environments for your account.'],
-    ['Can I test failures, retries and rate limits?', 'Yes — the sandbox is the recommended place to test retry behaviour, rate limits and failure handling before any code gets a live key. Ask developer support which failure scenarios can be simulated for your account.'],
-    ['Is the sandbox suitable for testing AI agents?', 'Yes. Any agent-driven or autonomous workflow should be tested in the sandbox — including how it retries and how it handles errors — before it is given a live key.'],
-];
+$faqs = faq_set('sandbox');
 $trail = [['Home', '/'], ['Developers', '/developers'], ['Sandbox', '/sandbox']];
 $page_meta = sp_meta([
     'title'       => 'Sandbox | Test Paynancial Without Live Payments',

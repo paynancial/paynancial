@@ -157,7 +157,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
             <div>
               <div class="mega-col-title">Build</div>
               <a class="mega-link" href="/developers"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
-              <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guide</strong><span>Step-by-step setup for your stack</span></a>
+              <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guide</strong><span>From sandbox key to first live payment</span></a>
               <a class="mega-link" href="/developers/sdks"><strong>SDKs</strong><span>PHP, JavaScript, Python client libraries</span></a>
             </div>
             <div>
@@ -175,11 +175,12 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
             <div>
               <div class="mega-col-title">Learn</div>
               <a class="mega-link" href="/developers"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
-              <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guides</strong><span>Step-by-step setup for your stack</span></a>
-              <a class="mega-link" href="/support#faqs"><strong>FAQs</strong><span>Answers to common questions</span></a>
+              <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guide</strong><span>From sandbox key to first live payment</span></a>
+              <a class="mega-link" href="/resources/faqs"><strong>FAQs</strong><span>Answers to common questions</span></a>
             </div>
             <div>
               <div class="mega-col-title">Get Help</div>
+              <a class="mega-link" href="/resources"><strong>All Resources</strong><span>Guides, answers and policies in one place</span></a>
               <a class="mega-link" href="/support"><strong>Support Center</strong><span>Get help from our support team</span></a>
               <a class="mega-link" href="/security"><strong>Security &amp; Compliance</strong><span>How we protect every transaction</span></a>
               <a class="mega-link" href="/blog"><strong>Blog / Insights</strong><span>Product updates &amp; payment insights</span></a>
@@ -331,9 +332,10 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
   <details>
     <summary>Resources <i class="chev" aria-hidden="true"></i></summary>
     <ul>
+      <li><a href="/resources">All Resources</a></li>
       <li><a href="/developers">API Documentation</a></li>
-      <li><a href="/developers/integration-guide">Integration Guides</a></li>
-      <li><a href="/support#faqs">FAQs</a></li>
+      <li><a href="/developers/integration-guide">Integration Guide</a></li>
+      <li><a href="/resources/faqs">FAQs</a></li>
       <li><a href="/support">Support Center</a></li>
       <li><a href="/security">Security &amp; Compliance</a></li>
       <li><a href="/blog">Blog / Insights</a></li>

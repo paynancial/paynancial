@@ -79,8 +79,9 @@ $footer_groups = [
         'title' => 'Resources & Trust',
         'blocks' => [
             ['Resources', [
+                ['All Resources', '/resources'],
                 ['Blog / Insights', '/blog'],
-                ['FAQs', '/support#faqs'],
+                ['FAQs', '/resources/faqs'],
                 ['Support Center', '/support'],
             ]],
             ['Trust', [

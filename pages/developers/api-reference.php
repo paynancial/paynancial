@@ -1,14 +1,10 @@
 <?php
 /** API Reference — /developers/api-reference */
+require_once __DIR__ . '/../../includes/faq-data.php';
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
-$faqs = [
-    ['What is the base URL of the Paynancial API?', 'All requests go to ' . DEV_API_BASE . ' over HTTPS. Whether a request runs in the sandbox or moves real money depends on whether you authenticate with a sandbox key or a live key.'],
-    ['How are amounts expressed?', 'In the smallest unit of the currency. For Indian rupees that is paise, so 50000 means ₹500.00.'],
-    ['How do I avoid creating a duplicate payment or payout when I retry?', 'Send an idempotency key with every write request. If the same key is sent again, the API returns the original result instead of creating a second payment or payout.'],
-    ['Which endpoints are documented here?', 'Payments, refunds, payouts, payment links and collections, with the parameters used in Paynancial\'s published examples. For anything not covered on this page, contact developer support.'],
-];
+$faqs = faq_set('api-reference');
 $trail = [['Home', '/'], ['Developers', '/developers'], ['API Reference', '/developers/api-reference']];
 $page_meta = sp_meta([
     'title'       => 'API Reference | Paynancial Developers',

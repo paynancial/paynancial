@@ -1,15 +1,10 @@
 <?php
+require_once __DIR__ . '/../includes/faq-data.php';
 $page_meta = [
     'title' => 'Support | Paynancial Help Center',
     'description' => 'Get help with Paynancial payment products. Browse FAQs or contact our support team.',
 ];
-$faqs = [
-    ['How do I get started with Paynancial?', 'Reach out through our contact form or create an account, and our team will guide you through onboarding and KYC.'],
-    ['Which payment methods are supported?', 'Cards, UPI, netbanking and wallets are supported through the Payment Gateway product.'],
-    ['How do refunds work?', 'Refunds can be initiated from your dashboard and are tracked through to settlement.'],
-    ['How do I report a security concern?', 'Email hello@paynancial.com with details and our team will respond promptly.'],
-    ['How can partners track commission?', 'Commission and settlement tracking are available in the Partner Portal.'],
-];
+$faqs = faq_set('general');
 ?>
 <section style="padding-top:56px;">
   <div class="container">
@@ -77,15 +72,14 @@ $faqs = [
     <div class="section-head reveal">
       <span class="eyebrow">FAQs</span>
       <h2 id="faqs-heading">Frequently asked questions</h2>
+      <p>Answers to common questions — getting started, payment methods, refunds, security and sandbox testing — plus every question answered across Paynancial, by topic.</p>
     </div>
-    <div class="grid" style="gap:14px;">
-      <?php foreach ($faqs as $i => [$q, $a]): ?>
-        <details class="card reveal" style="cursor:pointer;">
-          <summary style="font-weight:650;list-style:none;"><?= e($q) ?></summary>
-          <p class="text-muted" style="margin-top:12px;"><?= e($a) ?></p>
-        </details>
+    <ul class="reveal" style="display:grid;gap:8px;margin-bottom:22px;">
+      <?php foreach (array_slice($faqs, 0, 5) as [$q]): ?>
+        <li><a class="inline-link" href="/resources/faqs#general"><?= e($q) ?></a></li>
       <?php endforeach; ?>
-    </div>
+    </ul>
+    <a class="btn btn-primary reveal" href="/resources/faqs">Browse all FAQs →</a>
   </div>
 </section>
 

@@ -32,7 +32,7 @@ destinations.
 | E-Commerce … Enterprise (8 industries) | `/solutions#…` | 2 sentences each | **New standalone pages** (see §2a) | `/solutions/{industry}` |
 | AI Financial Agents | `/agentic-ai#financial-agents` | 215 words | **Expanded into a standalone page** (see §2b) | `/agentic-ai/financial-agents` |
 | AI Orchestration | `/agentic-ai#payment-orchestration` | 175 words | **Expanded into a standalone page** (see §2b) | `/agentic-ai/payment-orchestration` |
-| FAQs | `/support#faqs` | 5 FAQs | **Kept for now** — too thin; see §5 | — |
+| FAQs | `/support#faqs` | 5 FAQs | **New FAQ hub** (see §2c) | `/resources/faqs` |
 | Our Journey | `/about#journey` | 591 words, part of About | **Kept** — the journey belongs on About | — |
 
 The two "AI Governance" links pointed at two different pages for the same
@@ -125,6 +125,22 @@ Where a developer would need these, the page says so and links to developer supp
 - **Parent page:** the two sections on `/agentic-ai` are now short summaries that link to the new pages. The highest text overlap between any of `/agentic-ai`, the two new pages, `/ai-governance` and `/developers` is ≤10%.
 - **Legacy links:** `/agentic-ai#financial-agents` and `#payment-orchestration` forward client-side. Every other `/agentic-ai` section stays where it is.
 
+## 2c. Resources hub and FAQ hub
+
+| URL | Purpose | Words | Schema | Sitemap |
+|---|---|---|---|---|
+| `/resources` | Navigational hub: help, developer docs, agentic AI guides, industries, trust & legal, insights | 673 | WebPage, BreadcrumbList | Yes |
+| `/resources/faqs` | FAQ hub: 9 general questions answered in full, plus a directory of the 118 questions answered elsewhere, with a search filter | 1,314 | WebPage, BreadcrumbList, FAQPage (general questions only) | Yes |
+
+- **Single source for FAQs:** every page's FAQs now live in `includes/faq-data.php`. Industry and Business Services FAQs stay in their own data files. Pages and the FAQ hub read the same data, so a question is written once. A check confirmed that every directory question appears on the page it links to.
+- **No duplicated answers:** only the general questions are answered on the hub. Topic questions are links to the page that answers them. `/support` now lists its questions as links to the hub instead of repeating the answers.
+- **General questions added (4):** sandbox testing, where to find developer docs, Business Services, and how to contact sales or support. All are answered from facts already on the site.
+- **Navigation:**
+  - The header Resources menu and the footer Resources column gain "All Resources".
+  - "FAQs" now points to `/resources/faqs`, and `/support#faqs` forwards there.
+  - The header's Integration Guide description no longer promises "setup for your stack".
+- **Not built:** a separate `/resources/guides` page. The guides are grouped on the hub instead, because a guides page would only repeat those links.
+
 ## 3. Redirect map
 
 | From | To | Type |
@@ -143,7 +159,6 @@ Every new page is self-canonical at its slash-less URL, for example `https://pay
 | Group | Current state | Why it was not split | What would make it ready |
 |---|---|---|---|
 | Solutions industries (8) | 2 sentences each on `/solutions` | A page per industry would be thin, or the same template with the industry name swapped | Approved, industry-specific content: problems, product stack, use cases, FAQs |
-| Resources / FAQs | 5 FAQs on `/support` | A dedicated FAQ page would be thin | A larger, approved FAQ set, then a `/resources` hub |
 | Our Journey | 591 words on `/about` | The journey is part of the About story; a separate page would duplicate it | — (recommended to keep) |
 | Products enquiry items (for example Payment Pages, UPI Payments, Recurring Payments; 25 in the header) | Link to the sales enquiry form | No product content exists; a page would have to invent features | Product specifications for each item |
 | Local SEO | "Based in Patna, Bihar" only | One city page with nothing local to say is a doorway page; the registered office is unconfirmed | Confirmed office details, then an Organization address in schema; location pages only for real locations with local content |

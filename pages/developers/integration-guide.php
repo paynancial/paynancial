@@ -1,14 +1,10 @@
 <?php
 /** Integration Guide — /developers/integration-guide */
+require_once __DIR__ . '/../../includes/faq-data.php';
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
-$faqs = [
-    ['How long does a Paynancial integration take?', 'It depends on what you are building and how much of it you test. A first API call is a few lines of code; a production integration also needs webhooks, error handling and testing, which is where most of the time goes.'],
-    ['What do I need before I start?', 'A sandbox API key, a server that can make HTTPS requests and keep a key secret, and an HTTPS endpoint if you plan to receive webhooks.'],
-    ['Which product should I integrate first?', 'The one that matches how you get paid: the Payment Gateway for checkout, Payment Links to get paid without a checkout, Payment Collection for recurring or scheduled payments, and Payouts to send money out.'],
-    ['When am I ready to go live?', 'When every item on the go-live checklist on this page is done: your integration handles failures and retries, your webhook handler copes with duplicates, and your live key is stored only on your server.'],
-];
+$faqs = faq_set('integration-guide');
 $trail = [['Home', '/'], ['Developers', '/developers'], ['Integration Guide', '/developers/integration-guide']];
 $page_meta = sp_meta([
     'title'       => 'Integration Guide | From Sandbox to Live | Paynancial Developers',

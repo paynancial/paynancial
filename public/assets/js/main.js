@@ -486,6 +486,39 @@
   forwardLegacyAgenticHash();
   window.addEventListener('hashchange', forwardLegacyAgenticHash);
 
+  /* Legacy FAQ anchor: /support#faqs → the FAQ hub. */
+  if (window.location.pathname === '/support' && window.location.hash === '#faqs') {
+    window.location.replace('/resources/faqs');
+  }
+
+  /* ---------------------------------------------------------------
+     FAQ hub filter (/resources/faqs): hides questions, topic cards and
+     whole topic sections that do not match what the visitor types.
+     --------------------------------------------------------------- */
+  var faqFilter = document.querySelector('[data-faq-filter]');
+  if (faqFilter) {
+    var faqEmpty = document.querySelector('[data-faq-empty]');
+    var faqItems = document.querySelectorAll('[data-faq-group] .sp-faq-item, [data-faq-group] [data-faq-item]');
+    faqFilter.addEventListener('input', function () {
+      var q = faqFilter.value.trim().toLowerCase();
+      var shown = 0;
+      faqItems.forEach(function (item) {
+        var match = !q || item.textContent.toLowerCase().indexOf(q) !== -1;
+        if (match) { item.removeAttribute('data-faq-hidden'); shown++; } else { item.setAttribute('data-faq-hidden', ''); }
+      });
+      document.querySelectorAll('.sp-faqdir-page').forEach(function (card) {
+        var any = card.querySelector('[data-faq-item]:not([data-faq-hidden])');
+        if (any || !q) card.removeAttribute('data-faq-hidden'); else card.setAttribute('data-faq-hidden', '');
+      });
+      document.querySelectorAll('[data-faq-group]').forEach(function (group) {
+        var band = group.closest('.sp-band');
+        var any = group.querySelector('.sp-faq-item:not([data-faq-hidden]), [data-faq-item]:not([data-faq-hidden])');
+        if (band) { if (any || !q) band.removeAttribute('data-faq-hidden'); else band.setAttribute('data-faq-hidden', ''); }
+      });
+      if (faqEmpty) faqEmpty.hidden = shown !== 0;
+    });
+  }
+
   /* ---------------------------------------------------------------
      Page analytics hooks. The site has no analytics stack yet, so
      events go to window.dataLayer / gtag only if present, and are

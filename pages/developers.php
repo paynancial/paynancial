@@ -3,15 +3,11 @@
  * Developer Hub — summaries of each developer resource with a link to its
  * standalone page. Deliberately does not repeat the child pages in full.
  */
+require_once __DIR__ . '/../includes/faq-data.php';
 require_once __DIR__ . '/../includes/standalone-ui.php';
 require_once __DIR__ . '/../includes/developer-docs.php';
 
-$faqs = [
-    ['How do I start integrating with Paynancial?', 'Request sandbox access, build and test your integration with a sandbox API key, then switch to a live key once it behaves the way you expect. The Integration Guide walks through each step.'],
-    ['Which languages have an official SDK?', 'PHP, JavaScript and Python. Any other language can call the REST API directly over HTTPS.'],
-    ['Can an AI agent call the Paynancial API?', 'Yes. The API an agent calls is the same one a developer calls, and the features that make it safe for agents — idempotency keys, structured error codes and webhooks — are the same ones that make any integration reliable.'],
-    ['Where do I get help with an integration?', 'Contact developer support through the contact page and choose Support. Include the request you sent and the response you received, without your API key.'],
-];
+$faqs = faq_set('developers');
 $trail = [['Home', '/'], ['Developers', '/developers']];
 $page_meta = sp_meta([
     'title'       => 'Developers | Paynancial API, SDKs, Webhooks & Sandbox',

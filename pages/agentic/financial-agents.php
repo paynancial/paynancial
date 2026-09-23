@@ -6,16 +6,11 @@
  * products already listed in the header; no accuracy, savings or outcome
  * claims are made.
  */
+require_once __DIR__ . '/../../includes/faq-data.php';
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 
 $ai = fn (string $slug) => '/contact?intent=sales&product=' . $slug;
-$faqs = [
-    ['What is an AI financial agent?', 'Software that monitors financial activity, understands the context of what it sees, and — within limits a business sets — takes the next step: flagging an anomaly, matching a settlement, routing an exception or retrying a failed payment. It differs from a report or a dashboard because it acts, and from fixed automation because it evaluates each situation rather than following one script.'],
-    ['Do AI financial agents make decisions on their own?', 'Only inside the scope a business grants them. Every Paynancial AI capability surfaces a recommendation or takes a narrowly scoped action; anything above a set threshold, or matching a risk pattern, routes to a person before it completes.'],
-    ['Which financial tasks are agents best suited to?', 'High-volume, repetitive work where most cases are routine and a few need judgement: payment monitoring, reconciliation, exception routing, fraud screening, cash-flow forecasting and answering routine payment questions.'],
-    ['What stays with people?', 'Setting the limits, approving anything above them, handling genuine exceptions, and deciding when to widen or narrow what an agent may do. The agent reduces how much routine work reaches a person; it does not replace the person\'s authority.'],
-    ['How do we start using AI agents in finance?', 'Start with one workflow where the agent only recommends — for example, surfacing reconciliation exceptions. Test it in the sandbox, set permissions and limits, and widen its scope as it earns trust.'],
-];
+$faqs = faq_set('financial-agents');
 $trail = [['Home', '/'], ['Agentic AI', '/agentic-ai'], ['AI Financial Agents', '/agentic-ai/financial-agents']];
 $page_meta = sp_meta([
     'title'       => 'AI Financial Agents | Agentic AI for Finance Operations | Paynancial',

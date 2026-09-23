@@ -4,6 +4,7 @@
  * $product_slug is set by the front controller. Sets $product_not_found
  * and returns early for an unknown slug so the controller can render 404.
  */
+require_once __DIR__ . '/../includes/faq-data.php';
 $products = [
     'payment-gateway' => [
         'icon'     => '◆',
@@ -28,10 +29,7 @@ $products = [
         'code_php'  => "\$payment = \$client->payments->create([\n    'amount'   => 50000, // in paise\n    'currency' => 'INR',\n    'receipt'  => 'order_rcpt_101',\n]);\n\necho \$payment->id;",
         'code_curl' => "curl https://api.paynancial.com/v1/payments \\\n  -u YOUR_API_KEY: \\\n  -d amount=50000 \\\n  -d currency=INR \\\n  -d receipt=order_rcpt_101",
         'related_solutions' => ['ecommerce', 'retail', 'travel'],
-        'faqs' => [
-            ['Which payment methods are supported?', 'Cards, UPI, netbanking and wallets through a single integration — see the API Reference for the full method list.'],
-            ['Can I test before going live?', 'Yes — sandbox API keys let you run a complete integration test with no real funds involved.'],
-        ],
+        'faqs' => faq_set('product:payment-gateway'),
     ],
     'payment-links' => [
         'icon'     => '◆',
@@ -56,10 +54,7 @@ $products = [
         'code_php'  => "\$link = \$client->paymentLinks->create([\n    'title'    => 'Invoice #204',\n    'amount'   => 500000, // in paise, or omit to let the customer enter it\n    'currency' => 'INR',\n]);\n\necho \$link->short_url;",
         'code_curl' => "curl https://api.paynancial.com/v1/payment_links \\\n  -u YOUR_API_KEY: \\\n  -d title='Invoice #204' \\\n  -d amount=500000 \\\n  -d currency=INR",
         'related_solutions' => ['professional-services', 'hospitality', 'education'],
-        'faqs' => [
-            ['Do I need a website to use payment links?', 'No — a payment link works entirely on its own; you only need a way to share the link, like email or chat.'],
-            ['Can a link be reused?', 'A link stays active until it is paid, expires, or you disable it, so it can be shared with more than one customer if left open.'],
-        ],
+        'faqs' => faq_set('product:payment-links'),
     ],
     'payment-collection' => [
         'icon'     => '◆',
@@ -84,10 +79,7 @@ $products = [
         'code_php'  => "\$collection = \$client->collections->create([\n    'customer_id' => 'cust_7Fk21',\n    'amount'      => 150000, // in paise\n    'schedule'    => 'monthly',\n]);\n\necho \$collection->id;",
         'code_curl' => "curl https://api.paynancial.com/v1/collections \\\n  -u YOUR_API_KEY: \\\n  -d customer_id=cust_7Fk21 \\\n  -d amount=150000 \\\n  -d schedule=monthly",
         'related_solutions' => ['education', 'healthcare', 'enterprise'],
-        'faqs' => [
-            ['What happens if a collection fails?', 'A failed attempt is recorded with a reason code and can be retried on your defined schedule.'],
-            ['Can I collect from a batch of customers at once?', 'Yes — bulk collection lets you submit a batch and track each customer’s result individually.'],
-        ],
+        'faqs' => faq_set('product:payment-collection'),
     ],
     'payouts' => [
         'icon'     => '◆',
@@ -112,10 +104,7 @@ $products = [
         'code_php'  => "\$payout = \$client->payouts->create([\n    'beneficiary_id' => 'bene_3Kd91',\n    'amount'         => 250000, // in paise\n    'mode'           => 'upi',\n]);\n\necho \$payout->status;",
         'code_curl' => "curl https://api.paynancial.com/v1/payouts \\\n  -u YOUR_API_KEY: \\\n  -d beneficiary_id=bene_3Kd91 \\\n  -d amount=250000 \\\n  -d mode=upi",
         'related_solutions' => ['enterprise', 'retail', 'travel'],
-        'faqs' => [
-            ['Can I pay more than one person at once?', 'Yes — bulk payouts let you submit a batch of transfers in a single request.'],
-            ['What payout modes are supported?', 'Bank transfer and UPI are both supported for sending funds to a beneficiary.'],
-        ],
+        'faqs' => faq_set('product:payouts'),
     ],
     'payment-analytics' => [
         'icon'     => '◆',
@@ -140,10 +129,7 @@ $products = [
         'code_php'  => "\$report = \$client->reports->transactions([\n    'from'   => '2026-08-01',\n    'to'     => '2026-08-31',\n    'format' => 'csv',\n]);\n\necho \$report->download_url;",
         'code_curl' => "curl https://api.paynancial.com/v1/reports/transactions \\\n  -u YOUR_API_KEY: \\\n  -d from=2026-08-01 \\\n  -d to=2026-08-31 \\\n  -d format=csv",
         'related_solutions' => ['enterprise', 'retail', 'ecommerce'],
-        'faqs' => [
-            ['Can I export data for my accounting system?', 'Yes — reports can be exported in common formats for use outside the dashboard.'],
-            ['Does this show real customer data or sample data?', 'Analytics reflect your own account’s real transactions and settlements — there is no sample or simulated data in your dashboard.'],
-        ],
+        'faqs' => faq_set('product:payment-analytics'),
     ],
 ];
 
@@ -239,7 +225,7 @@ $page_meta = [
   </div>
 </section>
 
-<section>
+<section id="faqs">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">FAQs</span>

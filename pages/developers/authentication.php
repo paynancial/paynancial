@@ -1,15 +1,10 @@
 <?php
 /** Authentication — /developers/authentication */
+require_once __DIR__ . '/../../includes/faq-data.php';
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
-$faqs = [
-    ['How do I authenticate with the Paynancial API?', 'Send your API key using HTTP basic authentication: the key is the username and the password is left empty. In cURL that is -u YOUR_API_KEY: (note the trailing colon). The SDKs take the key when you create the client.'],
-    ['What is the difference between a sandbox key and a live key?', 'A sandbox key runs requests in the sandbox, where no real money moves. A live key processes real payments and payouts. Build and test with a sandbox key; switch to a live key only when your integration is ready.'],
-    ['Where do I manage my API keys?', 'Sandbox and live API keys are managed from your Paynancial dashboard.'],
-    ['Can I use my API key in a browser or mobile app?', 'Not a live key. Anyone who can see the key can make requests as your business, so live keys belong on your server only. Your browser or app should call your server, and your server calls Paynancial.'],
-    ['What should I do if a key is exposed?', 'Treat it as compromised: replace it from your dashboard, update your server with the new key and stop using the old one. If you are unsure what to do, contact developer support.'],
-];
+$faqs = faq_set('authentication');
 $trail = [['Home', '/'], ['Developers', '/developers'], ['Authentication', '/developers/authentication']];
 $page_meta = sp_meta([
     'title'       => 'API Authentication | Paynancial Developers',

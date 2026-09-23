@@ -1,15 +1,10 @@
 <?php
 /** Webhooks — /developers/webhooks */
+require_once __DIR__ . '/../../includes/faq-data.php';
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
-$faqs = [
-    ['What is a Paynancial webhook?', 'An HTTPS request Paynancial sends to a URL on your server when something happens in your account — a payment, payout, refund or settlement changes state — so your system learns about it immediately instead of asking repeatedly.'],
-    ['Which events does Paynancial send?', 'Events for payments, payouts, refunds and settlements. For the exact event names and payload fields for your account, contact developer support.'],
-    ['Why use webhooks instead of polling?', 'Polling asks "has anything changed?" on a timer, which is slow when something has changed and wasteful when nothing has. A webhook arrives when the change happens, so orders are fulfilled and payouts marked paid in real time.'],
-    ['Can I receive the same event more than once?', 'Design for it. Any system that retries delivery can deliver an event twice, so make your handler safe to run more than once for the same event.'],
-    ['How do I test webhooks?', 'Test your handler in the Sandbox before going live, and confirm with developer support how events are delivered for sandbox activity.'],
-];
+$faqs = faq_set('webhooks');
 $trail = [['Home', '/'], ['Developers', '/developers'], ['Webhooks', '/developers/webhooks']];
 $page_meta = sp_meta([
     'title'       => 'Webhooks | Real-Time Payment Events | Paynancial Developers',

@@ -1,15 +1,10 @@
 <?php
 /** SDKs — /developers/sdks */
+require_once __DIR__ . '/../../includes/faq-data.php';
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
-$faqs = [
-    ['Which languages does Paynancial have SDKs for?', 'PHP, JavaScript and Python.'],
-    ['Do I have to use an SDK?', 'No. The SDKs are a convenience over the REST API. Any language that can make an HTTPS request with basic authentication can call ' . DEV_API_BASE . ' directly, as the cURL examples show.'],
-    ['How do I install an SDK?', 'Contact developer support for installation details for your language and environment.'],
-    ['Do the SDKs support idempotency keys?', 'Yes. In PHP, pass an idempotency_key option as the second argument to a create call; the SDK sends it as the Idempotency-Key header.'],
-    ['Can I use the JavaScript SDK in a browser?', 'Not with a live key. A live key must stay on your server, so run the JavaScript SDK in a server environment and have your web page call your server.'],
-];
+$faqs = faq_set('sdks');
 $trail = [['Home', '/'], ['Developers', '/developers'], ['SDKs', '/developers/sdks']];
 $page_meta = sp_meta([
     'title'       => 'SDKs for PHP, JavaScript & Python | Paynancial Developers',

@@ -4,15 +4,10 @@
  * Paynancial's AI and agent-initiated actions are governed; the Agentic AI
  * page and the Trust Center summarise and link here.
  */
+require_once __DIR__ . '/../includes/faq-data.php';
 require_once __DIR__ . '/../includes/standalone-ui.php';
 
-$faqs = [
-    ['Does Paynancial\'s AI make financial decisions on its own?', 'No. Every AI capability Paynancial offers surfaces a recommendation or takes a narrowly scoped action inside limits a business sets. A person, or a policy a person configured, is always the authority.'],
-    ['Can an AI agent move money without anyone approving it?', 'Only within limits a business explicitly configures — such as a payout ceiling, an approval workflow or a list of pre-authorised beneficiaries. Anything above a threshold, or matching a risk pattern, routes to a person before it completes.'],
-    ['Who sets the limits?', 'The business using the platform, not Paynancial. It decides how much of a workflow an agent handles unattended, and can tighten or loosen that at any time.'],
-    ['How can I tell what an agent did and why?', 'Every write action is tied to the specific API key or session that made the request, and webhooks give a real-time, timestamped record of every state change — the data an audit trail draws from.'],
-    ['Is there a formal AI governance policy document?', 'Not yet. The principles on this page govern how Paynancial\'s AI & Intelligence products are designed to operate. A standalone, formally reviewed AI governance policy document has not been published.'],
-];
+$faqs = faq_set('ai-governance');
 $trail = [['Home', '/'], ['Trust Center', '/trust'], ['AI Governance', '/ai-governance']];
 $page_meta = sp_meta([
     'title'       => 'AI Governance | Human Oversight for AI & Agents | Paynancial',
