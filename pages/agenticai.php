@@ -175,14 +175,3 @@ $sectionCount = count($sections);
   </div>
 </section>
 
-<section class="section-subtle">
-  <div class="container">
-    <div class="cta-band reveal">
-      <h2>Ready to see what this looks like for your business?</h2>
-      <div class="hero-actions" style="justify-content:center;margin-top:24px;">
-        <a href="/contact?intent=sales&topic=agentic-ai" class="btn btn-primary">Talk to a Specialist</a>
-        <a href="/developers" class="btn btn-outline">Explore the API</a>
-      </div>
-    </div>
-  </div>
-</section>

@@ -310,15 +310,3 @@ foreach ([
   </div>
 </section>
 
-<section aria-labelledby="cta-heading">
-  <div class="container">
-    <div class="cta-band reveal">
-      <h2 id="cta-heading">Start accepting and managing payments with Paynancial.</h2>
-      <p class="lead" style="max-width:560px;margin-inline:auto;margin-top:14px;">Talk to our team or get started with a Paynancial account today.</p>
-      <div class="hero-actions" style="justify-content:center;margin-top:28px;">
-        <a href="/contact" class="btn btn-primary">Get Started</a>
-        <a href="/contact?intent=sales" class="btn btn-outline"><?= e(cta_label()) ?></a>
-      </div>
-    </div>
-  </div>
-</section>
