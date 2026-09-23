@@ -7,7 +7,11 @@
  * every column is heading → divider → labelled subgroups → CTA, with the
  * CTAs sharing one baseline on desktop. Every link points at
  * an existing page or anchor; groups render from $footer_groups so a link
- * is defined exactly once. Descriptive text is justified. On narrow
+ * is defined exactly once, and no URL appears twice in the footer (column
+ * CTAs included). Pages held out of search by the publishing gate
+ * (includes/content-governance.php) are not linked here — the
+ * AI & Intelligence hub stands in for its unconfirmed child pages. Legal
+ * documents are linked only from the bottom bar. Descriptive text is justified. On narrow
  * screens each group collapses into an accordion (main.js; panels stay
  * open without JavaScript).
  * Business Services is in the header mega-menu but not linked here.
@@ -39,18 +43,9 @@ $footer_groups = [
         'badge' => 'New',
         'blocks' => [
             ['AI Finance', [
-                ['Agentic Payments', '/agentic-ai'],
                 ['AI Financial Agents', '/agentic-ai/financial-agents'],
                 ['AI Orchestration', '/agentic-ai/payment-orchestration'],
-                ['AI Governance', '/ai-governance'],
-            ]],
-            ['AI & Intelligence', [
-                ['Paynancial AI', '/ai-intelligence/paynancial-ai'],
-                ['AI Fraud Detection', '/ai-intelligence/fraud-detection'],
-                ['AI Reconciliation', '/ai-intelligence/reconciliation'],
-                ['AI Financial Assistant', '/ai-intelligence/financial-assistant'],
-                ['AI Cash-Flow Intelligence', '/ai-intelligence/cash-flow-intelligence'],
-                ['AI Revenue Forecasting', '/ai-intelligence/revenue-forecasting'],
+                ['AI & Intelligence', '/ai-intelligence'],
             ]],
         ],
         'cta' => ['Explore Agentic AI', '/agentic-ai'],
@@ -59,7 +54,7 @@ $footer_groups = [
         'title' => 'Developers',
         'blocks' => [
             ['Build', [
-                ['Documentation', '/developers'],
+                ['Getting Started', '/developers/integration-guide'],
                 ['API Reference', '/developers/api-reference'],
                 ['SDKs', '/developers/sdks'],
             ]],
@@ -67,10 +62,6 @@ $footer_groups = [
                 ['Webhooks', '/developers/webhooks'],
                 ['Authentication', '/developers/authentication'],
                 ['Sandbox', '/sandbox'],
-                ['Integration Guide', '/developers/integration-guide'],
-            ]],
-            ['Support', [
-                ['Developer Support', '/support'],
             ]],
         ],
         'cta' => ['Developer Center', '/developers'],
@@ -80,20 +71,15 @@ $footer_groups = [
         'blocks' => [
             ['Resources', [
                 ['All Resources', '/resources'],
-                ['Blog / Insights', '/blog'],
                 ['FAQs', '/resources/faqs'],
                 ['Support Center', '/support'],
             ]],
             ['Trust', [
-                ['Security & Compliance', '/security'],
                 ['Trust Center', '/trust'],
                 ['AI Governance', '/ai-governance'],
-                ['Privacy Policy', '/legal/privacy-policy'],
-                ['Terms & Conditions', '/legal/terms-conditions'],
-                ['Refund Policy', '/legal/refund-policy'],
             ], 'is-trust'],
         ],
-        'cta' => ['Visit Trust Center', '/trust'],
+        'cta' => ['Security & Compliance', '/security'],
     ],
     'company' => [
         'title' => 'Company',
@@ -106,10 +92,9 @@ $footer_groups = [
             ['Work With Us', [
                 ['Careers', '/careers'],
                 ['Partner Program', '/partner-program'],
-                ['Contact', '/contact'],
             ]],
         ],
-        'cta' => ['About Paynancial', '/about'],
+        'cta' => ['Contact Us', '/contact'],
     ],
 ];
 ?>
@@ -182,7 +167,7 @@ $footer_groups = [
     <ul class="ft-legal" aria-label="Legal">
       <li><a href="/legal/privacy-policy">Privacy</a></li>
       <li><a href="/legal/terms-conditions">Terms</a></li>
-      <li><a href="/security">Security</a></li>
+      <li><a href="/legal/refund-policy">Refunds</a></li>
       <li><a href="/legal/cookie-policy">Cookies</a></li>
     </ul>
     <div class="footer-social ft-social" aria-label="Paynancial on social media" role="group">
