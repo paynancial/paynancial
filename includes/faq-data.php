@@ -292,6 +292,42 @@ function faq_sets(): array
             ['Does Paynancial deduct TDS?', 'No. Paynancial does not calculate or deduct TDS. Agree the net amount with your CA before you pay.'],
             ['How do I keep spending records for GST?', 'Keep the supplier\'s GST invoice for each business expense — your CA needs it to claim input tax credit — and use your payout report to match each payment to its bill.'],
         ],
+        'product:embedded-payments' => [
+            ['What are embedded payments?', 'Payments a platform\'s users make inside the platform itself, instead of on a separate provider\'s page — for example, paying inside a booking flow or a business software product.'],
+            ['How do platforms embed payments with Paynancial?', 'As technology partners: they embed the Payment API directly, build their own checkout UI on top of it or use the hosted checkout, and receive a real-time status and payment webhook for every transaction.'],
+            ['Which payment methods can my platform accept?', 'Cards, UPI, netbanking and wallets, through one integration with the Payment Gateway.'],
+            ['Can my platform onboard its own users as merchants?', 'Onboarding a platform\'s users as separate merchants is not described on this site. Partners can enroll customers, submit KYC and track approvals in the Partner Hub; ask our team about your platform\'s model.'],
+        ],
+        'product:embedded-payouts' => [
+            ['What are embedded payouts?', 'Payouts a platform makes to the people on it — sellers, creators, drivers or partners — from inside its own product, triggered by its own systems.'],
+            ['How does my platform pay its users with Paynancial?', 'Through the Payout API: save each recipient\'s bank account or UPI ID as a beneficiary, create a payout with an idempotency key when money is due, and follow it by webhook. Bulk payouts pay many recipients at once.'],
+            ['Can I pay sellers to a UPI ID?', 'Yes. Payouts supports UPI IDs as well as bank accounts.'],
+            ['Does Paynancial deduct TDS on payouts?', 'No. Paynancial does not calculate or deduct tax. Agree the amounts with your CA before you pay.'],
+        ],
+        'product:embedded-billing' => [
+            ['What is embedded billing?', 'Recurring billing that lives inside a software product — subscriptions, memberships or instalments collected without a separate billing tool.'],
+            ['How does embedded billing work with Paynancial?', 'Technology partners embed the Collections API: create a collection with the customer, amount and schedule, and Smart Collections collects on schedule, retries failed attempts, keeps the customer informed and reconciles each cycle.'],
+            ['What rules apply to recurring payments in India?', 'Recurring card, UPI and prepaid-instrument payments run on an e-mandate the customer registers with additional authentication, with a notification before each debit. UPI AutoPay lets customers manage UPI mandates in their app.'],
+            ['Can Paynancial bill on behalf of my platform\'s business users?', 'Billing on behalf of a platform\'s own business users is not described on this site. Ask our team about your requirements.'],
+        ],
+        'product:wallet-infrastructure' => [
+            ['What is wallet infrastructure?', 'The systems that let a platform hold and show a stored balance for each of its users, which they can top up and spend.'],
+            ['Does Paynancial offer wallet infrastructure?', 'Wallet infrastructure is not described on this site, so no wallet capability is claimed. The Payment Gateway accepts wallets as a payment method, which is different from running a wallet.'],
+            ['Is a wallet regulated in India?', 'Yes. Wallets are prepaid payment instruments (PPIs), regulated by the Reserve Bank of India. Issuing one needs RBI authorisation or a partnership with an authorised issuer.'],
+            ['What is the alternative to a wallet?', 'Many platforms only need a record of what each user is owed, settled by payouts to a bank account or UPI ID. Talk to our team before designing around a stored balance.'],
+        ],
+        'product:split-payments' => [
+            ['What are split payments?', 'Dividing one customer payment between several recipients — typically a marketplace, its seller and sometimes a delivery or service partner.'],
+            ['Does Paynancial split payments at the point of collection?', 'Splitting at the point of collection is not described as a Paynancial product on this site. The published route is to collect through the Payment Gateway and pay each seller or partner their share through Payouts.'],
+            ['Do RBI rules affect marketplace payments?', 'Yes. RBI\'s payment aggregator framework governs how funds collected for merchants are held and settled, and can apply to a marketplace that collects and settles money for its sellers. Check your model with a compliance adviser.'],
+            ['How do I pay many sellers at once?', 'With Bulk Payouts: submit a batch of payouts in one action and track each payout individually.'],
+        ],
+        'product:white-label-payments' => [
+            ['What are white-label payments?', 'Payments presented under a platform\'s own brand instead of the payment provider\'s, from checkout to receipts.'],
+            ['Does Paynancial offer white-label payments?', 'A white-label product is not described on this site. What is published: a custom checkout you build on the API, and technology and reseller partner programmes.'],
+            ['Can I resell Paynancial under my own relationship with merchants?', 'Reseller partners resell Paynancial products under their own commercial relationship with merchants. See the Partners page.'],
+            ['Who is responsible to merchants in a white-label setup?', 'Under RBI\'s framework the payment aggregator is the regulated party for merchant funds, whatever brand the customer sees. Confirm the arrangement with our team.'],
+        ],
     ];
 }
 

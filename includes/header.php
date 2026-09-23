@@ -87,12 +87,12 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/embedded-finance">Embedded Finance <span aria-hidden="true">→</span></a>
-              <a class="mega-link mega-link-plain" href="/embedded-finance#embedded-payments"><strong>Embedded Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/embedded-finance#embedded-payouts"><strong>Embedded Payouts</strong></a>
-              <a class="mega-link mega-link-plain" href="/embedded-finance#embedded-billing"><strong>Embedded Billing</strong></a>
-              <a class="mega-link mega-link-plain" href="/embedded-finance#wallet-infrastructure"><strong>Wallet Infrastructure</strong></a>
-              <a class="mega-link mega-link-plain" href="/embedded-finance#split-payments"><strong>Split Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/embedded-finance#white-label-payments"><strong>White-Label Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/embedded-payments"><strong>Embedded Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/embedded-payouts"><strong>Embedded Payouts</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/embedded-billing"><strong>Embedded Billing</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/wallet-infrastructure"><strong>Wallet Infrastructure</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/split-payments"><strong>Split Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/white-label-payments"><strong>White-Label Payments</strong></a>
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/developers">Developer Platform <span aria-hidden="true">→</span></a>
@@ -272,12 +272,12 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/ai-intelligence/revenue-forecasting">AI Revenue Forecasting</a></li>
 
       <li class="mobile-nav-group-label"><a href="/embedded-finance">Embedded Finance</a></li>
-      <li><a href="/embedded-finance#embedded-payments">Embedded Payments</a></li>
-      <li><a href="/embedded-finance#embedded-payouts">Embedded Payouts</a></li>
-      <li><a href="/embedded-finance#embedded-billing">Embedded Billing</a></li>
-      <li><a href="/embedded-finance#wallet-infrastructure">Wallet Infrastructure</a></li>
-      <li><a href="/embedded-finance#split-payments">Split Payments</a></li>
-      <li><a href="/embedded-finance#white-label-payments">White-Label Payments</a></li>
+      <li><a href="/products/embedded-payments">Embedded Payments</a></li>
+      <li><a href="/products/embedded-payouts">Embedded Payouts</a></li>
+      <li><a href="/products/embedded-billing">Embedded Billing</a></li>
+      <li><a href="/products/wallet-infrastructure">Wallet Infrastructure</a></li>
+      <li><a href="/products/split-payments">Split Payments</a></li>
+      <li><a href="/products/white-label-payments">White-Label Payments</a></li>
 
       <li class="mobile-nav-group-label"><a href="/developers">Developer Platform</a></li>
       <li><a href="/developers/api-reference#payments">Payment APIs</a></li>

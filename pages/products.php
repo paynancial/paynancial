@@ -48,12 +48,12 @@ $catalog = [
         ['AI Revenue Forecasting', '/ai-intelligence/revenue-forecasting'],
     ],
     'Embedded Finance' => [
-        ['Embedded Payments', '/embedded-finance#embedded-payments'],
-        ['Embedded Payouts', '/embedded-finance#embedded-payouts'],
-        ['Embedded Billing', '/embedded-finance#embedded-billing'],
-        ['Wallet Infrastructure', '/embedded-finance#wallet-infrastructure'],
-        ['Split Payments', '/embedded-finance#split-payments'],
-        ['White-Label Payments', '/embedded-finance#white-label-payments'],
+        ['Embedded Payments', '/products/embedded-payments'],
+        ['Embedded Payouts', '/products/embedded-payouts'],
+        ['Embedded Billing', '/products/embedded-billing'],
+        ['Wallet Infrastructure', '/products/wallet-infrastructure'],
+        ['Split Payments', '/products/split-payments'],
+        ['White-Label Payments', '/products/white-label-payments'],
     ],
     'Developer Platform' => [
         ['Payment APIs', '/developers/api-reference#payments'],

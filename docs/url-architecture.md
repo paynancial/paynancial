@@ -224,6 +224,8 @@ The guide pages are indexable at the owner's request. Each still states plainly 
 
 **Regulatory context (RBI / NPCI):** `includes/regulatory-context.php` holds plain-language summaries of the frameworks that apply (PSS Act 2007, PA/PG guidelines, PA-CB, FEMA, TAT for failed transactions, ODR, UDIR, UPI guidelines, UPI AutoPay, e-mandates, NACH, IMPS, card-on-file tokenisation, digital payment security controls, KYC Direction, DPDP Act 2023) and maps them to pages. Deliberately no circular numbers, dates, thresholds or timelines, no claim that Paynancial holds any licence or complies with a given circular, and links to rbi.org.in and npci.org.in for the current text. **Have a compliance professional review this file.**
 
+**Embedded Finance guide pages** (owner's request): `/products/embedded-payments`, `/embedded-payouts`, `/embedded-billing`, `/wallet-infrastructure`, `/split-payments`, `/white-label-payments`. Breadcrumb parent: Embedded Finance. Indexable, in the sitemap, no `Service` schema (`'guide' => true`). Built only from published facts — technology partners embedding the Payment, Payout and Billing APIs, the Partner Hub (enroll customers, submit KYC, track approvals), custom or hosted checkout, Payouts and Smart Collections — and each says plainly what is not described (onboarding users as merchants, split-at-collection, stored balances, white-label branding). Regulatory bands add RBI's PPI Master Direction (wallets). Split Payments flags that a marketplace collecting and settling for sellers may fall under RBI's payment aggregator rules.
+
 ## 3. Redirect map
 
 | From | To | Type |
