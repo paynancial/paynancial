@@ -242,6 +242,7 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
 
 .brand { display: flex; align-items: center; }
 .brand-logo { height: 28px; width: auto; display: block; }
+@media (min-width: 1080px) { .site-header .brand-logo { height: 34px; } }
 
 .main-nav { display: none; }
 @media (min-width: 1080px) { .main-nav { display: flex; align-items: center; gap: 2px; } }
@@ -283,6 +284,9 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
 @media (max-width: 1439px) {
   .main-nav > li:nth-child(2) > .mega-menu { left: 0; transform: translateY(6px); }
   .main-nav > li.is-open:nth-child(2) > .mega-menu { transform: translateY(0); }
+  /* Company (last item) sits near the right edge: anchor its menu right. */
+  .main-nav > li:last-child > .mega-menu { left: auto; right: 0; transform: translateY(6px); }
+  .main-nav > li.is-open:last-child > .mega-menu { transform: translateY(0); }
 }
 /* Centre the wide Products menu under the whole header (the sticky header is
    its containing block) so it can never run past the viewport, whatever the
