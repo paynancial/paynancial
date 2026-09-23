@@ -83,6 +83,13 @@ function gov_content_items(): array
     $items['/blog'] = $utility('Empty placeholder for the future Paynancial Insights / Regulatory Insights programme; indexable only once it has substantial original content and passes review.');
     $items['/signup'] = $utility('Account sign-up form — a utility page, not an organic landing page.');
     $items['/partner/register'] = $utility('Partner application form — a conversion endpoint. The search-visible page is /partner-program.');
+    // Grievance Officer named by the business; the process wording awaits
+    // qualified legal / regulatory review before the page is indexed.
+    $items['/grievance-redressal'] = [
+        'stage' => 'regulatory_review', 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
+        'professional_review' => GOV_PROFESSIONAL_REVIEW, 'approved_by' => null, 'approved_on' => null,
+        'reason' => 'Grievance Redressal page: officer name and contact email confirmed by the business; response timelines, escalation levels and regulatory routes not yet confirmed; legal review pending.',
+    ];
     return $items;
 }
 

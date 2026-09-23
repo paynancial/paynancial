@@ -432,6 +432,7 @@ $publicRoutes = [
     'resources'        => 'resources',
     'resources/faqs'   => 'resources-faqs',
     'partner-program'  => 'partner-program',
+    'grievance-redressal' => 'grievance-redressal',
     'support'          => 'support',
     'contact'          => 'contact',
     'careers'          => 'careers',

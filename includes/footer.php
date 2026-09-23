@@ -87,7 +87,7 @@ $footer_groups = [
             ['Trust', [
                 ['Security & Compliance', '/security'],
                 ['Trust Center', '/trust'],
-                ['AI Governance', '/ai-governance'],
+                ['Grievance Redressal', '/grievance-redressal'],
                 ['Privacy Policy', '/legal/privacy-policy'],
                 ['Terms & Conditions', '/legal/terms-conditions'],
                 ['Refund Policy', '/legal/refund-policy'],

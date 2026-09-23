@@ -83,6 +83,7 @@ $entries = [
     'leadership'                   => 'leadership.php',
     'careers'                      => 'careers.php',
     'partner-program'              => 'partner-program.php',
+    'grievance-redressal'          => 'grievance-redressal.php',
     'partner/register'             => 'partner-register.php',
     'contact'                      => 'contact.php',
     'signup'                       => 'signup.php',
