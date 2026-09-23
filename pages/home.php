@@ -94,6 +94,7 @@ $industries = [
       <span class="eyebrow">How It Works Together</span>
       <h2 id="workflow-heading">One Flow, From Payment to Insight</h2>
       <p>Gateway, Collection, Payouts, and Analytics aren't separate tools — they're one connected flow.</p>
+      <p style="margin-top:10px;"><a class="card-link" href="/ai-intelligence">See how AI & Intelligence works on this flow →</a></p>
     </div>
     <div class="journey reveal">
       <?php

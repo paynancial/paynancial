@@ -217,3 +217,78 @@
 /* Hero code caption: must beat the later .sp-code figcaption rule. */
 .sp-hero .sp-hero-aside .sp-code figcaption { color: rgba(250, 249, 245, 0.66); }
 .sp-band--ink .sp-code figcaption { color: rgba(250, 249, 245, 0.66); }
+
+/* =====================================================================
+   AI & Intelligence hub (/ai-intelligence)
+   ===================================================================== */
+.ai-visual { margin: 0; }
+.ai-visual svg { width: 100%; height: auto; display: block; }
+.ai-stream { stroke-dasharray: 6 10; animation: ai-flow 9s linear infinite; }
+.ai-core-ring { transform-origin: 260px 210px; animation: ai-turn 40s linear infinite; }
+@keyframes ai-flow { to { stroke-dashoffset: -160; } }
+@keyframes ai-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ai-stream, .ai-core-ring { animation: none; } }
+
+.ai-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; counter-reset: f; position: relative; }
+.ai-flow-step { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 26px 24px 26px 0; border-top: 2px solid var(--teal-500); }
+.ai-flow-step:last-child { border-top-color: var(--orange-500); }
+.ai-flow-step::after { content: ''; position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--teal-500); }
+.ai-flow-step:last-child::after { border-color: var(--orange-500); }
+.ai-flow-num { font-family: var(--font-mono); font-size: 0.72rem; color: #b83d00; }
+.ai-flow-step strong { font-family: var(--font-serif); font-weight: 460; font-size: 1.3rem; color: var(--ink); }
+.ai-flow-step strong a { color: inherit; }
+.ai-flow-step span:last-child { color: var(--text-muted); line-height: 1.6; font-size: 0.94rem; }
+.ai-flow--vertical { grid-template-columns: 1fr; }
+.ai-flow--vertical .ai-flow-step { padding: 22px 0 22px 26px; border-top: 0; border-left: 2px solid var(--teal-500); }
+.ai-flow--vertical .ai-flow-step::after { top: 26px; left: -7px; }
+
+.ai-caps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ai-cap { display: flex; flex-direction: column; gap: 12px; padding: 28px; border: 1px solid var(--border); border-radius: 16px; background: #fff; scroll-margin-top: 150px; }
+.ai-cap--platform { grid-column: 1 / -1; background: linear-gradient(120deg, var(--ink) 0%, #0f3b35 100%); border-color: transparent; }
+.ai-cap.ai-cap--platform h3, .ai-cap.ai-cap--platform p, .ai-cap.ai-cap--platform dd { color: var(--paper); }
+.ai-cap.ai-cap--platform .ai-cap-kicker, .ai-cap.ai-cap--platform dt { color: var(--teal-300); }
+.ai-cap.ai-cap--platform .sp-item-link { color: var(--teal-300); }
+.ai-cap-kicker { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-700); }
+.ai-cap h3 { font-family: var(--font-serif); font-weight: 460; font-size: 1.45rem; color: var(--ink); }
+.ai-cap p { color: var(--text-muted); line-height: 1.65; }
+.ai-cap-people { margin: 0; padding-top: 12px; border-top: 1px solid var(--border); }
+.ai-cap--platform .ai-cap-people { border-color: var(--border-on-ink); }
+.ai-cap-people dt { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #b83d00; }
+.ai-cap-people dd { margin: 4px 0 0; color: var(--ink); }
+
+.ai-arch { display: grid; gap: 18px; }
+.ai-arch-top { text-align: center; padding: 22px; border: 1px solid rgba(109, 213, 205, 0.4); border-radius: 16px; background: rgba(0, 166, 157, 0.08); }
+.ai-arch-top span { display: block; font-family: var(--font-serif); font-size: 1.6rem; color: var(--paper); }
+.ai-arch-top small { color: rgba(250, 249, 245, 0.7); }
+.ai-arch-caps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; position: relative; }
+.ai-arch-caps a { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 72px; padding: 12px; border: 1px solid var(--border-on-ink); border-radius: 12px; color: var(--paper); font-weight: 500; background: rgba(250, 249, 245, 0.03); position: relative; transition: border-color var(--transition), background var(--transition); }
+.ai-arch-caps a::before, .ai-arch-caps a::after { content: ''; position: absolute; left: 50%; width: 1px; height: 18px; background: rgba(109, 213, 205, 0.5); }
+.ai-arch-caps a::before { top: -19px; }
+.ai-arch-caps a::after { bottom: -19px; }
+.ai-arch-caps a:hover { border-color: var(--teal-300); background: rgba(0, 166, 157, 0.12); }
+.ai-arch-base { padding: 20px; border-radius: 16px; background: rgba(250, 249, 245, 0.06); border: 1px dashed rgba(250, 249, 245, 0.22); }
+.ai-arch-label { display: block; text-align: center; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-300); margin-bottom: 14px; }
+.ai-arch-base div { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.ai-arch-base a { padding: 8px 14px; min-height: 40px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid var(--border-on-ink); color: rgba(250, 249, 245, 0.86); font-size: 0.88rem; }
+.ai-arch-base a:hover { border-color: var(--teal-300); color: var(--paper); }
+
+.ai-uses { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.ai-use { display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--border); border-radius: 16px; background: #fff; }
+.ai-use h3 { font-family: var(--font-serif); font-weight: 460; font-size: 1.3rem; color: var(--ink); }
+.ai-use dl { margin: 0; display: grid; gap: 10px; }
+.ai-use dt { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-700); }
+.ai-use dd { margin: 2px 0 0; color: var(--text-muted); line-height: 1.6; font-size: 0.94rem; }
+
+@media (max-width: 1080px) {
+  .ai-flow { grid-template-columns: 1fr; }
+  .ai-flow-step { padding: 20px 0 20px 26px; border-top: 0; border-left: 2px solid var(--teal-500); }
+  .ai-flow-step:last-child { border-left-color: var(--orange-500); }
+  .ai-flow-step::after { top: 24px; left: -7px; }
+  .ai-caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ai-arch-caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ai-arch-caps a::before, .ai-arch-caps a::after { display: none; }
+}
+@media (max-width: 720px) {
+  .ai-caps, .ai-arch-caps { grid-template-columns: 1fr; }
+  .ai-visual { max-width: 460px; margin-inline: auto; }
+}

@@ -29,6 +29,12 @@ function cat_slugify(string $label): string
 
 function cat_url(string $slug, ?string $item = null): string
 {
+    if ($slug === 'ai-and-intelligence') {
+        // Moved to its own hub; items have their own pages there.
+        $children = ['Paynancial AI' => 'paynancial-ai', 'AI Fraud Detection' => 'fraud-detection', 'AI Reconciliation' => 'reconciliation',
+            'AI Financial Assistant' => 'financial-assistant', 'AI Cash-Flow Intelligence' => 'cash-flow-intelligence', 'AI Revenue Forecasting' => 'revenue-forecasting'];
+        return '/ai-intelligence' . ($item !== null && isset($children[$item]) ? '/' . $children[$item] : '');
+    }
     return '/products/' . $slug . ($item !== null ? '#' . cat_slugify($item) : '');
 }
 

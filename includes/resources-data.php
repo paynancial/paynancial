@@ -14,6 +14,7 @@ require_once __DIR__ . '/faq-data.php';
 require_once __DIR__ . '/solutions-data.php';
 require_once __DIR__ . '/business-services.php';
 require_once __DIR__ . '/product-categories.php';
+require_once __DIR__ . '/ai-intelligence.php';
 
 /**
  * FAQ directory: topic groups, each a list of pages with their questions.
@@ -29,6 +30,9 @@ function res_faq_directory(): array
     ];
     $productPages = [];
     foreach (cat_pages() as $slug => $c) {
+        if ($slug === 'ai-and-intelligence') {
+            continue; // now the /ai-intelligence hub, listed under AI below
+        }
         $productPages[] = [$c['name'], cat_url($slug), 'faq', $q('category:' . $slug)];
     }
     foreach ($products as $slug => $name) {
@@ -57,6 +61,10 @@ function res_faq_directory(): array
             ['Sandbox', '/sandbox', 'faq', $q('sandbox')],
         ]],
         ['id' => 'solutions', 'label' => 'Industry solutions', 'pages' => $industryPages],
+        ['id' => 'ai-intelligence', 'label' => 'AI & Intelligence', 'pages' => array_merge(
+            [['AI & Intelligence', ai_url(), 'questions', $q('ai:hub')]],
+            array_values(array_map(fn ($slug, $c) => [$c['name'], $c['path'], 'faq', $q('ai:' . $slug)], array_keys(ai_children()), ai_children()))
+        )],
         ['id' => 'agentic-ai', 'label' => 'Agentic AI & governance', 'pages' => [
             ['Agentic AI in Finance', '/agentic-ai', 'faqs', $q('agentic-ai')],
             ['AI Financial Agents', '/agentic-ai/financial-agents', 'faq', $q('financial-agents')],

@@ -77,13 +77,13 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/products/payment-analytics"><strong>MIS &amp; Reports</strong></a>
             </div>
             <div>
-              <a class="mega-col-title mega-col-link" href="/products/ai-and-intelligence">AI &amp; Intelligence <span aria-hidden="true">→</span></a>
-              <a class="mega-link mega-link-plain" href="/products/ai-and-intelligence#paynancial-ai"><strong>Paynancial AI</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/ai-and-intelligence#ai-fraud-detection"><strong>AI Fraud Detection</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/ai-and-intelligence#ai-reconciliation"><strong>AI Reconciliation</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/ai-and-intelligence#ai-financial-assistant"><strong>AI Financial Assistant</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/ai-and-intelligence#ai-cash-flow-intelligence"><strong>AI Cash-Flow Intelligence</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/ai-and-intelligence#ai-revenue-forecasting"><strong>AI Revenue Forecasting</strong></a>
+              <a class="mega-col-title mega-col-link" href="/ai-intelligence">AI &amp; Intelligence <span aria-hidden="true">→</span></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/paynancial-ai"><strong>Paynancial AI</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/fraud-detection"><strong>AI Fraud Detection</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/reconciliation"><strong>AI Reconciliation</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/financial-assistant"><strong>AI Financial Assistant</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/cash-flow-intelligence"><strong>AI Cash-Flow Intelligence</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/revenue-forecasting"><strong>AI Revenue Forecasting</strong></a>
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/products/embedded-finance">Embedded Finance <span aria-hidden="true">→</span></a>
@@ -263,13 +263,13 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/products/payment-analytics">Finance Analytics</a></li>
       <li><a href="/products/payment-analytics">MIS &amp; Reports</a></li>
 
-      <li class="mobile-nav-group-label"><a href="/products/ai-and-intelligence">AI &amp; Intelligence</a></li>
-      <li><a href="/products/ai-and-intelligence#paynancial-ai">Paynancial AI</a></li>
-      <li><a href="/products/ai-and-intelligence#ai-fraud-detection">AI Fraud Detection</a></li>
-      <li><a href="/products/ai-and-intelligence#ai-reconciliation">AI Reconciliation</a></li>
-      <li><a href="/products/ai-and-intelligence#ai-financial-assistant">AI Financial Assistant</a></li>
-      <li><a href="/products/ai-and-intelligence#ai-cash-flow-intelligence">AI Cash-Flow Intelligence</a></li>
-      <li><a href="/products/ai-and-intelligence#ai-revenue-forecasting">AI Revenue Forecasting</a></li>
+      <li class="mobile-nav-group-label"><a href="/ai-intelligence">AI &amp; Intelligence</a></li>
+      <li><a href="/ai-intelligence/paynancial-ai">Paynancial AI</a></li>
+      <li><a href="/ai-intelligence/fraud-detection">AI Fraud Detection</a></li>
+      <li><a href="/ai-intelligence/reconciliation">AI Reconciliation</a></li>
+      <li><a href="/ai-intelligence/financial-assistant">AI Financial Assistant</a></li>
+      <li><a href="/ai-intelligence/cash-flow-intelligence">AI Cash-Flow Intelligence</a></li>
+      <li><a href="/ai-intelligence/revenue-forecasting">AI Revenue Forecasting</a></li>
 
       <li class="mobile-nav-group-label"><a href="/products/embedded-finance">Embedded Finance</a></li>
       <li><a href="/products/embedded-finance#embedded-payments">Embedded Payments</a></li>

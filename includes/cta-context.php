@@ -23,7 +23,7 @@ function cta_contexts(): array
     return [
         'payments' => [
             'label'   => 'Talk to Payment Experts',
-            'support' => 'Discuss your payment requirements with our team.',
+            'support' => 'Discuss your payment and financial infrastructure requirements.',
             'area'    => 'Payments',
             'subject' => 'Paynancial Payments Enquiry',
             'message' => "Hi Paynancial, I'd like to discuss my payment requirements.",
@@ -105,6 +105,7 @@ function cta_context_key(string $path): string
         ''            => 'payments',   // homepage: payment infrastructure
         'products'    => 'payments',
         'solutions'   => 'payments',
+        'ai-intelligence' => 'payments',
         'pricing'     => 'pricing',
         'developers'  => 'developers',
         'about'       => 'company',

@@ -202,6 +202,14 @@ function pc_related_card(string $key): array
         'payouts' => ['Payouts', 'Send money to bank accounts and UPI IDs.'],
         'payment-analytics' => ['Payment Analytics', 'Dashboards, settlements, reconciliation and reports.'],
     ];
+    if ($key === 'ai:hub') {
+        return ['AI & Intelligence', 'Paynancial\'s connected AI capabilities, with the governance around them.', '/ai-intelligence'];
+    }
+    if (str_starts_with($key, 'ai:')) {
+        require_once __DIR__ . '/ai-intelligence.php';
+        $a = ai_child(substr($key, 3));
+        return [$a['name'], $a['lead'], $a['path']];
+    }
     if (str_starts_with($key, 'category:')) {
         require_once __DIR__ . '/product-categories.php';
         $c = cat_page(substr($key, 9));

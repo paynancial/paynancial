@@ -141,11 +141,44 @@ Where a developer would need these, the page says so and links to developer supp
   - The header's Integration Guide description no longer promises "setup for your stack".
 - **Not built:** a separate `/resources/guides` page. The guides are grouped on the hub instead, because a guides page would only repeat those links.
 
+## 2d. AI & Intelligence
+
+| URL | Status | Words | Indexing |
+|---|---|---|---|
+| `/ai-intelligence` | **Canonical hub** (new) | 1,957 | Indexable; in sitemap |
+| `/ai-intelligence/paynancial-ai` | Child | 830 | `noindex, follow` until availability is confirmed |
+| `/ai-intelligence/fraud-detection` | Child | 787 | same |
+| `/ai-intelligence/reconciliation` | Child | 718 | same |
+| `/ai-intelligence/financial-assistant` | Child | 705 | same |
+| `/ai-intelligence/cash-flow-intelligence` | Child | 677 | same |
+| `/ai-intelligence/revenue-forecasting` | Child | 656 | same |
+| `/products/ai-and-intelligence` | **301 → `/ai-intelligence`** | — | Removed from sitemap |
+
+**Why the children are noindex.** Each capability has only a one-line published description, and the site describes its availability as "on request". Under the brief's indexing rule (#26), they stay live and linked but out of the index until the business confirms each one.
+
+**To index a child page:** set its flag in `ai_confirmed()` (`includes/ai-intelligence.php`) and add it to the sitemap.
+
+**Content sources:**
+- the one-line capability descriptions on the Agentic AI pages;
+- the AI Governance model;
+- the Trust Center's **verified** security facts: TLS 1.2+, AES-256, tokenised card data, segmented cardholder environment, least-privilege access with MFA, and real-time fraud monitoring and risk scoring before funds move.
+
+**Not claimed anywhere:**
+- anything the Trust Center marks "Verify": PCI DSS certification, RBI Payment Aggregator authorisation, and a written AI governance framework;
+- AI accuracy or model explainability;
+- APIs for the AI capabilities.
+
+**Links and enquiries:**
+- The Products menu's AI & Intelligence column, the footer's AI block and the `/products` catalog now point to these pages.
+- The homepage flow section links to the hub.
+- The floating enquiry on these pages reads "Talk to Payment Experts — Discuss your payment and financial infrastructure requirements."
+
 ## 3. Redirect map
 
 | From | To | Type |
 |---|---|---|
 | `/sandbox/`, `/developers/{page}/` | slash-less URL | 301 (existing trailing-slash rule, one hop) |
+| `/products/ai-and-intelligence` | `/ai-intelligence` | 301, one hop |
 | `/developers#sandbox` and the other old developer anchors | the new page | Client-side forward in `main.js`. A `#fragment` never reaches the server, so no 301 is possible or claimed. |
 
 No other redirects were created. Unknown `/developers/{x}` paths return 404.

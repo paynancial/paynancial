@@ -190,6 +190,53 @@ function faq_sets(): array
             ['Which embedded finance products are available?', 'Embedded payments, embedded payouts, embedded billing, wallet infrastructure, split payments and white-label payments are available to discuss with our team, so you can confirm what fits your platform.'],
             ['Can I test before building?', 'Yes. The Paynancial Sandbox lets you build and test against the API with no real funds involved.'],
         ],
+        'ai:hub' => [
+            ['What is Paynancial AI?', 'Paynancial AI is the name for Paynancial\'s AI & Intelligence capabilities — AI Fraud Detection, AI Reconciliation, AI Financial Assistant, AI Cash-Flow Intelligence and AI Revenue Forecasting — which work on your Paynancial payments data. Each one surfaces a recommendation or takes a narrowly scoped action within limits your business sets.'],
+            ['How does AI Fraud Detection work?', 'It evaluates transaction patterns for fraud risk as payments happen, rather than after settlement. Transactions above the thresholds your business sets, or matching a risk pattern, go to a person before they complete. Paynancial\'s verified security foundations already include real-time fraud monitoring and risk scoring before funds move.'],
+            ['What is AI Reconciliation?', 'An AI capability that matches settlements against transactions automatically and surfaces only the genuine exceptions for your team to resolve.'],
+            ['What does the AI Financial Assistant do?', 'It answers routine payment questions — such as "why was this transaction declined?" — without a support ticket, and supports operational alerts. It does not give legal, accounting or investment advice.'],
+            ['What is AI Cash-Flow Intelligence?', 'A capability that forecasts near-term liquidity from live transaction data instead of a monthly spreadsheet. Treasury and funding decisions stay with your team.'],
+            ['How does Paynancial use AI in financial operations?', 'To assist with detection, analysis and narrowly scoped actions on payments data — fraud screening, reconciliation, forecasting and answering routine questions — while people keep the authority over anything above the limits they set.'],
+            ['How is Paynancial\'s AI governed?', 'By five controls: permissions, policy limits, human oversight, authentication and auditability. Every action is logged against the request, key and rule that authorised it. A standalone, formally reviewed AI governance policy document has not yet been published.'],
+            ['Can developers integrate Paynancial AI?', 'Developers integrate the Paynancial payments API that the AI capabilities work on — payments, payouts, collections, refunds, reports and webhooks. APIs for the AI capabilities themselves are not published; ask our team about availability.'],
+            ['Are Paynancial\'s AI capabilities available now?', 'They are available on request. Ask our team whether a specific capability is available for your business.'],
+        ],
+        'ai:paynancial-ai' => [
+            ['What is Paynancial AI?', 'The family of Paynancial AI capabilities that work on your payments data: AI Fraud Detection, AI Reconciliation, AI Financial Assistant, AI Cash-Flow Intelligence and AI Revenue Forecasting.'],
+            ['Does Paynancial AI make decisions on its own?', 'No. Each capability surfaces a recommendation or takes a narrowly scoped action within limits your business sets. Anything above a threshold, or matching a risk pattern, routes to a person first.'],
+            ['Who sets the limits?', 'Your business — not Paynancial. You decide how much of a workflow runs unattended and can tighten or loosen that at any time.'],
+            ['How is Paynancial AI different from Agentic AI?', 'Paynancial AI is the set of intelligence capabilities. Agentic AI describes agent-driven financial workflows and the agent-ready infrastructure they run on — see the Agentic AI pages.'],
+        ],
+        'ai:fraud-detection' => [
+            ['How does Paynancial AI Fraud Detection work?', 'It evaluates transaction patterns for fraud risk as payments happen, rather than after settlement, and routes transactions above your thresholds to a person before they complete.'],
+            ['Does Paynancial already monitor for fraud?', 'Yes. The Trust Center lists real-time fraud monitoring as verified: transactions pass through real-time risk scoring before funds move.'],
+            ['Who decides whether a flagged payment goes through?', 'A person, for anything above the thresholds your business sets.'],
+            ['What accuracy does it have?', 'Paynancial does not publish accuracy or fraud-reduction figures. Ask our team about how it would apply to your business.'],
+        ],
+        'ai:reconciliation' => [
+            ['What is AI Reconciliation?', 'An AI capability that matches settlements against transactions automatically and surfaces only the genuine exceptions for a person to resolve.'],
+            ['How is it different from Paynancial\'s reconciliation today?', 'Paynancial already ties every transaction to a settlement record and reconciles collections automatically. AI Reconciliation focuses on matching settlements to transactions and surfacing only the exceptions.'],
+            ['Who resolves the exceptions?', 'Your team. Resolving exceptions and closing the books stay with people.'],
+            ['Is AI Reconciliation available now?', 'It is available on request. Ask our team whether it is available for your business.'],
+        ],
+        'ai:financial-assistant' => [
+            ['What does the AI Financial Assistant do?', 'It answers routine payment questions — such as "why was this transaction declined?" — without a support ticket, and supports operational alerts.'],
+            ['Does it give financial, legal or tax advice?', 'No. It answers questions about your payments; it is not a source of legal, accounting, tax or investment advice.'],
+            ['What happens if it cannot answer?', 'The question goes to a person.'],
+            ['Do I need to share API keys with it?', 'No. Never share API keys in questions.'],
+        ],
+        'ai:cash-flow-intelligence' => [
+            ['What is AI Cash-Flow Intelligence?', 'A capability that forecasts near-term liquidity from live transaction data rather than a monthly spreadsheet.'],
+            ['How accurate are the forecasts?', 'Paynancial does not publish forecast accuracy figures. A forecast informs decisions; it does not guarantee an outcome.'],
+            ['Who makes treasury decisions?', 'Your team. Treasury and funding decisions stay with people.'],
+            ['What data does it use?', 'Your Paynancial transaction data — payments, payouts and settlements.'],
+        ],
+        'ai:revenue-forecasting' => [
+            ['What is AI Revenue Forecasting?', 'A capability that turns raw transaction volume into the specific, forward-looking revenue numbers a finance lead needs.'],
+            ['How does it relate to Payment Analytics?', 'It works alongside the dashboards and reports in Payment Analytics, on the same transaction data.'],
+            ['Are the forecasts guaranteed?', 'No. Paynancial does not publish forecast accuracy figures; interpreting the numbers and acting on them stays with people.'],
+            ['Is it available now?', 'It is available on request. Ask our team whether it is available for your business.'],
+        ],
     ];
 }
 

@@ -164,6 +164,11 @@ if (($segments[0] ?? '') === 'pay' && isset($segments[1])) {
 // ---------------------------------------------------------------------
 // Product detail pages: /products/{slug}
 // ---------------------------------------------------------------------
+// The AI & Intelligence category moved to its own hub: one hop, permanent.
+if (($segments[0] ?? '') === 'products' && ($segments[1] ?? '') === 'ai-and-intelligence' && count($segments) === 2) {
+    header('Location: /ai-intelligence', true, 301);
+    exit;
+}
 require_once __DIR__ . '/../includes/product-capabilities.php';
 require_once __DIR__ . '/../includes/product-categories.php';
 if (($segments[0] ?? '') === 'products' && count($segments) === 2
@@ -347,6 +352,30 @@ if (($segments[0] ?? '') === 'agentic-ai' && isset($segments[1])) {
 }
 
 // ---------------------------------------------------------------------
+// AI & Intelligence child pages: /ai-intelligence/{capability}. The hub
+// (/ai-intelligence) is a public route below; unknown slugs 404.
+// ---------------------------------------------------------------------
+if (($segments[0] ?? '') === 'ai-intelligence' && isset($segments[1])) {
+    require_once __DIR__ . '/../includes/ai-intelligence.php';
+    $pc_page = count($segments) === 2 ? ai_child($segments[1]) : null;
+    ob_start();
+    if ($pc_page === null) {
+        http_response_code(404);
+        include __DIR__ . '/../pages/404.php';
+    } else {
+        include __DIR__ . '/../pages/products/capability.php';
+    }
+    $page_body = ob_get_clean();
+
+    include __DIR__ . '/../includes/site-head.php';
+    include __DIR__ . '/../includes/header.php';
+    echo '<main id="main-content">' . $page_body . '</main>';
+    include __DIR__ . '/../includes/footer.php';
+    include __DIR__ . '/../includes/site-foot.php';
+    exit;
+}
+
+// ---------------------------------------------------------------------
 // Legal pages: /legal/{slug}
 // ---------------------------------------------------------------------
 if (($segments[0] ?? '') === 'legal') {
@@ -379,6 +408,7 @@ $publicRoutes = [
     'developers'       => 'developers',
     'sandbox'          => 'sandbox',
     'ai-governance'    => 'ai-governance',
+    'ai-intelligence'  => 'ai-intelligence',
     'resources'        => 'resources',
     'resources/faqs'   => 'resources-faqs',
     'partners'         => 'partners',
