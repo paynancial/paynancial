@@ -641,6 +641,102 @@ function pc_pages(): array
             ],
             'related' => ['vendor-payments', 'employee-payments', 'product:payment-analytics', 'pillar:financial-operations'],
         ],
+        // ---- Accept & Collect: Smart Collections use cases -------------------
+        // Built only from the published Payment Collection (Smart Collections)
+        // facts: collection on a schedule (subscription / instalment), retries
+        // on a defined schedule, failed attempts recorded with a reason code,
+        // customer notifications, automatic reconciliation per customer and
+        // cycle, collection reports, and the Collections API (customer, amount,
+        // schedule — the published example is monthly). Smart Collections
+        // itself stays on /products/payment-collection.
+        'recurring-payments' => [
+            'parent' => ['Accept & Collect', '/products/accept-and-collect'],
+            'name'  => 'Recurring Payments',
+            'title' => 'Recurring Payments | Scheduled & Instalment Collection | Paynancial',
+            'description' => 'Collect recurring payments on a schedule with Paynancial Smart Collections — instalments and repeat charges collected on the date you set, failed attempts retried, customers notified and every cycle reconciled.',
+            'h1'    => 'Recurring payments, collected on the date you set.',
+            'lead'  => 'Set a schedule once — monthly, for instalments or repeat charges — and Paynancial collects each cycle, retries failed attempts and reconciles every payment to its customer and cycle.',
+            'answer' => 'Recurring payments are charges collected from the same customer on a repeating schedule, such as monthly instalments. With Paynancial Smart Collections you set the schedule once; Paynancial attempts collection on each due date, records failed attempts with a reason code and retries them on a defined schedule, keeps the customer informed, and reconciles each collection against the customer and cycle it belongs to.',
+            'values' => ['Set the schedule once', 'Retries on failure', 'Customers notified', 'Reconciled per cycle'],
+            'secondary' => ['Explore Smart Collections', '/products/payment-collection', 'cta_click'],
+            'aside_code' => dev_resource_code($resources['collections']),
+            'aside_caption' => 'A monthly collection for one customer',
+            'what' => [
+                'Chasing the same customers every month for the same amount — an EMI, a membership, a service retainer — is slow and error-prone. Recurring payments replace the chase with a schedule: the amount and the due date are agreed once, and collection happens on its own.',
+                'On Paynancial, recurring payments are part of <a class="inline-link" href="/products/payment-collection">Smart Collections</a>. You create a collection with the customer, the amount and the schedule, from the dashboard or the Collections API, and every cycle after that is collected, retried if it fails and reconciled for you.',
+            ],
+            'steps' => [
+                ['Set the schedule', 'Choose the customer, the amount and how often to collect — monthly, for example.'],
+                ['Collected on the due date', 'Paynancial attempts the collection on each scheduled date.'],
+                ['Failures recorded', 'A failed attempt is recorded with a reason code for that customer.'],
+                ['Retried', 'Failed attempts are retried on a defined schedule.'],
+                ['Reconciled', 'Each collection is matched to its customer and cycle and appears in your collection report.'],
+            ],
+            'capabilities' => [
+                ['Scheduled collection', 'Collect instalments and repeat charges on the schedule you set.'],
+                ['Reason codes', 'Every failed attempt is recorded with a reason code.'],
+                ['Retry logic', 'Failed attempts are retried on a defined schedule.'],
+                ['Customer notifications', 'Customers are kept informed as a collection is due or completed.'],
+                ['Per-cycle reconciliation', 'Each collection is matched against its customer and cycle.'],
+                ['Collection reports', 'See what was collected, what failed and what is still pending.'],
+            ],
+            'surfaces' => [
+                ['Smart Collections', 'The product behind recurring payments. See <a class="inline-link" href="/products/payment-collection">Smart Collections</a>.'],
+                ['Collections API', '<code>POST /collections</code> with customer, amount and schedule. See the <a class="inline-link" href="/developers/api-reference#collections">API Reference</a>.'],
+                ['Webhooks', 'Events your systems can act on. See <a class="inline-link" href="/developers/webhooks">Webhooks</a>.'],
+                ['Payment Analytics', 'Collection results alongside all your payments. See <a class="inline-link" href="/products/payment-analytics">Payment Analytics</a>.'],
+            ],
+            'practices' => [
+                ['Agree the schedule up front', 'Tell customers the amount and the date before the first collection.'],
+                ['Watch the reason codes', 'A pattern in failure reasons tells you what to fix — details, timing or amount.'],
+                ['Reconcile by cycle', 'Close each cycle against the collection report before the next one starts.'],
+            ],
+            'related' => ['subscription-billing', 'product:payment-collection', 'reconciliation', 'pillar:accept-and-collect'],
+        ],
+        'subscription-billing' => [
+            'parent' => ['Accept & Collect', '/products/accept-and-collect'],
+            'name'  => 'Subscription Billing',
+            'title' => 'Subscription Billing | Collect Subscription Fees on Schedule | Paynancial',
+            'description' => 'Collect subscription fees on schedule with Paynancial Smart Collections: each subscriber charged every cycle, failed payments retried, subscribers kept informed and every renewal reconciled. What is published today, and what to confirm.',
+            'h1'    => 'Subscription fees, collected every cycle — without the chasing.',
+            'lead'  => 'For subscription businesses: collect each subscriber\'s fee on schedule, retry failed payments, keep subscribers informed and see every renewal reconciled to the right subscriber and cycle.',
+            'answer' => 'Subscription billing is collecting a subscriber\'s fee automatically every billing cycle. Paynancial Smart Collections collects subscription payments on a schedule, retries failed attempts on a defined schedule, keeps subscribers informed and reconciles every collection against the subscriber and cycle it belongs to. Plan management, free trials, proration and invoice generation are not described on this site — ask our team.',
+            'values' => ['Every cycle, on time', 'Failed renewals retried', 'Subscribers informed', 'Renewals reconciled'],
+            'secondary' => ['Explore Smart Collections', '/products/payment-collection', 'cta_click'],
+            'availability' => 'Subscription payments are collected through Smart Collections. Subscription plan management, free trials, proration and invoice generation are not described on this site; ask our team about your requirements.',
+            'what' => [
+                'For a subscription business, revenue lives or dies on renewals. Every cycle, each subscriber has to be charged; every failed card or account is revenue at risk; and every renewal has to land in the right subscriber\'s record for finance to trust the numbers.',
+                'Paynancial handles the collection side through <a class="inline-link" href="/products/payment-collection">Smart Collections</a>: subscription payments collected on schedule, failed renewals retried, subscribers kept informed and each renewal reconciled. Your own product keeps deciding who is subscribed to what; Paynancial collects what is due.',
+            ],
+            'steps' => [
+                ['Subscriber signs up', 'Your product records the plan and the price.'],
+                ['Schedule the fee', 'Create a collection for the subscriber with the amount and the billing cycle.'],
+                ['Renewal collected', 'Each cycle, the subscription fee is collected on the scheduled date.'],
+                ['Failed renewals retried', 'A failed attempt is recorded with a reason code and retried on a defined schedule.'],
+                ['Revenue reconciled', 'Each renewal is matched to its subscriber and cycle in your collection report.'],
+            ],
+            'caps_head' => ['What you get', 'Subscription collection, handled.', 'Through Smart Collections.'],
+            'capabilities' => [
+                ['Renewals on schedule', 'Collect each subscriber\'s fee every billing cycle.'],
+                ['Failed-renewal recovery', 'Failed attempts are retried on a defined schedule.'],
+                ['Reason codes', 'See why a renewal failed, subscriber by subscriber.'],
+                ['Subscriber notifications', 'Subscribers are kept informed as a payment is due or completed.'],
+                ['Renewal reconciliation', 'Each renewal is matched to its subscriber and cycle.'],
+                ['Renewal reporting', 'Collected, failed and pending renewals in one report.'],
+            ],
+            'surfaces' => [
+                ['Smart Collections', 'Collects the subscription fees. See <a class="inline-link" href="/products/payment-collection">Smart Collections</a>.'],
+                ['Collections API', 'Create a collection per subscriber from your product. See the <a class="inline-link" href="/developers/api-reference#collections">API Reference</a>.'],
+                ['Payment Links', 'One-off charges alongside the subscription. See <a class="inline-link" href="/products/payment-links">Payment Links</a>.'],
+                ['Reconciliation', 'Renewals matched to subscribers. See <a class="inline-link" href="/products/reconciliation">Reconciliation</a>.'],
+            ],
+            'practices' => [
+                ['Keep the plan in your product', 'Your product decides who is subscribed and at what price; collections follow it.'],
+                ['Act on failed renewals quickly', 'Contact the subscriber while the retry schedule is still running.'],
+                ['Make cancelling clear', 'A subscriber who can cancel easily is less likely to dispute a charge.'],
+            ],
+            'related' => ['recurring-payments', 'product:payment-collection', 'embedded-billing', 'pillar:accept-and-collect'],
+        ],
         // Payment Pages — guide built from the Payment Links product's
         // published "branded payment page" facts. A standalone page builder
         // (donation or event pages with their own fields) is not described.

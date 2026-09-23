@@ -58,7 +58,12 @@
 
   /* Layout */
   --header-height: 76px;
-  --container-max: 1240px;
+  --container-max: 1360px;
+  /* One site frame for the header, footer, .container and full-width
+     sections (standalone .sp-wrap): same max width and side padding at every
+     breakpoint, so page content starts exactly where the logo's "P" starts. */
+  --frame-max: 1360px;
+  --frame-pad: 20px;
   --radius-sm: 3px;
   --radius-md: 4px;
   --radius-lg: 6px;
@@ -112,11 +117,16 @@ input, select, textarea { font-family: inherit; font-size: 1rem; }
 
 .container {
   width: 100%;
-  max-width: var(--container-max);
+  max-width: var(--frame-max);
   margin-inline: auto;
-  padding-inline: 32px;
+  padding-inline: var(--frame-pad);
 }
-@media (max-width: 640px) { .container { padding-inline: 20px; } }
+/* Frame side padding by breakpoint. 1080–1199px stays tight because the
+   header's seven menu items and two buttons need the room there. */
+@media (min-width: 641px) { :root { --frame-pad: 24px; } }
+@media (min-width: 1080px) and (max-width: 1199px) { :root { --frame-pad: 16px; } }
+@media (min-width: 1280px) { :root { --frame-pad: 32px; } }
+@media (min-width: 1440px) { :root { --frame-pad: 56px; } }
 
 .full-bleed {
   width: 100vw;
@@ -232,17 +242,32 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
 }
 .site-header .container {
   height: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px;
-  max-width: var(--container-max);
-  padding: 14px 24px;
+  max-width: var(--frame-max);
+  padding: 14px var(--frame-pad);
   transition: padding var(--gh-transition);
 }
 .site-header.is-scrolled { box-shadow: 0 4px 20px rgba(10, 33, 29, 0.08); }
 .site-header.is-scrolled .container { padding-top: 10px; padding-bottom: 10px; }
-@media (max-width: 640px) { .site-header .container { padding: 10px 16px; } }
+@media (max-width: 640px) { .site-header .container { padding-top: 10px; padding-bottom: 10px; } }
 
 .brand { display: flex; align-items: center; }
 .brand-logo { height: 28px; width: auto; display: block; }
 @media (min-width: 1080px) { .site-header .brand-logo { height: 34px; } }
+/* Optical alignment: the logo artwork has 20px of transparent space before
+   the "P" (520×118 image), so shift it left by that share of its height to
+   put the visible "P" exactly on the frame edge. */
+.site-header .brand-logo { margin-left: calc(28px * -20 / 118); }
+@media (min-width: 1080px) { .site-header .brand-logo { margin-left: calc(34px * -20 / 118); } }
+/* Never squash the logo: it keeps its true proportions at every width, and
+   the header tightens around it on the narrowest phones instead. */
+.site-header .brand { flex-shrink: 0; }
+.site-header .brand-logo { max-width: none; }
+@media (max-width: 400px) {
+  .site-header .container { gap: 10px; }
+  .site-header .brand-logo { height: 24px; margin-left: calc(24px * -20 / 118); }
+  .site-header .header-actions { gap: 6px; }
+  .site-header .btn-login-signup { padding-inline: 12px; }
+}
 
 .main-nav { display: none; }
 @media (min-width: 1080px) { .main-nav { display: flex; align-items: center; gap: 2px; } }
@@ -529,7 +554,7 @@ section:last-of-type { border-bottom: none; }
 .ft-brand { border-bottom: 1px solid var(--border-on-ink); padding: 56px 0 48px; }
 .ft-brand-grid { display: grid; gap: 36px; align-items: end; }
 @media (min-width: 900px) { .ft-brand-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; } }
-.ft-logo img { height: 30px; width: auto; }
+.ft-logo img { height: 30px; width: auto; margin-left: calc(30px * -20 / 118); } /* optical: visible "P" on the frame edge */
 .ft-brand-copy .brand-lockup { margin: 18px 0 0; font-size: 0.9rem; }
 .ft-statement { margin-top: 22px; font-family: var(--font-serif); font-size: clamp(1.45rem, 1.1rem + 1.3vw, 2.05rem); line-height: 1.18; color: var(--paper); max-width: 24ch; }
 .ft-sales { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 11px 20px; border-radius: 999px; background: var(--paper); color: var(--ink); font-size: 0.86rem; font-weight: 600; transition: background var(--transition), transform var(--transition); }
@@ -707,8 +732,8 @@ section:last-of-type { border-bottom: none; }
 .service p { margin: 0; color: var(--text-muted); font-size: 0.88rem; }
 
 .registry-strip { background: var(--ink); color: var(--paper); }
-.registry-strip .container { padding: 56px 32px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; }
-@media (max-width: 800px) { .registry-strip .container { grid-template-columns: 1fr; padding: 48px 20px; } }
+.registry-strip .container { padding-block: 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; } /* side padding from the site frame */
+@media (max-width: 800px) { .registry-strip .container { grid-template-columns: 1fr; padding-block: 48px; } }
 .registry-strip h2 { color: var(--paper); max-width: 16ch; }
 .registry-strip p { color: rgba(250,249,245,0.68); max-width: 42ch; margin-top: 16px; font-size: 0.92rem; }
 /* CTA-only variant (no legal detail column — those already live in the footer registry) */
@@ -844,7 +869,7 @@ section:last-of-type { border-bottom: none; }
    Legal pages (Privacy, Terms, Refund, Cookie, Security) — sticky TOC,
    article typography, callouts and tables shared across all five.
    --------------------------------------------------------------------- */
-.legal-wrap { padding: 64px 0 100px; }
+.legal-wrap { padding-block: 64px 100px; } /* vertical only: keep the site frame's side padding */
 .legal-grid { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 64px; align-items: start; }
 @media (max-width: 860px) { .legal-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
 
@@ -936,7 +961,7 @@ section:last-of-type { border-bottom: none; }
 /* Seven primary items + two CTAs: tighten item padding on narrower desktops
    so the row never wraps or overflows. */
 @media (min-width: 1080px) and (max-width: 1199px) {
-  .site-header .container { gap: 12px; padding-inline: 16px; }
+  .site-header .container { gap: 12px; }
   .main-nav .nav-link { padding-inline: 7px !important; font-size: 0.84rem !important; }
   .nav-link.is-current::after { left: 7px !important; right: 7px !important; }
   .site-header .btn-contact, .site-header .btn-login-signup { padding-inline: 12px; font-size: 0.8rem; }

@@ -4,7 +4,7 @@
    Sandbox and AI Governance. Components: includes/standalone-ui.php.
    ===================================================================== */
 
-.sp-wrap { width: 100%; max-width: 1360px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 56px); }
+.sp-wrap { width: 100%; max-width: var(--frame-max); margin-inline: auto; padding-inline: var(--frame-pad); } /* same frame as the header (main.css) */
 
 /* ---- Hero ------------------------------------------------------------ */
 .sp-hero { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 85% 0%, rgba(0, 166, 157, 0.22) 0%, rgba(0, 166, 157, 0) 55%), linear-gradient(160deg, var(--ink) 0%, #07191a 100%); color: var(--paper); padding: clamp(48px, 7vw, 96px) 0 clamp(56px, 7vw, 104px); }

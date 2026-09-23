@@ -82,6 +82,8 @@ function reg_page_map(): array
         'white-label-payments'      => ['pa-pg', 'pss-act', 'odr', 'ombudsman', 'dpdp'],
         'dev:payment-apis'          => ['pa-pg', 'tokenisation', 'emandate', 'tat', 'security'],
         'dev:payout-apis'           => ['pss-act', 'imps', 'upi', 'nach', 'tat'],
+        'recurring-payments'        => ['emandate', 'upi-autopay', 'nach'],
+        'subscription-billing'      => ['emandate', 'upi-autopay', 'odr'],
         'payment-pages'             => ['pa-pg', 'upi', 'tat', 'odr'],
         'ai:hub'                    => ['free-ai', 'fraud-rm', 'security', 'dpdp', 'odr', 'ombudsman'],
         'ai:paynancial-ai'          => ['free-ai', 'security', 'fraud-rm', 'dpdp'],

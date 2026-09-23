@@ -29,7 +29,7 @@ function res_faq_directory(): array
         'refunds' => 'Refunds', 'settlements' => 'Settlements', 'reconciliation' => 'Reconciliation', 'upi-payments' => 'UPI Payments',
         'bulk-payouts' => 'Bulk Payouts', 'vendor-payments' => 'Vendor Payments', 'employee-payments' => 'Employee Payments', 'partner-payments' => 'Partner Payments',
         'mis-reports' => 'MIS & Reports', 'chargebacks' => 'Chargebacks', 'international-payments' => 'International Payments', 'invoice-management' => 'Invoice Management', 'expense-management' => 'Expense Management',
-        'payment-pages' => 'Payment Pages', 'embedded-payments' => 'Embedded Payments', 'embedded-payouts' => 'Embedded Payouts', 'embedded-billing' => 'Embedded Billing', 'wallet-infrastructure' => 'Wallet Infrastructure', 'split-payments' => 'Split Payments', 'white-label-payments' => 'White-Label Payments',
+        'recurring-payments' => 'Recurring Payments', 'subscription-billing' => 'Subscription Billing', 'payment-pages' => 'Payment Pages', 'embedded-payments' => 'Embedded Payments', 'embedded-payouts' => 'Embedded Payouts', 'embedded-billing' => 'Embedded Billing', 'wallet-infrastructure' => 'Wallet Infrastructure', 'split-payments' => 'Split Payments', 'white-label-payments' => 'White-Label Payments',
     ];
     $productPages = [];
     foreach (cat_pages() as $slug => $c) {

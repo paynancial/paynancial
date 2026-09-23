@@ -17,8 +17,8 @@ $catalog = [
         ['Payment Links', '/products/payment-links'],
         ['Payment Pages', '/products/payment-pages'],
         ['UPI Payments', '/products/upi-payments'],
-        ['Recurring Payments', '/products/payment-collection'],
-        ['Subscription Billing', '/products/payment-collection'],
+        ['Recurring Payments', '/products/recurring-payments'],
+        ['Subscription Billing', '/products/subscription-billing'],
         ['Smart Collections', '/products/payment-collection'],
     ],
     'Pay & Move Money' => [

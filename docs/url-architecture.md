@@ -258,3 +258,15 @@ There is no analytics platform on the site. Pages fire events through the existi
 
 - **Page views:** `developer_page_view`, `api_reference_view`, `sandbox_view`, `ai_governance_view`
 - **Clicks:** `request_sandbox_access`, `api_reference_click`, `documentation_click`, `cta_click`
+
+## Site frame (one width pattern on every page)
+
+Header, footer, `.container` pages and full-width `.sp-wrap` sections share one frame defined in `main.css`: `--frame-max: 1360px` and `--frame-pad` (20px ≤640px · 24px 641–1079px · 16px 1080–1199px, where the header menu needs the room · 24px 1200–1279px · 32px 1280–1439px · 56px ≥1440px). The header logo carries an optical offset for the transparent space in its artwork, so the visible "P" of Paynancial sits exactly on the frame edge. Section wrappers must set vertical padding only (`padding-block`), never side padding. Verified on all 112 URLs at 1440, 1280, 1024, 768 and 390px (plus 17 widths on sample pages): content, header and footer share the same left and right edges.
+
+## Accept & Collect: recurring items
+
+| Menu item | URL | Basis |
+|---|---|---|
+| Smart Collections | `/products/payment-collection` | The product page |
+| Recurring Payments | `/products/recurring-payments` (new) | Published Smart Collections facts: scheduled instalment / repeat collection, reason codes, retries, notifications, per-cycle reconciliation, Collections API |
+| Subscription Billing | `/products/subscription-billing` (new) | Same facts from the subscription angle; plan management, trials, proration and invoicing stated as not described |

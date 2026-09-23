@@ -312,6 +312,18 @@ function faq_sets(): array
             ['Does Paynancial deduct TDS?', 'No. Paynancial does not calculate or deduct TDS. Agree the net amount with your CA before you pay.'],
             ['How do I keep spending records?', 'Keep the supplier\'s invoice for each business expense and use your payout report to match each payment to its bill. Your CA can advise on the tax records you need.'],
         ],
+        'product:recurring-payments' => [
+            ['What are recurring payments?', 'Charges collected from the same customer on a repeating schedule, such as monthly instalments or a membership fee.'],
+            ['How do I set up recurring payments with Paynancial?', 'Create a collection in Smart Collections with the customer, the amount and the schedule — from the dashboard or with the Collections API. Each cycle is then collected on its due date.'],
+            ['What happens when a recurring payment fails?', 'The failed attempt is recorded with a reason code and retried on a defined schedule, and the result appears in your collection report.'],
+            ['Are customers told before they are charged?', 'Customers are kept informed as a collection is due or completed.'],
+        ],
+        'product:subscription-billing' => [
+            ['What is subscription billing?', 'Collecting a subscriber\'s fee automatically every billing cycle, so renewals happen without chasing.'],
+            ['How does Paynancial handle subscription billing?', 'Smart Collections collects subscription payments on a schedule, retries failed renewals on a defined schedule, keeps subscribers informed and reconciles each renewal to its subscriber and cycle.'],
+            ['Does Paynancial manage subscription plans, trials or proration?', 'Plan management, free trials, proration and invoice generation are not described on this site. Your product keeps the plan; ask our team about your requirements.'],
+            ['How do I see which renewals failed?', 'Your collection report shows what was collected, what failed — with a reason code — and what is still pending.'],
+        ],
         'product:payment-pages' => [
             ['What is a payment page?', 'The secure page a customer lands on to pay you. With Paynancial, every Payment Link opens a branded payment page that shows your business name and the amount due.'],
             ['Do I need a website to use a payment page?', 'No. Create a Payment Link from the dashboard, share it by email, WhatsApp, SMS or on an invoice, and the customer pays on the page.'],

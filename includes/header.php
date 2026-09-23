@@ -52,8 +52,8 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/products/payment-links"><strong>Payment Links</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-pages"><strong>Payment Pages</strong></a>
               <a class="mega-link mega-link-plain" href="/products/upi-payments"><strong>UPI Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/payment-collection"><strong>Recurring Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/payment-collection"><strong>Subscription Billing</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/recurring-payments"><strong>Recurring Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/subscription-billing"><strong>Subscription Billing</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-collection"><strong>Smart Collections</strong></a>
             </div>
             <div>
@@ -241,8 +241,8 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/products/payment-links">Payment Links</a></li>
       <li><a href="/products/payment-pages">Payment Pages</a></li>
       <li><a href="/products/upi-payments">UPI Payments</a></li>
-      <li><a href="/products/payment-collection">Recurring Payments</a></li>
-      <li><a href="/products/payment-collection">Subscription Billing</a></li>
+      <li><a href="/products/recurring-payments">Recurring Payments</a></li>
+      <li><a href="/products/subscription-billing">Subscription Billing</a></li>
       <li><a href="/products/payment-collection">Smart Collections</a></li>
 
       <li class="mobile-nav-group-label"><a href="/pay-and-move-money">Pay &amp; Move Money</a></li>

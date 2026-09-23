@@ -2,7 +2,7 @@
    About page (ab-*). Loaded only on /about via $page_meta['extra_css'].
    Full-bleed sections with inner grids; built on main.css tokens.
    ===================================================================== */
-:root { --ab-gutter: max(32px, calc((100vw - var(--container-max)) / 2 + 32px)); }
+:root { --ab-gutter: max(var(--frame-pad), calc((100vw - var(--frame-max)) / 2 + var(--frame-pad))); } /* aligned with the site frame */
 @media (max-width: 640px) { :root { --ab-gutter: 20px; } }
 
 main section[class^="ab-"] { border-bottom: none; padding: 112px 0; }
