@@ -4,8 +4,8 @@ $page_meta = [
     'description' => 'Payment infrastructure for startups, SaaS, SMEs, marketplaces and enterprises — across e-commerce, travel, healthcare, FinTech and more.',
 ];
 $businessTypes = [
-    'startups'           => ['Startups & New Businesses', 'Launch fast with payment infrastructure that grows with you.', '/solutions/startups'],
-    'saas'               => ['SaaS & Subscription Businesses', 'Recurring billing, automated collections and reconciliation, built in.', '/solutions/saas'],
+    'startups'           => ['Startups & New Businesses', 'Launch fast with payment infrastructure that grows with you.', '/contact?intent=sales&solution=startups'],
+    'saas'               => ['SaaS & Subscription Businesses', 'Recurring billing, automated collections and reconciliation, built in.', '/contact?intent=sales&solution=saas'],
     'sme'                => ['SMEs & Growing Businesses', 'Room to scale into new volume without switching providers.', '/contact?intent=sales&solution=sme'],
     'marketplaces'       => ['Marketplaces & Platforms', 'Collect from customers and split funds to sellers and partners automatically.', '/contact?intent=sales&solution=marketplaces'],
     'digital-businesses' => ['Digital Businesses', 'Payment infrastructure for products that live entirely online.', '/contact?intent=sales&solution=digital-businesses'],
@@ -54,6 +54,7 @@ $industries = [
         </a>
       <?php endforeach; ?>
     </div>
+    <?php business_services_crosslink('Registering a new company?', 'Paynancial Business Services supports company incorporation and business registration for founders and growing businesses.'); ?>
   </div>
 </section>
 

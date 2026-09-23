@@ -289,6 +289,32 @@
   });
 
   /* ---------------------------------------------------------------
+     Footer groups — accordions below 720px, always open above.
+     Without JS every group simply stays expanded.
+     --------------------------------------------------------------- */
+  var footer = document.querySelector('.ft');
+  if (footer) {
+    var ftQuery = window.matchMedia('(max-width: 719px)');
+    var ftGroups = footer.querySelectorAll('[data-ft-group]');
+    var setGroup = function (group, open) {
+      group.classList.toggle('is-open', open);
+      var btn = group.querySelector('[data-ft-toggle]');
+      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    var syncFooter = function () {
+      footer.classList.toggle('ft-js', ftQuery.matches);
+      ftGroups.forEach(function (g) { setGroup(g, !ftQuery.matches); });
+    };
+    ftGroups.forEach(function (g) {
+      var btn = g.querySelector('[data-ft-toggle]');
+      if (btn) btn.addEventListener('click', function () { setGroup(g, !g.classList.contains('is-open')); });
+    });
+    syncFooter();
+    if (ftQuery.addEventListener) ftQuery.addEventListener('change', syncFooter);
+    else if (ftQuery.addListener) ftQuery.addListener(syncFooter);
+  }
+
+  /* ---------------------------------------------------------------
      Scroll reveal
      --------------------------------------------------------------- */
   var revealEls = document.querySelectorAll('.reveal');

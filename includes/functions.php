@@ -85,16 +85,34 @@ function generate_enquiry_code(PDO $pdo): string
     return sprintf('PAY-ENQ-%s-%06d', $year, $count);
 }
 
-/** Render a page's SEO <head> tags. */
+/**
+ * Canonical path for a request URI: query string dropped and trailing
+ * slash removed (except for "/"), so /about/ and /contact?intent=sales
+ * both canonicalise to their clean URL.
+ */
+function canonical_path(string $uri): string
+{
+    $path = (string) (parse_url($uri, PHP_URL_PATH) ?? '/');
+    $path = '/' . trim($path, '/');
+    return $path;
+}
+
+/**
+ * Render a page's SEO <head> tags. Optional keys: title, description,
+ * canonical, image, schema, robots (e.g. 'noindex, follow').
+ */
 function seo_meta(array $meta): void
 {
     $title       = $meta['title'] ?? APP_NAME;
     $description = $meta['description'] ?? 'Paynancial — secure, intelligent payment technology for modern businesses.';
-    $canonical   = $meta['canonical'] ?? site_url($_SERVER['REQUEST_URI'] ?? '/');
+    $canonical   = $meta['canonical'] ?? site_url(canonical_path($_SERVER['REQUEST_URI'] ?? '/'));
     $image       = $meta['image'] ?? site_url('/assets/images/paynancial-icon.png');
     ?>
     <title><?= e($title) ?></title>
     <meta name="description" content="<?= e($description) ?>">
+    <?php if (!empty($meta['robots'])): ?>
+    <meta name="robots" content="<?= e($meta['robots']) ?>">
+    <?php endif; ?>
     <link rel="canonical" href="<?= e($canonical) ?>">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Paynancial">
@@ -162,4 +180,19 @@ function format_amount(float $amount, string $currency = 'INR'): string
 {
     $symbol = $currency === 'INR' ? '₹' : $currency . ' ';
     return $symbol . number_format($amount, 2);
+}
+
+/**
+ * Small contextual cross-link from a payments page to Paynancial Business
+ * Services. Approved placements only: homepage, Payment Gateway, Solutions.
+ * Business Services is deliberately NOT in the header, mega-menus or footer.
+ */
+function business_services_crosslink(string $lead, string $text, string $href = '/business-services', string $label = 'Explore Business Services'): void
+{
+    ?>
+    <aside class="crosslink reveal" aria-label="Paynancial Business Services">
+      <p><strong><?= e($lead) ?></strong> <?= e($text) ?></p>
+      <a class="card-link" href="<?= e($href) ?>"><?= e($label) ?> →</a>
+    </aside>
+    <?php
 }

@@ -10,6 +10,17 @@ declare(strict_types=1);
 require_once __DIR__ . '/../includes/bootstrap.php';
 
 $requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+
+// One URL per page: permanently redirect trailing-slash URLs to the
+// slash-less form (query string preserved). GET/HEAD only; the API and
+// form posts are left alone.
+if ($requestPath !== '/' && str_ends_with($requestPath, '/')
+    && in_array($_SERVER['REQUEST_METHOD'] ?? 'GET', ['GET', 'HEAD'], true)
+    && !str_starts_with($requestPath, '/api/')) {
+    $query = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY);
+    header('Location: ' . rtrim($requestPath, '/') . ($query ? '?' . $query : ''), true, 301);
+    exit;
+}
 $path = trim($requestPath, '/');
 $segments = $path === '' ? [] : explode('/', $path);
 $current_path = $requestPath;
@@ -136,6 +147,8 @@ if (isset($dashboardAreas[$segments[0] ?? ''])) {
 // ---------------------------------------------------------------------
 if (($segments[0] ?? '') === 'pay' && isset($segments[1])) {
     $pay_ref = $segments[1];
+    // Customer payment-link pages are private to the payer — never index.
+    header('X-Robots-Tag: noindex, nofollow');
     ob_start();
     include __DIR__ . '/../pages/pay.php';
     $page_body = ob_get_clean();
@@ -182,6 +195,11 @@ $solutionPages = [
 ];
 if (($segments[0] ?? '') === 'solutions' && isset($segments[1])) {
     $solutionFile = $solutionPages[$segments[1]] ?? null;
+    // Only serve a solutions page whose template actually exists; a missing
+    // template used to render an empty 200 page (soft 404).
+    if ($solutionFile !== null && !is_file(__DIR__ . '/../pages/' . $solutionFile . '.php')) {
+        $solutionFile = null;
+    }
     ob_start();
     if ($solutionFile === null) {
         http_response_code(404);
@@ -268,7 +286,7 @@ $publicRoutes = [
     ''                 => 'home',
     'about'            => 'about',
     'technology'       => 'technology',
-    'agentic-ai'       => 'agentic-ai',
+    'agentic-ai'       => 'agenticai',
     'trust'            => 'trust',
     'leadership'       => 'leadership',
     'solutions'        => 'solutions',
@@ -305,6 +323,12 @@ if ($pageSlug === null) {
 ob_start();
 include $pageFile;
 $page_body = ob_get_clean();
+
+// /login opens the login panel over the homepage; point search engines
+// at the homepage itself rather than a second copy of it.
+if ($path === 'login' && isset($page_meta)) {
+    $page_meta['canonical'] = site_url('/');
+}
 
 include __DIR__ . '/../includes/site-head.php';
 include __DIR__ . '/../includes/header.php';

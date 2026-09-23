@@ -20,7 +20,7 @@ $stmt = $pdo->prepare(
 $stmt->execute(['ref' => $linkRef]);
 $link = $stmt->fetch();
 
-$page_meta = ['title' => 'Payment Link | Paynancial'];
+$page_meta = ['title' => 'Payment Link | Paynancial', 'robots' => 'noindex, nofollow'];
 
 $isExpired = $link && $link['expires_at'] && strtotime((string) $link['expires_at']) < time();
 ?>

@@ -47,7 +47,7 @@ $page_meta = bs_page_meta(
       <?php bs_breadcrumb($bs_trail); ?>
       <span class="eyebrow">Jurisdiction Directory</span>
       <h1 id="bs-dir-title">Where Would You Like to Incorporate?</h1>
-      <p class="lead">Search for a country or jurisdiction, or narrow the list by region and business objective. Each jurisdiction page outlines how we support incorporation there.</p>
+      <p class="lead">Search for a country or jurisdiction, or narrow the list by region and business objective. Each jurisdiction page covers what to plan for; our team confirms availability when you enquire.</p>
     </div>
 
     <form class="bs-filter reveal" action="<?= e(bs_jurisdiction_url()) ?>" method="get" role="search" aria-label="Find a jurisdiction" data-jur-filter>

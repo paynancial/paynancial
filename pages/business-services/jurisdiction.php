@@ -15,9 +15,12 @@ $name = $j['name'];
 $pos = bs_map_position($j);
 $regionNames = array_map(fn ($r) => bs_regions()[$r] ?? $r, $j['regions']);
 $enquiry = bs_enquiry_url($j['slug']);
+$approved = bs_jurisdiction_approved($j);
 
 $faqs = [
-    ["Can Paynancial help me incorporate in {$name}?", "Yes. {$name} is one of the jurisdictions where we support international company incorporation. Share your requirements and we will outline the options, documents and next steps."],
+    ["Can Paynancial help me incorporate in {$name}?", $approved
+        ? "Yes. {$name} is one of the jurisdictions where we support international company incorporation. Share your requirements and we will outline the options, documents and next steps."
+        : "Tell us about your plans for {$name} and our team will confirm whether and how we can support your incorporation there, before any work begins."],
     ["Which company structure should I use in {$name}?", "That depends on your business activity, ownership and plans. We explain the available structures and their ongoing obligations during your consultation."],
     ["How much does incorporation in {$name} cost and how long does it take?", "Government fees, registered agent charges and processing times vary. You receive a written quote and an expected timeline once we understand your case."],
     ['Do you provide tax advice?', "We recommend obtaining independent tax advice in your home country and in {$name} before you incorporate. We coordinate the incorporation itself."],
@@ -36,8 +39,13 @@ $page_meta = bs_page_meta(
     "Company Incorporation in {$name} | Paynancial Business Services",
     "Incorporate a company in {$name} with Paynancial. Structures, requirements, documents and process — with expert guidance from first conversation to incorporation.",
     bs_jurisdiction_url($j['slug']),
-    [bs_breadcrumb_schema($bs_trail), bs_faq_schema($faqs)]
+    // FAQ markup only once the page is approved and its FAQs are jurisdiction-specific.
+    $approved ? [bs_breadcrumb_schema($bs_trail), bs_faq_schema($faqs)] : [bs_breadcrumb_schema($bs_trail)]
 );
+if (!$approved) {
+    // Pending the Jurisdiction Approval Matrix: usable by visitors, kept out of search.
+    $page_meta['robots'] = 'noindex, follow';
+}
 
 $considerations = $j['considerations'] ?? [
     ['Business activity & licensing', "Some activities need a licence or approval in addition to incorporation. We identify what applies to your activity in {$name}."],
@@ -54,7 +62,9 @@ $considerations = $j['considerations'] ?? [
       <?php bs_breadcrumb($bs_trail); ?>
       <span class="eyebrow">International Incorporation</span>
       <h1 id="bs-jur-title"><span class="bs-jur-hero-flag"><?= bs_flag($j, 'bs-flag bs-flag-lg') ?></span>Company Incorporation in <?= e($name) ?></h1>
-      <p class="lead"><?= e($j['descriptor']) ?> Paynancial supports incorporation in <?= e($name) ?> with expert guidance, structured documentation and end-to-end coordination.</p>
+      <p class="lead"><?= e($j['descriptor']) ?> <?= $approved
+          ? 'Paynancial supports incorporation in ' . e($name) . ' with expert guidance, structured documentation and end-to-end coordination.'
+          : 'Planning to incorporate in ' . e($name) . '? Share your requirements and our team will confirm how we can help.' ?></p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="<?= e($enquiry) ?>">Talk to an Expert <?= bs_icon('arrow') ?></a>
         <a class="btn btn-outline" href="<?= e(bs_enquiry_url('quote')) ?>">Get a Quote</a>
@@ -93,7 +103,7 @@ $considerations = $j['considerations'] ?? [
       <div><dt>Region</dt><dd><?= e(implode(', ', $regionNames)) ?></dd></div>
       <div><dt>Capital / seat of government</dt><dd><?= e($j['capital']) ?></dd></div>
       <div><dt>Coordinates</dt><dd class="mono"><?= e(bs_format_coords($j)) ?></dd></div>
-      <div><dt>Support</dt><dd>Incorporation, documentation &amp; post-incorporation assistance</dd></div>
+      <div><dt>Paynancial support</dt><dd><?= $approved ? 'Incorporation, documentation &amp; post-incorporation assistance' : 'Confirmed on enquiry' ?></dd></div>
     </dl>
   </div>
 </section>

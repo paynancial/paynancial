@@ -281,6 +281,14 @@ $page_meta = [
   </div>
 </section>
 
+<?php if ($product_slug === 'payment-gateway'): ?>
+<section style="padding:0 0 8px;border-bottom:none;">
+  <div class="container">
+    <?php business_services_crosslink('Need to set up your business first?', 'Paynancial Business Services can help with company incorporation and the registrations a business typically needs before going live with payments.', '/business-services/company-incorporation'); ?>
+  </div>
+</section>
+<?php endif; ?>
+
 <section>
   <div class="container">
     <div class="cta-band reveal">

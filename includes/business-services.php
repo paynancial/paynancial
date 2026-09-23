@@ -134,7 +134,7 @@ function bs_services(): array
             ],
             'faqs' => [
                 ['Which structure should I choose?', 'It depends on the number of founders, how you plan to raise capital, and your compliance appetite. Our team explains the trade-offs for your specific situation before you commit.'],
-                ['Can you help incorporate outside India?', 'Yes. We support incorporation in selected international jurisdictions. Browse the jurisdictions we list, or speak with our team if yours is not shown.'],
+                ['Can you help incorporate outside India?', 'Speak with our team about the jurisdiction you are considering. We confirm whether and how we can support your incorporation there before any work begins.'],
                 ['How much does incorporation cost and how long does it take?', 'Government fees and processing times vary by structure, jurisdiction and authority. We share a written quote and an expected timeline once we understand your requirements.'],
                 ['What happens after incorporation?', 'We can help with registrations such as GST, ongoing ROC compliance and changes to the company — and Paynancial can help you start accepting payments.'],
             ],
@@ -688,6 +688,20 @@ function bs_jurisdictions(): array
             'capital' => 'London', 'lat' => 51.51, 'lon' => -0.13,
         ],
     ];
+}
+
+/**
+ * Jurisdiction approval gate (see docs/jurisdiction-approval-matrix.md).
+ * A jurisdiction page is indexable, and may state that Paynancial serves
+ * it, only when BOTH are recorded on its entry:
+ *   'served_confirmed' => true   — business owner confirmed it is served today
+ *   'content_verified' => true   — page content checked against official sources
+ * Neither is set for any jurisdiction yet, so every jurisdiction page is
+ * noindex and uses "we'll confirm availability" wording.
+ */
+function bs_jurisdiction_approved(array $j): bool
+{
+    return ($j['served_confirmed'] ?? false) === true && ($j['content_verified'] ?? false) === true;
 }
 
 /** Look up one jurisdiction; null if unknown. */

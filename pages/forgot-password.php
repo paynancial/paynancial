@@ -2,6 +2,7 @@
 $page_meta = [
     'title' => 'Reset Your Password | Paynancial',
     'description' => 'Reset your Paynancial account password securely.',
+    'robots'      => 'noindex, follow',
 ];
 $type = $_GET['type'] ?? 'customer';
 $typeLabels = ['customer' => 'Customer', 'partner' => 'Partner', 'employee' => 'Employee', 'hr' => 'HRMS'];

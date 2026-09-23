@@ -7,6 +7,7 @@
 
 $page_meta = [
     'title' => 'Verify Your Email | Paynancial',
+    'robots' => 'noindex, nofollow',
 ];
 
 $challenge = $_SESSION['_signup_challenge'] ?? null;

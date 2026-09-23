@@ -4,7 +4,7 @@
  * api/auth/forgot-password.php (and by the admin partner-approval
  * flow, which issues the same kind of token for a brand-new account).
  */
-$page_meta = ['title' => 'Reset Password | Paynancial'];
+$page_meta = ['title' => 'Reset Password | Paynancial', 'robots' => 'noindex, nofollow'];
 
 $token = (string) ($_GET['token'] ?? $_POST['token'] ?? '');
 $tokenHash = $token !== '' ? hash('sha256', $token) : '';

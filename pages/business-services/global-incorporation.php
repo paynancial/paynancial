@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../includes/business-services-ui.php';
 $bs_trail = [['Home', '/'], ['Business Services', bs_url()], ['Global Incorporation', bs_url('global-incorporation')]];
 
 $faqs = [
-    ['Which jurisdictions do you support?', 'The jurisdictions listed in our directory are the popular destinations we support today. If the one you are considering is not listed, speak with our team about your requirements.'],
+    ['Which jurisdictions do you support?', 'Our directory lists the destinations founders ask us about most. Availability can change, so we confirm support for your chosen jurisdiction when you enquire — including any not listed.'],
     ['Which company structure will I need?', 'Structures vary by jurisdiction and depend on your business activity, ownership and plans. We outline the options that fit during your consultation.'],
     ['How much does international incorporation cost and how long does it take?', 'Government fees, registered agent charges and processing times differ between jurisdictions. You receive a written quote and an expected timeline once we understand your case.'],
     ['Will incorporating abroad give me a bank account, residency or a visa?', 'No. Incorporation is separate from banking, residency and visa processes, each of which has its own requirements and approvals. We can explain what is involved so you can plan for it.'],
