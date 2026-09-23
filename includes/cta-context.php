@@ -108,6 +108,7 @@ function cta_context_key(string $path): string
         'ai-intelligence' => 'payments',
         'pay-and-move-money' => 'payments',
         'financial-operations' => 'payments',
+        'embedded-finance' => 'payments',
         'pricing'     => 'pricing',
         'developers'  => 'developers',
         'about'       => 'company',

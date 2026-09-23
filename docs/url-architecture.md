@@ -202,6 +202,26 @@ Each section states only what the site already publishes and says plainly where 
 
 **Uniqueness:** the highest 5-word-shingle overlap among these pages, the pillars and the existing products is 28% (limit 40%).
 
+## 2f. Embedded Finance, remaining pillar items, India SEO and regulatory context
+
+**Embedded Finance pillar** — `/embedded-finance` (canonical, indexable, in the sitemap); `/products/embedded-finance` 301s there. Evidence: the Partners page (technology partners "embed Payment, Payout and Billing APIs directly") and the published API. All six items (Embedded Payments, Payouts, Billing, Wallet Infrastructure, Split Payments, White-Label Payments) are **sections** on the pillar, because none has product-level evidence beyond the APIs. Solutions/Technology narrative is not used as evidence.
+
+**Standalone pages for the remaining Pay & Move Money / Financial Operations items** (built on request):
+
+| URL | Basis | Indexing |
+|---|---|---|
+| `/products/mis-reports` | Payment Analytics reports + Reports API (verified) | Indexable; in sitemap |
+| `/products/chargebacks` | Chargeback process in the published Refund Policy (verified) | Indexable; in sitemap |
+| `/products/international-payments` | Guide: published payout facts + India context; no cross-border claim | `noindex, follow` until confirmed |
+| `/products/invoice-management` | Guide: Payment Links + Smart Collections; no invoicing claim | `noindex, follow` until confirmed |
+| `/products/expense-management` | Guide: payout side of spending; no expense-product claim | `noindex, follow` until confirmed |
+
+To index a guide page once the capability is confirmed: remove its `'robots'` line in `includes/product-capabilities.php` and add it to `public/sitemap.php`.
+
+**India local signals (site-wide):** `<html lang="en-IN">`, `og:locale en_IN`, `inLanguage: en-IN`, Organization `address` (Patna, Bihar, IN — "based in", not a registered-office claim), and a `Service` schema with `areaServed: India` on every product, capability and pillar page. Each new page also has an "In India" band.
+
+**Regulatory context (RBI / NPCI):** `includes/regulatory-context.php` holds plain-language summaries of the frameworks that apply (PSS Act 2007, PA/PG guidelines, PA-CB, FEMA, TAT for failed transactions, ODR, UDIR, UPI guidelines, UPI AutoPay, e-mandates, NACH, IMPS, card-on-file tokenisation, digital payment security controls, KYC Direction, DPDP Act 2023) and maps them to pages. Deliberately no circular numbers, dates, thresholds or timelines, no claim that Paynancial holds any licence or complies with a given circular, and links to rbi.org.in and npci.org.in for the current text. **Have a compliance professional review this file.**
+
 ## 3. Redirect map
 
 | From | To | Type |
@@ -210,6 +230,7 @@ Each section states only what the site already publishes and says plainly where 
 | `/products/ai-and-intelligence` | `/ai-intelligence` | 301, one hop |
 | `/products/pay-and-move-money` | `/pay-and-move-money` | 301, one hop |
 | `/products/financial-operations` | `/financial-operations` | 301, one hop |
+| `/products/embedded-finance` | `/embedded-finance` | 301, one hop |
 | `/developers#sandbox` and the other old developer anchors | the new page | Client-side forward in `main.js`. A `#fragment` never reaches the server, so no 301 is possible or claimed. |
 
 No other redirects were created. Unknown `/developers/{x}` paths return 404.

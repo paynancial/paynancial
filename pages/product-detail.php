@@ -186,6 +186,7 @@ $page_meta = sp_meta([
     'h1'          => $p['headline'],
     'trail'       => $trail,
     'faqs'        => $faqs,
+    'service'     => $p['eyebrow'],
 ]);
 $resource = dev_resources()[$p['api']];
 $apiAnchor = str_replace('_', '-', $p['api']);
@@ -260,6 +261,8 @@ sp_hero([
     <?php sp_table(['Parameter', 'Description'], array_map(fn ($x) => ['<code>' . e($x[0]) . '</code>', $x[1]], $resource['params']), $resource['name'] . ' parameters'); ?>
   </div>
 <?php sp_band_close(); ?>
+
+<?php sp_regulatory('product:' . $product_slug, strtolower($p['eyebrow']) . ' in India'); ?>
 
 <?php sp_band_open('faq'); ?>
   <div class="sp-split">

@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/business-services.php';    // breadcrumb / FAQ schema builders
 require_once __DIR__ . '/business-services-ui.php'; // bs_breadcrumb()
+require_once __DIR__ . '/regulatory-context.php';  // sp_regulatory() content
 
 /**
  * Page meta for a standalone page: canonical, OG, and JSON-LD
@@ -34,11 +35,24 @@ function sp_meta(array $o): array
         'headline'    => $o['h1'] ?? $o['title'],
         'description' => $o['description'],
         'url'         => $url,
-        'inLanguage'  => 'en',
+        'inLanguage'  => 'en-IN',
         'publisher'   => organization_schema(),
         'isPartOf'    => ['@type' => 'WebSite', 'name' => 'Paynancial', 'url' => APP_URL],
     ];
     $schema = [$page, bs_breadcrumb_schema($o['trail'])];
+    if (!empty($o['service'])) {
+        // Local relevance: every Paynancial product is offered to businesses in India.
+        $schema[] = [
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Service',
+            'name'        => $o['service'],
+            'serviceType' => $o['service'],
+            'description' => $o['description'],
+            'url'         => $url,
+            'provider'    => organization_schema(),
+            'areaServed'  => ['@type' => 'Country', 'name' => 'India'],
+        ];
+    }
     if (!empty($o['faqs'])) {
         $schema[] = bs_faq_schema($o['faqs']);
     }

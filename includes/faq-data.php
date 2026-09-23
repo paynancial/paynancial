@@ -185,9 +185,10 @@ function faq_sets(): array
             ['How is Paynancial\'s AI governed?', 'By five controls: permissions, policy limits, human oversight, authentication and auditability. See the AI Governance page.'],
         ],
         'category:embedded-finance' => [
-            ['What is embedded finance?', 'Putting financial services — payments, payouts, billing, wallets — directly inside a platform\'s own product, so its users never have to leave it.'],
-            ['What does embedded finance build on at Paynancial?', 'The same foundation as any Paynancial integration: a REST API, idempotent requests, real-time webhooks and payouts to bank accounts and UPI IDs.'],
-            ['Which embedded finance products are available?', 'Embedded payments, embedded payouts, embedded billing, wallet infrastructure, split payments and white-label payments are available to discuss with our team, so you can confirm what fits your platform.'],
+            ['What is embedded finance?', 'Putting financial services — payments, payouts, billing — directly inside a platform\'s own product, so its users never have to leave it to pay or get paid.'],
+            ['How do platforms embed Paynancial?', 'As technology partners: SaaS platforms and marketplaces embed Paynancial\'s Payment, Payout and Billing APIs directly in their own software, using API keys, idempotent requests and real-time webhooks.'],
+            ['Can my platform pay its sellers or partners?', 'Yes, through Payouts: send funds to bank accounts and UPI IDs from your own systems, singly or in bulk, with each payout tracked and reported by webhook.'],
+            ['Does Paynancial offer wallets, split payments or white-label payments?', 'These are not yet described on this site, so no capabilities are claimed. Ask our team about your platform\'s requirements before you plan around them.'],
             ['Can I test before building?', 'Yes. The Paynancial Sandbox lets you build and test against the API with no real funds involved.'],
         ],
         'ai:hub' => [
@@ -260,6 +261,36 @@ function faq_sets(): array
             ['Can my commission system trigger partner payouts automatically?', 'Yes. Payouts is API-first, so your system can create payouts directly — with an idempotency key so a retried run never pays a partner twice.'],
             ['Does Paynancial calculate partner commissions?', 'No. Commission rules and calculations stay in your own systems; Paynancial pays the amounts you send.'],
             ['Is this the same as the Paynancial Partner Program?', 'No. This page is about paying your own partners. The Partner Program is for businesses that want to partner with Paynancial.'],
+        ],
+        'product:mis-reports' => [
+            ['What is MIS reporting for payments?', 'MIS (management information system) reporting gives owners and finance leads a regular view of the numbers. For payments that means how much came in, through which methods, what has settled, what was refunded and what is still pending.'],
+            ['What reports does Paynancial provide?', 'Payment Analytics provides transaction reports by payment method, status and period, with settlement and refund data alongside. Reports can be exported, delivered on a schedule, or generated for a date range through the Reports API.'],
+            ['Can I get a report through the API?', 'Yes. The Reports API generates a transaction report for a date range — the published example requests a CSV file — and returns a link to download it.'],
+            ['Can my CA use Paynancial reports?', 'You can export a period\'s transactions for your accountant or CA to work from, instead of copying figures from a bank statement.'],
+        ],
+        'product:chargebacks' => [
+            ['What is a chargeback?', 'A chargeback is a payment reversal a customer raises with their card issuer or bank — for example when they believe a transaction was unauthorised, or that the merchant did not deliver as promised and the matter was not resolved directly.'],
+            ['What happens when a customer raises a chargeback on Paynancial?', 'Under Paynancial\'s Refund Policy, when Paynancial receives a chargeback notification it shares the relevant transaction evidence with the merchant, who can respond within the network\'s applicable timeline (typically 7–10 days). The card network or bank makes the final decision.'],
+            ['What is the difference between a refund and a chargeback?', 'A refund is something the merchant issues. A chargeback is something the customer raises through their own bank or card issuer. Refunding a genuine problem promptly is usually the best way to avoid a chargeback.'],
+            ['How can I reduce chargebacks?', 'Refund genuine problems promptly, keep delivery confirmations, invoices and customer messages, make sure customers recognise your business name, publish a clear refund and cancellation policy, and respond to disputes before the deadline.'],
+        ],
+        'product:international-payments' => [
+            ['Does Paynancial support international payments?', 'Paynancial\'s published payout capability sends funds to bank accounts and UPI IDs. Countries, currencies, foreign exchange and cross-border availability are not published on this site, so ask our team about your requirements.'],
+            ['Which rules apply to cross-border payments from India?', 'Foreign exchange transactions by businesses in India are governed by the Foreign Exchange Management Act, 1999, with the Reserve Bank of India as the regulator. Cross-border remittances are generally routed through banks authorised to deal in foreign exchange.'],
+            ['What should I confirm before planning international payments?', 'The countries and currencies you need, whether you are paying out, collecting or both, how currency conversion is handled, and the fees, timelines and documents involved.'],
+            ['Do international payments have tax implications?', 'Payments to and from abroad can have GST and income-tax consequences. Take advice from your CA before the first cross-border payment.'],
+        ],
+        'product:invoice-management' => [
+            ['Can customers pay an invoice online with Paynancial?', 'Yes. Create a Payment Link titled with the invoice number, add it to the invoice, and the customer can pay in one step.'],
+            ['How do I know an invoice has been paid?', 'Each Payment Link shows whether it is active, paid, expired or disabled, and payment webhooks can tell your accounting system when a payment is made.'],
+            ['Does Paynancial create GST invoices?', 'No. Invoice creation, numbering and tax calculation are not described on this site. Keep using your accounting software or CA to issue GST invoices, and use Paynancial to get them paid.'],
+            ['Can I collect recurring invoices?', 'Yes. Smart Collections collects subscription and instalment payments on a schedule, with retries for failed attempts.'],
+        ],
+        'product:expense-management' => [
+            ['Does Paynancial offer expense management?', 'Expense management — receipt capture, approval workflows, spend policies or company cards — is not described on this site. What Paynancial publishes is the payment side: paying vendors and staff through Payouts, with every payout tracked and reported.'],
+            ['How do I pay approved bills and claims?', 'Send the approved amounts through Payouts to a bank account or UPI ID, singly or in a batch with a bulk payout, and follow each payout to completion.'],
+            ['Does Paynancial deduct TDS?', 'No. Paynancial does not calculate or deduct TDS. Agree the net amount with your CA before you pay.'],
+            ['How do I keep spending records for GST?', 'Keep the supplier\'s GST invoice for each business expense — your CA needs it to claim input tax credit — and use your payout report to match each payment to its bill.'],
         ],
     ];
 }

@@ -28,6 +28,7 @@ function res_faq_directory(): array
         'payment-collection' => 'Payment Collection', 'payouts' => 'Payouts', 'payment-analytics' => 'Payment Analytics',
         'refunds' => 'Refunds', 'settlements' => 'Settlements', 'reconciliation' => 'Reconciliation', 'upi-payments' => 'UPI Payments',
         'bulk-payouts' => 'Bulk Payouts', 'vendor-payments' => 'Vendor Payments', 'employee-payments' => 'Employee Payments', 'partner-payments' => 'Partner Payments',
+        'mis-reports' => 'MIS & Reports', 'chargebacks' => 'Chargebacks', 'international-payments' => 'International Payments', 'invoice-management' => 'Invoice Management', 'expense-management' => 'Expense Management',
     ];
     $productPages = [];
     foreach (cat_pages() as $slug => $c) {

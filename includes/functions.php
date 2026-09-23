@@ -115,6 +115,7 @@ function seo_meta(array $meta): void
     <?php endif; ?>
     <link rel="canonical" href="<?= e($canonical) ?>">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Paynancial">
     <meta property="og:title" content="<?= e($title) ?>">
     <meta property="og:description" content="<?= e($description) ?>">
@@ -140,6 +141,7 @@ function organization_schema(): array
         'url'      => APP_URL,
         'logo'     => site_url('/assets/images/paynancial-icon.png'),
         'email'    => 'hello@paynancial.com',
+        'address'  => ['@type' => 'PostalAddress', 'addressLocality' => 'Patna', 'addressRegion' => 'Bihar', 'addressCountry' => 'IN'],
     ];
 }
 

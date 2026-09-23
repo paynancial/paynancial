@@ -17,10 +17,11 @@ $page_meta = sp_meta([
     'h1'          => $cat['h1'],
     'trail'       => $trail,
     'faqs'        => $faqs,
+    'service'     => $cat['name'],
 ]);
-$statusLabel = ['page' => 'Product page', 'covered' => 'Included', 'request' => 'On request', 'section' => 'Details on request'];
+$statusLabel = ['page' => 'Product page', 'guide' => 'Guide', 'covered' => 'Included', 'request' => 'On request', 'section' => 'Details on request'];
 $pillar = !empty($cat['pillar']);
-$linked = array_values(array_filter($cat['items'], fn ($i) => $i[1] === 'page'));
+$linked = array_values(array_filter($cat['items'], fn ($i) => in_array($i[1], ['page', 'guide'], true)));
 
 ob_start(); ?>
 <div class="sp-glance">
@@ -139,6 +140,8 @@ sp_hero([
   <p class="reveal" style="margin-top:24px;"><a class="card-link" href="/developers">Visit the Developer Center →</a></p>
 <?php sp_band_close(); ?>
 
+<?php sp_regulatory('pillar:' . $cat['slug'], $cat['name'] . ' in India'); ?>
+
 <?php sp_band_open('intelligence'); ?>
   <div class="sp-split">
     <?php sp_head('intelligence', 'AI & Intelligence', 'Where intelligence helps.', 'AI capabilities that work on the same data. All are available on request.'); ?>
@@ -158,6 +161,7 @@ sp_hero([
   ]); ?>
   <p class="reveal" style="margin-top:28px;"><a class="card-link" href="/developers" style="color:var(--teal-300);">Explore the Developer Hub →</a></p>
 <?php sp_band_close(); ?>
+<?php sp_regulatory('pillar:' . $cat['slug'], $cat['name'] . ' in India', 'paper'); ?>
 <?php endif; ?>
 
 <?php sp_band_open('faq', 'dim'); ?>

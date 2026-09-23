@@ -169,8 +169,8 @@ if (($segments[0] ?? '') === 'products' && ($segments[1] ?? '') === 'ai-and-inte
     header('Location: /ai-intelligence', true, 301);
     exit;
 }
-// Pay & Move Money and Financial Operations are top-level pillar pages.
-$pillarSlugs = ['pay-and-move-money', 'financial-operations'];
+// Pay & Move Money, Financial Operations and Embedded Finance are top-level pillar pages.
+$pillarSlugs = ['pay-and-move-money', 'financial-operations', 'embedded-finance'];
 if (($segments[0] ?? '') === 'products' && count($segments) === 2 && in_array($segments[1], $pillarSlugs, true)) {
     header('Location: /' . $segments[1], true, 301);
     exit;

@@ -306,3 +306,25 @@
 @keyframes pl-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(109, 213, 205, 0); } 40% { box-shadow: 0 0 0 8px rgba(109, 213, 205, 0.18); } }
 @media (prefers-reduced-motion: reduce) { .pl-node { animation: none; } }
 .sp-item--section .sp-item-status { color: #6b4700; background: #fdf3df; border-color: #f3d9a4; }
+
+/* "Confirm with our team" checklist on guide-style product pages */
+.sp-confirm ul { margin: 10px 0 0; padding-left: 20px; }
+.sp-confirm li { margin: 4px 0; }
+.sp-split .sp-answers { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1100px) { .sp-split .sp-answers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sp-item--guide .sp-item-status { color: #6b4700; background: #fdf3df; border-color: #f3d9a4; }
+
+/* Regulatory context band (RBI / NPCI) */
+.sp-reg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.sp-reg-item { padding: 22px 22px 24px; border: 1px solid var(--border); border-radius: 14px; background: var(--paper); }
+.sp-reg-item h3 { font-family: var(--font-serif); font-weight: 460; font-size: 1.12rem; line-height: 1.3; margin: 12px 0 8px; color: var(--ink); }
+.sp-reg-item p { margin: 0; font-size: 0.93rem; line-height: 1.65; color: var(--text-muted); }
+.sp-reg-by { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; color: var(--teal-900); background: var(--teal-50); border: 1px solid var(--teal-100); }
+.sp-reg-foot { margin-top: 24px; font-size: 0.92rem; color: var(--text-muted); }
+.sp-band--ink .sp-reg-item { background: rgba(250, 249, 245, 0.04); border-color: var(--border-on-ink); }
+.sp-band--ink .sp-reg-item h3 { color: var(--paper); }
+.sp-band--ink .sp-reg-item p, .sp-band--ink .sp-reg-foot { color: rgba(250, 249, 245, 0.74); }
+.sp-band--ink .sp-reg-by { color: var(--teal-100); background: rgba(0, 119, 113, 0.28); border-color: rgba(153, 221, 216, 0.3); }
+.sp-band--ink .sp-reg-foot .inline-link { color: var(--teal-300); }
+@media (max-width: 1024px) { .sp-reg { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .sp-reg { grid-template-columns: minmax(0, 1fr); } }

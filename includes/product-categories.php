@@ -29,8 +29,8 @@ function cat_slugify(string $label): string
 
 function cat_url(string $slug, ?string $item = null): string
 {
-    // The two pillars live at their own top-level URLs.
-    if (in_array($slug, ['pay-and-move-money', 'financial-operations'], true)) {
+    // The pillars live at their own top-level URLs.
+    if (in_array($slug, ['pay-and-move-money', 'financial-operations', 'embedded-finance'], true)) {
         return '/' . $slug . ($item !== null ? '#' . cat_slugify($item) : '');
     }
     if ($slug === 'ai-and-intelligence') {
@@ -111,7 +111,7 @@ function cat_pages(): array
                 ['Vendor Payments', 'page', '/products/vendor-payments', 'Pay suppliers by bank transfer or UPI, one at a time or in a batch, with a record of every payment.'],
                 ['Employee Payments', 'page', '/products/employee-payments', 'Pay staff and freelancers the amounts your payroll process calculates. Paynancial is not a payroll system.'],
                 ['Partner Payments', 'page', '/products/partner-payments', 'Pay channel and business partners by bank transfer or UPI, triggered by your own systems through the API.'],
-                ['International Payments', 'section', null, 'What is published today: Payouts send funds to bank accounts and UPI IDs. Countries, currencies, foreign exchange and cross-border regulatory availability are not published. Talk to our team about your requirements before you plan around international payments.'],
+                ['International Payments', 'guide', '/products/international-payments', 'What cross-border payments involve for a business in India, what Paynancial publishes today, and what to confirm with our team.'],
             ],
             'related' => ['accept-and-collect', 'financial-operations', 'embedded-finance'],
         ],
@@ -150,10 +150,10 @@ function cat_pages(): array
                 ['Settlements', 'page', '/products/settlements', 'See what has settled, what is pending and when it is due.'],
                 ['Refunds', 'page', '/products/refunds', 'Full or partial refunds from the dashboard or API, tracked to completion.'],
                 ['Finance Analytics', 'page', '/products/payment-analytics', 'Transaction dashboards by method, status and period (Payment Analytics).'],
-                ['MIS & Reports', 'covered', '/products/payment-analytics', 'Part of Payment Analytics: exportable reports and scheduled delivery.'],
-                ['Chargebacks', 'section', null, 'What is published today: every refund is tracked from request to completion, and Paynancial\'s Refund Policy sets out how chargebacks and disputes are handled under its terms. A chargeback management product is not yet described on this site. Ask our team.', ['Read the Refund Policy', '/legal/refund-policy#chargebacks']],
-                ['Invoice Management', 'section', null, 'What is published today: a Payment Link can be added to an invoice so the customer pays in one step, and each link shows whether it is active, paid, expired or disabled. Invoice creation and tracking as a product is not yet described on this site. Ask our team.', ['Explore Payment Links', '/products/payment-links']],
-                ['Expense Management', 'section', null, 'Expense management is not yet described on this site, so no capabilities are claimed here. Ask our team about your requirements.'],
+                ['MIS & Reports', 'page', '/products/mis-reports', 'Transaction, settlement and refund reports — exported, scheduled or pulled through the Reports API.'],
+                ['Chargebacks', 'page', '/products/chargebacks', 'How disputes work under Paynancial\'s Refund Policy: evidence shared with you, time to respond, and a decision by the network or bank.', ['Read the Refund Policy', '/legal/refund-policy#chargebacks']],
+                ['Invoice Management', 'guide', '/products/invoice-management', 'Put a Payment Link on every invoice so customers pay in one step, and track each link\'s status.'],
+                ['Expense Management', 'guide', '/products/expense-management', 'The payment side of business spending: pay approved bills and claims through Payouts, tracked and reported.'],
             ],
             'related' => ['accept-and-collect', 'ai-and-intelligence', 'pay-and-move-money'],
         ],
@@ -185,29 +185,51 @@ function cat_pages(): array
             'related' => ['financial-operations', 'accept-and-collect', 'embedded-finance'],
         ],
         'embedded-finance' => [
+            // Evidence (baseline site): the Partners page — technology partners
+            // "integrate Paynancial into your own software platform or
+            // marketplace" and "embed Payment, Payout and Billing APIs
+            // directly" — plus the published API, webhooks, Payouts and Smart
+            // Collections. Solutions and Technology narrative (splitting funds
+            // to sellers, "under their brand") is use-case framing, not
+            // product evidence, so no embedded item has its own page: each is
+            // a section here, per the approved "split by evidence" rule.
+            'pillar' => true,
+            'secondary' => ['Explore the Developer Hub', '/developers', 'cta_click'],
+            'hero_nodes' => [['Your platform', 'Your product, your users'], ['Paynancial API', 'One REST API, API keys'], ['Payments · Collections · Payouts', 'Embedded in your workflow'], ['Webhooks', 'Events back to your product']],
+            'flow' => [
+                ['Get a sandbox key', 'Build and test against the API with no real funds involved.'],
+                ['Embed the APIs', 'Call the Payments, Collections and Payouts APIs from your own product, with an idempotency key on every request that moves money.'],
+                ['Listen for events', 'Webhooks tell your product as payments, payouts, refunds and settlements change state.'],
+                ['Go live', 'Swap sandbox keys for live keys once your integration is reviewed.'],
+                ['Reconcile and report', 'Settlement records and transaction reports keep your platform\'s books straight.'],
+            ],
+            'dev' => [['Payments API', 'Accept payments from inside your product.', '/developers/api-reference#payments'], ['Collections API', 'Recurring and scheduled payments.', '/developers/api-reference#collections'], ['Payouts API', 'Pay out to bank accounts and UPI IDs.', '/developers/api-reference#payouts'], ['Webhooks', 'Real-time events for your product.', '/developers/webhooks'], ['Integration Guide', 'From a sandbox key to a live integration.', '/developers/integration-guide'], ['Sandbox', 'Test with no real funds.', '/sandbox']],
+            'ai' => [['AI & Intelligence', 'AI capabilities that work on the same payments data.', '/ai-intelligence'], ['AI Governance', 'Permissions, limits and oversight for anything automated.', '/ai-governance'], ['AI Financial Agents', 'Agents that act within limits a business sets.', '/agentic-ai/financial-agents']],
+            'cross' => ['pay-and-move-money', 'Paying sellers, creators or partners from your platform runs on Payouts — to bank accounts and UPI IDs, singly or in bulk.'],
             'name'  => 'Embedded Finance',
-            'title' => 'Embedded Finance | Payments Inside Your Platform | Paynancial',
-            'description' => 'Embedded finance with Paynancial: what embedded payments, payouts, billing, wallets, split payments and white-label payments are, the API foundation they build on, and how to talk to our team about availability.',
-            'h1'    => 'Put payments inside your own product.',
-            'lead'  => 'Embedded finance means your customers pay, get paid and see their money inside your platform — not on someone else\'s. Paynancial\'s API is the foundation it builds on.',
-            'answer' => 'Embedded finance puts financial services — payments, payouts, billing, wallets — directly inside a platform\'s own product, so its users never leave it. Paynancial\'s API, webhooks and payouts are the foundation; the specific embedded offerings are available to discuss with our team.',
+            'title' => 'Embedded Finance | Payment, Payout & Billing APIs for Platforms | Paynancial',
+            'description' => 'Embedded finance with Paynancial: SaaS platforms and marketplaces embed Paynancial\'s Payment, Payout and Billing APIs in their own product. See what is published today, how an integration works, and what to confirm with our team.',
+            'h1'    => 'Build payments into your own product.',
+            'lead'  => 'SaaS platforms and marketplaces embed Paynancial\'s Payment, Payout and Billing APIs directly, so money moves inside their own product instead of on someone else\'s.',
+            'answer' => 'Embedded finance puts payments, payouts and billing inside a platform\'s own product. On Paynancial, technology partners — SaaS platforms and marketplaces — embed the Payment, Payout and Billing APIs directly, using one REST API, idempotent requests and real-time webhooks. Specific embedded offerings such as wallets, split payments and white-label payments are not yet described on this site; ask our team.',
             'intro' => [
-                'Platforms, marketplaces and software products increasingly want money to move inside their own experience: a marketplace paying its sellers, a SaaS product collecting from its customers\' customers, an app holding a balance for its users. That is embedded finance.',
-                'It is built on the same pieces as any Paynancial integration — a REST API, idempotent requests, real-time webhooks and payouts to bank accounts and UPI IDs. The embedded offerings below are available to discuss with our team, so you can confirm what fits your platform before you build.',
+                'Platforms, marketplaces and software products increasingly want money to move inside their own experience: a marketplace paying its sellers, a SaaS product billing its customers, an app that collects without sending anyone to a separate checkout. That is embedded finance.',
+                'On Paynancial it starts with the same pieces as any integration — the Payments, Collections and Payouts APIs, API keys, idempotency keys and webhooks — embedded by technology partners in their own software. Each item below says exactly what is published today and what to confirm with our team before you build.',
             ],
             'choose' => [
-                ['You want to understand the API foundation', 'Developer Hub', '/developers'],
-                ['You need to pay many users or sellers', 'Payouts', '/products/payouts'],
+                ['You want to take payments inside your product', 'Payments API', '/developers/api-reference#payments'],
+                ['You bill your customers on a schedule', 'Payment Collection', '/products/payment-collection'],
+                ['You pay sellers, creators or partners', 'Payouts', '/products/payouts'],
+                ['You want to build on Paynancial as a technology partner', 'Partners', '/partners'],
                 ['You want to test first', 'Sandbox', '/sandbox'],
-                ['You are ready to discuss your platform', 'Talk to our team', '/contact?intent=sales&product=embedded-finance'],
             ],
             'items' => [
-                ['Embedded Payments', 'request', null, 'Embedded payments let a platform\'s users take payments inside the platform itself, rather than through a separate provider account. ' . $ask],
-                ['Embedded Payouts', 'request', null, 'Embedded payouts let a platform pay its users — sellers, drivers, creators — from inside its own product. ' . $ask],
-                ['Embedded Billing', 'request', null, 'Embedded billing lets a platform invoice and charge on behalf of its users, inside its own product. ' . $ask],
-                ['Wallet Infrastructure', 'request', null, 'Wallet infrastructure lets a platform hold and show a balance for each of its users. ' . $ask],
-                ['Split Payments', 'request', null, 'Split payments divide one customer payment between several recipients, such as a marketplace and its sellers. ' . $ask],
-                ['White-Label Payments', 'request', null, 'White-label payments are presented under a platform\'s own brand instead of the payment provider\'s. ' . $ask],
+                ['Embedded Payments', 'section', null, 'What is published today: technology partners embed Paynancial\'s Payment APIs directly in their own software platform or marketplace, with API keys, idempotent requests and payment webhooks. Onboarding your platform\'s own users as merchants, and how funds and responsibilities are arranged between you and them, are not described on this site. Ask our team.', ['See the Payments API', '/developers/api-reference#payments']],
+                ['Embedded Payouts', 'section', null, 'What is published today: technology partners embed the Payout API, which sends funds to bank accounts and UPI IDs with saved beneficiaries, idempotency keys and payout webhooks — so a platform can pay from its own systems. An embedded payouts offering beyond the Payouts product is not described on this site. Ask our team.', ['Explore Payouts', '/products/payouts']],
+                ['Embedded Billing', 'section', null, 'What is published today: technology partners embed Billing APIs, and the Collections API collects recurring or scheduled payments from a customer, with retries for failed attempts through Smart Collections. Billing on behalf of your platform\'s own users is not described on this site. Ask our team.', ['Explore Payment Collection', '/products/payment-collection']],
+                ['Wallet Infrastructure', 'section', null, 'Wallet infrastructure — holding and showing a balance for each of a platform\'s users — is not described on this site, so no capabilities are claimed here. Ask our team about your requirements.'],
+                ['Split Payments', 'section', null, 'Splitting one customer payment between several recipients at the point of collection is not described as a product on this site. What is published today: after you collect, Payouts can pay sellers and partners to bank accounts and UPI IDs, singly or in bulk. Ask our team about splitting.', ['Explore Bulk Payouts', '/products/bulk-payouts']],
+                ['White-Label Payments', 'section', null, 'White-label payments — presented under your platform\'s brand instead of Paynancial\'s — are not described on this site, so no capabilities are claimed here. Ask our team about your requirements.'],
             ],
             'related' => ['pay-and-move-money', 'accept-and-collect', 'ai-and-intelligence'],
         ],

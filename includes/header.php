@@ -63,18 +63,18 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/products/vendor-payments"><strong>Vendor Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/employee-payments"><strong>Employee Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/partner-payments"><strong>Partner Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/pay-and-move-money#international-payments"><strong>International Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/international-payments"><strong>International Payments</strong></a>
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/financial-operations">Financial Operations <span aria-hidden="true">→</span></a>
               <a class="mega-link mega-link-plain" href="/products/reconciliation"><strong>Reconciliation</strong></a>
               <a class="mega-link mega-link-plain" href="/products/settlements"><strong>Settlements</strong></a>
               <a class="mega-link mega-link-plain" href="/products/refunds"><strong>Refunds</strong></a>
-              <a class="mega-link mega-link-plain" href="/financial-operations#chargebacks"><strong>Chargebacks</strong></a>
-              <a class="mega-link mega-link-plain" href="/financial-operations#invoice-management"><strong>Invoice Management</strong></a>
-              <a class="mega-link mega-link-plain" href="/financial-operations#expense-management"><strong>Expense Management</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/chargebacks"><strong>Chargebacks</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/invoice-management"><strong>Invoice Management</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/expense-management"><strong>Expense Management</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-analytics"><strong>Finance Analytics</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/payment-analytics"><strong>MIS &amp; Reports</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/mis-reports"><strong>MIS &amp; Reports</strong></a>
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/ai-intelligence">AI &amp; Intelligence <span aria-hidden="true">→</span></a>
@@ -86,13 +86,13 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/ai-intelligence/revenue-forecasting"><strong>AI Revenue Forecasting</strong></a>
             </div>
             <div>
-              <a class="mega-col-title mega-col-link" href="/products/embedded-finance">Embedded Finance <span aria-hidden="true">→</span></a>
-              <a class="mega-link mega-link-plain" href="/products/embedded-finance#embedded-payments"><strong>Embedded Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/embedded-finance#embedded-payouts"><strong>Embedded Payouts</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/embedded-finance#embedded-billing"><strong>Embedded Billing</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/embedded-finance#wallet-infrastructure"><strong>Wallet Infrastructure</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/embedded-finance#split-payments"><strong>Split Payments</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/embedded-finance#white-label-payments"><strong>White-Label Payments</strong></a>
+              <a class="mega-col-title mega-col-link" href="/embedded-finance">Embedded Finance <span aria-hidden="true">→</span></a>
+              <a class="mega-link mega-link-plain" href="/embedded-finance#embedded-payments"><strong>Embedded Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/embedded-finance#embedded-payouts"><strong>Embedded Payouts</strong></a>
+              <a class="mega-link mega-link-plain" href="/embedded-finance#embedded-billing"><strong>Embedded Billing</strong></a>
+              <a class="mega-link mega-link-plain" href="/embedded-finance#wallet-infrastructure"><strong>Wallet Infrastructure</strong></a>
+              <a class="mega-link mega-link-plain" href="/embedded-finance#split-payments"><strong>Split Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/embedded-finance#white-label-payments"><strong>White-Label Payments</strong></a>
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/developers">Developer Platform <span aria-hidden="true">→</span></a>
@@ -251,17 +251,17 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/products/vendor-payments">Vendor Payments</a></li>
       <li><a href="/products/employee-payments">Employee Payments</a></li>
       <li><a href="/products/partner-payments">Partner Payments</a></li>
-      <li><a href="/pay-and-move-money#international-payments">International Payments</a></li>
+      <li><a href="/products/international-payments">International Payments</a></li>
 
       <li class="mobile-nav-group-label"><a href="/financial-operations">Financial Operations</a></li>
       <li><a href="/products/reconciliation">Reconciliation</a></li>
       <li><a href="/products/settlements">Settlements</a></li>
       <li><a href="/products/refunds">Refunds</a></li>
-      <li><a href="/financial-operations#chargebacks">Chargebacks</a></li>
-      <li><a href="/financial-operations#invoice-management">Invoice Management</a></li>
-      <li><a href="/financial-operations#expense-management">Expense Management</a></li>
+      <li><a href="/products/chargebacks">Chargebacks</a></li>
+      <li><a href="/products/invoice-management">Invoice Management</a></li>
+      <li><a href="/products/expense-management">Expense Management</a></li>
       <li><a href="/products/payment-analytics">Finance Analytics</a></li>
-      <li><a href="/products/payment-analytics">MIS &amp; Reports</a></li>
+      <li><a href="/products/mis-reports">MIS &amp; Reports</a></li>
 
       <li class="mobile-nav-group-label"><a href="/ai-intelligence">AI &amp; Intelligence</a></li>
       <li><a href="/ai-intelligence/paynancial-ai">Paynancial AI</a></li>
@@ -271,13 +271,13 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/ai-intelligence/cash-flow-intelligence">AI Cash-Flow Intelligence</a></li>
       <li><a href="/ai-intelligence/revenue-forecasting">AI Revenue Forecasting</a></li>
 
-      <li class="mobile-nav-group-label"><a href="/products/embedded-finance">Embedded Finance</a></li>
-      <li><a href="/products/embedded-finance#embedded-payments">Embedded Payments</a></li>
-      <li><a href="/products/embedded-finance#embedded-payouts">Embedded Payouts</a></li>
-      <li><a href="/products/embedded-finance#embedded-billing">Embedded Billing</a></li>
-      <li><a href="/products/embedded-finance#wallet-infrastructure">Wallet Infrastructure</a></li>
-      <li><a href="/products/embedded-finance#split-payments">Split Payments</a></li>
-      <li><a href="/products/embedded-finance#white-label-payments">White-Label Payments</a></li>
+      <li class="mobile-nav-group-label"><a href="/embedded-finance">Embedded Finance</a></li>
+      <li><a href="/embedded-finance#embedded-payments">Embedded Payments</a></li>
+      <li><a href="/embedded-finance#embedded-payouts">Embedded Payouts</a></li>
+      <li><a href="/embedded-finance#embedded-billing">Embedded Billing</a></li>
+      <li><a href="/embedded-finance#wallet-infrastructure">Wallet Infrastructure</a></li>
+      <li><a href="/embedded-finance#split-payments">Split Payments</a></li>
+      <li><a href="/embedded-finance#white-label-payments">White-Label Payments</a></li>
 
       <li class="mobile-nav-group-label"><a href="/developers">Developer Platform</a></li>
       <li><a href="/developers/api-reference#payments">Payment APIs</a></li>

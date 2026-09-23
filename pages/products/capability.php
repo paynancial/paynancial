@@ -21,7 +21,10 @@ $page_meta = sp_meta([
     'trail'       => $trail,
     'faqs'        => $faqs,
     'robots'      => $pc['robots'] ?? '',
+    'service'     => ($pc['family'] ?? '') === 'ai' ? '' : $pc['name'],
 ]);
+$india = $pc['india'] ?? null;
+$tone = fn (string $a, string $b) => $india ? $b : $a; // keep bands alternating when the India band is present
 
 if (!empty($pc['aside_code'])) {
     $aside = sp_code($pc['aside_code'], $pc['aside_caption']);
@@ -49,6 +52,11 @@ sp_hero([
       <?php if (!empty($pc['aside_code'])): ?><p class="sp-answer-lead"><strong><?= e($pc['answer']) ?></strong></p><?php endif; ?>
       <?php foreach ($pc['what'] as $para): ?><p><?= $para ?></p><?php endforeach; ?>
       <?php if (!empty($pc['availability'])): ?><div class="sp-note"><strong>Availability:</strong> <?= e($pc['availability']) ?></div><?php endif; ?>
+      <?php if (!empty($pc['confirm'])): ?>
+      <div class="sp-note sp-confirm"><strong>Confirm with our team before you plan:</strong>
+        <ul><?php foreach ($pc['confirm'] as $c): ?><li><?= e($c) ?></li><?php endforeach; ?></ul>
+      </div>
+      <?php endif; ?>
     </div>
   </div>
 <?php sp_band_close(); ?>
@@ -59,7 +67,7 @@ sp_hero([
 <?php sp_band_close(); ?>
 
 <?php sp_band_open('capabilities', 'ink'); ?>
-  <?php sp_head('capabilities', 'Capabilities', 'What you can do.'); ?>
+  <?php [$capLabel, $capTitle, $capNote] = ($pc['caps_head'] ?? []) + ['Capabilities', 'What you can do.', '']; sp_head('capabilities', $capLabel, $capTitle, $capNote); ?>
   <?php sp_answers($pc['capabilities']); ?>
 <?php sp_band_close(); ?>
 
@@ -70,21 +78,32 @@ sp_hero([
   </div>
 <?php sp_band_close(); ?>
 
-<?php sp_band_open('practices', 'dim'); ?>
+<?php if ($india): ?>
+<?php sp_band_open('india', 'dim'); ?>
+  <div class="sp-split">
+    <?php sp_head('india', 'In India', $india['title'], $india['note'] ?? ''); ?>
+    <?php sp_answers($india['items']); ?>
+  </div>
+<?php sp_band_close(); ?>
+<?php endif; ?>
+
+<?php if (($pc['family'] ?? '') !== 'ai') { sp_regulatory($pc['slug'], $noun . ' in India'); } ?>
+
+<?php sp_band_open('practices', $tone('dim', 'paper')); ?>
   <div class="sp-split">
     <?php sp_head('practices', 'Good practice', 'Getting it right.'); ?>
     <?php sp_steps($pc['practices']); ?>
   </div>
 <?php sp_band_close(); ?>
 
-<?php sp_band_open('faq'); ?>
+<?php sp_band_open('faq', $tone('paper', 'dim')); ?>
   <div class="sp-split">
     <?php sp_head('faq', 'FAQ', $pc['name'] . ' questions.'); ?>
     <?php sp_faq($faqs); ?>
   </div>
 <?php sp_band_close(); ?>
 
-<?php sp_band_open('related', 'dim'); ?>
+<?php sp_band_open('related', $tone('dim', 'paper')); ?>
   <?php sp_head('related', ($pc['family'] ?? '') === 'ai' ? 'Related' : 'Related products', 'Works well with.'); ?>
   <?php sp_related(array_map('pc_related_card', $pc['related'])); ?>
 <?php sp_band_close(); ?>
