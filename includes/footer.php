@@ -122,6 +122,8 @@
   </div>
 </footer>
 
+<?php require_once __DIR__ . '/floating-enquiry.php'; fe_render((string) ($current_path ?? ($_SERVER['REQUEST_URI'] ?? '/'))); ?>
+
 <?php include __DIR__ . '/login-panel.php'; ?>
 
 <script src="<?= asset('js/main.js') ?>" defer></script>
