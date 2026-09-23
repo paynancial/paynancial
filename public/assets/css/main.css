@@ -160,8 +160,8 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
   white-space: nowrap;
 }
 .btn:active { transform: translateY(1px); }
-.btn-primary { background: var(--accent); color: var(--white); }
-.btn-primary:hover { background: var(--teal-700); }
+.btn-primary { background: var(--teal-700); color: var(--white); }
+.btn-primary:hover { background: var(--teal-900); }
 .btn-outline { background: transparent; border-color: var(--btn-outline-border, var(--border)); color: var(--btn-outline-color, var(--text)); }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent-strong); }
 .btn-ghost { background: transparent; color: var(--text); }
@@ -330,7 +330,8 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
 }
 .btn-login-signup {
   border: none; color: #fff;
-  background: linear-gradient(120deg, var(--teal-500) 0%, var(--orange-500) 100%);
+  /* Deeper ends (teal-700 → #d14600) keep white text at WCAG AA on both sides. */
+  background: linear-gradient(120deg, var(--teal-700) 0%, #d14600 100%);
   box-shadow: 0 4px 16px rgba(255, 85, 0, 0.28);
 }
 .btn-login-signup:hover { box-shadow: 0 6px 22px rgba(255, 85, 0, 0.42); transform: translateY(-1px); }
@@ -513,7 +514,7 @@ section:last-of-type { border-bottom: none; }
   background: var(--ink); color: var(--white); padding: 56px; text-align: center;
   --btn-outline-border: rgba(250,249,245,0.32); --btn-outline-color: var(--paper);
 }
-.cta-band .btn-primary { background: var(--teal-500); color: var(--white); }
+.cta-band .btn-primary { background: var(--teal-700); color: var(--white); }
 .cta-band .btn-primary:hover { background: var(--teal-300); color: var(--ink); }
 .cta-band .lead { color: rgba(255,255,255,0.78); }
 
@@ -795,7 +796,7 @@ section:last-of-type { border-bottom: none; }
 }
 .wizard-steps li span { width: 18px; height: 18px; border-radius: 50%; background: var(--border); color: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 0.66rem; flex-shrink: 0; }
 .wizard-steps li.is-active { color: var(--ink); border-color: var(--accent); }
-.wizard-steps li.is-active span { background: var(--accent); }
+.wizard-steps li.is-active span { background: var(--teal-700); }
 .wizard-step { display: none; border: none; padding: 0; margin: 0; }
 .wizard-step.is-active { display: block; }
 .wizard-step h3 { margin-bottom: 20px; }
@@ -816,7 +817,7 @@ section:last-of-type { border-bottom: none; }
 .pipeline-node:not(:last-child)::after { content: ''; position: absolute; top: 15px; left: 58%; right: -42%; height: 1px; background: var(--border); }
 .pipeline-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; border: 1.5px solid var(--border); background: var(--paper); color: var(--text-muted); z-index: 1; }
 .pipeline-node span:last-child { font-size: 0.76rem; color: var(--text-muted); }
-.pipeline-done .pipeline-icon { background: var(--accent); border-color: var(--accent); color: var(--white); }
+.pipeline-done .pipeline-icon { background: var(--teal-700); border-color: var(--teal-700); color: var(--white); }
 .pipeline-done span:last-child { color: var(--text); font-weight: 600; }
 .pipeline-current .pipeline-icon { background: var(--orange-50); border-color: var(--orange-500); color: var(--orange-600); }
 .pipeline-current span:last-child { color: var(--orange-600); font-weight: 600; }
@@ -853,7 +854,7 @@ section:last-of-type { border-bottom: none; }
 .legal-toc ol { list-style: none; margin: 14px 0 0; padding: 0; border-left: 1px solid var(--border); }
 .legal-toc li { margin: 0; }
 .legal-toc a { display: block; padding: 9px 0 9px 18px; margin-left: -1px; border-left: 2px solid transparent; font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: all 0.15s; }
-.legal-toc a .n { font-family: var(--font-mono); color: var(--teal-500); margin-right: 8px; font-size: 0.76rem; }
+.legal-toc a .n { font-family: var(--font-mono); color: var(--teal-700); margin-right: 8px; font-size: 0.76rem; }
 .legal-toc a:hover { color: var(--ink); }
 .legal-toc a.active { color: var(--ink); border-left-color: var(--orange-500); font-weight: 500; }
 
@@ -865,19 +866,19 @@ section:last-of-type { border-bottom: none; }
 
 .legal-section { margin-bottom: 52px; scroll-margin-top: 100px; }
 .legal-section:last-child { margin-bottom: 0; }
-.legal-section .sec-num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--teal-500); display: block; margin-bottom: 10px; }
+.legal-section .sec-num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--teal-700); display: block; margin-bottom: 10px; }
 .legal-section h2 { font-size: 1.4rem; margin: 0 0 18px; max-width: 36ch; }
 .legal-section h3 { font-weight: 600; font-size: 0.97rem; color: var(--ink); margin: 22px 0 10px; }
 .legal-article p { color: var(--text-muted); font-size: 0.94rem; line-height: 1.75; margin: 0 0 16px; max-width: 70ch; }
 .legal-article ul, .legal-article ol.legal-list { margin: 0 0 16px; padding-left: 22px; color: var(--text-muted); font-size: 0.94rem; line-height: 1.75; max-width: 68ch; }
 .legal-article li { margin-bottom: 8px; }
 .legal-article strong { color: var(--ink); }
-.legal-article a.inline-link { color: var(--teal-500); text-decoration: underline; text-underline-offset: 2px; }
+.legal-article a.inline-link { color: var(--teal-700); text-decoration: underline; text-underline-offset: 2px; }
 
 .legal-callout { background: var(--paper-dim); border-left: 3px solid var(--teal-500); padding: 18px 22px; margin: 0 0 24px; font-size: 0.87rem; color: var(--ink); border-radius: 0 4px 4px 0; max-width: 68ch; }
-.legal-callout strong { color: var(--teal-500); }
+.legal-callout strong { color: var(--teal-700); }
 .legal-callout.warn { border-left-color: var(--orange-500); }
-.legal-callout.warn strong { color: var(--orange-500); }
+.legal-callout.warn strong { color: #b83d00; }
 
 .legal-table { width: 100%; max-width: 78ch; border-collapse: collapse; margin: 0 0 24px; font-size: 0.87rem; }
 .legal-table th, .legal-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -1023,3 +1024,8 @@ section:last-of-type { border-bottom: none; }
    (4.6:1), matching the standalone pages' primary buttons. */
 .mega-bs-cta { background: #d14600; }
 .mega-bs-cta:hover { background: #b83d00; }
+
+/* Code tabs everywhere: reset native button chrome so inactive tabs stay legible on the dark panel. */
+.code-tab { background: transparent; border: 0; border-radius: 8px 8px 0 0; color: rgba(250, 249, 245, 0.62); }
+.code-tab:hover { color: var(--paper); }
+.code-tab.is-active { background: var(--ink-soft); color: var(--paper); }

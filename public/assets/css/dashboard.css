@@ -17,7 +17,7 @@
 .side-nav-group { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; color: #6b7c85; padding: 16px 12px 6px; }
 .side-nav a { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: var(--radius-sm); font-size: 0.88rem; font-weight: 500; color: #c4cdd8; }
 .side-nav a:hover { background: rgba(255,255,255,0.06); color: var(--white); }
-.side-nav a.is-active { background: var(--teal-600); color: var(--white); }
+.side-nav a.is-active { background: var(--teal-700); color: var(--white); }
 .side-nav .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.5; }
 .sidebar-footer { padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 12px; }
 .sidebar-footer a { color: #97a3b3; font-size: 0.85rem; display: flex; gap: 10px; padding: 10px 12px; }
@@ -85,7 +85,7 @@ table.data-table tr:last-child td { border-bottom: none; }
 .assistant-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; }
 .assistant-msg { font-size: 0.84rem; line-height: 1.45; padding: 9px 12px; border-radius: var(--radius-sm); max-width: 88%; }
 .assistant-msg-bot { background: var(--bg-subtle); align-self: flex-start; }
-.assistant-msg-user { background: var(--teal-500); color: var(--white); align-self: flex-end; }
+.assistant-msg-user { background: var(--teal-700); color: var(--white); align-self: flex-end; }
 .assistant-form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
 .assistant-form input { flex: 1; min-width: 0; padding: 9px 11px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 0.84rem; }
 .assistant-form button { padding: 9px 14px; border-radius: var(--radius-sm); border: none; background: var(--ink); color: var(--white); font-size: 0.8rem; font-weight: 600; cursor: pointer; }

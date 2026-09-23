@@ -213,3 +213,7 @@
 .sp-item-link { margin-top: auto; padding-top: 6px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; font-size: 0.9rem; color: var(--teal-700); }
 .sp-item-link:hover { color: var(--ink); }
 [id] { scroll-margin-top: 150px; }
+
+/* Hero code caption: must beat the later .sp-code figcaption rule. */
+.sp-hero .sp-hero-aside .sp-code figcaption { color: rgba(250, 249, 245, 0.66); }
+.sp-band--ink .sp-code figcaption { color: rgba(250, 249, 245, 0.66); }
