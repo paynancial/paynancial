@@ -190,7 +190,9 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
   background: var(--ink);
   color: var(--gh-text-dim);
   font-size: 0.79rem; font-weight: 600; letter-spacing: 0.01em;
-  padding: 8px 20px;
+  /* Same frame as .container, so the strip lines up with the header logo and actions. */
+  padding-block: 8px;
+  padding-inline: max(var(--frame-pad), calc((100% - var(--frame-max)) / 2 + var(--frame-pad)));
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   max-height: 100px; overflow: visible; transition: max-height var(--gh-transition), padding var(--gh-transition), opacity var(--gh-transition);
 }
