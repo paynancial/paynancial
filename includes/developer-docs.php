@@ -25,6 +25,8 @@ function dev_pages(): array
     return [
         'integration-guide' => ['Integration Guide', 'The path from a sandbox key to a live integration, step by step.', '/developers/integration-guide'],
         'api-reference'     => ['API Reference', 'Base URL, resources, request conventions, idempotency and errors.', '/developers/api-reference'],
+        'payment-apis'      => ['Payment APIs', 'Payments, payment links, collections, refunds and reports — the money-in APIs.', '/developers/payment-apis'],
+        'payout-apis'       => ['Payout APIs', 'Send money to bank accounts and UPI IDs, exactly once, with idempotency keys.', '/developers/payout-apis'],
         'authentication'    => ['Authentication', 'API keys, sandbox and live environments, and keeping keys safe.', '/developers/authentication'],
         'webhooks'          => ['Webhooks', 'Real-time events for payments, payouts, refunds and settlements.', '/developers/webhooks'],
         'sdks'              => ['SDKs', 'Client libraries for PHP, JavaScript and Python.', '/developers/sdks'],

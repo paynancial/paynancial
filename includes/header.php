@@ -50,7 +50,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-col-title mega-col-link" href="/products/accept-and-collect">Accept &amp; Collect <span aria-hidden="true">→</span></a>
               <a class="mega-link mega-link-plain" href="/products/payment-gateway"><strong>Payment Gateway</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-links"><strong>Payment Links</strong></a>
-              <a class="mega-link mega-link-plain" href="/products/accept-and-collect#payment-pages"><strong>Payment Pages</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/payment-pages"><strong>Payment Pages</strong></a>
               <a class="mega-link mega-link-plain" href="/products/upi-payments"><strong>UPI Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-collection"><strong>Recurring Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-collection"><strong>Subscription Billing</strong></a>
@@ -96,8 +96,8 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/developers">Developer Platform <span aria-hidden="true">→</span></a>
-              <a class="mega-link mega-link-plain" href="/developers/api-reference#payments"><strong>Payment APIs</strong></a>
-              <a class="mega-link mega-link-plain" href="/developers/api-reference#payouts"><strong>Payout APIs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/payment-apis"><strong>Payment APIs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/payout-apis"><strong>Payout APIs</strong></a>
               <a class="mega-link mega-link-plain" href="/developers/sdks"><strong>SDKs</strong></a>
               <a class="mega-link mega-link-plain" href="/developers/webhooks"><strong>Webhooks</strong></a>
               <a class="mega-link mega-link-plain" href="/sandbox"><strong>Sandbox</strong></a>
@@ -239,7 +239,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li class="mobile-nav-group-label"><a href="/products/accept-and-collect">Accept &amp; Collect</a></li>
       <li><a href="/products/payment-gateway">Payment Gateway</a></li>
       <li><a href="/products/payment-links">Payment Links</a></li>
-      <li><a href="/products/accept-and-collect#payment-pages">Payment Pages</a></li>
+      <li><a href="/products/payment-pages">Payment Pages</a></li>
       <li><a href="/products/upi-payments">UPI Payments</a></li>
       <li><a href="/products/payment-collection">Recurring Payments</a></li>
       <li><a href="/products/payment-collection">Subscription Billing</a></li>
@@ -280,8 +280,8 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/products/white-label-payments">White-Label Payments</a></li>
 
       <li class="mobile-nav-group-label"><a href="/developers">Developer Platform</a></li>
-      <li><a href="/developers/api-reference#payments">Payment APIs</a></li>
-      <li><a href="/developers/api-reference#payouts">Payout APIs</a></li>
+      <li><a href="/developers/payment-apis">Payment APIs</a></li>
+      <li><a href="/developers/payout-apis">Payout APIs</a></li>
       <li><a href="/developers/sdks">SDKs</a></li>
       <li><a href="/developers/webhooks">Webhooks</a></li>
       <li><a href="/sandbox">Sandbox</a></li>

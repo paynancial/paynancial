@@ -15,7 +15,7 @@ $catalog = [
     'Accept & Collect' => [
         ['Payment Gateway', '/products/payment-gateway'],
         ['Payment Links', '/products/payment-links'],
-        ['Payment Pages', '/products/accept-and-collect#payment-pages'],
+        ['Payment Pages', '/products/payment-pages'],
         ['UPI Payments', '/products/upi-payments'],
         ['Recurring Payments', '/products/payment-collection'],
         ['Subscription Billing', '/products/payment-collection'],
@@ -56,8 +56,8 @@ $catalog = [
         ['White-Label Payments', '/products/white-label-payments'],
     ],
     'Developer Platform' => [
-        ['Payment APIs', '/developers/api-reference#payments'],
-        ['Payout APIs', '/developers/api-reference#payouts'],
+        ['Payment APIs', '/developers/payment-apis'],
+        ['Payout APIs', '/developers/payout-apis'],
         ['SDKs', '/developers/sdks'],
         ['Webhooks', '/developers/webhooks'],
         ['Sandbox', '/sandbox'],

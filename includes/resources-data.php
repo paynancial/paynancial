@@ -29,7 +29,7 @@ function res_faq_directory(): array
         'refunds' => 'Refunds', 'settlements' => 'Settlements', 'reconciliation' => 'Reconciliation', 'upi-payments' => 'UPI Payments',
         'bulk-payouts' => 'Bulk Payouts', 'vendor-payments' => 'Vendor Payments', 'employee-payments' => 'Employee Payments', 'partner-payments' => 'Partner Payments',
         'mis-reports' => 'MIS & Reports', 'chargebacks' => 'Chargebacks', 'international-payments' => 'International Payments', 'invoice-management' => 'Invoice Management', 'expense-management' => 'Expense Management',
-        'embedded-payments' => 'Embedded Payments', 'embedded-payouts' => 'Embedded Payouts', 'embedded-billing' => 'Embedded Billing', 'wallet-infrastructure' => 'Wallet Infrastructure', 'split-payments' => 'Split Payments', 'white-label-payments' => 'White-Label Payments',
+        'payment-pages' => 'Payment Pages', 'embedded-payments' => 'Embedded Payments', 'embedded-payouts' => 'Embedded Payouts', 'embedded-billing' => 'Embedded Billing', 'wallet-infrastructure' => 'Wallet Infrastructure', 'split-payments' => 'Split Payments', 'white-label-payments' => 'White-Label Payments',
     ];
     $productPages = [];
     foreach (cat_pages() as $slug => $c) {
@@ -57,6 +57,8 @@ function res_faq_directory(): array
         ['id' => 'developers', 'label' => 'Developers', 'pages' => [
             ['Developer Hub', '/developers', 'support', $q('developers')],
             ['API Reference', '/developers/api-reference', 'faq', $q('api-reference')],
+            ['Payment APIs', '/developers/payment-apis', 'faq', $q('payment-apis')],
+            ['Payout APIs', '/developers/payout-apis', 'faq', $q('payout-apis')],
             ['Authentication', '/developers/authentication', 'faq', $q('authentication')],
             ['Webhooks', '/developers/webhooks', 'faq', $q('webhooks')],
             ['SDKs', '/developers/sdks', 'faq', $q('sdks')],

@@ -641,6 +641,66 @@ function pc_pages(): array
             ],
             'related' => ['vendor-payments', 'employee-payments', 'product:payment-analytics', 'pillar:financial-operations'],
         ],
+        // Payment Pages — guide built from the Payment Links product's
+        // published "branded payment page" facts. A standalone page builder
+        // (donation or event pages with their own fields) is not described.
+        'payment-pages' => [
+            'parent' => ['Accept & Collect', '/products/accept-and-collect'],
+            'guide' => true,
+            'name'  => 'Payment Pages',
+            'title' => 'Payment Pages | A Secure, Branded Page to Get Paid | Paynancial',
+            'description' => 'Paynancial payment pages: the secure, branded page a customer pays on — with your business name and the amount due — reached from a Payment Link you share by email, WhatsApp, SMS or on an invoice. No website needed.',
+            'h1'    => 'A secure, branded page to get paid on — no website needed.',
+            'lead'  => 'Every Paynancial Payment Link opens a secure payment page that carries your business name and the amount due. Share the link anywhere; the customer pays on the page.',
+            'answer' => 'A payment page is the secure page a customer lands on to pay you. With Paynancial, every Payment Link opens a branded payment page showing your business name and the amount due — a fixed amount, or one the customer enters — with an optional expiry date, and you share the link by email, WhatsApp, SMS or on an invoice. A standalone page builder, such as donation or event pages with custom fields, is not described on this site.',
+            'values' => ['Your business name', 'Fixed or open amount', 'Optional expiry', 'Share anywhere'],
+            'secondary' => ['Explore Payment Links', '/products/payment-links', 'cta_click'],
+            'aside_code' => dev_resource_code($resources['payment_links']),
+            'aside_caption' => 'Creating the link that opens a payment page',
+            'availability' => 'Payment pages are published as part of Payment Links. A separate page builder — custom fields, donation or event pages, your own page design — is not described on this site; ask our team.',
+            'confirm' => ['Custom fields on the page', 'Donation or event pages with their own content', 'Your own logo and colours on the page', 'One page for many payers'],
+            'what' => [
+                'Plenty of businesses need to get paid without a website: a tutor collecting fees, a consultant billing a project, a caterer taking an advance. They need a secure place to send the customer, that shows who they are paying and how much.',
+                'That is what the payment page behind every <a class="inline-link" href="/products/payment-links">Payment Link</a> does. You create the link from the dashboard or the API, share it, and the customer pays on a secure page that carries your business name and the amount due. The link\'s status shows the moment it is paid.',
+            ],
+            'steps' => [
+                ['Create a link', 'Give it a title — an invoice number, a course, an order — and an amount, or leave the amount open.'],
+                ['Set an expiry', 'Optionally set a date after which the page stops accepting payment.'],
+                ['Share it', 'Send the link by email, WhatsApp or SMS, or put it on an invoice.'],
+                ['Customer pays', 'The customer pays on the secure, branded payment page.'],
+                ['See it paid', 'The link shows as paid, and the payment appears in your reports.'],
+            ],
+            'caps_head' => ['Published today', 'What a payment page gives you.', 'As part of Payment Links.'],
+            'capabilities' => [
+                ['Branded page', 'Shows your business name and the amount due.'],
+                ['Fixed or open amount', 'Set the price, or let the customer enter what they owe.'],
+                ['Expiry control', 'The page stops accepting payment after the date you set.'],
+                ['Status tracking', 'Each link shows whether it is active, paid, expired or disabled.'],
+                ['No code required', 'Create links from the dashboard — or from the API if you prefer.'],
+                ['Share anywhere', 'Email, WhatsApp, SMS or an invoice.'],
+            ],
+            'surfaces' => [
+                ['Payment Links', 'The product behind every payment page. See <a class="inline-link" href="/products/payment-links">Payment Links</a>.'],
+                ['Payment Links API', '<code>POST /payment_links</code> returns a <code>short_url</code>. See the <a class="inline-link" href="/developers/api-reference#payment-links">API Reference</a>.'],
+                ['Invoice Management', 'A link on every invoice. See <a class="inline-link" href="/products/invoice-management">Invoice Management</a>.'],
+                ['Payment Analytics', 'Every payment in your reports. See <a class="inline-link" href="/products/payment-analytics">Payment Analytics</a>.'],
+            ],
+            'india' => [
+                'title' => 'Getting paid by link in India.',
+                'items' => [
+                    ['Shared where customers are', 'In India, a payment request often travels by WhatsApp or SMS; a link fits straight into that conversation.'],
+                    ['Recognisable name', 'Customers are rightly wary of payment scams. A page that shows your business name helps them trust the request.'],
+                    ['Amounts in rupees and paise', 'In the API, amounts are in paise — 500000 is ₹5,000.00.'],
+                    ['GST invoices stay with you', 'Issue your GST invoice from your accounting software, and add the link to it.'],
+                ],
+            ],
+            'practices' => [
+                ['Title it clearly', 'Use an invoice number or order name so the customer knows exactly what they are paying.'],
+                ['Set an expiry for time-bound requests', 'An advance or an event fee should not stay payable forever.'],
+                ['Disable superseded links', 'If the amount changes, disable the old link and send a new one.'],
+            ],
+            'related' => ['product:payment-links', 'invoice-management', 'product:payment-gateway', 'pillar:accept-and-collect'],
+        ],
         // ---- Embedded Finance guides ----------------------------------------
         // Evidence: Partners page (technology partners "embed Payment, Payout
         // and Billing APIs directly"; the Partner Hub lets partners enroll

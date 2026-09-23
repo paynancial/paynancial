@@ -71,7 +71,7 @@ function cat_pages(): array
                 ['Smart Collections', 'page', '/products/payment-collection', 'Recurring and bulk collection on a schedule, with retries, notifications and automatic reconciliation.'],
                 ['Recurring Payments', 'covered', '/products/payment-collection', 'Part of Smart Collections: set up a schedule for subscription or instalment payments.'],
                 ['Subscription Billing', 'covered', '/products/payment-collection', 'Part of Smart Collections: collect subscription payments on schedule, with retries for failed attempts.'],
-                ['Payment Pages', 'request', null, 'A payment page is a hosted page, such as a donation or event page, where anyone with the link can pay. ' . $ask],
+                ['Payment Pages', 'guide', '/products/payment-pages', 'The secure, branded page a customer pays on — your business name and the amount due — reached from a Payment Link.'],
             ],
             'related' => ['pay-and-move-money', 'financial-operations', 'ai-and-intelligence'],
         ],

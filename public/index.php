@@ -313,7 +313,7 @@ if (($segments[0] ?? '') === 'business-services') {
 // (/developers) is a public route below; unknown child slugs 404.
 // ---------------------------------------------------------------------
 if (($segments[0] ?? '') === 'developers' && isset($segments[1])) {
-    $devPages = ['api-reference', 'authentication', 'webhooks', 'sdks', 'integration-guide'];
+    $devPages = ['api-reference', 'payment-apis', 'payout-apis', 'authentication', 'webhooks', 'sdks', 'integration-guide'];
     $devFile = (count($segments) === 2 && in_array($segments[1], $devPages, true))
         ? __DIR__ . '/../pages/developers/' . $segments[1] . '.php'
         : null;

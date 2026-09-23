@@ -43,6 +43,18 @@ function faq_sets(): array
             ['Can I receive the same event more than once?', 'Design for it. Any system that retries delivery can deliver an event twice, so make your handler safe to run more than once for the same event.'],
             ['How do I test webhooks?', 'Test your handler in the Sandbox before going live, and confirm with developer support how events are delivered for sandbox activity.'],
         ],
+        'payment-apis' => [
+            ['What are the Paynancial Payment APIs?', 'The money-in resources of the Paynancial REST API: Payments, Payment Links, Collections, Refunds and transaction reports. Every call goes to https://api.paynancial.com/v1 and is authenticated with your API key.'],
+            ['Which API should I use to charge a customer?', 'Payments for a checkout in your own website or app, Payment Links to get paid without a checkout, and Collections for recurring or scheduled charges. Refunds give money back, in full or in part.'],
+            ['How do I know a payment succeeded?', 'Each transaction returns a real-time status, and a payment webhook reaches your endpoint as it changes. Fulfil orders on the webhook, not on the customer\'s redirect.'],
+            ['What currency unit does the API use?', 'The smallest currency unit — paise for INR — so 50000 is ₹500.00.'],
+        ],
+        'payout-apis' => [
+            ['What is the Paynancial Payout API?', 'The resource that sends money to a beneficiary\'s bank account or UPI ID: POST /payouts with the beneficiary, the amount in paise and the mode, plus an idempotency key.'],
+            ['Why do payouts need an idempotency key?', 'A payout that times out might have gone through. Retrying with the same idempotency key returns the original payout instead of paying twice.'],
+            ['What happens if a payout fails?', 'You get a structured error code such as insufficient_funds, invalid_method or rate_limited, and a failed payout comes with a clear reason. Fix the cause, then retry.'],
+            ['Can I send payouts in bulk through the API?', 'Yes — Payouts supports submitting a batch of transfers in a single request, with each payout tracked individually. Ask developer support for the batch request format.'],
+        ],
         'sdks' => [
             ['Which languages does Paynancial have SDKs for?', 'PHP, JavaScript and Python.'],
             ['Do I have to use an SDK?', 'No. The SDKs are a convenience over the REST API. Any language that can make an HTTPS request with basic authentication can call ' . DEV_API_BASE . ' directly, as the cURL examples show.'],
@@ -291,6 +303,12 @@ function faq_sets(): array
             ['How do I pay approved bills and claims?', 'Send the approved amounts through Payouts to a bank account or UPI ID, singly or in a batch with a bulk payout, and follow each payout to completion.'],
             ['Does Paynancial deduct TDS?', 'No. Paynancial does not calculate or deduct TDS. Agree the net amount with your CA before you pay.'],
             ['How do I keep spending records for GST?', 'Keep the supplier\'s GST invoice for each business expense — your CA needs it to claim input tax credit — and use your payout report to match each payment to its bill.'],
+        ],
+        'product:payment-pages' => [
+            ['What is a payment page?', 'The secure page a customer lands on to pay you. With Paynancial, every Payment Link opens a branded payment page that shows your business name and the amount due.'],
+            ['Do I need a website to use a payment page?', 'No. Create a Payment Link from the dashboard, share it by email, WhatsApp, SMS or on an invoice, and the customer pays on the page.'],
+            ['Can the customer enter the amount?', 'Yes. A link can have a fixed amount, or leave the amount open for the customer to enter. You can also set an expiry date.'],
+            ['Can I build donation or event pages with custom fields?', 'A standalone page builder with custom fields is not described on this site. Ask our team about your requirements.'],
         ],
         'product:embedded-payments' => [
             ['What are embedded payments?', 'Payments a platform\'s users make inside the platform itself, instead of on a separate provider\'s page — for example, paying inside a booking flow or a business software product.'],
