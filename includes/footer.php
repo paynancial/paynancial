@@ -118,9 +118,11 @@ $footer_groups = [
 
   <div class="ft-brand">
     <div class="container ft-brand-grid">
-      <div class="ft-brand-copy">
+      <div class="ft-brand-head">
         <a href="/" class="ft-logo" aria-label="Paynancial home"><img src="<?= asset('images/paynancial-logo-dark-bg.png') ?>" alt="Paynancial" width="520" height="118" loading="lazy"></a>
         <?= brand_lockup('on-ink') ?>
+      </div>
+      <div class="ft-brand-copy">
         <p class="ft-statement">Payment &amp; financial infrastructure for modern businesses.</p>
         <a class="ft-sales" href="/contact?intent=sales"><?= e(cta_label()) ?> <span aria-hidden="true">→</span></a>
       </div>
