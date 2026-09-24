@@ -45,7 +45,7 @@ main section.ab-hero { padding: 64px 0 0; background: var(--ink); color: var(--p
 .ab-entity > div { padding: 22px 24px 26px 0; }
 .ab-entity > div + div { padding-left: 24px; border-left: 1px solid var(--border-on-ink); }
 @media (max-width: 880px) { .ab-entity > div + div { border-left: none; padding-left: 0; } .ab-entity > div { border-top: 1px solid var(--border-on-ink); padding-block: 16px; } .ab-entity > div:first-child { border-top: none; } }
-.ab-entity dt { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,249,245,0.45); }
+.ab-entity dt { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,249,245,0.62); }
 .ab-entity dd { margin: 6px 0 0; font-size: 0.92rem; color: var(--paper); }
 
 /* ---- Story ---- */
@@ -105,7 +105,7 @@ main section.ab-vm { display: grid; padding: 0; }
 @media (max-width: 899px) { .ab-vision, .ab-mission { padding: 72px var(--ab-gutter); } }
 .ab-vm-inner { max-width: 540px; }
 .ab-vision .ab-vm-inner { margin-left: auto; }
-.ab-vision .eyebrow { color: var(--orange-500); }
+.ab-vision .eyebrow { color: #ff8c4d; /* lighter orange: AA on both ends of the dark gradient */ }
 .ab-vm h2 { margin-top: 18px; font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem); line-height: 1.2; }
 .ab-vision h2 { color: #fff; }
 .ab-mission p { margin-top: 18px; color: var(--ink-700); }
@@ -113,7 +113,7 @@ main section.ab-vm { display: grid; padding: 0; }
 /* ---- Differentiators ---- */
 .ab-diff-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 48px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .ab-diff-list li { padding: 28px 0 32px; border-top: 1px solid var(--border); display: grid; gap: 10px; align-content: start; }
-.ab-num { font-family: var(--font-mono); font-size: 0.74rem; color: var(--orange-600); }
+.ab-num { font-family: var(--font-mono); font-size: 0.74rem; color: #b83d00; }
 .ab-diff-list h3 { font-size: 1.22rem; }
 .ab-diff-list p { color: var(--text-muted); font-size: 0.94rem; }
 .ab-diff-list a { font-size: 0.84rem; font-weight: 600; color: var(--teal-700); }
