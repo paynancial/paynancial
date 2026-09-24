@@ -34,8 +34,8 @@
 .bs-inline-link { color: var(--teal-700); text-decoration: underline; text-underline-offset: 3px; }
 .bs-prose { margin-top: 16px; font-size: 1.04rem; color: var(--text-muted); max-width: 60ch; }
 .btn .bs-icon { width: 16px; height: 16px; }
-.bs-btn-accent { background: var(--orange-500); color: #fff; border-radius: 999px; }
-.bs-btn-accent:hover { background: var(--orange-600); }
+.bs-btn-accent { background: #d14600; color: #fff; border-radius: 999px; } /* AA: white text 4.58:1 */
+.bs-btn-accent:hover { background: #b83d00; } /* 5.67:1 */
 .bs-section-ink .btn-outline, .bs-btn-on-ink { --btn-outline-border: rgba(250, 249, 245, 0.32); --btn-outline-color: var(--paper); }
 .bs-btn-on-ink:hover { border-color: var(--teal-300) !important; color: #fff !important; }
 
@@ -287,7 +287,7 @@
 .bs-subnav a:hover { background: var(--teal-50); color: var(--teal-700); }
 [id] { scroll-margin-top: 150px; }
 
-.bs-benefit-num { font-family: var(--font-mono); font-size: 0.74rem; color: var(--orange-600); }
+.bs-benefit-num { font-family: var(--font-mono); font-size: 0.74rem; color: #b83d00; } /* AA on white: 5.67:1 */
 
 .bs-structures { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 .bs-structure { display: flex; flex-direction: column; gap: 10px; padding: 26px; border-radius: var(--bs-radius); border: 1px solid var(--bs-line); background: #fff; transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition); }
@@ -442,7 +442,7 @@ a.bs-structure:hover { box-shadow: var(--bs-shadow-hover); transform: translateY
 .bs-who { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .bs-who-item { padding: 26px; border-radius: var(--bs-radius); border: 1px solid var(--bs-line); background: #fff; }
 .bs-who-item p { margin-top: 12px; font-family: var(--font-serif); font-size: 1.12rem; line-height: 1.4; color: var(--ink); }
-.bs-benefit-num { font-family: var(--font-mono); font-size: 0.74rem; color: var(--orange-600); }
+.bs-benefit-num { font-family: var(--font-mono); font-size: 0.74rem; color: #b83d00; } /* AA on white: 5.67:1 */
 .bs-pricing-intro .eyebrow + h2 { margin-top: 12px; }
 .bs-pricing-intro p { margin-top: 12px; color: var(--text-muted); }
 @media (min-width: 1000px) { .bs-pricing { grid-template-columns: 1.1fr 1fr 1fr; align-items: stretch; } }
