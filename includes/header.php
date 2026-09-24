@@ -152,19 +152,31 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
           </div>
         </li>
         <li class="nav-item">
-          <button class="nav-link" aria-haspopup="true" aria-expanded="false">Developers <i class="chev" aria-hidden="true"></i></button>
-          <div class="mega-menu">
-            <div>
-              <div class="mega-col-title">Build</div>
-              <a class="mega-link" href="/developers"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
-              <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guide</strong><span>From sandbox key to first live payment</span></a>
-              <a class="mega-link" href="/developers/sdks"><strong>SDKs</strong><span>PHP, JavaScript, Python client libraries</span></a>
+          <button class="nav-link" aria-haspopup="true" aria-expanded="false">Build <i class="chev" aria-hidden="true"></i></button>
+          <div class="mega-menu mega-build">
+            <div class="mega-build-cols">
+              <div class="mega-build-col">
+                <div class="mega-col-title">Build</div>
+                <a class="mega-link" href="/developers"><strong>API Documentation</strong><span>Everything you need to integrate</span></a>
+                <a class="mega-link" href="/developers/integration-guide"><strong>Integration Guide</strong><span>From sandbox key to first live payment</span></a>
+                <a class="mega-link" href="/developers/sdks"><strong>SDKs</strong><span>PHP, JavaScript and Python client libraries</span></a>
+              </div>
+              <div class="mega-build-col">
+                <div class="mega-col-title">Reference</div>
+                <a class="mega-link" href="/developers/api-reference"><strong>API Reference</strong><span>Every endpoint, request &amp; response</span></a>
+                <a class="mega-link" href="/developers/authentication"><strong>Authentication</strong><span>API keys for sandbox and live</span></a>
+                <a class="mega-link" href="/developers/webhooks"><strong>Webhooks</strong><span>Real-time event notifications</span></a>
+              </div>
+              <div class="mega-build-col">
+                <div class="mega-col-title">Test &amp; Ship</div>
+                <a class="mega-link" href="/sandbox"><strong>Sandbox</strong><span>Test integrations with no real money</span></a>
+                <a class="mega-link" href="/customer/dashboard"><strong>API Dashboard</strong><span>Sign in to manage your API keys</span></a>
+                <a class="mega-link" href="/developers"><strong>Developer Hub</strong><span>Every developer resource in one place</span></a>
+              </div>
             </div>
-            <div>
-              <div class="mega-col-title">Reference</div>
-              <a class="mega-link" href="/developers/api-reference"><strong>API Reference</strong><span>Every endpoint, request &amp; response</span></a>
-              <a class="mega-link" href="/sandbox"><strong>Sandbox</strong><span>Test integrations safely</span></a>
-              <a class="mega-link" href="/developers/webhooks"><strong>Webhooks</strong><span>Real-time event notifications</span></a>
+            <div class="mega-build-foot">
+              <span>Questions while you integrate?</span>
+              <a class="mega-build-cta" href="/support">Developer Support <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </li>
@@ -317,14 +329,21 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
     </div>
   </details>
   <details>
-    <summary>Developers <i class="chev" aria-hidden="true"></i></summary>
+    <summary>Build <i class="chev" aria-hidden="true"></i></summary>
     <ul>
+      <li class="mobile-nav-group-label">Build</li>
       <li><a href="/developers">API Documentation</a></li>
       <li><a href="/developers/integration-guide">Integration Guide</a></li>
       <li><a href="/developers/sdks">SDKs</a></li>
+      <li class="mobile-nav-group-label">Reference</li>
       <li><a href="/developers/api-reference">API Reference</a></li>
-      <li><a href="/sandbox">Sandbox</a></li>
+      <li><a href="/developers/authentication">Authentication</a></li>
       <li><a href="/developers/webhooks">Webhooks</a></li>
+      <li class="mobile-nav-group-label">Test &amp; Ship</li>
+      <li><a href="/sandbox">Sandbox</a></li>
+      <li><a href="/customer/dashboard">API Dashboard</a></li>
+      <li><a href="/developers">Developer Hub</a></li>
+      <li><a href="/support">Developer Support</a></li>
     </ul>
   </details>
   <a href="/pricing" class="nav-link">Pricing</a>

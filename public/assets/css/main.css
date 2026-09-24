@@ -1044,6 +1044,20 @@ section:last-of-type { border-bottom: none; }
 .legal-body details > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
 
 /* Products menu: column titles link to their category page. */
+/* Build (developer) menu: Build · Reference · Test & Ship, with a support bar. */
+.mega-menu.mega-build { width: min(820px, 94vw); display: block; padding: 0; overflow: hidden; }
+.mega-build-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 10px; padding: 18px 16px 14px; }
+.mega-build-col { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mega-build-col + .mega-build-col { border-left: 1px solid var(--border); padding-left: 10px; }
+.mega-build .mega-col-title { color: var(--teal-700); letter-spacing: 0.14em; padding: 6px 12px 8px; }
+.mega-build .mega-link { padding: 10px 12px; border-radius: 10px; }
+.mega-build .mega-link strong { font-weight: 600; color: var(--ink); transition: color var(--gh-transition); }
+.mega-build .mega-link:hover strong { color: var(--teal-700); }
+.mega-build-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 28px; background: var(--paper-dim); border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-muted); }
+.mega-build-cta { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--teal-700); transition: color var(--gh-transition); }
+.mega-build-cta span { transition: transform var(--gh-transition); }
+.mega-build-cta:hover { color: var(--ink); }
+.mega-build-cta:hover span { transform: translateX(3px); }
 .mega-col-title.mega-col-link { display: flex; align-items: center; gap: 6px; color: var(--teal-700); min-height: 32px; border-radius: 8px; transition: color var(--gh-transition), background var(--gh-transition); }
 .mega-col-title.mega-col-link span { transition: transform var(--gh-transition); }
 .mega-col-title.mega-col-link:hover { color: var(--ink); background: var(--paper-dim); }
