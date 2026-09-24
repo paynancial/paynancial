@@ -297,10 +297,10 @@ h3, .h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; l
 .mega-link strong { font-size: 0.87rem; font-weight: 500; color: var(--text); }
 .mega-link span { font-size: 0.76rem; color: var(--text-muted); margin-top: 2px; }
 
-/* Wide catalog variant — Products has 4 groups and ~22 items, too
+/* Wide catalog variant — Products has 6 categories and ~40 items, too
    dense for the description-style links the other menus use. */
 .mega-menu.mega-menu-wide {
-  width: min(980px, 94vw); grid-template-columns: repeat(4, 1fr); gap: 2px 4px;
+  width: min(980px, 94vw); grid-template-columns: repeat(3, 1fr); gap: 2px 4px;
   /* Products is the leftmost nav item — centering a menu this wide under
      it (the default .mega-menu behavior) pushes half of it off-screen. */
   left: 0; transform: translateY(6px);
@@ -1044,11 +1044,6 @@ section:last-of-type { border-bottom: none; }
 .legal-body details > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
 
 /* Products menu: column titles link to their category page. */
-/* Products: hub-only groups (their child pages are not yet approved for promotion). */
-.mega-hubs { display: flex; flex-direction: column; }
-.mega-hub-note { margin: 0 10px 14px; font-size: 0.78rem; line-height: 1.5; color: var(--text-muted); }
-/* Developers: three columns (Build · Reference · APIs). */
-.main-nav > li:nth-child(4) > .mega-menu { width: min(860px, 94vw); grid-template-columns: repeat(3, 1fr); }
 .mega-col-title.mega-col-link { display: flex; align-items: center; gap: 6px; color: var(--teal-700); min-height: 32px; border-radius: 8px; transition: color var(--gh-transition), background var(--gh-transition); }
 .mega-col-title.mega-col-link span { transition: transform var(--gh-transition); }
 .mega-col-title.mega-col-link:hover { color: var(--ink); background: var(--paper-dim); }

@@ -50,6 +50,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-col-title mega-col-link" href="/products/accept-and-collect">Accept &amp; Collect <span aria-hidden="true">→</span></a>
               <a class="mega-link mega-link-plain" href="/products/payment-gateway"><strong>Payment Gateway</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-links"><strong>Payment Links</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/payment-pages"><strong>Payment Pages</strong></a>
               <a class="mega-link mega-link-plain" href="/products/upi-payments"><strong>UPI Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/recurring-payments"><strong>Recurring Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/subscription-billing"><strong>Subscription Billing</strong></a>
@@ -62,6 +63,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/products/vendor-payments"><strong>Vendor Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/employee-payments"><strong>Employee Payments</strong></a>
               <a class="mega-link mega-link-plain" href="/products/partner-payments"><strong>Partner Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/international-payments"><strong>International Payments</strong></a>
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/financial-operations">Financial Operations <span aria-hidden="true">→</span></a>
@@ -69,14 +71,37 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/products/settlements"><strong>Settlements</strong></a>
               <a class="mega-link mega-link-plain" href="/products/refunds"><strong>Refunds</strong></a>
               <a class="mega-link mega-link-plain" href="/products/chargebacks"><strong>Chargebacks</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/invoice-management"><strong>Invoice Management</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/expense-management"><strong>Expense Management</strong></a>
               <a class="mega-link mega-link-plain" href="/products/payment-analytics"><strong>Finance Analytics</strong></a>
               <a class="mega-link mega-link-plain" href="/products/mis-reports"><strong>MIS &amp; Reports</strong></a>
             </div>
-            <div class="mega-hubs">
+            <div>
               <a class="mega-col-title mega-col-link" href="/ai-intelligence">AI &amp; Intelligence <span aria-hidden="true">→</span></a>
-              <p class="mega-hub-note">How AI can support payments and finance operations.</p>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/paynancial-ai"><strong>Paynancial AI</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/fraud-detection"><strong>AI Fraud Detection</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/reconciliation"><strong>AI Reconciliation</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/financial-assistant"><strong>AI Financial Assistant</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/cash-flow-intelligence"><strong>AI Cash-Flow Intelligence</strong></a>
+              <a class="mega-link mega-link-plain" href="/ai-intelligence/revenue-forecasting"><strong>AI Revenue Forecasting</strong></a>
+            </div>
+            <div>
               <a class="mega-col-title mega-col-link" href="/embedded-finance">Embedded Finance <span aria-hidden="true">→</span></a>
-              <p class="mega-hub-note">Payments and finance built into your own platform.</p>
+              <a class="mega-link mega-link-plain" href="/products/embedded-payments"><strong>Embedded Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/embedded-payouts"><strong>Embedded Payouts</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/embedded-billing"><strong>Embedded Billing</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/wallet-infrastructure"><strong>Wallet Infrastructure</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/split-payments"><strong>Split Payments</strong></a>
+              <a class="mega-link mega-link-plain" href="/products/white-label-payments"><strong>White-Label Payments</strong></a>
+            </div>
+            <div>
+              <a class="mega-col-title mega-col-link" href="/developers">Developer Platform <span aria-hidden="true">→</span></a>
+              <a class="mega-link mega-link-plain" href="/developers/payment-apis"><strong>Payment APIs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/payout-apis"><strong>Payout APIs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/sdks"><strong>SDKs</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers/webhooks"><strong>Webhooks</strong></a>
+              <a class="mega-link mega-link-plain" href="/sandbox"><strong>Sandbox</strong></a>
+              <a class="mega-link mega-link-plain" href="/developers"><strong>Developer Hub</strong></a>
             </div>
           </div>
         </li>
@@ -140,11 +165,6 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link" href="/developers/api-reference"><strong>API Reference</strong><span>Every endpoint, request &amp; response</span></a>
               <a class="mega-link" href="/sandbox"><strong>Sandbox</strong><span>Test integrations safely</span></a>
               <a class="mega-link" href="/developers/webhooks"><strong>Webhooks</strong><span>Real-time event notifications</span></a>
-            </div>
-            <div>
-              <div class="mega-col-title">APIs</div>
-              <a class="mega-link" href="/developers/payment-apis"><strong>Payment APIs</strong><span>Create, capture and refund payments</span></a>
-              <a class="mega-link" href="/developers/payout-apis"><strong>Payout APIs</strong><span>Send payouts and track their status</span></a>
             </div>
           </div>
         </li>
@@ -218,6 +238,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li class="mobile-nav-group-label"><a href="/products/accept-and-collect">Accept &amp; Collect</a></li>
       <li><a href="/products/payment-gateway">Payment Gateway</a></li>
       <li><a href="/products/payment-links">Payment Links</a></li>
+      <li><a href="/products/payment-pages">Payment Pages</a></li>
       <li><a href="/products/upi-payments">UPI Payments</a></li>
       <li><a href="/products/recurring-payments">Recurring Payments</a></li>
       <li><a href="/products/subscription-billing">Subscription Billing</a></li>
@@ -229,17 +250,41 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/products/vendor-payments">Vendor Payments</a></li>
       <li><a href="/products/employee-payments">Employee Payments</a></li>
       <li><a href="/products/partner-payments">Partner Payments</a></li>
+      <li><a href="/products/international-payments">International Payments</a></li>
 
       <li class="mobile-nav-group-label"><a href="/financial-operations">Financial Operations</a></li>
       <li><a href="/products/reconciliation">Reconciliation</a></li>
       <li><a href="/products/settlements">Settlements</a></li>
       <li><a href="/products/refunds">Refunds</a></li>
       <li><a href="/products/chargebacks">Chargebacks</a></li>
+      <li><a href="/products/invoice-management">Invoice Management</a></li>
+      <li><a href="/products/expense-management">Expense Management</a></li>
       <li><a href="/products/payment-analytics">Finance Analytics</a></li>
       <li><a href="/products/mis-reports">MIS &amp; Reports</a></li>
 
       <li class="mobile-nav-group-label"><a href="/ai-intelligence">AI &amp; Intelligence</a></li>
+      <li><a href="/ai-intelligence/paynancial-ai">Paynancial AI</a></li>
+      <li><a href="/ai-intelligence/fraud-detection">AI Fraud Detection</a></li>
+      <li><a href="/ai-intelligence/reconciliation">AI Reconciliation</a></li>
+      <li><a href="/ai-intelligence/financial-assistant">AI Financial Assistant</a></li>
+      <li><a href="/ai-intelligence/cash-flow-intelligence">AI Cash-Flow Intelligence</a></li>
+      <li><a href="/ai-intelligence/revenue-forecasting">AI Revenue Forecasting</a></li>
+
       <li class="mobile-nav-group-label"><a href="/embedded-finance">Embedded Finance</a></li>
+      <li><a href="/products/embedded-payments">Embedded Payments</a></li>
+      <li><a href="/products/embedded-payouts">Embedded Payouts</a></li>
+      <li><a href="/products/embedded-billing">Embedded Billing</a></li>
+      <li><a href="/products/wallet-infrastructure">Wallet Infrastructure</a></li>
+      <li><a href="/products/split-payments">Split Payments</a></li>
+      <li><a href="/products/white-label-payments">White-Label Payments</a></li>
+
+      <li class="mobile-nav-group-label"><a href="/developers">Developer Platform</a></li>
+      <li><a href="/developers/payment-apis">Payment APIs</a></li>
+      <li><a href="/developers/payout-apis">Payout APIs</a></li>
+      <li><a href="/developers/sdks">SDKs</a></li>
+      <li><a href="/developers/webhooks">Webhooks</a></li>
+      <li><a href="/sandbox">Sandbox</a></li>
+      <li><a href="/developers">Developer Hub</a></li>
     </ul>
   </details>
   <details>
@@ -280,8 +325,6 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/developers/api-reference">API Reference</a></li>
       <li><a href="/sandbox">Sandbox</a></li>
       <li><a href="/developers/webhooks">Webhooks</a></li>
-      <li><a href="/developers/payment-apis">Payment APIs</a></li>
-      <li><a href="/developers/payout-apis">Payout APIs</a></li>
     </ul>
   </details>
   <a href="/pricing" class="nav-link">Pricing</a>
