@@ -372,6 +372,36 @@ if (($segments[0] ?? '') === 'agentic-ai' && isset($segments[1])) {
 }
 
 // ---------------------------------------------------------------------
+// Blog: /blog/{article} and /blog/category/{category}. Only live articles
+// resolve (includes/blog.php); drafts and unverified regulatory articles 404.
+// ---------------------------------------------------------------------
+if (($segments[0] ?? '') === 'blog' && isset($segments[1])) {
+    require_once __DIR__ . '/../includes/blog.php';
+    $blogFile = null;
+    if ($segments[1] === 'category' && count($segments) === 3 && isset(blog_category_pages()[$segments[2]])) {
+        $blog_category = $segments[2];
+        $blogFile = __DIR__ . '/../pages/blog/category.php';
+    } elseif (count($segments) === 2 && ($blog_article = blog_article($segments[1])) !== null) {
+        $blogFile = __DIR__ . '/../pages/blog/article.php';
+    }
+    ob_start();
+    if ($blogFile === null) {
+        http_response_code(404);
+        include __DIR__ . '/../pages/404.php';
+    } else {
+        include $blogFile;
+    }
+    $page_body = ob_get_clean();
+
+    include __DIR__ . '/../includes/site-head.php';
+    include __DIR__ . '/../includes/header.php';
+    echo '<main id="main-content">' . $page_body . '</main>';
+    include __DIR__ . '/../includes/footer.php';
+    include __DIR__ . '/../includes/site-foot.php';
+    exit;
+}
+
+// ---------------------------------------------------------------------
 // AI & Intelligence child pages: /ai-intelligence/{capability}. The hub
 // (/ai-intelligence) is a public route below; unknown slugs 404.
 // ---------------------------------------------------------------------

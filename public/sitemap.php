@@ -129,4 +129,18 @@ foreach (bs_sitemap_paths() as $path) {
     echo '  <url><loc>' . htmlspecialchars(site_url(ltrim($path, '/'))) . '</loc>'
         . '<lastmod>' . gmdate('Y-m-d', $mtime) . '</lastmod></url>' . "\n";
 }
+// Blog: only articles and category pages the publishing gate has approved
+// for the sitemap (none until editorial, SEO/AEO and indexing approval).
+require_once __DIR__ . '/../includes/blog.php';
+foreach (blog_live() as $slug => $a) {
+    if (gov_in_sitemap(blog_url($slug))) {
+        echo '  <url><loc>' . htmlspecialchars(site_url(ltrim(blog_url($slug), '/'))) . '</loc>'
+            . '<lastmod>' . htmlspecialchars($a['updated']) . '</lastmod></url>' . "\n";
+    }
+}
+foreach (array_keys(blog_category_pages()) as $cat) {
+    if (gov_in_sitemap(blog_category_url($cat))) {
+        echo '  <url><loc>' . htmlspecialchars(site_url(ltrim(blog_category_url($cat), '/'))) . '</loc></url>' . "\n";
+    }
+}
 echo '</urlset>';

@@ -80,7 +80,7 @@ function gov_content_items(): array
         'stage' => 'content_review', 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
         'professional_review' => 'not_applicable', 'approved_by' => null, 'approved_on' => null, 'reason' => $reason,
     ];
-    $items['/blog'] = $utility('Empty placeholder for the future Paynancial Insights / Regulatory Insights programme; indexable only once it has substantial original content and passes review.');
+    $items['/blog'] = $utility('Blog hub — article library under editorial review. Indexable only after a separate blog-level quality review; the number of articles alone never switches it on.');
     $items['/signup'] = $utility('Account sign-up form — a utility page, not an organic landing page.');
     $items['/partner/register'] = $utility('Partner application form — a conversion endpoint. The search-visible page is /partner-program.');
     // Grievance Officer named by the business; the process wording awaits
@@ -90,6 +90,9 @@ function gov_content_items(): array
         'professional_review' => GOV_PROFESSIONAL_REVIEW, 'approved_by' => null, 'approved_on' => null,
         'reason' => 'Grievance Redressal page: officer name, title and grievance email (gro@paynancial.com) confirmed by the business; response timelines, escalation levels and regulatory routes not yet confirmed; legal review pending.',
     ];
+    // Blog articles and category pages: article-level gate (includes/blog.php).
+    require_once __DIR__ . '/blog.php';
+    $items += blog_gov_items();
     return $items;
 }
 

@@ -10,10 +10,14 @@
 require_once __DIR__ . '/../includes/content-governance.php';
 require_once __DIR__ . '/../includes/regulatory-context.php';
 require_once __DIR__ . '/../includes/business-services.php';
+require_once __DIR__ . '/../includes/blog.php';
 
 $page_meta = ['title' => 'Content Governance | Paynancial Admin', 'heading' => 'Content Governance'];
 
-$items = gov_content_items();
+$items = array_filter(gov_content_items(), fn ($p) => !str_starts_with($p, '/blog/'), ARRAY_FILTER_USE_KEY);
+$articles = blog_all();
+$blogStatuses = blog_statuses();
+$workflow = blog_regulatory_workflow();
 $labels = gov_stage_labels();
 $refs = reg_references();
 $queue = array_filter($refs, fn ($r) => !reg_publishable($r));
@@ -24,6 +28,7 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
   <div class="stat-card"><span class="label">Governed pages (live, not approved)</span><strong class="value"><?= count($items) ?></strong></div>
   <div class="stat-card"><span class="label">Regulatory references pending verification</span><strong class="value"><?= count($queue) ?> / <?= count($refs) ?></strong></div>
   <div class="stat-card"><span class="label">Jurisdictions approved</span><strong class="value"><?= count(array_filter($jurisdictions, 'bs_jurisdiction_approved')) ?> / <?= count($jurisdictions) ?></strong></div>
+  <div class="stat-card"><span class="label">Blog articles (live / indexable)</span><strong class="value"><?= count(blog_live()) ?> / <?= count(array_filter(array_keys($articles), fn ($s) => gov_indexable(blog_url($s)))) ?></strong></div>
   <div class="stat-card"><span class="label">Professional review</span><strong class="value"><?= e(ucfirst(GOV_PROFESSIONAL_REVIEW)) ?></strong></div>
 </div>
 
@@ -46,6 +51,31 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
         <td><?= $yn(gov_service_promotion($path)) ?></td>
         <td><?= e(ucfirst($i['professional_review'])) ?></td>
         <td><?= e($i['reason']) ?></td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel">
+  <h2>Blog / Insights — articles</h2>
+  <p class="text-muted">CMS status: <?= e(implode(' → ', $blogStatuses)) ?>. “In review” articles are live but noindex. An article is indexable only with status “Indexable”, the indexable flag on, and an approval (by whom, when) recorded; it enters the sitemap only with the sitemap flag on too. /blog and the category pages stay noindex until a separate blog-level review.</p>
+  <p class="text-muted">Regulatory articles: written only from an official source the business supplies — <?= e(implode(' → ', array_slice($workflow, 1))) ?>. Not live until the workflow is “Published” and the source record is complete and verified (<?= e(implode(', ', blog_source_fields())) ?>).</p>
+  <table class="data-table">
+    <thead><tr><th>Article</th><th>Category</th><th>Type</th><th>CMS status</th><th>Source</th><th>Live</th><th>Indexable</th><th>Sitemap</th><th>Approved</th><th>Updated</th></tr></thead>
+    <tbody>
+      <?php foreach ($articles as $slug => $a): $regulatory = $a['type'] === 'regulatory'; ?>
+      <tr>
+        <td><?php if (blog_is_live($a)): ?><a href="<?= e(blog_url($slug)) ?>" target="_blank" rel="noopener"><?= e($a['title']) ?></a><?php else: ?><?= e($a['title']) ?><?php endif; ?></td>
+        <td><?= e(blog_categories()[$a['category']][0] ?? $a['category']) ?></td>
+        <td><?= $regulatory ? 'Regulatory' : 'General' ?></td>
+        <td><?= e($blogStatuses[$a['status']] ?? $a['status']) ?><?= $regulatory ? ' · ' . e($workflow[$a['workflow'] ?? ''] ?? 'Workflow not set') : '' ?></td>
+        <td><?= $regulatory ? (blog_source_verified($a) ? 'Verified' : 'Missing: ' . e(implode(', ', blog_source_missing($a)) ?: 'verification')) : 'Not applicable' ?></td>
+        <td><?= $yn(blog_is_live($a)) ?></td>
+        <td><?= $yn(gov_indexable(blog_url($slug))) ?></td>
+        <td><?= $yn(gov_in_sitemap(blog_url($slug))) ?></td>
+        <td><?= $a['approved_by'] ? e($a['approved_by'] . ' · ' . $a['approved_on']) : '—' ?></td>
+        <td><?= e($a['updated']) ?></td>
       </tr>
       <?php endforeach; ?>
     </tbody>

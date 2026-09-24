@@ -132,7 +132,10 @@ function seo_meta(array $meta): void
     <?php if ($canonical !== null): ?>
     <link rel="canonical" href="<?= e($canonical) ?>">
     <?php endif; ?>
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="<?= e($meta['og_type'] ?? 'website') ?>">
+    <?php foreach (['published_time', 'modified_time', 'section'] as $k): if (!empty($meta['article'][$k])): ?>
+    <meta property="article:<?= $k ?>" content="<?= e($meta['article'][$k]) ?>">
+    <?php endif; endforeach; ?>
     <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Paynancial">
     <meta property="og:title" content="<?= e($title) ?>">
