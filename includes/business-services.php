@@ -131,7 +131,7 @@ function bs_services(): array
             'headline'  => 'Start Your Business with Confidence',
             'summary'   => 'Incorporate your company in India with structured documentation and expert guidance from first conversation to certificate — and talk to us if you are planning to incorporate abroad.',
             'who'       => ['Founders turning an idea or side project into a registered business', 'Existing businesses moving from a proprietorship or partnership to a company', 'Entrepreneurs planning to operate from, or expand into, another jurisdiction'],
-            'framework' => 'In India, companies are incorporated with the Registrar of Companies under the Companies Act, 2013. International incorporations follow the rules of the chosen jurisdiction.',
+            'framework' => 'In India, companies are incorporated with the Registrar of Companies; businesses should consider the applicable requirements under the Companies Act, 2013. International incorporations follow the rules of the chosen jurisdiction.',
             'why' => [
                 ['Separate legal identity', 'An incorporated entity can own assets, enter contracts and open accounts in its own name.'],
                 ['Credibility with partners', 'Banks, payment providers, enterprise customers and investors generally expect to work with a registered entity.'],
@@ -175,7 +175,7 @@ function bs_services(): array
             'summary'   => 'The structure most growing and investor-backed businesses in India choose — with limited liability and a clear shareholding model.',
             'who'       => ['Founders planning to raise external investment', 'Businesses that want to offer equity to employees', 'Teams of two or more founders building for scale'],
             'suitable'  => 'Growing businesses planning to raise investment or issue equity.',
-            'framework' => 'Governed by the Companies Act, 2013 and registered with the Registrar of Companies (Ministry of Corporate Affairs).',
+            'framework' => 'Businesses should consider the applicable requirements under the Companies Act, 2013; companies are registered with the Registrar of Companies (Ministry of Corporate Affairs).',
             'why' => [
                 ['Limited liability', 'Shareholders\' liability is limited to their shareholding.'],
                 ['Built for fundraising', 'Equity can be issued to investors and employees through a defined share structure.'],
@@ -206,7 +206,7 @@ function bs_services(): array
             'summary'   => 'A Limited Liability Partnership combines the flexibility of a partnership with the protection of limited liability.',
             'who'       => ['Professional firms and consultancies', 'Partners who want limited liability with flexible management', 'Businesses that do not plan to raise equity investment'],
             'suitable'  => 'Professional and service firms that want limited liability with flexible management.',
-            'framework' => 'Governed by the Limited Liability Partnership Act, 2008 and registered with the Ministry of Corporate Affairs.',
+            'framework' => 'Businesses should consider the applicable requirements under the Limited Liability Partnership Act, 2008; LLPs are registered with the Ministry of Corporate Affairs.',
             'why' => [
                 ['Limited liability', 'Partners are not personally liable for the misconduct of other partners.'],
                 ['Flexible management', 'Roles and profit sharing are set out in the LLP agreement.'],
@@ -237,7 +237,7 @@ function bs_services(): array
             'summary'   => 'A company structure designed for a single founder who wants limited liability and a corporate identity.',
             'who'       => ['Solo founders who want a company structure', 'Freelancers and consultants formalising their business', 'Single owners who want limited liability'],
             'suitable'  => 'A single founder who wants a company structure with limited liability.',
-            'framework' => 'Governed by the Companies Act, 2013 and registered with the Registrar of Companies.',
+            'framework' => 'Businesses should consider the applicable requirements under the Companies Act, 2013; One Person Companies are registered with the Registrar of Companies.',
             'why' => [
                 ['Single-founder friendly', 'One individual can be the sole member of the company.'],
                 ['Limited liability', 'The founder\'s personal assets are separated from the business.'],
@@ -267,7 +267,7 @@ function bs_services(): array
             'summary'   => 'Register a partnership firm with a well-drafted partnership deed that sets out how the business is run.',
             'who'       => ['Two or more people starting a business together', 'Family businesses and small trading firms', 'Existing unregistered partnerships'],
             'suitable'  => 'Two or more people running a business together under a partnership deed.',
-            'framework' => 'Governed by the Indian Partnership Act, 1932 and registered with the Registrar of Firms of the relevant state.',
+            'framework' => 'Businesses should consider the applicable requirements under the Indian Partnership Act, 1932; firms are registered with the Registrar of Firms of the relevant state.',
             'why' => [
                 ['Simple to set up', 'A familiar structure for businesses run by two or more people.'],
                 ['Clear arrangements', 'The partnership deed records capital, profit sharing and responsibilities.'],
@@ -298,7 +298,7 @@ function bs_services(): array
             'category'  => 'register',
             'summary'   => 'Register your business under the Goods and Services Tax framework so you can invoice, collect tax and claim input credit correctly.',
             'who'       => ['Businesses that meet the conditions for GST registration', 'Sellers on e-commerce marketplaces', 'Businesses supplying goods or services to other businesses'],
-            'framework' => 'Governed by the Central Goods and Services Tax Act, 2017 and corresponding State/UT GST laws.',
+            'framework' => 'Businesses should consider the applicable requirements under the Central Goods and Services Tax Act, 2017 and the corresponding State/UT GST laws.',
             'why' => [
                 ['Operate compliantly', 'Registration is required for businesses that meet the conditions set under GST law.'],
                 ['Input tax credit', 'Registered businesses can claim credit for GST paid on eligible purchases.'],
@@ -387,7 +387,7 @@ function bs_services(): array
             'category'  => 'register',
             'summary'   => 'Apply for or update the Permanent Account Number and Tax Deduction Account Number your business needs.',
             'who'       => ['Newly formed companies, LLPs and firms', 'Businesses that deduct or collect tax at source', 'Businesses correcting or updating PAN / TAN details'],
-            'framework' => 'PAN and TAN are issued under the Income-tax Act, 1961 by the Income Tax Department.',
+            'framework' => 'PAN and TAN are issued by the Income Tax Department; businesses should consider the applicable requirements under the Income-tax Act, 1961.',
             'why' => [
                 ['PAN for the business', 'Required for tax filings, bank accounts and many financial transactions.'],
                 ['TAN for deductors', 'Required by businesses that deduct or collect tax at source.'],
@@ -416,7 +416,7 @@ function bs_services(): array
             'category'  => 'protect',
             'summary'   => 'Protect your brand name and logo with a trademark application prepared around the right classes.',
             'who'       => ['Startups and businesses launching a new brand', 'Businesses already trading under an unregistered name or logo', 'Founders protecting a product or service name'],
-            'framework' => 'Trademarks in India are registered under the Trade Marks Act, 1999 with the Trade Marks Registry.',
+            'framework' => 'Trademarks in India are registered with the Trade Marks Registry; businesses should consider the applicable requirements under the Trade Marks Act, 1999.',
             'why' => [
                 ['Exclusive rights', 'A registered trademark gives you the right to use the mark for the goods or services it covers.'],
                 ['Brand value', 'A protected brand is an asset that can be licensed or assigned.'],
@@ -482,7 +482,7 @@ function bs_services(): array
             'category'  => 'comply',
             'summary'   => 'Stay in good standing with the Registrar of Companies through structured, calendar-driven filings.',
             'who'       => ['Private limited companies, OPCs and LLPs', 'Companies that have fallen behind on filings', 'Founders who want a clear compliance calendar'],
-            'framework' => 'Filings are made with the Registrar of Companies under the Companies Act, 2013 or the LLP Act, 2008, as applicable.',
+            'framework' => 'Filings are made with the Registrar of Companies; businesses should consider the applicable requirements under the Companies Act, 2013 or the LLP Act, 2008.',
             'why' => [
                 ['Good standing', 'Timely filings keep your company or LLP active and compliant.'],
                 ['Fewer penalties', 'A clear compliance calendar reduces the risk of missed deadlines.'],
@@ -508,7 +508,7 @@ function bs_services(): array
             'category'  => 'comply',
             'summary'   => 'An annual compliance package that brings your statutory filings, meetings and records together in one plan.',
             'who'       => ['Companies and LLPs with recurring annual obligations', 'Businesses switching compliance providers', 'Founders who want one team coordinating filings'],
-            'framework' => 'Annual obligations arise under the Companies Act, 2013, the LLP Act, 2008 and applicable tax laws.',
+            'framework' => 'Businesses should consider the applicable annual requirements under the Companies Act, 2013, the LLP Act, 2008 and applicable tax laws.',
             'why' => [
                 ['One annual plan', 'All recurring obligations mapped out at the start of the year.'],
                 ['Predictable workload', 'Know what is needed and when, well before each deadline.'],
@@ -534,7 +534,7 @@ function bs_services(): array
             'category'  => 'comply',
             'summary'   => 'Make changes to your company — directors, registered office, name, capital or objects — with the right approvals and filings.',
             'who'       => ['Companies adding or removing directors', 'Businesses moving their registered office', 'Companies changing their name, capital or business objects'],
-            'framework' => 'Changes are filed with the Registrar of Companies under the Companies Act, 2013 (or the LLP Act, 2008 for LLPs).',
+            'framework' => 'Changes are filed with the Registrar of Companies; businesses should consider the applicable requirements under the Companies Act, 2013 (or the LLP Act, 2008 for LLPs).',
             'why' => [
                 ['Done correctly', 'Each change needs the right resolutions and filings in the right order.'],
                 ['Records kept current', 'Registry records stay aligned with how your business actually runs.'],
@@ -811,7 +811,8 @@ function bs_sitemap_paths(): array
  */
 function bs_framework_public(array $service): bool
 {
-    return !empty($service['framework_source']) && !empty($service['framework_verified']);
+    // Source verification requirement removed at the owner's request (24 Sep 2026).
+    return !empty($service['framework']);
 }
 
 /** Look up one jurisdiction; null if unknown. */

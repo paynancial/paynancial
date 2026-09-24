@@ -462,8 +462,8 @@ function pc_pages(): array
                 'items' => [
                     ['Card payments', 'A cardholder raises a chargeback with the bank that issued their card; the card network\'s rules set the process and the deadlines.'],
                     ['UPI and netbanking', 'For account-based payments, the customer raises the dispute with their own bank, which handles it.'],
-                    ['Failed or duplicate debits', 'If money was debited but the merchant got no confirmation, the Refund Policy says the payment is flagged for reconciliation and usually reversed automatically — that is not a chargeback.'],
-                    ['Your refund policy', 'Merchants on Paynancial must publish a clear refund and cancellation policy and process approved refunds promptly.'],
+                    ['Failed or duplicate debits', 'If money was debited but the merchant got no confirmation, that is not a chargeback — see Paynancial\'s Refund Policy for how failed debits are handled.'],
+                    ['Your refund policy', 'Merchants should publish a clear refund and cancellation policy and process approved refunds promptly.'],
                 ],
             ],
             'practices' => [
@@ -516,7 +516,7 @@ function pc_pages(): array
             'india' => [
                 'title' => 'Cross-border payments from India.',
                 'items' => [
-                    ['FEMA and the RBI', 'Foreign exchange transactions by businesses in India are governed by the Foreign Exchange Management Act, 1999, with the Reserve Bank of India as the regulator.'],
+                    ['FEMA and the RBI', 'Businesses should consider the applicable requirements under the Foreign Exchange Management Act, 1999, administered by the Reserve Bank of India.'],
                     ['Authorised Dealer banks', 'Cross-border remittances are generally routed through banks the RBI has authorised to deal in foreign exchange.'],
                     ['Purpose and documents', 'Banks usually ask for the purpose of a remittance and supporting documents, such as an invoice or contract.'],
                     ['Tax', 'Payments to and from abroad can have GST and income-tax consequences. Take advice from your CA.'],
@@ -628,7 +628,7 @@ function pc_pages(): array
             'india' => [
                 'title' => 'Business spending in India.',
                 'items' => [
-                    ['Keep the GST invoice', 'Keep the supplier\'s GST invoice for each business expense — your CA needs it to claim input tax credit.'],
+                    ['Keep the GST invoice', 'Keep the supplier\'s GST invoice for each business expense — your CA may need it for input tax credit.'],
                     ['TDS', 'Some payments to vendors and contractors attract TDS under the Income-tax Act. Paynancial does not calculate or deduct TDS; agree the net amount with your CA before paying.'],
                     ['UPI or bank account', 'Pay a supplier or a staff member to their bank account or straight to a UPI ID.'],
                     ['Rupees and paise', 'Payout amounts are set in paise for INR in the API — 250000 is ₹2,500.00.'],
@@ -850,8 +850,8 @@ function pc_pages(): array
                 'title' => 'Embedded payments in India.',
                 'items' => [
                     ['UPI inside your flow', 'Customers in India expect to pay by UPI. Offering it inside your product, next to cards and netbanking, keeps them from dropping out.'],
-                    ['Merchant due diligence', 'Under RBI\'s payment aggregator framework, businesses taking payments are onboarded with due diligence — which is why the Partner Hub has a KYC step.'],
-                    ['No stored card numbers', 'Card-on-file tokenisation means your platform should never store customers\' actual card numbers.'],
+                    ['Merchant due diligence', 'RBI\'s payment aggregator framework covers due diligence on businesses taking payments. Separately, the Partner Hub includes a KYC step.'],
+                    ['No stored card numbers', 'Under card-on-file tokenisation, platforms should not store customers\' actual card numbers.'],
                     ['Rupees and paise', 'The API takes amounts in paise for INR — 50000 is ₹500.00.'],
                 ],
             ],
@@ -963,7 +963,7 @@ function pc_pages(): array
             'india' => [
                 'title' => 'Recurring billing in India.',
                 'items' => [
-                    ['E-mandates', 'Recurring card, UPI and prepaid-instrument payments in India run on an e-mandate the customer registers with additional authentication, with a notification before each debit.'],
+                    ['E-mandates', 'Recurring card, UPI and prepaid-instrument payments in India typically run on an e-mandate the customer registers with additional authentication, with a notification before each debit.'],
                     ['UPI AutoPay', 'Customers can set up, pause and cancel recurring UPI mandates in their own UPI app.'],
                     ['Bank-account mandates', 'For debits straight from a bank account, NPCI\'s NACH is the established route for repeating payments such as instalments.'],
                     ['GST on subscriptions', 'Your GST invoices stay with your accounting system; Paynancial collects the payment.'],
@@ -1019,9 +1019,9 @@ function pc_pages(): array
                 'title' => 'Wallets in India.',
                 'items' => [
                     ['Prepaid payment instruments', 'In India, wallets are prepaid payment instruments (PPIs), regulated by the RBI under the Payment and Settlement Systems Act, 2007.'],
-                    ['Authorised issuers', 'Issuing a PPI needs RBI authorisation. Platforms that are not authorised typically work with an authorised issuer.'],
+                    ['Authorised issuers', 'Businesses should consider the RBI\'s authorisation requirements for PPI issuers; platforms that are not authorised typically work with an authorised issuer.'],
                     ['KYC decides limits', 'RBI rules link what a wallet can hold and do to how fully its user has been verified.'],
-                    ['Interoperability', 'RBI has moved full-KYC wallets towards interoperability, including with UPI.'],
+                    ['Interoperability', 'RBI\'s PPI rules also address interoperability between wallets.'],
                 ],
             ],
             'practices' => [
@@ -1073,7 +1073,7 @@ function pc_pages(): array
             'india' => [
                 'title' => 'Marketplace payments in India.',
                 'items' => [
-                    ['How merchant funds are held', 'Under RBI\'s payment aggregator framework, funds collected for merchants are held in an escrow account with a bank and settled to them — which shapes how any split can be structured.'],
+                    ['How merchant funds are held', 'RBI\'s payment aggregator framework covers how funds collected for merchants are held and settled — which shapes how any split can be structured.'],
                     ['Marketplaces and the PA rules', 'RBI\'s framework can treat a marketplace that collects money and settles it to its sellers as carrying out payment aggregation. Check your model with a compliance adviser and our team before you collect on sellers\' behalf.'],
                     ['TDS and TCS', 'Payments to sellers and e-commerce operators can attract TDS or TCS. Paynancial does not calculate tax; agree the amounts with your CA.'],
                     ['Refunds after payout', 'Decide in advance how a refund is recovered once a seller has been paid.'],
@@ -1131,7 +1131,7 @@ function pc_pages(): array
                     ['Who is regulated', 'Under RBI\'s framework, the payment aggregator is the regulated party for merchant funds, whatever brand the customer sees. Be clear with merchants about who that is.'],
                     ['Merchant onboarding', 'Merchants are onboarded with due diligence, whatever the brand on the front.'],
                     ['Clear descriptors', 'Customers need to recognise a charge on their statement; unclear names lead to disputes.'],
-                    ['Grievance routes', 'Customers must still be able to raise complaints through the regulated routes, such as the RBI Ombudsman.'],
+                    ['Grievance routes', 'Customers should still be able to raise complaints through the regulated routes, such as the RBI Ombudsman.'],
                 ],
             ],
             'practices' => [

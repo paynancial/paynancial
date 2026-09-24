@@ -353,7 +353,7 @@ function ai_children(): array
                 'title' => 'Revenue planning in India.',
                 'items' => [
                     ['April to March', 'India\'s financial year runs from April to March. Forecasts are most useful when they line up with it.'],
-                    ['Advance tax', 'Businesses in India pay advance tax in instalments during the year based on estimated income. A revenue forecast is one input your CA can use.'],
+                    ['Advance tax', 'Businesses in India may need to pay advance tax in instalments during the year based on estimated income — check with your CA. A revenue forecast is one input they can use.'],
                     ['Festive and seasonal cycles', 'Seasonal peaks around festivals and sales events show up in transaction volume first.'],
                     ['A forecast, not a promise', 'Forecasts are estimates from past and current transaction data. They are not guarantees of future revenue.'],
                 ],

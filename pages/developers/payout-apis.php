@@ -1,6 +1,7 @@
 <?php
 /** Payout APIs — /developers/payout-apis: the money-out side of the API. */
 require_once __DIR__ . '/../../includes/faq-data.php';
+require_once __DIR__ . '/../../includes/content-governance.php'; // GOV_REG_DISCLAIMER
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
@@ -93,10 +94,10 @@ sp_hero([
   </div>
 <?php sp_band_close(); ?>
 
-<?php if (gov_india_context_public()): // regulatory statements pending source verification ?>
+<?php if (gov_india_context_public()): // general regulatory information (verification gate disabled) ?>
 <?php sp_band_open('india'); ?>
   <div class="sp-split">
-    <?php sp_head('india', 'In India', 'Paying out in India.'); ?>
+    <?php sp_head('india', 'In India', 'Paying out in India.', GOV_REG_DISCLAIMER); ?>
     <?php sp_answers([
         ['UPI or bank transfer', 'Set mode to upi to pay a UPI ID; bank transfer to an account is also supported.'],
         ['Amounts in paise', '250000 is ₹2,500.00. Convert once, at the edge of your system.'],

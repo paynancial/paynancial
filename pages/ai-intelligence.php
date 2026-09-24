@@ -5,6 +5,7 @@
  * Content rule: see includes/ai-intelligence.php.
  */
 require_once __DIR__ . '/../includes/standalone-ui.php';
+require_once __DIR__ . '/../includes/content-governance.php'; // GOV_REG_DISCLAIMER
 require_once __DIR__ . '/../includes/ai-intelligence.php';
 require_once __DIR__ . '/../includes/solutions-data.php';
 
@@ -243,10 +244,10 @@ sp_hero([
   </div>
 <?php sp_band_close(); ?>
 
-<?php if (gov_india_context_public()): // regulatory statements pending source verification ?>
+<?php if (gov_india_context_public()): // general regulatory information (verification gate disabled) ?>
 <?php sp_band_open('india', 'dim'); ?>
   <div class="sp-split">
-    <?php sp_head('india', 'In India', 'AI for how businesses in India pay and get paid.', 'Built around the realities of Indian digital payments — with people, not models, accountable for decisions.'); ?>
+    <?php sp_head('india', 'In India', 'AI for how businesses in India pay and get paid.', 'Built around the realities of Indian digital payments — with people, not models, accountable for decisions. ' . GOV_REG_DISCLAIMER); ?>
     <?php sp_answers([
         ['UPI-scale volumes', 'UPI has made high-volume, low-value digital payments normal. AI helps surface the few transactions and mismatches that need a person, instead of reviewing every one.'],
         ['Fraud awareness', 'Customers can report cyber fraud on the national helpline 1930 or at cybercrime.gov.in, and a UPI PIN is never needed to receive money — two messages worth repeating to your customers.'],

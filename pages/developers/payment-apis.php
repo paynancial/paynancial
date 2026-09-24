@@ -1,6 +1,7 @@
 <?php
 /** Payment APIs — /developers/payment-apis: the money-in side of the API. */
 require_once __DIR__ . '/../../includes/faq-data.php';
+require_once __DIR__ . '/../../includes/content-governance.php'; // GOV_REG_DISCLAIMER
 require_once __DIR__ . '/../../includes/standalone-ui.php';
 require_once __DIR__ . '/../../includes/developer-docs.php';
 
@@ -97,15 +98,15 @@ sp_hero([
   <p class="reveal" style="margin-top:28px;"><a class="card-link" href="/developers/webhooks" style="color:var(--teal-300);">Webhooks →</a> &nbsp; <a class="card-link" href="/developers/authentication" style="color:var(--teal-300);">Authentication →</a></p>
 <?php sp_band_close(); ?>
 
-<?php if (gov_india_context_public()): // regulatory statements pending source verification ?>
+<?php if (gov_india_context_public()): // general regulatory information (verification gate disabled) ?>
 <?php sp_band_open('india'); ?>
   <div class="sp-split">
-    <?php sp_head('india', 'In India', 'Accepting payments from customers in India.'); ?>
+    <?php sp_head('india', 'In India', 'Accepting payments from customers in India.', GOV_REG_DISCLAIMER); ?>
     <?php sp_answers([
         ['Amounts in paise', 'The API takes amounts in the smallest currency unit — 50000 is ₹500.00. Never send rupees with decimals.'],
         ['UPI alongside cards', 'UPI sits next to cards, netbanking and wallets at checkout; many customers in India reach for it first.'],
-        ['No stored card numbers', 'Under RBI\'s card-on-file tokenisation rules, your systems should never store customers\' actual card numbers — let the checkout handle card details.'],
-        ['Recurring needs a mandate', 'Recurring card and UPI payments run on an e-mandate the customer registers, with a notice before each debit.'],
+        ['No stored card numbers', 'Under RBI\'s card-on-file tokenisation rules, your systems should not store customers\' actual card numbers — let the checkout handle card details.'],
+        ['Recurring needs a mandate', 'Recurring card and UPI payments typically run on an e-mandate the customer registers, with a notice before each debit.'],
     ]); ?>
   </div>
 <?php sp_band_close(); ?>

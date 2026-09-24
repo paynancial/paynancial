@@ -163,12 +163,15 @@ function gov_service_promotion(string $path): bool
 }
 
 /**
- * "In India" context bands contain regulatory statements (RBI, NPCI, FEMA,
- * GST, TDS, tokenisation, e-mandates…) that have not been verified against
- * official sources. They stay in the page data as drafts and are not shown
- * publicly until source verification is complete.
+ * "In India" context bands (RBI, NPCI, FEMA, DPDP, tokenisation…). Shown
+ * publicly as general information: the source verification requirement was
+ * removed at the owner's request on 24 Sep 2026. They are not labelled as
+ * verified anywhere.
  */
+/** Shown with every piece of general regulatory information. */
+const GOV_REG_DISCLAIMER = 'General information only. Not legal, tax, financial or regulatory advice.';
+
 function gov_india_context_public(): bool
 {
-    return false;
+    return true;
 }

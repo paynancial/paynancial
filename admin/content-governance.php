@@ -26,7 +26,7 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
 ?>
 <div class="stat-grid">
   <div class="stat-card"><span class="label">Governed pages (live, not approved)</span><strong class="value"><?= count($items) ?></strong></div>
-  <div class="stat-card"><span class="label">Regulatory references pending verification</span><strong class="value"><?= count($queue) ?> / <?= count($refs) ?></strong></div>
+  <div class="stat-card"><span class="label">Regulatory verification gate</span><strong class="value">Disabled</strong></div>
   <div class="stat-card"><span class="label">Jurisdictions approved</span><strong class="value"><?= count(array_filter($jurisdictions, 'bs_jurisdiction_approved')) ?> / <?= count($jurisdictions) ?></strong></div>
   <div class="stat-card"><span class="label">Blog articles (live / indexable)</span><strong class="value"><?= count(blog_live()) ?> / <?= count(array_filter(array_keys($articles), fn ($s) => gov_indexable(blog_url($s)))) ?></strong></div>
   <div class="stat-card"><span class="label">Professional review</span><strong class="value"><?= e(ucfirst(GOV_PROFESSIONAL_REVIEW)) ?></strong></div>
@@ -105,7 +105,7 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
 
 <div class="panel">
   <h2>Regulatory references — review queue</h2>
-  <p class="text-muted">Workflow: <?= e(implode(' → ', reg_workflow())) ?>. Not shown on any public page until the workflow reaches “Published”, the status is verified and every required field is present: <?= e(implode(', ', reg_required_fields())) ?>.</p>
+  <p class="text-muted">Workflow: <?= e(implode(' → ', reg_workflow())) ?>. The verification gate is disabled, so these references are public as general information regardless of workflow stage; the fields (<?= e(implode(', ', reg_required_fields())) ?>) are kept for internal record-keeping and are never shown as verification metadata.</p>
   <table class="data-table">
     <thead><tr><th>Reference</th><th>Regulator</th><th>Workflow</th><th>Status</th><th>Missing fields</th><th>Used on</th></tr></thead>
     <tbody>
@@ -143,11 +143,13 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
 </div>
 
 <div class="panel">
-  <h2>Drafts held back from public pages</h2>
+  <h2>Regulatory verification gate: disabled</h2>
+  <p><strong>Regulatory verification gate disabled by editorial decision. Regulatory content is general informational material and must not be represented as verified regulatory advice.</strong></p>
+  <p class="text-muted">Decision date: 24 Sep 2026. Public as general information, each with “General information only. Not legal, tax, financial or regulatory advice.”, never labelled as verified and without source metadata:</p>
   <ul>
-    <li>“Compliance in India” bands — all references above (source verification pending).</li>
-    <li>“In India” context bands on product, AI and developer pages — contain regulatory statements (source verification pending).</li>
-    <li>Business Services “Framework” statements (e.g. Companies Act references) — need an official source and a last-verified date.</li>
+    <li>“Compliance in India” reference cards on product pages (source details line shown only for references with a verified record).</li>
+    <li>“In India” context bands on product, AI and developer pages.</li>
+    <li>Business Services “Framework” statements (e.g. Companies Act references).</li>
   </ul>
-  <p class="text-muted">Schema for moving this into the CMS database: <code>database/content_governance_schema.sql</code>.</p>
+  <p class="text-muted">Regulatory Insights blog articles still follow the source-first workflow (none written yet). Schema for moving this into the CMS database: <code>database/content_governance_schema.sql</code>.</p>
 </div>

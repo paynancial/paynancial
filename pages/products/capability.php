@@ -84,7 +84,7 @@ sp_hero([
 <?php if ($india): ?>
 <?php sp_band_open('india', 'dim'); ?>
   <div class="sp-split">
-    <?php sp_head('india', 'In India', $india['title'], $india['note'] ?? ''); ?>
+    <?php sp_head('india', 'In India', $india['title'], trim(($india['note'] ?? '') . ' ' . GOV_REG_DISCLAIMER)); ?>
     <?php sp_answers($india['items']); ?>
   </div>
 <?php sp_band_close(); ?>
