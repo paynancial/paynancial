@@ -103,6 +103,12 @@ function canonical_path(string $uri): string
  */
 function seo_meta(array $meta): void
 {
+    // Published CMS SEO overrides (title, description, social tags, noindex)
+    // for the pages listed in cms_seo_pages(); canonical is never editable.
+    require_once __DIR__ . '/cms/public.php';
+    if (http_response_code() !== 404) {
+        $meta = cms_apply_seo($meta, canonical_path($_SERVER['REQUEST_URI'] ?? '/'));
+    }
     $title       = $meta['title'] ?? APP_NAME;
     $description = $meta['description'] ?? 'Paynancial — secure, intelligent payment technology for modern businesses.';
     $canonical   = $meta['canonical'] ?? site_url(canonical_path($_SERVER['REQUEST_URI'] ?? '/'));
@@ -138,15 +144,15 @@ function seo_meta(array $meta): void
     <?php endif; endforeach; ?>
     <meta property="og:locale" content="en_IN">
     <meta property="og:site_name" content="Paynancial">
-    <meta property="og:title" content="<?= e($title) ?>">
-    <meta property="og:description" content="<?= e($description) ?>">
+    <meta property="og:title" content="<?= e($meta['og_title'] ?? $title) ?>">
+    <meta property="og:description" content="<?= e($meta['og_description'] ?? $description) ?>">
     <?php if ($canonical !== null): ?>
     <meta property="og:url" content="<?= e($canonical) ?>">
     <?php endif; ?>
     <meta property="og:image" content="<?= e($image) ?>">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?= e($title) ?>">
-    <meta name="twitter:description" content="<?= e($description) ?>">
+    <meta name="twitter:title" content="<?= e($meta['og_title'] ?? $title) ?>">
+    <meta name="twitter:description" content="<?= e($meta['og_description'] ?? $description) ?>">
     <?php if (!empty($meta['schema'])): ?>
     <script type="application/ld+json"><?= json_encode($meta['schema'], JSON_UNESCAPED_SLASHES) ?></script>
     <?php endif; ?>

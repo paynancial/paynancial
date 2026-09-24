@@ -110,6 +110,7 @@ $dashboardAreas = [
         'dashboard', 'users', 'transactions', 'cms', 'enquiries',
         'partner-applications', 'products', 'commission-rules', 'customer-applications', 'customer-kyc',
         'change-requests', 'audit-logs', 'content-governance', 'anti-spam',
+        'cms-articles', 'cms-article', 'cms-hero', 'cms-seo', 'cms-preview',
     ]],
     'super-admin' => ['roles' => ['super_admin'],                      'dir' => 'admin',    'pages' => ['dashboard']],
 ];

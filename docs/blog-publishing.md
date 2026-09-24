@@ -14,6 +14,7 @@ content over AI-generated assumptions.
 | Regulatory article template (not loaded) | `docs/templates/regulatory-article.php` |
 | Admin view | Admin → Content Governance → "Blog / Insights — articles" |
 | Tests | `php tests/blog-gate-test.php` |
+| CMS (editing workflow for general articles) | `docs/cms.md` |
 
 ## CMS status (every article)
 
@@ -74,3 +75,11 @@ while it has at least one indexable article.
 
 Regulatory Insights: no articles yet — topic page noindex, awaiting
 official source documents.
+
+## CMS (25 Sep 2026)
+
+General articles can also be written and edited in Admin → Content (CMS),
+through the DRAFT → EDITORIAL REVIEW → SEO/AEO REVIEW → BUSINESS/LEGAL
+REVIEW → APPROVED → PUBLISHED workflow. A published CMS snapshot uses the
+same templates and gate as a file article. Regulatory Insights stays
+file-based and source-first. See `docs/cms.md`.

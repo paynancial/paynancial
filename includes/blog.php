@@ -74,20 +74,49 @@ function blog_categories(): array
     ];
 }
 
-/** All article records, keyed by slug (drafts included). */
+/** Version-controlled article files, keyed by slug (drafts included). */
+function blog_file_articles(): array
+{
+    static $files = null;
+    if ($files !== null) {
+        return $files;
+    }
+    $files = [];
+    foreach (glob(__DIR__ . '/blog/articles/*.php') ?: [] as $file) {
+        $a = require $file;
+        if (is_array($a) && !empty($a['slug'])) {
+            $files[$a['slug']] = blog_article_defaults($a);
+        }
+    }
+    return $files;
+}
+
+function blog_article_defaults(array $a): array
+{
+    return $a + ['type' => 'general', 'status' => 'draft', 'indexable' => false, 'sitemap' => false,
+        'approved_by' => null, 'approved_on' => null, 'editor' => null, 'related' => [], 'links' => [], 'faqs' => []];
+}
+
+/**
+ * All article records, keyed by slug (drafts included): the article files,
+ * with CMS-published snapshots layered on top (includes/cms/public.php).
+ * A published CMS snapshot replaces the file of the same slug; a CMS article
+ * that was published and then unpublished hides it. Without the database the
+ * files alone are used.
+ */
 function blog_all(): array
 {
     static $all = null;
     if ($all !== null) {
         return $all;
     }
-    $all = [];
-    foreach (glob(__DIR__ . '/blog/articles/*.php') ?: [] as $file) {
-        $a = require $file;
-        if (is_array($a) && !empty($a['slug'])) {
-            $a += ['type' => 'general', 'status' => 'draft', 'indexable' => false, 'sitemap' => false,
-                'approved_by' => null, 'approved_on' => null, 'editor' => null, 'related' => [], 'links' => [], 'faqs' => []];
-            $all[$a['slug']] = $a;
+    $all = blog_file_articles();
+    require_once __DIR__ . '/cms/public.php';
+    foreach (cms_blog_overrides() as $slug => $snap) {
+        if ($snap === null) {
+            unset($all[$slug]);
+        } else {
+            $all[$slug] = blog_article_defaults($snap);
         }
     }
     return $all;

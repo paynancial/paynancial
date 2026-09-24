@@ -18,3 +18,7 @@ Thumbs.db
 # Server-generated files.
 error_log
 /public/.well-known/
+
+# CMS image uploads (the directory's .htaccess is tracked).
+/public/uploads/*
+!/public/uploads/.htaccess

@@ -132,9 +132,22 @@ function gov_approved(array $item): bool
     return !empty($item['approved_by']) && !empty($item['approved_on']);
 }
 
+/**
+ * A published CMS SEO setting of "noindex" (includes/cms/public.php). The CMS
+ * can only ever remove a page from the index, never add one.
+ */
+function gov_cms_noindex(string $path): bool
+{
+    require_once __DIR__ . '/cms/public.php';
+    return cms_seo_noindex($path);
+}
+
 /** May search engines index this path? Ungoverned paths: yes. */
 function gov_indexable(string $path): bool
 {
+    if (gov_cms_noindex($path)) {
+        return false;
+    }
     $i = gov_item($path);
     if ($i === null) {
         return true;
@@ -145,6 +158,9 @@ function gov_indexable(string $path): bool
 /** May this path be listed in the XML sitemap? */
 function gov_in_sitemap(string $path): bool
 {
+    if (gov_cms_noindex($path)) {
+        return false;
+    }
     $i = gov_item($path);
     if ($i === null) {
         return true;

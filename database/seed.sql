@@ -33,9 +33,12 @@ INSERT IGNORE INTO role_permissions (role_id, permission_id)
 SELECT (SELECT id FROM roles WHERE slug = 'super_admin'), p.id FROM permissions p;
 
 -- Admin gets everything except settings.manage (kept restricted by default).
+-- CMS review / approval / publishing permissions (migration 2026-09-25) are
+-- never granted to the admin role wholesale — only per person.
 INSERT IGNORE INTO role_permissions (role_id, permission_id)
 SELECT (SELECT id FROM roles WHERE slug = 'admin'), p.id
-FROM permissions p WHERE p.slug <> 'settings.manage';
+FROM permissions p WHERE p.slug <> 'settings.manage'
+  AND (p.module <> 'cms' OR p.slug IN ('cms.manage','cms.view','cms.create','cms.edit','cms.submit'));
 
 -- HR gets hrms + support.
 INSERT IGNORE INTO role_permissions (role_id, permission_id)

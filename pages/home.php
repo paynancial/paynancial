@@ -5,6 +5,11 @@ $page_meta = [
     'schema'      => organization_schema(),
 ];
 
+// Homepage hero: the published CMS hero (Admin → CMS → Homepage hero) over
+// these hardcoded defaults, which remain the fallback.
+require_once __DIR__ . '/../includes/cms/public.php';
+$hero = cms_home_hero(home_hero_defaults());
+
 $services = [
     ['icon' => '◆', 'title' => 'Payment Gateway', 'benefit' => 'Accept cards, UPI, netbanking, and wallets.', 'desc' => 'One integration for every major payment method, with clear settlement reporting behind each transaction.', 'href' => '/products/payment-gateway'],
     ['icon' => '◆', 'title' => 'Payment Links', 'benefit' => 'Collect payments without writing code.', 'desc' => 'Generate a secure, shareable payment link in seconds and send it by email, chat, or SMS.', 'href' => '/products/payment-links'],
@@ -28,12 +33,12 @@ $industries = [
 <section class="hero">
   <div class="container">
     <div class="hero-copy reveal">
-      <span class="eyebrow">Paynancial Technology Pvt. Ltd.</span>
-      <h1>Smarter Payment Infrastructure for Growing Businesses.</h1>
-      <p class="lead">Accept payments, collect dues, send payouts, and understand every transaction — through one platform, a clear dashboard, and a developer-first API.</p>
+      <span class="eyebrow"><?= e($hero['eyebrow']) ?></span>
+      <h1><?= e($hero['title']) ?></h1>
+      <p class="lead"><?= e($hero['lead']) ?></p>
       <div class="hero-actions">
-        <a href="/contact" class="btn btn-primary">Get Started</a>
-        <a href="/contact?intent=sales" class="btn btn-outline"><?= e(cta_label()) ?></a>
+        <a href="<?= e($hero['primary_url']) ?>" class="btn btn-primary"><?= e($hero['primary_label']) ?></a>
+        <a href="<?= e($hero['secondary_url']) ?>" class="btn btn-outline"><?= e($hero['secondary_label']) ?></a>
       </div>
     </div>
 

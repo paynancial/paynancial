@@ -43,7 +43,11 @@ form, CMS or sitemap reference. `/partners` is redirected (301) to
    `regulatory_references` table already exists in production:
    run `database/migrations/2026-09-24-regulatory-reference-workflow.sql`.
    If the table does not exist, skip it (the site reads governance from code).
-3. Do not run any other SQL.
+3. Do not run any other SQL for this release. The CMS migration
+   (`database/migrations/2026-09-25-cms-editing.sql`, see `docs/cms.md`) is a
+   separate, later step: take a backup, run it on staging first, then on
+   production. The site works identically without it (the CMS falls back to
+   the code).
 
 ## 5. Turnstile (server environment only)
 Set on the server (cPanel → "PHP environment variables", Apache `SetEnv` in
