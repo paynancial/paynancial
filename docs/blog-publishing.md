@@ -60,8 +60,17 @@ regulatory statement must be sourced separately. No invented statistics;
 Paynancial products are described only as documented on their own product
 pages, and links go only to approved (indexable) pages.
 
-## Current library (16 articles, all "In review")
+## Current library
+
+16 articles — **Indexable**, in the sitemap. Approved by Paynancial
+Editorial Team on 24 Sep 2026 (content + indexing approval).
 
 Payments (5) · Business Finance (4) · Fintech & AI (2) · Developer
-Education (3) · Learning & Development (2). Regulatory Insights: none yet —
-awaiting official source documents.
+Education (3) · Learning & Development (2).
+
+Blog-level review approved 24 Sep 2026: `/blog` and the five topic pages
+above are indexable and in the sitemap. A topic page stays indexable only
+while it has at least one indexable article.
+
+Regulatory Insights: no articles yet — topic page noindex, awaiting
+official source documents.

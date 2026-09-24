@@ -210,11 +210,19 @@ function blog_gov_items(): array
                 . 'CMS status: ' . (blog_statuses()[$a['status']] ?? $a['status']) . '. Indexable only after editorial, SEO/AEO and indexing approval.',
         ];
     }
+    // Topic pages approved in the blog-level review (24 Sep 2026). A topic is
+    // indexable only while it has at least one indexable article; Regulatory
+    // Insights is not approved (no articles yet).
+    $approvedTopics = ['payments', 'business-finance', 'fintech-ai', 'developers', 'learning'];
     foreach (array_keys(blog_categories()) as $cat) {
+        $hasIndexable = (bool) array_filter(blog_all(), fn ($a) => $a['category'] === $cat && blog_is_live($a)
+            && $a['status'] === 'indexable' && $a['indexable'] === true && !empty($a['approved_by']));
+        $approved = in_array($cat, $approvedTopics, true) && $hasIndexable;
         $items[blog_category_url($cat)] = [
-            'stage' => 'content_review', 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
-            'professional_review' => 'not_applicable', 'approved_by' => null, 'approved_on' => null,
-            'reason' => 'Blog category listing — noindex until the blog-level quality review.',
+            'stage' => $approved ? 'sitemap' : 'content_review', 'indexable' => $approved, 'sitemap' => $approved,
+            'service_promotion' => false, 'professional_review' => 'not_applicable',
+            'approved_by' => $approved ? 'Paynancial Editorial Team' : null, 'approved_on' => $approved ? '2026-09-24' : null,
+            'reason' => $approved ? 'Blog topic page — approved in the blog-level review.' : 'Blog topic page — noindex (not approved, or no indexable articles).',
         ];
     }
     return $items;

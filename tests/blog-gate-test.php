@@ -31,10 +31,21 @@ $check('regulatory article missing a circular number is not live', !blog_is_live
 // Every current article, the hub and the category pages are noindex and out of the sitemap.
 $all = blog_all();
 $check('at least 14 articles exist', count($all) >= 14);
-$indexed = array_filter(array_keys($all), fn ($s) => gov_indexable(blog_url($s)) || gov_in_sitemap(blog_url($s)));
-$check('no article is indexable or in the sitemap before approval', $indexed === []);
-$check('/blog is noindex', !gov_indexable('/blog'));
-$check('category pages are noindex', array_filter(array_keys(blog_categories()), fn ($c) => gov_indexable(blog_category_url($c))) === []);
+// Every indexable / sitemap article carries its approval record and status.
+foreach ($all as $slug => $a) {
+    if (gov_indexable(blog_url($slug)) || gov_in_sitemap(blog_url($slug))) {
+        $check("indexed article '$slug' has status indexable + approval record",
+            $a['status'] === 'indexable' && $a['indexable'] === true && !empty($a['approved_by']) && !empty($a['approved_on']));
+    }
+}
+$check('/blog indexable only with an approval record', !gov_indexable('/blog') || gov_approved(gov_item('/blog')));
+$check('Regulatory Insights topic page stays noindex without verified articles', !gov_indexable(blog_category_url('regulatory')));
+foreach (array_keys(blog_categories()) as $c) {
+    if (gov_indexable(blog_category_url($c))) {
+        $check("indexed topic '$c' has at least one indexable article",
+            (bool) array_filter($all, fn ($a) => $a['category'] === $c && gov_indexable(blog_url($a['slug']))));
+    }
+}
 
 // Approval record is required: flipping flags alone must not index an article.
 $flagsOnly = ['status' => 'indexable', 'indexable' => true, 'sitemap' => true] + $base;

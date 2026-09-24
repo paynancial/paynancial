@@ -80,7 +80,12 @@ function gov_content_items(): array
         'stage' => 'content_review', 'indexable' => false, 'sitemap' => false, 'service_promotion' => false,
         'professional_review' => 'not_applicable', 'approved_by' => null, 'approved_on' => null, 'reason' => $reason,
     ];
-    $items['/blog'] = $utility('Blog hub — article library under editorial review. Indexable only after a separate blog-level quality review; the number of articles alone never switches it on.');
+    // Blog hub: blog-level quality review approved 24 Sep 2026.
+    $items['/blog'] = [
+        'stage' => 'sitemap', 'indexable' => true, 'sitemap' => true, 'service_promotion' => false,
+        'professional_review' => 'not_applicable', 'approved_by' => 'Paynancial Editorial Team', 'approved_on' => '2026-09-24',
+        'reason' => 'Blog hub — blog-level quality review approved; lists only live articles.',
+    ];
     $items['/signup'] = $utility('Account sign-up form — a utility page, not an organic landing page.');
     $items['/partner/register'] = $utility('Partner application form — a conversion endpoint. The search-visible page is /partner-program.');
     // Grievance Officer named by the business; the process wording awaits
