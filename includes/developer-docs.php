@@ -113,7 +113,7 @@ function dev_resources(): array
             'does'   => 'Collect recurring or scheduled payments from a customer.',
             'params' => [['customer_id', 'The customer being charged'], ['amount', 'Amount per collection, in paise'], ['schedule', 'How often to collect; the published example uses <code>monthly</code>']],
             'returns'=> 'A collection object; the examples read its <code>id</code>.',
-            'product'=> ['Payment Collection', '/products/payment-collection'],
+            'product'=> ['Smart Collections', '/products/payment-collection'],
             'php'    => "\$collection = \$client->collections->create([\n    'customer_id' => 'cust_7Fk21',\n    'amount'      => 150000, // in paise\n    'schedule'    => 'monthly',\n]);\n\necho \$collection->id;",
             'curl'   => "curl " . DEV_API_BASE . "/collections \\\n  -u YOUR_API_KEY: \\\n  -d customer_id=cust_7Fk21 \\\n  -d amount=150000 \\\n  -d schedule=monthly",
         ],

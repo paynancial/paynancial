@@ -93,5 +93,5 @@ HTML],
     ],
 
     'related' => ['cash-flow-basics-for-growing-businesses', 'payment-reconciliation-explained', 'choosing-how-to-get-paid-online'],
-    'links'   => [['Payment Links', '/products/payment-links'], ['Payment Collection', '/products/payment-collection'], ['MIS & Reports', '/products/mis-reports']],
+    'links'   => [['Payment Links', '/products/payment-links'], ['Smart Collections', '/products/payment-collection'], ['MIS & Reports', '/products/mis-reports']],
 ];

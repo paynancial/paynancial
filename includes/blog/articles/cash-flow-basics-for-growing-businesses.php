@@ -82,5 +82,5 @@ HTML],
     ],
 
     'related' => ['reduce-overdue-invoices', 'payment-settlement-explained', 'vendor-payout-process'],
-    'links'   => [['Payment Collection', '/products/payment-collection'], ['Payment Analytics', '/products/payment-analytics'], ['Settlements', '/products/settlements']],
+    'links'   => [['Smart Collections', '/products/payment-collection'], ['Payment Analytics', '/products/payment-analytics'], ['Settlements', '/products/settlements']],
 ];

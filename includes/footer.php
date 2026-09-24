@@ -19,7 +19,7 @@ $footer_groups = [
             ['Payments', [
                 ['Payment Gateway', '/products/payment-gateway'],
                 ['Payment Links', '/products/payment-links'],
-                ['Payment Collection', '/products/payment-collection'],
+                ['Smart Collections', '/products/payment-collection'],
                 ['Pricing', '/pricing'],
             ]],
             ['Solutions', [

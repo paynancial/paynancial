@@ -8,7 +8,7 @@ $page_meta = [
 $services = [
     ['icon' => '◆', 'title' => 'Payment Gateway', 'benefit' => 'Accept cards, UPI, netbanking, and wallets.', 'desc' => 'One integration for every major payment method, with clear settlement reporting behind each transaction.', 'href' => '/products/payment-gateway'],
     ['icon' => '◆', 'title' => 'Payment Links', 'benefit' => 'Collect payments without writing code.', 'desc' => 'Generate a secure, shareable payment link in seconds and send it by email, chat, or SMS.', 'href' => '/products/payment-links'],
-    ['icon' => '◆', 'title' => 'Payment Collection', 'benefit' => 'Automate recurring and bulk collections.', 'desc' => 'Run subscription, instalment, or batch collections on schedule, with reconciliation built in.', 'href' => '/products/payment-collection'],
+    ['icon' => '◆', 'title' => 'Smart Collections', 'benefit' => 'Automate recurring and bulk collections.', 'desc' => 'Run subscription, instalment, or batch collections on schedule, with reconciliation built in.', 'href' => '/products/payment-collection'],
     ['icon' => '◆', 'title' => 'Payouts', 'benefit' => 'Pay vendors, employees, and partners.', 'desc' => 'Send funds to bank accounts or UPI IDs directly from your dashboard or API.', 'href' => '/products/payouts'],
     ['icon' => '◆', 'title' => 'Payment Analytics', 'benefit' => 'See performance, not just totals.', 'desc' => 'Dashboards and exportable reports covering transactions, settlements, and reconciliation.', 'href' => '/products/payment-analytics'],
     ['icon' => '◆', 'title' => 'Payment APIs', 'benefit' => 'Build payments into your own product.', 'desc' => 'A documented REST API and webhooks so your engineering team can integrate on their own terms.', 'href' => '/developers'],
@@ -17,7 +17,7 @@ $services = [
 $industries = [
     'ecommerce'             => ['E-Commerce', 'An online store uses the Payment Gateway for checkout and Analytics to track conversion by method.'],
     'travel'                => ['Travel', 'A travel agency uses Payment Links for booking deposits and Payouts to settle with partners.'],
-    'healthcare'            => ['Healthcare', 'A clinic uses Payment Collection to bill patients for recurring treatment plans.'],
+    'healthcare'            => ['Healthcare', 'A clinic uses Smart Collections to bill patients for recurring treatment plans.'],
     'education'             => ['Education', 'A training institute automates monthly fee billing across hundreds of students.'],
     'retail'                => ['Retail', 'A retail chain uses the Gateway online and Analytics to reconcile sales across stores.'],
     'hospitality'           => ['Hospitality', 'A hotel uses Payment Links for advance deposits and the Gateway for on-site payments.'],

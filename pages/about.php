@@ -91,7 +91,7 @@ $stack = [
     ['Intelligence', 'Agent-ready APIs: idempotency, structured errors, audit trails.', [['Agent-Ready APIs', '/developers#agent-ready']]],
     ['Financial operations', 'Settlements, refunds, reconciliation and reporting in one view.', [['Payment Analytics', '/products/payment-analytics']]],
     ['Payouts', 'Money out to vendors, employees and partners.', [['Payouts', '/products/payouts']]],
-    ['Payments', 'Money in, through every major method.', [['Payment Gateway', '/products/payment-gateway'], ['Payment Links', '/products/payment-links'], ['Payment Collection', '/products/payment-collection']]],
+    ['Payments', 'Money in, through every major method.', [['Payment Gateway', '/products/payment-gateway'], ['Payment Links', '/products/payment-links'], ['Smart Collections', '/products/payment-collection']]],
 ];
 
 $leaders = [

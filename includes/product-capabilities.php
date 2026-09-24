@@ -126,7 +126,7 @@ function pc_pages(): array
             ],
             'capabilities' => [
                 ['Reconciliation views', 'Match payments against settlements and refunds in one place (Payment Analytics).'],
-                ['Automatic reconciliation for collections', 'Each collection is matched against the customer and cycle it belongs to (Payment Collection).'],
+                ['Automatic reconciliation for collections', 'Each collection is matched against the customer and cycle it belongs to (Smart Collections).'],
                 ['Order-level reconciliation', 'Reconcile each transaction against your order in the dashboard or via webhook (Payment Gateway).'],
                 ['Discrepancies surfaced', 'Discrepancies surface clearly so reconciliation stays manageable.'],
                 ['Exportable and scheduled reports', 'Download reports or have them delivered on a schedule.'],
@@ -134,7 +134,7 @@ function pc_pages(): array
             ],
             'surfaces' => [
                 ['Payment Analytics', 'Reconciliation views, discrepancies and reports. See <a class="inline-link" href="/products/payment-analytics">Payment Analytics</a>.'],
-                ['Payment Collection', 'Automatic reconciliation of every collection cycle. See <a class="inline-link" href="/products/payment-collection">Payment Collection</a>.'],
+                ['Smart Collections', 'Automatic reconciliation of every collection cycle. See <a class="inline-link" href="/products/payment-collection">Smart Collections</a>.'],
                 ['Webhooks', 'Payment, refund and settlement events to reconcile in your own systems. See <a class="inline-link" href="/developers/webhooks">Webhooks</a>.'],
                 ['AI Reconciliation', 'Exception-first matching. See <a class="inline-link" href="/agentic-ai/financial-agents#capabilities">AI Financial Agents</a>.'],
             ],
@@ -566,7 +566,7 @@ function pc_pages(): array
             ],
             'surfaces' => [
                 ['Payment Links', 'Links for one-off invoices. See <a class="inline-link" href="/products/payment-links">Payment Links</a>.'],
-                ['Smart Collections', 'Recurring and scheduled invoices. See <a class="inline-link" href="/products/payment-collection">Payment Collection</a>.'],
+                ['Smart Collections', 'Recurring and scheduled invoices. See <a class="inline-link" href="/products/payment-collection">Smart Collections</a>.'],
                 ['Payment Links API', '<code>/payment_links</code> with a title, amount and currency. See the <a class="inline-link" href="/developers/api-reference#payment-links">API Reference</a>.'],
                 ['Reconciliation', 'Match invoice payments to settlements. See <a class="inline-link" href="/products/reconciliation">Reconciliation</a>.'],
             ],
@@ -642,7 +642,7 @@ function pc_pages(): array
             'related' => ['vendor-payments', 'employee-payments', 'product:payment-analytics', 'pillar:financial-operations'],
         ],
         // ---- Accept & Collect: Smart Collections use cases -------------------
-        // Built only from the published Payment Collection (Smart Collections)
+        // Built only from the published Smart Collections
         // facts: collection on a schedule (subscription / instalment), retries
         // on a defined schedule, failed attempts recorded with a reason code,
         // customer notifications, automatic reconciliation per customer and
@@ -929,7 +929,7 @@ function pc_pages(): array
             'lead'  => 'Technology partners embed Paynancial\'s Billing APIs so subscriptions and instalments are collected on schedule inside their own product — with retries, customer notifications and reconciliation handled.',
             'answer' => 'Embedded billing means a software product collects recurring payments inside its own experience. On Paynancial, technology partners embed the Billing APIs: the Collections API collects recurring or scheduled payments from a customer, Smart Collections retries failed attempts on a defined schedule and keeps customers informed, and each collection is reconciled against the customer and cycle it belongs to. Billing on behalf of a platform\'s own business users is not described on this site.',
             'values' => ['Collections API', 'Scheduled collections', 'Retries for failures', 'Reconciled per cycle'],
-            'secondary' => ['Explore Payment Collection', '/products/payment-collection', 'cta_click'],
+            'secondary' => ['Explore Smart Collections', '/products/payment-collection', 'cta_click'],
             'aside_code' => dev_resource_code($resources['collections']),
             'aside_caption' => 'A monthly collection from your software',
             'availability' => 'Embedded Billing is not described as a separate Paynancial product. This page covers the published Collections API and Smart Collections, embedded by technology partners.',
@@ -955,7 +955,7 @@ function pc_pages(): array
                 ['Automatic reconciliation', 'Each collection is reconciled to its customer and cycle.'],
             ],
             'surfaces' => [
-                ['Smart Collections', 'Recurring and bulk collection. See <a class="inline-link" href="/products/payment-collection">Payment Collection</a>.'],
+                ['Smart Collections', 'Recurring and bulk collection. See <a class="inline-link" href="/products/payment-collection">Smart Collections</a>.'],
                 ['Collections API', '<code>POST /collections</code>. See the <a class="inline-link" href="/developers/api-reference#collections">API Reference</a>.'],
                 ['Payment Links', 'One-off charges alongside the subscription. See <a class="inline-link" href="/products/payment-links">Payment Links</a>.'],
                 ['Invoice Management', 'Getting invoices paid. See <a class="inline-link" href="/products/invoice-management">Invoice Management</a>.'],

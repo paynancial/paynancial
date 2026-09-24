@@ -18,7 +18,7 @@ function sol_products(): array
     return [
         'payment-gateway'    => ['Payment Gateway', '/products/payment-gateway', 'Cards, UPI, netbanking and wallets through one integration, with a hosted or custom checkout, full or partial refunds and settlement reporting.'],
         'payment-links'      => ['Payment Links', '/products/payment-links', 'Shareable links with a fixed or open amount and an expiry date, sent by email, WhatsApp, SMS or on an invoice — no website needed.'],
-        'payment-collection' => ['Payment Collection', '/products/payment-collection', 'Recurring and bulk collection on a schedule, with retries for failed attempts, customer notifications and automatic reconciliation.'],
+        'payment-collection' => ['Smart Collections', '/products/payment-collection', 'Recurring and bulk collection on a schedule, with retries for failed attempts, customer notifications and automatic reconciliation.'],
         'payouts'            => ['Payouts', '/products/payouts', 'Single or bulk payouts to bank accounts and UPI IDs, with saved beneficiaries, status tracking and clear failure reasons.'],
         'payment-analytics'  => ['Payment Analytics', '/products/payment-analytics', 'Transaction dashboards, settlement visibility, reconciliation views, refund tracking and exportable or scheduled reports.'],
     ];
@@ -165,7 +165,7 @@ function sol_industries(): array
             ],
             'faqs' => [
                 ['Can patients pay before their appointment?', 'Yes. Send a payment link by SMS, email or WhatsApp and the patient can pay from their phone.'],
-                ['Can we bill a treatment plan in instalments?', 'Yes. Payment Collection runs scheduled collections, retries failed attempts and reconciles each payment to its cycle.'],
+                ['Can we bill a treatment plan in instalments?', 'Yes. Smart Collections runs scheduled collections, retries failed attempts and reconciles each payment to its cycle.'],
                 ['Can we refund a cancelled appointment?', 'Yes. Refunds can be full or partial and are issued from the dashboard or API.'],
                 ['Does Paynancial store patient medical records?', 'No. Paynancial is a payments platform. Keep clinical information out of payment descriptions and references.'],
             ],
@@ -177,7 +177,7 @@ function sol_industries(): array
             'description' => 'Fee collection for schools, colleges, coaching and training institutes: scheduled term and monthly fees, payment links for admissions, reminders, and reconciliation per student.',
             'h1'    => 'Fee collection that runs on schedule.',
             'lead'  => 'Collect admission, term and monthly fees without manual follow-up, keep parents informed, and see at a glance who has paid.',
-            'answer' => 'Paynancial helps schools, colleges and training institutes collect fees on a schedule with Payment Collection, send payment links for admissions and one-off charges, and reconcile every payment to the student and term it belongs to.',
+            'answer' => 'Paynancial helps schools, colleges and training institutes collect fees on a schedule with Smart Collections, send payment links for admissions and one-off charges, and reconcile every payment to the student and term it belongs to.',
             'challenges' => [
                 ['Recurring fees for many students', 'Monthly or term fees are due from hundreds or thousands of students at the same time, and collecting them one by one does not scale.'],
                 ['Chasing late payments', 'Staff spend time reminding parents and students, and tracking who has paid.'],
@@ -198,7 +198,7 @@ function sol_industries(): array
                 ['Report on collections', 'payment-analytics', 'See what was collected, what failed and what is pending.'],
             ],
             'scenarios' => [
-                ['A training institute', 'Automates monthly fee billing across hundreds of students with Payment Collection.'],
+                ['A training institute', 'Automates monthly fee billing across hundreds of students with Smart Collections.'],
                 ['A school', 'Sends payment links for annual trips and events, each with its own expiry date.'],
                 ['A coaching centre', 'Accepts course fees on its website and tracks pending instalments in one report.'],
             ],
@@ -208,7 +208,7 @@ function sol_industries(): array
                 ['Tell parents what to expect', 'Share the fee schedule before collection starts, so a scheduled payment is never a surprise.'],
             ],
             'faqs' => [
-                ['Can we collect fees from many students at once?', 'Yes. Payment Collection supports bulk collection from a batch of customers, with each result tracked individually.'],
+                ['Can we collect fees from many students at once?', 'Yes. Smart Collections supports bulk collection from a batch of customers, with each result tracked individually.'],
                 ['Can parents pay by UPI?', 'Yes. Cards, UPI, netbanking and wallets are supported.'],
                 ['What happens if a fee payment fails?', 'The attempt is recorded with a reason and can be retried on the schedule you define.'],
                 ['Can we see which students have not paid?', 'Yes. Collection reports show what was collected, what failed and what is still pending.'],
@@ -309,7 +309,7 @@ function sol_industries(): array
             'description' => 'Payments for consultants, agencies, law and accounting firms: send invoice payment links, collect retainers on a schedule, and pay freelancers and associates with payouts.',
             'h1'    => 'Get paid for your work, without chasing invoices.',
             'lead'  => 'Send a payment link with every invoice, collect retainers automatically, and pay the freelancers and associates who work with you.',
-            'answer' => 'Paynancial helps consultants, agencies and professional firms get paid by adding a payment link to every invoice, collecting monthly retainers with Payment Collection, and paying freelancers and associates with Payouts.',
+            'answer' => 'Paynancial helps consultants, agencies and professional firms get paid by adding a payment link to every invoice, collecting monthly retainers with Smart Collections, and paying freelancers and associates with Payouts.',
             'challenges' => [
                 ['Slow invoice payments', 'Invoices sent as documents are easy to set aside; paying often requires the client to log in to their bank and re-type details.'],
                 ['Retainers and milestones', 'Work is billed as monthly retainers, milestones or partial advances, each needing its own tracking.'],
@@ -342,7 +342,7 @@ function sol_industries(): array
             'faqs' => [
                 ['Can I add a payment link to an invoice?', 'Yes. Create a link with the invoice amount and share it by email, WhatsApp, SMS or on the invoice itself.'],
                 ['Can clients choose how much to pay?', 'Yes. A link can have a fixed amount, or an open amount the client enters.'],
-                ['Can I collect a monthly retainer automatically?', 'Yes. Payment Collection runs recurring collections on a schedule and retries failed attempts.'],
+                ['Can I collect a monthly retainer automatically?', 'Yes. Smart Collections runs recurring collections on a schedule and retries failed attempts.'],
                 ['Can I pay freelancers through Paynancial?', 'Yes. Payouts sends funds to bank accounts or UPI IDs, individually or in bulk.'],
             ],
             'related' => ['enterprise', 'education', 'healthcare'],
@@ -353,7 +353,7 @@ function sol_industries(): array
             'description' => 'Payment infrastructure for large businesses: payments, collections, payouts and analytics through one API, integrated with your finance systems, with idempotency, webhooks and governance for automation.',
             'h1'    => 'Payment infrastructure that fits your finance stack.',
             'lead'  => 'Run payments, collections, payouts and reconciliation behind your own systems through one API — with the controls large finance teams and automated workflows need.',
-            'answer' => 'Paynancial gives enterprises the full platform — Payment Gateway, Payment Collection, Payouts and Payment Analytics — behind their own finance systems through one API, with idempotent requests, webhooks and business-set limits for automated and agent-driven workflows.',
+            'answer' => 'Paynancial gives enterprises the full platform — Payment Gateway, Smart Collections, Payouts and Payment Analytics — behind their own finance systems through one API, with idempotent requests, webhooks and business-set limits for automated and agent-driven workflows.',
             'challenges' => [
                 ['Many systems, one ledger', 'ERP, billing, procurement and treasury systems all need to agree on what was paid, refunded and settled.'],
                 ['Volume and batch operations', 'Collections and payouts run in large batches that must not duplicate or go missing.'],

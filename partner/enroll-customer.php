@@ -13,7 +13,7 @@ $customerTypes = [
 $requirementLabels = [
     'online_gateway' => 'Online Payment Gateway', 'payment_links' => 'Payment Links', 'payment_pages' => 'Payment Pages',
     'website_payments' => 'Website Payments', 'ecommerce_payments' => 'E-Commerce Payments', 'payouts' => 'Payouts',
-    'recurring_payments' => 'Recurring Payments', 'payment_collection' => 'Payment Collection', 'payment_analytics' => 'Payment Analytics',
+    'recurring_payments' => 'Recurring Payments', 'payment_collection' => 'Smart Collections', 'payment_analytics' => 'Payment Analytics',
     'api_integration' => 'API Integration', 'custom_integration' => 'Custom Integration', 'multi_platform' => 'Multi-platform Payments',
     'business_dashboard' => 'Business Dashboard', 'other' => 'Other',
 ];
