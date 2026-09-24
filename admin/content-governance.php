@@ -151,5 +151,6 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
     <li>“In India” context bands on product, AI and developer pages.</li>
     <li>Business Services “Framework” statements (e.g. Companies Act references).</li>
   </ul>
+  <p><strong>Scope:</strong> general Indian regulatory context only. Foreign jurisdiction-specific claims remain pending until actual business/service evidence and source research exist — the jurisdiction gate below is unchanged.</p>
   <p class="text-muted">Regulatory Insights blog articles still follow the source-first workflow (none written yet). Schema for moving this into the CMS database: <code>database/content_governance_schema.sql</code>.</p>
 </div>

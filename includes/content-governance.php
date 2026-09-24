@@ -168,6 +168,15 @@ function gov_service_promotion(string $path): bool
  * removed at the owner's request on 24 Sep 2026. They are not labelled as
  * verified anywhere.
  */
+/**
+ * Regulatory content policy (editorial decision, 24 Sep 2026):
+ *  - General Indian regulatory context → published as general information
+ *    with GOV_REG_DISCLAIMER (verification gate disabled).
+ *  - Foreign jurisdiction-specific claims → remain pending until actual
+ *    business/service evidence and source research exist (jurisdiction
+ *    gate in business-services.php unchanged: service_enabled, indexable,
+ *    sitemap and service_promotion all false).
+ */
 /** Shown with every piece of general regulatory information. */
 const GOV_REG_DISCLAIMER = 'General information only. Not legal, tax, financial or regulatory advice.';
 
