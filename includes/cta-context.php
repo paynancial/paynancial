@@ -111,6 +111,10 @@ function cta_context_key(string $path): string
         'embedded-finance' => 'payments',
         'pricing'     => 'pricing',
         'developers'  => 'developers',
+        'sandbox'     => 'developers',   // Build: testing an integration
+        'agentic-ai'  => 'payments',     // AI pages use the payments wording
+        'technology'  => 'payments',
+        'ai-governance' => 'payments',
         'about'       => 'company',
         'leadership'  => 'company',
         'careers'     => 'company',

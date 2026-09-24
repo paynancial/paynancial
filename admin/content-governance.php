@@ -105,14 +105,15 @@ $yn = fn ($v) => $v ? 'Yes' : 'No';
 
 <div class="panel">
   <h2>Regulatory references — review queue</h2>
-  <p class="text-muted">Not shown on any public page until verified with every required field: <?= e(implode(', ', reg_required_fields())) ?>.</p>
+  <p class="text-muted">Workflow: <?= e(implode(' → ', reg_workflow())) ?>. Not shown on any public page until the workflow reaches “Published”, the status is verified and every required field is present: <?= e(implode(', ', reg_required_fields())) ?>.</p>
   <table class="data-table">
-    <thead><tr><th>Reference</th><th>Authority</th><th>Status</th><th>Missing fields</th><th>Used on</th></tr></thead>
+    <thead><tr><th>Reference</th><th>Regulator</th><th>Workflow</th><th>Status</th><th>Missing fields</th><th>Used on</th></tr></thead>
     <tbody>
       <?php $map = reg_page_map(); foreach ($refs as $id => $r): $used = count(array_filter($map, fn ($ids) => in_array($id, $ids, true))); ?>
       <tr>
         <td><?= e($r['title']) ?></td>
-        <td><?= e($r['authority']) ?></td>
+        <td><?= e($r['regulator']) ?></td>
+        <td><?= e(reg_workflow()[$r['workflow']] ?? $r['workflow']) ?></td>
         <td><?= e(str_replace('_', ' ', $r['status'])) ?></td>
         <td><?= e(implode(', ', reg_missing_fields($r)) ?: '—') ?></td>
         <td><?= $used ?> page<?= $used === 1 ? '' : 's' ?></td>

@@ -56,7 +56,7 @@ $footer_groups = [
         'cta' => ['Explore Agentic AI', '/agentic-ai'],
     ],
     'developers' => [
-        'title' => 'Developers',
+        'title' => 'Build & Developers',
         'blocks' => [
             ['Build', [
                 ['Documentation', '/developers'],

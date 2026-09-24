@@ -83,7 +83,6 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/ai-intelligence/reconciliation"><strong>AI Reconciliation</strong></a>
               <a class="mega-link mega-link-plain" href="/ai-intelligence/financial-assistant"><strong>AI Financial Assistant</strong></a>
               <a class="mega-link mega-link-plain" href="/ai-intelligence/cash-flow-intelligence"><strong>AI Cash-Flow Intelligence</strong></a>
-              <a class="mega-link mega-link-plain" href="/ai-intelligence/revenue-forecasting"><strong>AI Revenue Forecasting</strong></a>
             </div>
             <div>
               <a class="mega-col-title mega-col-link" href="/embedded-finance">Embedded Finance <span aria-hidden="true">→</span></a>
@@ -95,19 +94,18 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link mega-link-plain" href="/products/white-label-payments"><strong>White-Label Payments</strong></a>
             </div>
             <div>
-              <a class="mega-col-title mega-col-link" href="/developers">Developer Platform <span aria-hidden="true">→</span></a>
+              <a class="mega-col-title mega-col-link" href="/developers">Payment Infrastructure <span aria-hidden="true">→</span></a>
               <a class="mega-link mega-link-plain" href="/developers/payment-apis"><strong>Payment APIs</strong></a>
               <a class="mega-link mega-link-plain" href="/developers/payout-apis"><strong>Payout APIs</strong></a>
               <a class="mega-link mega-link-plain" href="/developers/sdks"><strong>SDKs</strong></a>
               <a class="mega-link mega-link-plain" href="/developers/webhooks"><strong>Webhooks</strong></a>
               <a class="mega-link mega-link-plain" href="/sandbox"><strong>Sandbox</strong></a>
-              <a class="mega-link mega-link-plain" href="/developers"><strong>Developer Hub</strong></a>
             </div>
           </div>
         </li>
         <li class="nav-item">
           <button class="nav-link" aria-haspopup="true" aria-expanded="false">Solutions <i class="chev" aria-hidden="true"></i></button>
-          <div class="mega-menu">
+          <div class="mega-menu mega-menu-solutions">
             <div>
               <div class="mega-col-title">By Industry</div>
               <a class="mega-link" href="/solutions/e-commerce"><strong>E-Commerce</strong><span>Fast, reliable checkout at scale</span></a>
@@ -121,6 +119,15 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <a class="mega-link" href="/solutions/hospitality"><strong>Hospitality</strong><span>Bookings, deposits, and on-site payments</span></a>
               <a class="mega-link" href="/solutions/professional-services"><strong>Professional Services</strong><span>Simple invoicing and collection</span></a>
               <a class="mega-link" href="/solutions/enterprise"><strong>Enterprise</strong><span>Custom infrastructure for scale</span></a>
+            </div>
+            <div class="mega-need">
+              <div class="mega-col-title">By Business Need</div>
+              <a class="mega-link" href="/products/accept-and-collect"><strong>Accept Payments</strong><span>Checkout, links, UPI and recurring collection</span></a>
+              <a class="mega-link" href="/pay-and-move-money"><strong>Move Money</strong><span>Payouts to vendors, employees and partners</span></a>
+              <a class="mega-link" href="/financial-operations"><strong>Automate Finance</strong><span>Settlements, refunds and reporting</span></a>
+              <a class="mega-link" href="/products/reconciliation"><strong>Reconcile Transactions</strong><span>Match payments to orders and bank credits</span></a>
+              <a class="mega-link" href="/ai-intelligence"><strong>Financial Intelligence</strong><span>AI across payments and finance operations</span></a>
+              <a class="mega-link" href="/embedded-finance"><strong>Embedded Finance</strong><span>Payments built into your own platform</span></a>
             </div>
           </div>
         </li>
@@ -183,28 +190,35 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
         <li class="nav-item"><a class="nav-link" href="/pricing">Pricing</a></li>
         <li class="nav-item">
           <button class="nav-link" aria-haspopup="true" aria-expanded="false">Resources <i class="chev" aria-hidden="true"></i></button>
-          <div class="mega-menu">
+          <div class="mega-menu mega-menu-grouped">
             <div>
               <div class="mega-col-title">Learn</div>
               <a class="mega-link" href="/blog"><strong>Blog / Insights</strong><span>Guides to payments, finance and fintech</span></a>
               <a class="mega-link" href="/resources/faqs"><strong>FAQs</strong><span>Answers to common questions</span></a>
               <a class="mega-link" href="/resources"><strong>All Resources</strong><span>Guides, answers and policies in one place</span></a>
+              <div class="mega-col-title">Developers</div>
+              <a class="mega-link" href="/developers"><strong>Developer Hub</strong><span>Docs, API reference, SDKs and sandbox</span></a>
             </div>
             <div>
-              <div class="mega-col-title">Help &amp; Trust</div>
-              <a class="mega-link" href="/support"><strong>Support Center</strong><span>Get help from our support team</span></a>
+              <div class="mega-col-title">Trust</div>
               <a class="mega-link" href="/security"><strong>Security &amp; Compliance</strong><span>How we protect every transaction</span></a>
               <a class="mega-link" href="/trust"><strong>Trust Center</strong><span>Security, privacy and governance at a glance</span></a>
               <a class="mega-link" href="/ai-governance"><strong>AI Governance</strong><span>How AI actions stay controlled</span></a>
+              <div class="mega-col-title">Support</div>
+              <a class="mega-link" href="/support"><strong>Support Center</strong><span>Get help from our support team</span></a>
+              <a class="mega-link" href="/contact?intent=support"><strong>Contact Support</strong><span>Raise a question with our team</span></a>
             </div>
           </div>
         </li>
         <li class="nav-item">
           <button class="nav-link" aria-haspopup="true" aria-expanded="false">Company <i class="chev" aria-hidden="true"></i></button>
-          <div class="mega-menu">
+          <div class="mega-menu mega-menu-grouped">
             <div>
               <div class="mega-col-title">About</div>
-              <a class="mega-link" href="/about"><strong>About Us</strong><span>Our mission &amp; story</span></a>
+              <a class="mega-link" href="/about"><strong>About Paynancial</strong><span>Our mission &amp; story</span></a>
+              <a class="mega-link" href="/about#journey"><strong>Our Journey</strong><span>How Paynancial has grown</span></a>
+              <a class="mega-link" href="/about#vision"><strong>Vision &amp; Mission</strong><span>What we are building towards</span></a>
+              <div class="mega-col-title">People</div>
               <a class="mega-link" href="/leadership"><strong>Leadership</strong><span>The team steering Paynancial</span></a>
               <a class="mega-link" href="/careers"><strong>Careers</strong><span>Build the future of payments with us</span></a>
             </div>
@@ -212,6 +226,11 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
               <div class="mega-col-title">Connect</div>
               <a class="mega-link" href="/contact"><strong>Contact</strong><span>Talk to sales or support</span></a>
               <a class="mega-link" href="/partner-program"><strong>Partner Program</strong><span>Referral, reseller and technology partnerships</span></a>
+              <div class="mega-col-title">Corporate</div>
+              <a class="mega-link" href="/legal/privacy-policy"><strong>Privacy</strong><span>How we handle personal data</span></a>
+              <a class="mega-link" href="/legal/terms-conditions"><strong>Terms</strong><span>Terms of using Paynancial</span></a>
+              <a class="mega-link" href="/security"><strong>Security</strong><span>How we protect every transaction</span></a>
+              <a class="mega-link" href="/legal"><strong>Legal</strong><span>All policies and legal documents</span></a>
             </div>
           </div>
         </li>
@@ -219,6 +238,7 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
     </nav>
 
     <div class="header-actions">
+      <a href="/contact?intent=sales" class="btn-contact btn-contact-outline">Contact Sales</a>
       <button type="button" class="btn-login-signup" data-login-open>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Login / Sign Up
@@ -280,7 +300,6 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/ai-intelligence/reconciliation">AI Reconciliation</a></li>
       <li><a href="/ai-intelligence/financial-assistant">AI Financial Assistant</a></li>
       <li><a href="/ai-intelligence/cash-flow-intelligence">AI Cash-Flow Intelligence</a></li>
-      <li><a href="/ai-intelligence/revenue-forecasting">AI Revenue Forecasting</a></li>
 
       <li class="mobile-nav-group-label"><a href="/embedded-finance">Embedded Finance</a></li>
       <li><a href="/products/embedded-payments">Embedded Payments</a></li>
@@ -290,18 +309,18 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/products/split-payments">Split Payments</a></li>
       <li><a href="/products/white-label-payments">White-Label Payments</a></li>
 
-      <li class="mobile-nav-group-label"><a href="/developers">Developer Platform</a></li>
+      <li class="mobile-nav-group-label"><a href="/developers">Payment Infrastructure</a></li>
       <li><a href="/developers/payment-apis">Payment APIs</a></li>
       <li><a href="/developers/payout-apis">Payout APIs</a></li>
       <li><a href="/developers/sdks">SDKs</a></li>
       <li><a href="/developers/webhooks">Webhooks</a></li>
       <li><a href="/sandbox">Sandbox</a></li>
-      <li><a href="/developers">Developer Hub</a></li>
     </ul>
   </details>
   <details>
     <summary>Solutions <i class="chev" aria-hidden="true"></i></summary>
     <ul>
+      <li class="mobile-nav-group-label">By Industry</li>
       <li><a href="/solutions/e-commerce">E-Commerce</a></li>
       <li><a href="/solutions/travel">Travel</a></li>
       <li><a href="/solutions/healthcare">Healthcare</a></li>
@@ -310,6 +329,13 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
       <li><a href="/solutions/hospitality">Hospitality</a></li>
       <li><a href="/solutions/professional-services">Professional Services</a></li>
       <li><a href="/solutions/enterprise">Enterprise</a></li>
+      <li class="mobile-nav-group-label">By Business Need</li>
+      <li><a href="/products/accept-and-collect">Accept Payments</a></li>
+      <li><a href="/pay-and-move-money">Move Money</a></li>
+      <li><a href="/financial-operations">Automate Finance</a></li>
+      <li><a href="/products/reconciliation">Reconcile Transactions</a></li>
+      <li><a href="/ai-intelligence">Financial Intelligence</a></li>
+      <li><a href="/embedded-finance">Embedded Finance</a></li>
     </ul>
   </details>
   <details<?= $bs_is_current ? ' open' : '' ?>>
@@ -350,23 +376,39 @@ $bs_is_current = str_starts_with((string) $current_path, '/business-services');
   <details>
     <summary>Resources <i class="chev" aria-hidden="true"></i></summary>
     <ul>
+      <li class="mobile-nav-group-label">Learn</li>
       <li><a href="/blog">Blog / Insights</a></li>
       <li><a href="/resources/faqs">FAQs</a></li>
       <li><a href="/resources">All Resources</a></li>
-      <li><a href="/support">Support Center</a></li>
+      <li class="mobile-nav-group-label">Developers</li>
+      <li><a href="/developers">Developer Hub</a></li>
+      <li class="mobile-nav-group-label">Trust</li>
       <li><a href="/security">Security &amp; Compliance</a></li>
       <li><a href="/trust">Trust Center</a></li>
       <li><a href="/ai-governance">AI Governance</a></li>
+      <li class="mobile-nav-group-label">Support</li>
+      <li><a href="/support">Support Center</a></li>
+      <li><a href="/contact?intent=support">Contact Support</a></li>
     </ul>
   </details>
   <details>
     <summary>Company <i class="chev" aria-hidden="true"></i></summary>
     <ul>
-      <li><a href="/about">About Us</a></li>
+      <li class="mobile-nav-group-label">About</li>
+      <li><a href="/about">About Paynancial</a></li>
+      <li><a href="/about#journey">Our Journey</a></li>
+      <li><a href="/about#vision">Vision &amp; Mission</a></li>
+      <li class="mobile-nav-group-label">People</li>
       <li><a href="/leadership">Leadership</a></li>
       <li><a href="/careers">Careers</a></li>
+      <li class="mobile-nav-group-label">Connect</li>
       <li><a href="/contact">Contact</a></li>
       <li><a href="/partner-program">Partner Program</a></li>
+      <li class="mobile-nav-group-label">Corporate</li>
+      <li><a href="/legal/privacy-policy">Privacy</a></li>
+      <li><a href="/legal/terms-conditions">Terms</a></li>
+      <li><a href="/security">Security</a></li>
+      <li><a href="/legal">Legal</a></li>
     </ul>
   </details>
   <div class="mobile-nav-actions">

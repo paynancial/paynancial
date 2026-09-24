@@ -84,6 +84,7 @@ $entries = [
     'careers'                      => 'careers.php',
     'partner-program'              => 'partner-program.php',
     'grievance-redressal'          => 'grievance-redressal.php',
+    'legal'                        => 'legal-index.php',
     'partner/register'             => 'partner-register.php',
     'contact'                      => 'contact.php',
     'signup'                       => 'signup.php',

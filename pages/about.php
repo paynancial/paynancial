@@ -193,7 +193,7 @@ $leaders = [
 </section>
 
 <!-- =================================================== VISION & MISSION -->
-<section class="ab-vm" aria-label="Vision and mission">
+<section class="ab-vm" id="vision" aria-label="Vision and mission">
   <div class="ab-vm-half ab-vision reveal">
     <div class="ab-vm-inner">
       <span class="eyebrow">Our Vision</span>

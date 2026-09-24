@@ -86,6 +86,8 @@ function bs_menu_columns(): array
         ['label' => 'Start a Business',      'items' => ['company-incorporation', 'private-limited-company', 'llp-registration', 'opc-registration', 'partnership-registration']],
         ['label' => 'Business Registration', 'items' => ['gst-registration', 'msme-registration', 'startup-registration', 'pan-tan-assistance', ['Professional Tax', '/contact?intent=sales&product=professional-tax']]],
         ['label' => 'Protect & Comply',      'items' => ['trademark-registration', 'trademark-search', 'roc-compliance', 'annual-compliance', 'company-changes']],
+        // Research and guidance only: no jurisdiction is an approved service yet.
+        ['label' => 'Global Business',       'items' => [['Global Company Incorporation', '/business-services/global-incorporation'], ['Jurisdiction Finder', '/business-services/jurisdictions']]],
     ];
 }
 

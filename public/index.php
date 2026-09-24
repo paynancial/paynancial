@@ -431,7 +431,8 @@ if (($segments[0] ?? '') === 'ai-intelligence' && isset($segments[1])) {
 if (($segments[0] ?? '') === 'legal') {
     $legal_slug = $segments[1] ?? '';
     ob_start();
-    include __DIR__ . '/../pages/legal.php';
+    // /legal on its own is the directory of legal documents.
+    include __DIR__ . '/../pages/' . ($legal_slug === '' ? 'legal-index.php' : 'legal.php');
     $page_body = ob_get_clean();
 
     include __DIR__ . '/../includes/site-head.php';
@@ -497,6 +498,7 @@ $page_body = ob_get_clean();
 // at the homepage itself rather than a second copy of it.
 if ($path === 'login' && isset($page_meta)) {
     $page_meta['canonical'] = site_url('/');
+    $page_meta['robots'] = 'noindex, follow';   // account utility page, not an organic landing page
 }
 
 include __DIR__ . '/../includes/site-head.php';

@@ -73,7 +73,12 @@ CREATE TABLE IF NOT EXISTS regulatory_references (
   source_document     VARCHAR(255) NULL,
   last_verified       DATE NULL,
   next_review         DATE NULL,
+  reviewer            VARCHAR(190) NULL,                    -- named only after an actual review
   reviewer_status     VARCHAR(120) NOT NULL DEFAULT 'Professional review: Pending',
+  workflow_stage      ENUM('draft','source_verification','editorial_review','seo_aeo_review',
+                           'legal_regulatory_review','approval','published') NOT NULL DEFAULT 'source_verification',
+  approved_by         BIGINT UNSIGNED NULL,
+  approved_on         DATETIME NULL,
   status              ENUM('draft','source_verification_pending','under_review','verified','superseded','not_applicable','archived')
                       NOT NULL DEFAULT 'source_verification_pending',
   review_required     TINYINT(1) NOT NULL DEFAULT 0,
@@ -85,7 +90,10 @@ CREATE TABLE IF NOT EXISTS regulatory_references (
   CONSTRAINT chk_verified_complete CHECK (status <> 'verified' OR (
     official_source IS NOT NULL AND source_url IS NOT NULL AND reference_number IS NOT NULL
     AND issue_date IS NOT NULL AND (effective_date IS NOT NULL OR effective_note IS NOT NULL)
-    AND applicability IS NOT NULL AND last_verified IS NOT NULL))
+    AND applicability IS NOT NULL AND last_verified IS NOT NULL)),
+  -- Publishing requires a verified source, a named reviewer and an approval record.
+  CONSTRAINT chk_published_approved CHECK (workflow_stage <> 'published' OR (
+    status = 'verified' AND reviewer IS NOT NULL AND approved_by IS NOT NULL AND approved_on IS NOT NULL))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Reference ↔ where it is used (product, service, jurisdiction, page).
@@ -99,8 +107,8 @@ CREATE TABLE IF NOT EXISTS regulatory_reference_links (
 
 -- Manual review queue (§45): references due for review or flagged.
 CREATE OR REPLACE VIEW regulatory_review_queue AS
-  SELECT ref_key, title, status, last_verified, next_review, review_required, source_updated
+  SELECT ref_key, title, status, workflow_stage, last_verified, next_review, review_required, source_updated
   FROM regulatory_references
-  WHERE status IN ('draft','source_verification_pending','under_review')
+  WHERE status IN ('draft','source_verification_pending','under_review') OR workflow_stage <> 'published'
      OR review_required = 1 OR source_updated = 1
      OR (next_review IS NOT NULL AND next_review <= CURRENT_DATE);

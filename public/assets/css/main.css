@@ -980,14 +980,14 @@ section:last-of-type { border-bottom: none; }
 
 /* ---- Business Services mega-menu ---- */
 .mega-menu.mega-menu-bs {
-  display: block; width: min(780px, 94vw); padding: 0; overflow: hidden;
+  display: block; width: min(980px, 94vw); padding: 0; overflow: hidden;
   border-radius: var(--gh-radius-dropdown);
 }
 .mega-bs-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 18px 24px 4px; }
 .mega-bs-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 500; color: var(--ink); }
 .mega-bs-overview { font-size: 0.78rem; font-weight: 600; color: var(--teal-700); }
 .mega-bs-overview:hover { color: var(--ink); }
-.mega-bs-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 8px; padding: 6px 12px 14px; }
+.mega-bs-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px 8px; padding: 6px 12px 14px; }
 .mega-bs-col .mega-col-title { color: var(--teal-700); padding: 10px 12px 6px; }
 .mega-link.mega-link-lead strong { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
 .mega-bs-feature {
@@ -1007,7 +1007,7 @@ section:last-of-type { border-bottom: none; }
 .mega-bs-cta:hover { background: var(--orange-600); transform: translateY(-1px); }
 /* Narrower desktops: centre the menu under the whole header (like the wide
    Products menu) so it never runs past either edge of the viewport. */
-@media (max-width: 1279px) {
+@media (max-width: 1439px) {
   .main-nav > li:has(> .mega-menu-bs) { position: static; }
   .main-nav > li:has(> .mega-menu-bs) > .mega-menu-bs { top: 100%; left: 50%; transform: translateX(-50%) translateY(6px); }
   .main-nav > li.is-open:has(> .mega-menu-bs) > .mega-menu-bs { transform: translateX(-50%) translateY(0); }
@@ -1044,6 +1044,18 @@ section:last-of-type { border-bottom: none; }
 .legal-body details > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
 
 /* Products menu: column titles link to their category page. */
+/* Solutions: By Industry (two columns) + By Business Need. */
+.mega-menu.mega-menu-solutions { width: min(940px, 94vw); grid-template-columns: 1fr 1fr 1.1fr; gap: 2px 6px; }
+.mega-need { border-left: 1px solid var(--border); padding-left: 8px; }
+/* Centre it under the whole header, like Products, so it never runs off-screen. */
+.main-nav > li:has(> .mega-menu-solutions) { position: static; }
+.main-nav > li:has(> .mega-menu-solutions) > .mega-menu-solutions { top: 100%; left: 50%; transform: translateX(-50%) translateY(6px); }
+.main-nav > li.is-open:has(> .mega-menu-solutions) > .mega-menu-solutions { transform: translateX(-50%) translateY(0); }
+.mega-menu-solutions .mega-col-title { color: var(--teal-700); }
+/* Resources / Company: two columns, each holding two titled groups. */
+.mega-menu.mega-menu-grouped { width: min(680px, 94vw); gap: 2px 8px; }
+.mega-menu-grouped > div { display: flex; flex-direction: column; }
+.mega-menu-grouped .mega-link + .mega-col-title { margin-top: 12px; }
 /* Build (developer) menu: Build · Reference · Test & Ship, with a support bar. */
 .mega-menu.mega-build { width: min(820px, 94vw); display: block; padding: 0; overflow: hidden; }
 .mega-build-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 10px; padding: 18px 16px 14px; }

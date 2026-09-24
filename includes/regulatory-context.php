@@ -21,6 +21,24 @@ declare(strict_types=1);
 const REG_RBI_URL  = 'https://www.rbi.org.in/';
 const REG_NPCI_URL = 'https://www.npci.org.in/';
 
+/**
+ * Publishing workflow for a regulatory reference, in order. A reference is
+ * shown publicly only at 'published', with every required field present
+ * and status 'verified'.
+ */
+function reg_workflow(): array
+{
+    return [
+        'draft'                   => 'Draft',
+        'source_verification'     => 'Source verification',
+        'editorial_review'        => 'Editorial review',
+        'seo_aeo_review'          => 'SEO / AEO review',
+        'legal_regulatory_review' => 'Legal / regulatory review (where required)',
+        'approval'                => 'Approval',
+        'published'               => 'Published',
+    ];
+}
+
 /** Draft summaries: id => [title, authority, draft summary]. Not public. */
 function reg_items(): array
 {
@@ -111,6 +129,14 @@ function reg_references(): array
             'title'           => $title,
             'authority'       => $authority,
             'summary'         => $summary,
+            'regulator'       => $authority,
+            'instrument'      => null,   // Act, Master Direction, circular, notification…
+            'product'         => null,   // Paynancial products it applies to
+            'service'         => null,   // Business Services it applies to
+            'customer_impact' => null,
+            'next_review'     => null,
+            'reviewer'        => null,   // named only once someone has actually reviewed it
+            'workflow'        => 'source_verification',
             'official_source' => null,
             'source_url'      => null,
             'reference'       => null,
@@ -128,7 +154,8 @@ function reg_references(): array
 /** Fields a reference must have before it can be shown publicly. */
 function reg_required_fields(): array
 {
-    return ['official_source', 'source_url', 'reference', 'issue_date', 'effective_date', 'applicability', 'last_verified', 'reviewer_status'];
+    return ['regulator', 'instrument', 'reference', 'title', 'official_source', 'source_url', 'issue_date', 'effective_date',
+        'applicability', 'last_verified', 'next_review', 'reviewer', 'reviewer_status'];
 }
 
 /** Missing required fields for a reference (empty = complete). */
@@ -139,7 +166,7 @@ function reg_missing_fields(array $r): array
 
 function reg_publishable(array $r): bool
 {
-    return $r['status'] === 'verified' && reg_missing_fields($r) === [];
+    return $r['status'] === 'verified' && ($r['workflow'] ?? '') === 'published' && reg_missing_fields($r) === [];
 }
 
 /**
