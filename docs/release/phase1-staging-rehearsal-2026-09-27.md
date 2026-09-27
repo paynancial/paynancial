@@ -185,6 +185,10 @@ Email is never shown as operational, and there is no uptime figure.
 
 ## Real staging runbook (for whoever has staging access)
 
+**Use `tests/staging/run_gate.sh`.** It runs every step below in the mandated order, stops at the first failure that makes continuing unsafe, and writes the gate table (`gate-results.md`). See "One-command gate" at the end of this document. The manual steps are kept for reference.
+
+**Order correction:** the BEFORE snapshot must be taken right after the backup, before any migration or deploy. A snapshot taken after the deploy compares Phase 1 with itself and proves nothing.
+
 1. **Backup:** `mysqldump --single-transaction --routines --triggers <db> > pre-phase1.sql`, plus the files and `config/config.php`.
 2. **Run-once check:** `SELECT COUNT(*) FROM permissions WHERE slug='dashboard.view';` must return **0**. If it returns 1, **do not run** the Phase 1 migration again.
 3. **CMS migration check:** `SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='blog_posts' AND column_name='published_json';`. If 0, run `2026-09-25-cms-editing.sql`.
@@ -249,3 +253,77 @@ The real staging run **could not start**:
 **To proceed, either:**
 - a person with staging access runs the runbook above and the four scripts, and records the results in this section; or
 - staging hosts and credentials are made reachable from this environment, and I run them here.
+
+## One-command gate (`tests/staging/run_gate.sh`)
+
+Run it **on the staging host**. The session helpers write PHP session files that the staging web server has to read.
+
+    STAGING_URL=https://<staging> CODE_ROOT=/path/to/deployed/code DB_NAME=<db> \
+    PYN_MYSQL="mysql -h … -u … -p… <db>" \
+    PYN_MYSQLDUMP="mysqldump -h … -u … -p… --single-transaction --routines --triggers <db>" \
+    PYN_MYSQL_ADMIN="mysql -h … -u … -p…" \
+    DEPLOY_CMD="<deploys c238a25 to CODE_ROOT and reloads PHP-FPM>" \
+    OTP_RESULTS=otp.txt \
+    bash tests/staging/run_gate.sh
+
+- **`DEPLOY_CMD`:** optional. Without it, the script pauses so you can deploy by hand.
+- **`OTP_RESULTS`:** optional. It holds 12 lines of the form `role PASS|FAIL|NOT_VERIFIED note`. Without it, the script asks for each role.
+- **Production:** the script refuses to run if the target reports `APP_ENV=production`.
+
+**Order it runs in:**
+1. Backup: database dump and code archive.
+2. Staging fixtures (`*@stg.invalid`, `*-STG-*`), created by `tests/staging/fixtures.php`.
+3. Snapshot BEFORE.
+4. Run-once check. If `dashboard.view` already exists, the script stops.
+5. 25 Sep CMS migration, only if `blog_posts.published_json` is missing.
+6. Phase 1 migration, verified as 10 roles, 19 permissions, the new objects and the new columns.
+7. Deploy the code and reset OPcache.
+8. Hosting-stack checks: HTTPS, Secure cookie, `X-Powered-By`, Apache, the uploads PHP probe and `.htaccess`, MySQL version, and the System Health states for OPcache, Turnstile and email.
+9. `live_qa.py`, then `rbac_matrix.py` (12 roles, 29/29 routes), then `security_probes.py`.
+10. The 12 real email-OTP sign-ins.
+11. Snapshot AFTER and compare.
+12. Rollback drill on two restored copies: rollback must match the pre-Phase-1 schema and data exactly, and re-apply must match the live schema. The copies are dropped afterwards.
+13. Fixture cleanup, then the gate table.
+
+The table reads READY FOR PRODUCTION AUTHORIZATION only when every row is PASS. A NOT VERIFIED row keeps it at PRODUCTION NOT READY.
+
+### Local emulation of the gate (27 Sep 2026), not staging
+
+The driver itself was run end to end on this session's container:
+- **Code:** `c238a25` in a separate worktree, deployed by `DEPLOY_CMD`.
+- **Database:** MariaDB 10.11, restored from the pre-CMS rehearsal backup.
+- **Server:** PHP's built-in server over plain HTTP.
+
+This proves the script and its order. It does **not** verify staging.
+
+| Item | Result (emulation) |
+|---|---|
+| Backup | PASS (dump of 67 tables + code archive) |
+| Snapshot BEFORE | PASS (124 pages, before any change) |
+| Run-once check | PASS (not yet applied) |
+| 25 Sep CMS migration | PASS (applied) |
+| Phase 1 migration | PASS (10 / 19 / objects / columns) |
+| Deploy Phase 1 code | PASS |
+| HTTPS | NOT VERIFIED (plain HTTP) |
+| Secure cookie | FAIL, expected on plain HTTP; must PASS on staging |
+| PHP version exposure | FAIL (`X-Powered-By` sent by the local PHP); must PASS on staging |
+| Apache configuration | NOT VERIFIED (no Apache) |
+| Uploads `.htaccess` | FAIL (the built-in server ignores `.htaccess`); must PASS on staging |
+| MySQL 8 compatibility | NOT VERIFIED (MariaDB 10.11) |
+| System Health page | PASS |
+| OPcache | PASS |
+| Turnstile configuration | NOT VERIFIED (no real keys) |
+| live_qa.py | PASS (488 / 488) |
+| RBAC matrix (12 roles, 29/29 routes) | PASS (552 / 552) |
+| Security probes | PASS (55 / 55)¹ |
+| Real email OTP delivery | NOT VERIFIED |
+| 12 real email-OTP sign-ins | NOT VERIFIED |
+| Before/after snapshot | PASS (124 pages identical) |
+| Rollback drill | PASS |
+| Backups and rollback ready | PASS |
+
+¹ The suspended-super-admin probe depended on a rehearsal-only account and is not part of the staging script. That is why this run has 55 probes and the earlier rehearsal had 56.
+
+Fixture cleanup left 0 fixture users.
+
+**Status: PRODUCTION NOT READY.**

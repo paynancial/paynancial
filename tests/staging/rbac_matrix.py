@@ -5,7 +5,7 @@
 STAGING / DISPOSABLE COPY ONLY — never production. Needs a MySQL CLI for the
 staging database in PYN_MYSQL (e.g. "mysql -h db -u stg -p… stg"), the staging
 base URL and the path of the deployed code. The test sets a known OTP hash for its own test users (it cannot read email), creates users rbac-{role}@stg.invalid and
-resets the fixtures it touches. Requires the CMS fixtures described in docs/release/phase1-staging-rehearsal-2026-09-27.md.
+resets the fixtures it touches. Requires tests/staging/fixtures.php (base + cms) to have run.
 """
 
 import json, os, re, shlex, subprocess, sys, urllib.parse, urllib.request, urllib.error, http.cookiejar
@@ -43,7 +43,9 @@ art_pub = sql("SELECT id FROM blog_posts WHERE slug='staging-approved-article'")
 sql("DELETE FROM blog_posts WHERE slug='staging-legal-review'")
 sql(f"INSERT INTO blog_posts (slug,title,category,excerpt,body_html,content_json,meta_description,status,submitted_by,submitted_at) SELECT 'staging-legal-review','Staging legal review','payments','d',body_html,content_json,'desc','business_legal_review',1,NOW() FROM blog_posts WHERE id={art_pub}")
 art_appr = sql("SELECT id FROM blog_posts WHERE slug='staging-legal-review'")
-prod = sql('SELECT id FROM products ORDER BY id LIMIT 1'); prod_name = sql(f'SELECT name FROM products WHERE id={prod}')
+prod = sql('SELECT id FROM products ORDER BY id LIMIT 1'); prod_row = sql(f'SELECT name, short_description, complexity, pricing_status, commission_eligible, is_active, sort_order FROM products WHERE id={prod}').split('\t'); prod_name = prod_row[0]
+papp = sql("SELECT id FROM partner_applications WHERE application_code='PYN-PARTNER-APP-STG'")
+assert art_pub and papp and prod, 'run tests/staging/fixtures.php base + cms first'
 for role in ROLES:
     email = f'rbac-{role}@stg.invalid'; uid = sql(f"SELECT id FROM users WHERE email='{email}'")
     exp = json.loads(subprocess.run(['php', os.path.join(os.path.dirname(__file__), 'expect.php'), ROOT, email], capture_output=True, text=True).stdout)
@@ -83,7 +85,7 @@ for role in ROLES:
     # form submissions (expected from the permission catalogue)
     def post(path, data): return c.req(path, {'csrf_token': T, **data})
     E = exp['perms']
-    eid = sql("SELECT id FROM enquiries WHERE enquiry_code='PAY-ENQ-2026-000001'"); sql(f"UPDATE enquiries SET status='new' WHERE id={eid}")
+    eid = sql("SELECT id FROM enquiries WHERE enquiry_code='PAY-ENQ-STG-RBAC'"); sql(f"UPDATE enquiries SET status='new' WHERE id={eid}")
     code, _, _ = post('/admin/enquiries', {'op': 'status', 'enquiry_id': eid, 'status': 'closed'})
     changed = sql(f'SELECT status FROM enquiries WHERE id={eid}') == 'closed'
     check(changed == E['enquiries.manage'] and (code == 303 if E['enquiries.manage'] else code == 403), f'{role}: enquiry status change allowed={E["enquiries.manage"]} ({code})'); res['enq_manage'] = changed
@@ -115,13 +117,17 @@ for role in ROLES:
     pub = sql(f'SELECT live FROM blog_posts WHERE id={art_pub}') == '1'
     check(pub == (E['cms.publish'] and E['cms.view']), f'{role}: CMS publish allowed={E["cms.publish"]} ({code})'); res['publish'] = pub
     sql(f"UPDATE products SET name='{prod_name}' WHERE id={prod}")
-    code, _, _ = post('/admin/products', {'form_action': 'update', 'product_id': prod, 'name': prod_name + ' RBAC', 'complexity': 'medium', 'pricing_status': 'talk_to_sales', 'is_active': '1'})
+    pf = {'form_action': 'update', 'product_id': prod, 'name': prod_name + ' RBAC', 'short_description': '' if prod_row[1] == 'NULL' else prod_row[1],
+          'complexity': prod_row[2], 'pricing_status': prod_row[3], 'sort_order': prod_row[6]}  # full form, as the UI posts it
+    if prod_row[4] == '1': pf['commission_eligible'] = '1'
+    if prod_row[5] == '1': pf['is_active'] = '1'
+    code, _, _ = post('/admin/products', pf)
     upd = sql(f'SELECT name FROM products WHERE id={prod}').endswith('RBAC')
     sql(f"UPDATE products SET name='{prod_name}' WHERE id={prod}")
     check(upd == (E['products.manage'] and E['products.view']), f'{role}: product update allowed={E["products.manage"]} ({code})'); res['products'] = upd
-    sql("UPDATE partner_applications SET status='submitted' WHERE id=1")
-    code, _, _ = post('/admin/partner-applications/1', {'form_action': 'request_info', 'status_note': 'rbac'})
-    pa = sql('SELECT status FROM partner_applications WHERE id=1') == 'info_required'
+    sql(f"UPDATE partner_applications SET status='submitted' WHERE id={papp}")
+    code, _, _ = post(f'/admin/partner-applications/{papp}', {'form_action': 'request_info', 'status_note': 'rbac'})
+    pa = sql(f'SELECT status FROM partner_applications WHERE id={papp}') == 'info_required'
     check(pa == (E['partners.manage'] and E['partners.view']), f'{role}: partner application decision allowed={E["partners.manage"]} ({code})'); res['partners'] = pa
     code, _, _ = c.req('/admin/enquiries', {'op': 'status', 'enquiry_id': eid, 'status': 'responded'})
     check(code == 419, f'{role}: POST without CSRF token rejected ({code})')
@@ -130,7 +136,7 @@ for role in ROLES:
     check(code == 302, f'{role}: logged out → admin closed ({code})'); res['logout'] = code == 302
     matrix[role] = res
 sql(f"UPDATE blog_posts SET status='approved', live=0 WHERE id={art_pub}"); sql(f'DELETE FROM blog_posts WHERE id={art_appr}')
-sql("DELETE FROM enquiries WHERE name LIKE 'Rbac %'"); sql("DELETE FROM customers WHERE company_name LIKE 'Rbac Co %'"); sql("UPDATE partner_applications SET status='submitted' WHERE id=1")
+sql("UPDATE enquiries SET status='new', assigned_to=NULL WHERE enquiry_code='PAY-ENQ-STG-RBAC'"); sql("DELETE FROM enquiries WHERE name LIKE 'Rbac %'"); sql("DELETE FROM customers WHERE company_name LIKE 'Rbac Co %'"); sql(f"UPDATE partner_applications SET status='submitted' WHERE id={papp}")
 print(json.dumps(matrix, indent=0))
 n = {r: v.get('routes_checked') for r, v in matrix.items()}
 print(f'guarded routes validated per role: {sorted(set(n.values()))} (expected [29]: 28 registered admin routes + /super-admin/dashboard)')

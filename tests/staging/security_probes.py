@@ -2,7 +2,7 @@
 
     PYN_MYSQL="mysql … stg" python3 tests/staging/security_probes.py https://staging.example ./deployed/code
 
-STAGING / DISPOSABLE COPY ONLY. Uses tests/staging/mksession.php (local file sessions) for pre-authenticated clients.
+STAGING / DISPOSABLE COPY ONLY. Uses tests/staging/mksession.php (local file sessions) for pre-authenticated clients and the accounts from tests/staging/fixtures.php base.
 """
 import json, os, re, secrets, shlex, subprocess, sys, urllib.parse, urllib.request, urllib.error, http.cookiejar
 BASE, ROOT = sys.argv[1].rstrip('/'), sys.argv[2]
@@ -29,14 +29,14 @@ def sess(email): return subprocess.run(['php', MKS, ROOT, email], capture_output
 def tok(h):
     m = re.search(r'name="csrf-token" content="([^"]+)"', h) or re.search(r'name="csrf_token" value="([^"]+)"', h); return m.group(1) if m else ''
 PROBE = f'sec-probe-{secrets.token_hex(4)}@stg.invalid'  # unique per run (the lockout test locks the identifier)
-SA = sess('superadmin@paynancial.com'); ADM = sess('admin1@stg.invalid')
+SA = sess('stg-super@stg.invalid'); ADM = sess('admin1@stg.invalid')
 ERR = re.compile(r'SQLSTATE|syntax error|PDOException|Fatal error|Warning:|Uncaught|Stack trace', re.I)
 
 # ---------------- XSS: stored payload from an enquiry is escaped everywhere it renders
 for path in ['/admin/enquiries', '/admin/dashboard', '/admin/search?q=Test', '/admin/enquiries?q=%3Cscript%3E', '/admin/search?q=%3Cscript%3Ealert(9)%3C/script%3E', '/admin/customers?q=%22%3E%3Csvg/onload=alert(1)%3E', '/admin/activity']:
     c, h, _ = req(path, SA)
     check(c == 200 and '<script>alert(' not in h and '<img src=x onerror' not in h and '<svg/onload' not in h, f'XSS escaped on {path} ({c})')
-c, h, _ = req('/admin/enquiries?q=PAY-ENQ-2026-000004', SA)
+c, h, _ = req('/admin/enquiries?q=PAY-ENQ-STG-XSS', SA)
 check('&lt;script&gt;alert(1)&lt;/script&gt;' in h, 'XSS payload shown as text')
 c, h, _ = req('/admin/cms-seo?path=%3Cscript%3E', SA); check('<script>' not in h.split('</head>')[1] if '</head>' in h else True, 'cms-seo path param not reflected as markup')
 
@@ -94,7 +94,7 @@ for p in ['/admin/dashboard.php', '/../includes/audit.php', '/includes/audit.php
 
 # ---------------- privilege escalation
 c, h, _ = req('/admin/roles', ADM); ta = tok(req('/admin/dashboard', ADM)[1])
-for data, label in [({'op': 'toggle', 'cell': '6:1:0'}, 'admin edits super-admin role'), ({'op': 'assign', 'user_id': sql("SELECT id FROM users WHERE email='admin1@stg.invalid'"), 'role': 'super_admin'}, 'admin self-promotes'),
+for data, label in [({'op': 'toggle', 'cell': sql("SELECT id FROM roles WHERE slug='super_admin'") + ':' + sql("SELECT MIN(id) FROM permissions") + ':0'}, 'admin edits super-admin role'), ({'op': 'assign', 'user_id': sql("SELECT id FROM users WHERE email='admin1@stg.invalid'"), 'role': 'super_admin'}, 'admin self-promotes'),
                     ({'op': 'assign', 'user_id': sql("SELECT id FROM users WHERE email='admin2@stg.invalid'"), 'role': 'super_admin'}, 'admin promotes a peer')]:
     c, _, _ = req('/admin/roles', ADM, {'csrf_token': ta, **data}); check(c == 403, f'{label} blocked ({c})')
 check(sql("SELECT r.slug FROM users u JOIN roles r ON r.id=u.role_id WHERE email='admin1@stg.invalid'") == 'admin', 'admin role unchanged')
@@ -106,8 +106,5 @@ req('/admin/roles', SA, {'csrf_token': ts, 'op': 'toggle', 'cell': f'{cust_role}
 check(sql(f'SELECT COUNT(*) FROM role_permissions WHERE role_id={cust_role} AND permission_id={perm}') == '0', 'non-staff role cannot receive admin permissions via tampered cell')
 req('/admin/roles', SA, {'csrf_token': ts, 'op': 'assign', 'user_id': uid, 'role': 'customer'})
 check(sql(f'SELECT r.slug FROM users u JOIN roles r ON r.id=u.role_id WHERE u.id={uid}') == 'support', 'cannot assign non-staff role via admin')
-sql("UPDATE users SET status='suspended' WHERE email LIKE 'rbac-super_admin@%'")
-sa_id = sql("SELECT id FROM users WHERE email='superadmin@paynancial.com'")
-check(sql("SELECT COUNT(*) FROM users u JOIN roles r ON r.id=u.role_id WHERE r.slug='super_admin' AND u.status='active'") == '1', 'fixture: one active super admin')
 sql(f"DELETE FROM users WHERE email='{PROBE}'")
 print(f'\nSecurity probes: {passes} passed, {len(fails)} failed')
