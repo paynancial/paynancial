@@ -62,7 +62,7 @@ for role in ROLES:
     nav = sorted(set(re.findall(r'href="/admin/([a-z-]+)" class="adm-nav-link', dash)))
     check(nav == sorted(exp['nav']), f'{role}: sidebar = permitted modules ({nav} vs {sorted(exp["nav"])})')
     T = tok(dash)
-    # direct URL access, all 30 routes (endpoints with their real paths)
+    # direct URL access: all 29 guarded routes = 28 registered admin routes (endpoints with their real paths) + /super-admin/dashboard
     routes = {k: '/admin/' + k for k in exp['pages']}
     routes.update({'cms-article': f'/admin/cms-article/{art_pub}', 'cms-preview': f'/admin/cms-preview?type=article&id={art_pub}', 'widget': '/admin/widget/kpi.leads_today', 'search': '/admin/search?q=a'})
     denied = 0
@@ -72,6 +72,11 @@ for role in ROLES:
         ok = code == 200 if exp['pages'][k] else code == 403
         check(ok, f'{role}: GET {path} → {code} (expected {"200" if exp["pages"][k] else "403"})')
         denied += 0 if exp['pages'][k] else 1
+    code, _, _ = c.req('/super-admin/dashboard')  # area gate: super_admin only; other roles are redirected by require_role()
+    check(code == (200 if role == 'super_admin' else 302), f'{role}: GET /super-admin/dashboard → {code}')
+    code, _, _ = c.req('/admin/preferences')  # POST-only endpoint: GET must not expose anything beyond the guard
+    check(code in (200, 403, 405), f'{role}: GET /admin/preferences → {code}')
+    res['routes_checked'] = len(routes) + 1  # 28 registered (preferences via POST below) + /super-admin/dashboard
     res['routes_allowed'] = sum(1 for v in exp['pages'].values() if v); res['routes_denied'] = denied
     code, _, _ = c.req('/admin/preferences', js={'key': 'sidebar', 'value': 'expanded'}, headers={'X-CSRF-Token': T})
     check(code == 200, f'{role}: preferences POST ({code})')
@@ -127,4 +132,6 @@ for role in ROLES:
 sql(f"UPDATE blog_posts SET status='approved', live=0 WHERE id={art_pub}"); sql(f'DELETE FROM blog_posts WHERE id={art_appr}')
 sql("DELETE FROM enquiries WHERE name LIKE 'Rbac %'"); sql("DELETE FROM customers WHERE company_name LIKE 'Rbac Co %'"); sql("UPDATE partner_applications SET status='submitted' WHERE id=1")
 print(json.dumps(matrix, indent=0))
+n = {r: v.get('routes_checked') for r, v in matrix.items()}
+print(f'guarded routes validated per role: {sorted(set(n.values()))} (expected [29]: 28 registered admin routes + /super-admin/dashboard)')
 print(f'\nRBAC matrix: {passes} passed, {len(fails)} failed; audit rows written: {int(sql("SELECT MAX(id) FROM audit_logs")) - start}')

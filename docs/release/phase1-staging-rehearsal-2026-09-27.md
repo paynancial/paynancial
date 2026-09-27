@@ -63,7 +63,7 @@ Commit under test: **`c238a25`** (branch `claude/laughing-clarke-u06pou`). Commi
 
 Each role signs in through the real staff login: password, then OTP, then session. The test sets a known OTP hash because it cannot read email. Each role is then checked for:
 - sidebar;
-- all 28 admin routes by direct URL, plus `/super-admin/dashboard`;
+- all **29 guarded routes** by direct URL (28 registered admin routes plus `/super-admin/dashboard`);
 - form submissions: enquiry status, enquiry create, CSV export, customer create, anti-spam settings, role assignment, CMS approve, CMS publish, product update and partner-application decision;
 - a POST without a CSRF token;
 - logout.
@@ -206,3 +206,46 @@ Email is never shown as operational, and there is no uptime figure.
 8. **Test OTP by email:** sign in as one real staff account per role through the email OTP. This is the only step the rehearsal could not cover.
 9. **Rollback drill:** on a restored copy of the staging dump, run the rollback script, compare, then re-apply.
 10. **Sign off:** record STAGING VERIFIED = YES only when every item above passes on staging.
+
+## Staging execution gate: attempt of 27 Sep 2026 (BLOCKED)
+
+**Guarded routes: 29** (28 registered admin routes plus `/super-admin/dashboard`). `tests/staging/rbac_matrix.py` now checks all 29 for every role, and passes 552/552 on the rehearsal copy of `c238a25`.
+
+The real staging run **could not start**:
+- **No access:** `staging.paynancial.com`, `stage.paynancial.com`, `cms.paynancial.com` and `paynancial.com` are all refused by this session's network policy.
+- **No credentials:** no staging host, SSH, SFTP, cPanel or database credentials exist in this environment or the repository.
+- **Nothing run on staging:** none of the deployment-order steps (backup → run-once check → 25 Sep migration → Phase 1 migration → code → OPcache → QA) was executed on staging. Nothing was deployed anywhere.
+
+| Production gate item | Status |
+|---|---|
+| 29/29 guarded routes validated | Rehearsal only; **NOT VERIFIED on staging** |
+| Migrations validated | Rehearsal only; **NOT VERIFIED on staging** |
+| Rollback drill passed | Rehearsal only; **NOT VERIFIED on staging** |
+| 12 real email-OTP sign-ins | **NOT VERIFIED** (rehearsal used real OTP verification with a test-set code; no email delivery) |
+| RBAC matrix passed | Rehearsal only; **NOT VERIFIED on staging** |
+| Security probes passed | Rehearsal only; **NOT VERIFIED on staging** |
+| Live QA passed | Rehearsal only; **NOT VERIFIED on staging** |
+| Before/after snapshot, no public regression | Rehearsal only; **NOT VERIFIED on staging** |
+| Hosting-stack checks | **NOT VERIFIED** (see below) |
+| No critical security defect remains | None found in rehearsal; staging not tested |
+| Backups and rollback ready | Procedure written and rehearsed; staging backup **NOT VERIFIED** |
+
+| Hosting-stack check | Status |
+|---|---|
+| Apache configuration | NOT VERIFIED (rehearsal used PHP's built-in server) |
+| Uploads `.htaccess` behaviour | NOT VERIFIED (the built-in server ignores `.htaccess`) |
+| HTTPS | NOT VERIFIED |
+| Secure cookie behaviour | NOT VERIFIED (rehearsal was HTTP with `SESSION_COOKIE_SECURE=false`) |
+| Real email OTP delivery | NOT VERIFIED (no mail transport in this container) |
+| OPcache | NOT VERIFIED (off in the rehearsal) |
+| PHP version exposure | NOT VERIFIED (`expose_php=On` in the rehearsal) |
+| Turnstile configuration | NOT VERIFIED (no real keys) |
+| MySQL 8 compatibility | NOT VERIFIED (rehearsal used MariaDB 10.11) |
+
+**Logout CSRF:** pre-existing, non-blocking, later hardening. Session initialisation is not changed in Phase 1.
+
+**Status: PRODUCTION NOT READY.**
+
+**To proceed, either:**
+- a person with staging access runs the runbook above and the four scripts, and records the results in this section; or
+- staging hosts and credentials are made reachable from this environment, and I run them here.
