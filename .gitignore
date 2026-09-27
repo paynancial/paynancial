@@ -22,3 +22,7 @@ error_log
 # CMS image uploads (the directory's .htaccess is tracked).
 /public/uploads/*
 !/public/uploads/.htaccess
+
+# Python bytecode
+__pycache__/
+*.pyc
