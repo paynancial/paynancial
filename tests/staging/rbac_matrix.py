@@ -4,8 +4,10 @@
 
 STAGING / DISPOSABLE COPY ONLY — never production. Needs a MySQL CLI for the
 staging database in PYN_MYSQL (e.g. "mysql -h db -u stg -p… stg"), the staging
-base URL and the path of the deployed code. The test sets a known OTP hash for its own test users (it cannot read email), creates users rbac-{role}@stg.invalid and
-resets the fixtures it touches. Requires tests/staging/fixtures.php (base + cms) to have run.
+base URL and the path of the deployed code. The test sets a known password and OTP hash for the
+fixture accounts rbac-{role}@stg.invalid (it cannot read email) and resets the fixtures it touches.
+Requires tests/staging/fixtures.php base + cms; needs no other pre-existing data. This automated
+login is NOT the real email-OTP sign-in check: that is done by people (run_gate.sh step 12).
 """
 
 import json, os, re, shlex, subprocess, sys, urllib.parse, urllib.request, urllib.error, http.cookiejar
@@ -35,15 +37,16 @@ def tok(html):
     return m.group(1) if m else ''
 hashed = subprocess.run(['php', '-r', f'echo password_hash("{PW}", PASSWORD_DEFAULT);'], capture_output=True, text=True).stdout
 otp = subprocess.run(['php', '-r', 'echo password_hash("246810", PASSWORD_DEFAULT);'], capture_output=True, text=True).stdout
-for r in ROLES:
-    e = f'rbac-{r}@stg.invalid'; sql(f"DELETE FROM users WHERE email='{e}'")
-    sql(f"INSERT INTO users (uuid, role_id, full_name, email, password_hash, status) SELECT UUID(), id, 'Rbac {r}', '{e}', '{hashed}', 'active' FROM roles WHERE slug='{r}'")
+for r in ROLES:  # fixture accounts (fixtures.php base): known password, active, correct role
+    e = f'rbac-{r}@stg.invalid'
+    sql(f"UPDATE users SET password_hash='{hashed}', status='active', role_id=(SELECT id FROM roles WHERE slug='{r}') WHERE email='{e}'")
+    assert sql(f"SELECT COUNT(*) FROM users WHERE email='{e}'") == '1', f'fixture account {e} missing: run tests/staging/fixtures.php base first'
 start = int(sql('SELECT MAX(id) FROM audit_logs'))
 art_pub = sql("SELECT id FROM blog_posts WHERE slug='staging-approved-article'")
 sql("DELETE FROM blog_posts WHERE slug='staging-legal-review'")
-sql(f"INSERT INTO blog_posts (slug,title,category,excerpt,body_html,content_json,meta_description,status,submitted_by,submitted_at) SELECT 'staging-legal-review','Staging legal review','payments','d',body_html,content_json,'desc','business_legal_review',1,NOW() FROM blog_posts WHERE id={art_pub}")
+sql(f"INSERT INTO blog_posts (slug,title,category,excerpt,body_html,content_json,meta_description,status,submitted_by,submitted_at) SELECT 'staging-legal-review','Staging legal review','payments','d',body_html,content_json,'desc','business_legal_review',(SELECT id FROM users WHERE email='stg-super@stg.invalid'),NOW() FROM blog_posts WHERE id={art_pub}")
 art_appr = sql("SELECT id FROM blog_posts WHERE slug='staging-legal-review'")
-prod = sql('SELECT id FROM products ORDER BY id LIMIT 1'); prod_row = sql(f'SELECT name, short_description, complexity, pricing_status, commission_eligible, is_active, sort_order FROM products WHERE id={prod}').split('\t'); prod_name = prod_row[0]
+prod = sql("SELECT id FROM products WHERE slug='stg-fixture-product'"); prod_row = sql(f'SELECT name, short_description, complexity, pricing_status, commission_eligible, is_active, sort_order FROM products WHERE id={prod}').split('\t'); prod_name = prod_row[0]
 papp = sql("SELECT id FROM partner_applications WHERE application_code='PYN-PARTNER-APP-STG'")
 assert art_pub and papp and prod, 'run tests/staging/fixtures.php base + cms first'
 for role in ROLES:

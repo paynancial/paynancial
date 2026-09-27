@@ -3,6 +3,9 @@
     PYN_MYSQL="mysql … stg" python3 tests/staging/security_probes.py https://staging.example ./deployed/code
 
 STAGING / DISPOSABLE COPY ONLY. Uses tests/staging/mksession.php (local file sessions) for pre-authenticated clients and the accounts from tests/staging/fixtures.php base.
+
+55 probes. The earlier rehearsal had a 56th (a suspended super admin), removed on purpose: it depended on a
+rehearsal-only account and needs no pre-existing data now. Test records use @stg.invalid and are removed.
 """
 import json, os, re, secrets, shlex, subprocess, sys, urllib.parse, urllib.request, urllib.error, http.cookiejar
 BASE, ROOT = sys.argv[1].rstrip('/'), sys.argv[2]
