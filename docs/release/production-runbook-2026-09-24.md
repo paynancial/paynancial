@@ -48,6 +48,13 @@ form, CMS or sitemap reference. `/partners` is redirected (301) to
    separate, later step: take a backup, run it on staging first, then on
    production. The site works identically without it (the CMS falls back to
    the code).
+   The Phase 1 admin-platform migration
+   (`database/migrations/2026-09-28-phase1-admin-platform.sql`, see
+   `docs/admin-platform.md`) runs AFTER the CMS migration, also staging first.
+   IMPORTANT: deploy the Phase 1 code and run this migration together. Until
+   it runs, only the super admin can open admin pages (other staff get 403,
+   because their module permissions do not exist yet). The public site is
+   unaffected either way.
 
 ## 5. Turnstile (server environment only)
 Set on the server (cPanel → "PHP environment variables", Apache `SetEnv` in

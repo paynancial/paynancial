@@ -41,28 +41,8 @@ function dashboard_nav_items(string $area): array
             ['label' => 'Recruitment', 'page' => 'recruitment'],
             ['label' => 'Attendance', 'page' => 'attendance'],
         ],
-        'admin' => [
-            ['label' => 'Dashboard', 'page' => 'dashboard'],
-            ['label' => 'Users', 'page' => 'users'],
-            ['label' => 'Transactions', 'page' => 'transactions'],
-            ['label' => 'Enquiries', 'page' => 'enquiries'],
-            ['group' => 'Content (CMS)', 'label' => 'CMS Overview', 'page' => 'cms'],
-            ['group' => 'Content (CMS)', 'label' => 'Blog Articles', 'page' => 'cms-articles'],
-            ['group' => 'Content (CMS)', 'label' => 'Homepage Hero', 'page' => 'cms-hero'],
-            ['group' => 'Content (CMS)', 'label' => 'Page SEO', 'page' => 'cms-seo'],
-            ['group' => 'Content (CMS)', 'label' => 'Content Governance', 'page' => 'content-governance'],
-            ['group' => 'Settings', 'label' => 'Floating Enquiry Anti-Spam', 'page' => 'anti-spam'],
-            ['group' => 'Partner Hub', 'label' => 'Partner Applications', 'page' => 'partner-applications'],
-            ['group' => 'Partner Hub', 'label' => 'Customer Applications', 'page' => 'customer-applications'],
-            ['group' => 'Partner Hub', 'label' => 'Customer eKYC', 'page' => 'customer-kyc'],
-            ['group' => 'Partner Hub', 'label' => 'Solution Catalog', 'page' => 'products'],
-            ['group' => 'Partner Hub', 'label' => 'Commission Rules', 'page' => 'commission-rules'],
-            ['group' => 'Security', 'label' => 'Change Requests', 'page' => 'change-requests'],
-            ['group' => 'Security', 'label' => 'Audit Logs', 'page' => 'audit-logs'],
-        ],
-        'super-admin' => [
-            ['label' => 'Dashboard', 'page' => 'dashboard'],
-        ],
+        // The admin and super-admin areas use the enterprise admin shell; their
+        // navigation comes only from includes/admin/registry.php.
         default => [],
     };
 }

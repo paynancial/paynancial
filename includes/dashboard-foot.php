@@ -1,3 +1,4 @@
+<?php if (!empty($admin_shell)) { include __DIR__ . '/admin/shell-foot.php'; return; } ?>
     </div>
   </div>
 </div>

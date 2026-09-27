@@ -38,7 +38,9 @@ SELECT (SELECT id FROM roles WHERE slug = 'super_admin'), p.id FROM permissions 
 INSERT IGNORE INTO role_permissions (role_id, permission_id)
 SELECT (SELECT id FROM roles WHERE slug = 'admin'), p.id
 FROM permissions p WHERE p.slug <> 'settings.manage'
-  AND (p.module <> 'cms' OR p.slug IN ('cms.manage','cms.view','cms.create','cms.edit','cms.submit'));
+  AND (p.module <> 'cms' OR p.slug IN ('cms.manage','cms.view','cms.create','cms.edit','cms.submit'))
+  -- Phase 1 (2026-09-28): role management and HR documents stay super-admin only.
+  AND p.slug NOT IN ('roles.manage','documents.view_hr');
 
 -- HR gets hrms + support.
 INSERT IGNORE INTO role_permissions (role_id, permission_id)

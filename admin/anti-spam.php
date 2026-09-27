@@ -45,12 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if (!$errors) {
             try {
+                $prev = [];
+                $prevStmt = db()->prepare('SELECT setting_value FROM settings WHERE setting_key = :k');
+                foreach (array_keys($new) as $k) {
+                    $prevStmt->execute(['k' => AS_SETTINGS_PREFIX . $k]);
+                    $v = $prevStmt->fetchColumn();
+                    $prev[$k] = $v === false ? null : $v;
+                }
                 $stmt = db()->prepare('INSERT INTO settings (setting_key, setting_value) VALUES (:k, :v)
                     ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)');
                 foreach ($new as $k => $v) {
                     $stmt->execute(['k' => AS_SETTINGS_PREFIX . $k, 'v' => $v]);
                 }
                 $saved = true;
+                audit('settings.changed', 'settings', null, $prev, $new, ['name' => 'Floating enquiry anti-spam']);
                 header('Location: /admin/anti-spam?saved=1', true, 303);
                 exit;
             } catch (Throwable $e) {

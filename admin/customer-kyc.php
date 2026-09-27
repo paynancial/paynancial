@@ -50,6 +50,12 @@ if ($customerId !== null) {
                 $newDocStatus = sanitize_input((string) ($_POST['doc_status'] ?? ''));
                 $note = sanitize_input((string) ($_POST['status_note'] ?? ''));
                 if (array_key_exists($docType, $docLabels) && array_key_exists($newDocStatus, $docStatusLabels)) {
+                    $prevDoc = $pdo->prepare('SELECT id, status, status_note FROM customer_kyc_documents WHERE customer_id = :cid AND doc_type = :type');
+                    $prevDoc->execute(['cid' => $customerId, 'type' => $docType]);
+                    $prevDoc = $prevDoc->fetch() ?: ['id' => null, 'status' => null, 'status_note' => null];
+                    audit('document.status_changed', 'customer_kyc_document', $prevDoc['id'] ? (int) $prevDoc['id'] : null,
+                        ['status' => $prevDoc['status'], 'note' => $prevDoc['status_note']], ['status' => $newDocStatus, 'note' => $note ?: null],
+                        ['customer_id' => $customerId, 'doc_type' => $docType]);
                     $pdo->prepare(
                         'UPDATE customer_kyc_documents SET status = :status, status_note = :note, reviewed_at = NOW()
                          WHERE customer_id = :cid AND doc_type = :type'
@@ -66,6 +72,8 @@ if ($customerId !== null) {
                     $pdo->prepare("UPDATE customer_bank_accounts SET status = 'verified' WHERE customer_id = :cid")
                         ->execute(['cid' => $customerId]);
                     $pdo->commit();
+                    audit('customer.activated', 'customer', $customerId, ['status' => $customer['status'], 'kyc_status' => $customer['kyc_status']],
+                        ['status' => 'active', 'kyc_status' => 'verified']);
 
                     @mail($customer['email'], 'Your Paynancial account is verified',
                         "Hello {$customer['full_name']},\n\nYour Paynancial business profile has been verified and your account is now active. You can sign in and start using your activated products.\n\n— Paynancial",
@@ -82,6 +90,7 @@ if ($customerId !== null) {
             } elseif ($action === 'suspend') {
                 $note = sanitize_input((string) ($_POST['status_note'] ?? ''));
                 $pdo->prepare("UPDATE customers SET status = 'suspended' WHERE id = :id")->execute(['id' => $customerId]);
+                audit('customer.suspended', 'customer', $customerId, ['status' => $customer['status']], ['status' => 'suspended'], ['reason' => $note ?: null]);
                 @mail($customer['email'], 'Update on your Paynancial account',
                     "Hello {$customer['full_name']},\n\nWe were unable to verify your business profile" . ($note ? " ({$note})" : '') . ". Please contact support for next steps.\n\n— Paynancial",
                     'From: ' . MAIL_FROM_NAME . ' <' . MAIL_FROM_ADDRESS . '>');

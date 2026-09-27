@@ -23,7 +23,7 @@ $roles = $pdo->query('SELECT slug, name FROM roles ORDER BY name')->fetchAll();
   <div class="panel-head"><h2>Platform Users</h2></div>
   <form method="get" class="toolbar" style="margin-bottom:18px;">
     <input type="text" name="q" placeholder="Search name or email…" value="<?= e($search) ?>">
-    <select name="role">
+    <select name="role" aria-label="Filter by role">
       <option value="">All roles</option>
       <?php foreach ($roles as $r): ?>
         <option value="<?= e($r['slug']) ?>" <?= $roleFilter === $r['slug'] ? 'selected' : '' ?>><?= e($r['name']) ?></option>

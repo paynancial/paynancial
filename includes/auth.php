@@ -5,7 +5,22 @@
 
 declare(strict_types=1);
 
+/**
+ * Staff roles that work in the admin platform (12-role model, Phase 1 of the
+ * enterprise admin). They sign in through the staff (employee) surface and
+ * land on the Command Center; what they can open is decided per module by
+ * permissions (includes/admin/registry.php), never by role alone.
+ */
+const ADMIN_STAFF_ROLES = [
+    'super_admin', 'admin', 'operations_manager', 'sales_manager', 'consultant', 'incorporation_consultant',
+    'content_manager', 'seo_manager', 'compliance_reviewer', 'finance_manager', 'developer', 'support',
+];
+
 const DASHBOARD_BY_ROLE = [
+    'operations_manager' => '/admin/dashboard', 'sales_manager' => '/admin/dashboard', 'consultant' => '/admin/dashboard',
+    'incorporation_consultant' => '/admin/dashboard', 'content_manager' => '/admin/dashboard', 'seo_manager' => '/admin/dashboard',
+    'compliance_reviewer' => '/admin/dashboard', 'finance_manager' => '/admin/dashboard', 'developer' => '/admin/dashboard',
+    'support' => '/admin/dashboard',
     'customer'    => '/customer/dashboard',
     'partner'     => '/partner/dashboard',
     'employee'    => '/employee/dashboard',
@@ -23,7 +38,7 @@ function attempt_login(PDO $pdo, string $identifier, string $password, string $r
     $allowedRoles = match ($roleGroup) {
         'customer' => ['customer'],
         'partner'  => ['partner'],
-        'employee' => ['employee', 'admin', 'super_admin'],
+        'employee' => array_values(array_unique(array_merge(['employee'], ADMIN_STAFF_ROLES))),
         'hr'       => ['hr', 'admin', 'super_admin'],
         default    => [],
     };
@@ -48,11 +63,14 @@ function attempt_login(PDO $pdo, string $identifier, string $password, string $r
 
     if (!$user || !password_verify($password, $user['password_hash'])) {
         record_login_attempt($pdo, $identifier, $roleGroup, false);
+        audit('auth.login_failed', 'user', $user ? (int) $user['id'] : null, [], [],
+            ['identifier' => audit_mask_identifier($identifier), 'surface' => $roleGroup, 'reason' => 'invalid_credentials'], $pdo, ['id' => null]);
         return ['ok' => false, 'error' => 'Invalid credentials.'];
     }
 
     if ($user['status'] !== 'active') {
         record_login_attempt($pdo, $identifier, $roleGroup, false);
+        audit('auth.login_failed', 'user', (int) $user['id'], [], [], ['surface' => $roleGroup, 'reason' => 'inactive_account'], $pdo, ['id' => null]);
         return ['ok' => false, 'error' => 'This account is not active. Please contact support.'];
     }
 
@@ -65,7 +83,7 @@ function attempt_login(PDO $pdo, string $identifier, string $password, string $r
     // Staff accounts always verify with OTP. Customers/partners only do
     // when they've opted into two-factor, or this device hasn't been
     // seen before for this account.
-    $staffRoles = ['employee', 'hr', 'admin', 'super_admin'];
+    $staffRoles = array_merge(['employee', 'hr'], ADMIN_STAFF_ROLES);
     $deviceToken = current_device_token();
     $deviceKnown = $deviceToken !== null && device_is_known($pdo, (int) $user['id'], $deviceToken);
     $otpRequired = in_array($user['role_slug'], $staffRoles, true) || (bool) $user['two_factor_enabled'] || !$deviceKnown;
@@ -146,6 +164,8 @@ function finalize_login(PDO $pdo, array $user): bool
         'role'  => $user['role_slug'],
     ];
     $_SESSION['_session_version'] = (int) $user['session_version'];
+    audit('auth.login', 'user', (int) $user['id'], [], [], ['role' => $user['role_slug']], $pdo,
+        ['id' => (int) $user['id'], 'role' => $user['role_slug']]);
 
     $pdo->prepare('UPDATE users SET last_login_at = NOW(), last_login_ip = :ip, failed_login_count = 0 WHERE id = :id')
         ->execute(['ip' => client_ip(), 'id' => $user['id']]);
@@ -179,7 +199,7 @@ function require_role(array $roles): array
     $currentVersion->execute(['id' => $user['id']]);
     $dbVersion = $currentVersion->fetchColumn();
     if ($dbVersion === false || (int) $dbVersion !== (int) ($_SESSION['_session_version'] ?? -1)) {
-        logout_user();
+        logout_user('session_revoked');
         header('Location: /?login=required');
         exit;
     }
@@ -187,8 +207,11 @@ function require_role(array $roles): array
     return $user;
 }
 
-function logout_user(): void
+function logout_user(string $reason = 'user'): void
 {
+    if ($u = current_user()) {
+        audit('auth.logout', 'user', (int) $u['id'], [], [], ['reason' => $reason]);
+    }
     $_SESSION = [];
     if (ini_get('session.use_cookies')) {
         $params = session_get_cookie_params();

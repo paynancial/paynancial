@@ -22,6 +22,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../permissions.php';
+require_once __DIR__ . '/../audit.php';
 
 function cms_statuses(): array
 {
@@ -79,14 +80,19 @@ function cms_entity(string $type): array
 
 function cms_audit(PDO $pdo, ?int $userId, string $action, string $entityType, ?int $entityId, array $meta = []): void
 {
-    $pdo->prepare(
-        'INSERT INTO audit_logs (user_id, action, entity_type, entity_id, ip_address, meta_json)
-         VALUES (:uid, :action, :type, :eid, :ip, :meta)'
-    )->execute([
-        'uid' => $userId, 'action' => $action, 'type' => $entityType, 'eid' => $entityId,
-        'ip' => PHP_SAPI === 'cli' ? 'cli' : client_ip(),
-        'meta' => json_encode($meta, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
-    ]);
+    // Central helper (includes/audit.php), strict: a failed audit aborts the
+    // surrounding approval / publish transaction.
+    $me = function_exists('current_user') ? current_user() : null;
+    $actor = $userId === null ? null : ['id' => $userId, 'role' => ($me && (int) $me['id'] === $userId) ? $me['role'] : cms_user_role($pdo, $userId)];
+    audit_write($pdo, $action, $entityType, $entityId, [], [], $meta, $actor ?? ['id' => null]);
+}
+
+function cms_user_role(PDO $pdo, int $userId): ?string
+{
+    $stmt = $pdo->prepare('SELECT r.slug FROM users u JOIN roles r ON r.id = u.role_id WHERE u.id = :id');
+    $stmt->execute(['id' => $userId]);
+    $role = $stmt->fetchColumn();
+    return $role === false ? null : (string) $role;
 }
 
 function cms_load(PDO $pdo, string $type, int $id): ?array

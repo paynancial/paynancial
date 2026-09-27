@@ -97,6 +97,7 @@ if (($segments[0] ?? '') === 'signup') {
 // ---------------------------------------------------------------------
 // Authenticated dashboard routes: /{area}/{page}[/{id}]
 // ---------------------------------------------------------------------
+require_once __DIR__ . '/../includes/admin/registry.php';
 $dashboardAreas = [
     'customer'    => ['roles' => ['customer'],                         'dir' => 'customer', 'pages' => ['dashboard', 'onboarding', 'transactions', 'profile']],
     'partner'     => ['roles' => ['partner'],                          'dir' => 'partner',  'pages' => [
@@ -106,12 +107,9 @@ $dashboardAreas = [
     ]],
     'employee'    => ['roles' => ['employee', 'admin', 'super_admin'], 'dir' => 'employee', 'pages' => ['dashboard', 'tasks', 'profile']],
     'hrms'        => ['roles' => ['hr', 'admin', 'super_admin'],       'dir' => 'hrms',     'pages' => ['dashboard', 'employees', 'recruitment', 'attendance']],
-    'admin'       => ['roles' => ['admin', 'super_admin'],             'dir' => 'admin',    'pages' => [
-        'dashboard', 'users', 'transactions', 'cms', 'enquiries',
-        'partner-applications', 'products', 'commission-rules', 'customer-applications', 'customer-kyc',
-        'change-requests', 'audit-logs', 'content-governance', 'anti-spam',
-        'cms-articles', 'cms-article', 'cms-hero', 'cms-seo', 'cms-preview',
-    ]],
+    // Enterprise admin platform: pages, and who may open them, come from the
+    // module registry (includes/admin/registry.php); staff roles only.
+    'admin'       => ['roles' => ADMIN_STAFF_ROLES,                  'dir' => 'admin',    'pages' => array_keys(admin_modules())],
     'super-admin' => ['roles' => ['super_admin'],                      'dir' => 'admin',    'pages' => ['dashboard']],
 ];
 
@@ -131,6 +129,33 @@ if (isset($dashboardAreas[$segments[0] ?? ''])) {
     $dashboard_page = $page;
     $route_param = $segments[2] ?? null; // e.g. the {id} in /partner/customers/{id}
     $file = __DIR__ . '/../' . $area['dir'] . '/' . $page . '.php';
+
+    // Enterprise admin: new shell, central CSRF + permission check before the
+    // page runs, and an audit record for every state-changing request.
+    $admin_shell = $area['dir'] === 'admin';
+    if ($admin_shell) {
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        if ($method === 'POST' && !csrf_verify($_POST['csrf_token'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? null))) {
+            http_response_code(419);
+            $admin_denied = ['title' => 'Session expired', 'text' => 'Your session expired or the form was out of date. Reload the page and try again.'];
+            $file = __DIR__ . '/../includes/admin/denied.php';
+        } elseif (($missing = admin_guard($auth_user, $page, $method, $_POST)) !== null) {
+            http_response_code(403);
+            audit('access.denied', 'admin_page', null, [], [], ['page' => $page, 'method' => $method, 'permission' => $missing]);
+            $admin_denied = ['title' => 'Access denied', 'text' => 'You do not have permission to ' . ($method === 'POST' ? 'do this' : 'open this page') . '.', 'perm' => $missing];
+            $file = __DIR__ . '/../includes/admin/denied.php';
+        } elseif ($method === 'POST' && $page !== 'preferences') { // UI preferences are not audited (not sensitive)
+            $auditPage = $page;
+            register_shutdown_function(static function () use ($auditPage): void {
+                $fields = $_POST;
+                unset($fields['csrf_token']);
+                audit('admin.request', 'admin_page', null, [], [], [
+                    'page' => $auditPage, 'op' => $_POST['op'] ?? $_POST['form_action'] ?? $_POST['wf'] ?? null,
+                    'status' => http_response_code(), 'fields' => $fields,
+                ]);
+            });
+        }
+    }
 
     if (!is_file($file)) {
         http_response_code(404);

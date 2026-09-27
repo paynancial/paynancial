@@ -3,6 +3,12 @@
  * Authenticated dashboard shell (head + sidebar + topbar open).
  * Expects: $auth_user, $dashboard_area, $dashboard_page, optional $page_meta.
  */
+// Enterprise admin area: its own shell (includes/admin/). Other portals below, unchanged.
+if (!empty($admin_shell)) {
+    include __DIR__ . '/admin/shell-head.php';
+    return;
+}
+
 require_once __DIR__ . '/dashboard-nav.php';
 
 $page_meta = $page_meta ?? [];

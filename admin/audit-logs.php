@@ -32,8 +32,8 @@ $totalCount = (int) $pdo->query('SELECT COUNT(*) FROM audit_logs')->fetchColumn(
   <form method="get" class="toolbar" style="margin-bottom:18px;flex-wrap:wrap;">
     <input type="text" name="action" placeholder="Filter by action (e.g. change_request)" value="<?= e($actionFilter) ?>" style="min-width:220px;">
     <input type="text" name="user" placeholder="Filter by user name or email" value="<?= e($userFilter) ?>" style="min-width:200px;">
-    <input type="date" name="from" value="<?= e($fromDate) ?>">
-    <input type="date" name="to" value="<?= e($toDate) ?>">
+    <input type="date" name="from" aria-label="From date" value="<?= e($fromDate) ?>">
+    <input type="date" name="to" aria-label="To date" value="<?= e($toDate) ?>">
     <button type="submit" class="btn btn-outline btn-sm">Filter</button>
     <?php if ($actionFilter || $userFilter || $fromDate || $toDate): ?><a href="/admin/audit-logs" class="btn btn-outline btn-sm">Clear</a><?php endif; ?>
   </form>

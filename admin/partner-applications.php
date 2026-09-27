@@ -41,6 +41,7 @@ if ($applicationId !== null) {
                 $pdo->prepare('UPDATE partner_applications SET status = :status, status_note = :note WHERE id = :id')
                     ->execute(['status' => $newStatus, 'note' => $note ?: null, 'id' => $applicationId]);
                 log_partner_activity($pdo, null, 'admin.partner_application.' . $newStatus, 'partner_application', $applicationId, ['admin_id' => $auth_user['id']]);
+                audit('partner_application.status_changed', 'partner_application', $applicationId, ['status' => $app['status']], ['status' => $newStatus], ['reason' => $note ?: null]);
                 $app['status'] = $newStatus;
                 $notice = 'Application updated.';
             } elseif ($action === 'approve' && $app['status'] !== 'approved') {
